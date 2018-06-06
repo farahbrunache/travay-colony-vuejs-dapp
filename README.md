@@ -50,7 +50,8 @@ TODO
 
 # Roadmap
 [] Cross my fingers Colony launches on Mainnet soon
-[] Learn how to do off chain payments
+[] Learn how to incorporate off chain payments
 [] Learn best security practices in Blockchain so I can protect the identity of an already vulnerable population
+[] Implement identity verification to protect against fraud
 [] Replace Coinbase login with a decentralized solution
 

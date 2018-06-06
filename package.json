@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/devCrossNet/vue-starter.git"
   },
+  "license": "MIT",
   "keywords": [
     "vue",
     "vuex",
@@ -19,14 +20,10 @@
     "datepicker",
     "slider",
     "forms",
-    "components"
+    "components",
+    "dapp",
+    "bounties"
   ],
-  "author": "Johannes Werner <johannes.werner86@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/devCrossNet/vue-starter",
-  "bugs": {
-    "url": "https://github.com/devCrossNet/vue-starter/issues"
-  },
   "scripts": {
     "g": "npm run generate",
     "dev": "concurrently \"npm run dev:dev-server\" \"npm run dev:server\"",
