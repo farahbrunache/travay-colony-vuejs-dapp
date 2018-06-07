@@ -1,18 +1,45 @@
-# Travay ["work" in Haitian Creole]
+# Travay (pronounced "tri-vi")
+(means "work" in Haitian Creole)
 
-Colony Network smart contract dapp with the front-end done in PWA Vue.js hosted on firebase.
+colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA. Front-end hosted on firebase.
+
+## End User Guide
+
+[TBC]
+
+## Demo Video
+
+[TBC]
 
 TODO
-[] remove previous commit history, delete .git folder
-[] add additional components to front-end: https://vue-starter.herokuapp.com/storybook/?selectedKind=VueAccordion&selectedStory=Default&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+[] add additional components to front-end application: https://vue-starter.herokuapp.com/storybook/?selectedKind=VueAccordion&selectedStory=Default&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+[] Create Privacy Policy
+[] Creates Terms and Conditions
+[] Create Code of Conduct
+[] Create interactive user on-boarding flow
 
-# End User Guide
+## Acceptance Criteria
+[] An end user can post a short-term job
+[] An end user can post a long-term job
+[] An end user can only have an "x" amount of tasks open at a time - to ensure high quality/priority jobs are being requested and completed
+[] An end user can generate a resume of the work they preformed
+[] An end user can generate a reference list of people who have opted in
+[] An end user can see the total amount of coins they've earned
+[] An end user can see their total financial balance
+[] An end user can create a savings account
+[] An end user can create an investment account
+[] An end user cannot accumlate debt
+[] An end user can cash out in USD
+[] Application is translated to Haitian Creole
 
-[TBC]
+## Product Roadmap
+[] Cross my fingers Colony launches on Mainnet soon
+[] Learn how to incorporate off chain payments
+[] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
+[] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
+[] Replace Coinbase login with a decentralized solution
 
-# Demo Video
-
-[TBC]
+### Application
 
 ## Run End User Guide Locally
 
@@ -20,38 +47,10 @@ TODO
 2. Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
 3. run `vuepress dev docs`
 
-# Run Front-end Locally
+## Run Front-end Locally
 
 1. Install Node.js 8.x or higher. Use [nvm](https://github.com/creationix/nvm) or [n](https://github.com/tj/n) to maintain multiple Node.js versions
 2. Install npm version 5.x or higher
-3. clone the repository `git clone https://github.com/devCrossNet/vue-starter`
-4. change directory `cd vue-starter`
-5. Install dependencies: `npm install`
+3. Clone the repository
+4. Install dependencies: `npm install`
 6. Run `npm run dev`
-
-# Acceptance Criteria
-[] Only "x" amount of tasks are allowed to be open by one person at a time - to ensure high quality jobs are being requested and completed
-[] Individuals can post a short-term job
-[] Individuals can post a long-term job
-[] Individuals can generate a resume of the work they preformed
-[] Individuals can generate a reference list of people who have opted in. This is masked from the Blockchain?
-[] Individuals can see the total amount of coins they've earned
-[] Individuals can see their total financial balance
-[] Individuals can create a savings account
-[] Individuals can create an investment account
-[] Individuals cannot accumlate debt
-[] Application is translated in Haitian Creole
-
-TODO
-[] Create Privacy Policy
-[] Creates Terms and Conditions
-[] Create Code of Conduct
-[] Create interactive user on-boarding flow
-
-# Roadmap
-[] Cross my fingers Colony launches on Mainnet soon
-[] Learn how to incorporate off chain payments
-[] Learn best security practices in Blockchain so I can protect the identity of an already vulnerable population
-[] Implement identity verification to protect against fraud
-[] Replace Coinbase login with a decentralized solution
-
