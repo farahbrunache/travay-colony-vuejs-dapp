@@ -35,17 +35,12 @@ TODO
 ## Product Roadmap
 [] Cross my fingers Colony launches on Mainnet soon
 [] Learn how to incorporate off chain payments
+[] Add French translation
+[] Add Creole translation
 [] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
 [] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
-[] Replace Coinbase login with a decentralized solution
 
 ### Application
-
-## Run End User Guide Locally
-
-1. Complete the [Getting started](#getting-started) guide
-2. Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
-3. run `vuepress dev docs`
 
 ## Run Front-end Locally
 
@@ -54,3 +49,9 @@ TODO
 3. Clone the repository
 4. Install dependencies: `npm install`
 6. Run `npm run dev`
+
+## Run End User Guide Locally
+
+1. Complete the [Getting started](#getting-started) guide
+2. Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
+3. run `vuepress dev docs`
