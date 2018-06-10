@@ -17,7 +17,7 @@
         </li>
         <li>
           <router-link to="/balance" @click.native="navBarClose">
-            <i class="fas fa-wallet" />
+            <i class="far fa-credit-card" />
             <small>{{ $t('App.nav.balance' /* Balance */) }}</small>
           </router-link>
         </li>
@@ -55,98 +55,97 @@
 </template>
 
 <script lang="ts">
-  import { mapActions }       from 'vuex';
-  import VueNavBar            from '../../shared/components/VueNavBar/VueNavBar.vue';
-  import VueGrid              from '../../shared/components/VueGrid/VueGrid.vue';
-  import VueGridItem          from '../../shared/components/VueGridItem/VueGridItem.vue';
-  import VueFooter            from '../../shared/components/VueFooter/VueFooter.vue';
-  import VueNotificationStack from '../../shared/components/VueNotificationStack/VueNotificationStack.vue';
-  import { loadLocaleAsync }  from '../../shared/plugins/i18n/i18n';
-  import { EventBus }         from '../../shared/services/EventBus';
+import { mapActions } from "vuex";
+import VueNavBar from "../../shared/components/VueNavBar/VueNavBar.vue";
+import VueGrid from "../../shared/components/VueGrid/VueGrid.vue";
+import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
+import VueFooter from "../../shared/components/VueFooter/VueFooter.vue";
+import VueNotificationStack from "../../shared/components/VueNotificationStack/VueNotificationStack.vue";
+import { loadLocaleAsync } from "../../shared/plugins/i18n/i18n";
+import { EventBus } from "../../shared/services/EventBus";
 
-  export default {
-    components: {
-      VueNavBar,
-      VueGrid,
-      VueGridItem,
-      VueFooter,
-      VueNotificationStack,
-    },
-    methods:    {
-      ...mapActions('app', ['changeLocale']),
-      localeSwitch(locale: string): void {
-        loadLocaleAsync(locale)
-        .catch((error: Error) => console.log(error));
+export default {
+  components: {
+    VueNavBar,
+    VueGrid,
+    VueGridItem,
+    VueFooter,
+    VueNotificationStack
+  },
+  methods: {
+    ...mapActions("app", ["changeLocale"]),
+    localeSwitch(locale: string): void {
+      loadLocaleAsync(locale).catch((error: Error) => console.log(error));
 
-        this.changeLocale(locale);
-        this.navBarClose();
-      },
-      navBarClose() {
-        EventBus.$emit('navbar.close');
-      },
+      this.changeLocale(locale);
+      this.navBarClose();
     },
-  };
+    navBarClose() {
+      EventBus.$emit("navbar.close");
+    }
+  }
+};
 </script>
 
 <style lang="scss" module>
-  @import "../../shared/styles";
-  @import "../../shared/styles/reset";
-  @import "../../shared/styles/typo";
-  @import "../../shared/styles/global";
-  @import url($google-font);
+@import "../../shared/styles";
+@import "../../shared/styles/reset";
+@import "../../shared/styles/typo";
+@import "../../shared/styles/global";
+@import url($google-font);
 
-  .app {
-    min-height:     100vh;
-    display:        flex;
-    flex-direction: column;
-  }
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  .content {
+.content {
+  flex: 1;
+}
+
+.nav {
+  margin: $space-unit 0 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  li {
     flex: 1;
+    margin: $space-unit / 2;
+    color: $text-color;
+    flex-basis: $space-unit * 10;
+    height: $space-unit * 10;
+    background: $divider-color;
+    cursor: pointer;
+
+    a {
+      padding: $space-unit;
+      display: block;
+      color: $text-color;
+      text-align: center;
+      font-size: 32px;
+      text-decoration: none;
+
+      small {
+        font-size: 12px;
+        display: block;
+      }
+    }
   }
 
-  .nav {
-    margin:         $space-unit 0 0 0;
-    padding:        0;
-    list-style:     none;
-    display:        flex;
-    flex-direction: row;
-    flex-wrap:      wrap;
-    width:          100%;
-
+  @include media(tabletLandscape) {
     li {
-      flex:       1;
-      margin:     $space-unit / 2;
-      color:      $text-color;
-      flex-basis: $space-unit * 10;
-      height:     $space-unit * 10;
-      background: $divider-color;
-      cursor:     pointer;
+      opacity: 0.8;
+      transition: opacity 250ms linear;
 
-      a {
-        padding:         $space-unit;
-        display:         block;
-        color:           $text-color;
-        text-align:      center;
-        font-size:       32px;
-        text-decoration: none;
-
-        small {
-          font-size: 12px;
-          display:   block;
-        }
-      }
-    }
-
-    @include media(tabletLandscape) {
-      li {
-        opacity:    .8;
-        transition: opacity 250ms linear;
-
-        &:hover {
-          opacity: 1;
-        }
+      &:hover {
+        opacity: 1;
       }
     }
   }
+}
 </style>

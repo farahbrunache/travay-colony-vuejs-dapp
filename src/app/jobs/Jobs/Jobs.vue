@@ -5,7 +5,8 @@
         <vue-grid-item fill>
           <h1>Jobs</h1>
         </vue-grid-item>
-        <div>
+
+        <vue-grid-item>
         <ul class="filter-bar">
           <li class="filter__item">Search:
             <input type="text" name="search" v-model="keyword" />
@@ -43,15 +44,39 @@
             </select>
           </li>
         </ul>
-        </div>
-        <div>
-          <ul>
-            <li v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.id">
-              {{job.brief}}
-            </li>
-          </ul>
+        <br>
+        <hr>        
+          <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.id">
+            <vue-panel-header title="Title" subtitle="subtitle"
+                              image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
+            <vue-panel-body>
+            <ul>
+              <li >
+                Job: {{job.task}}<br>
+                Description: {{job.brief}}<br>
+                Full-time? {{job.full-time-job}}<br>
+                Short-term? {{job.short-time-job}}<br>
+                Salary: {{job.full-time-salary}}<br>
+                Date Posted: {{job.date-posted}}<br>
+
+              </li>
+            </ul>
+            </vue-panel-body>
+            
+            <vue-panel-footer>
+              <vue-button primary>Claim</vue-button>
+            </vue-panel-footer>
+            <br>
+          </vue-panel>
+
+          <br>
+          <div>
+          <vue-pagination :pages="10" :current="page" @change="page = $event" />
         </div>
 
+        </vue-grid-item>
+
+        
       </vue-grid-row>
     </vue-grid>
   </div>
@@ -65,6 +90,10 @@ import VueGrid from "../../shared/components/VueGrid/VueGrid";
 import VueGridItem from "../../shared/components/VueGridItem/VueGridItem";
 import VueButton from "../../shared/components/VueButton/VueButton";
 import VueGridRow from "../../shared/components/VueGridRow/VueGridRow";
+import VuePagination from "../../shared/components/VuePagination/VuePagination";
+import VuePanel from "../../shared/components/VuePanel/VuePanel.vue";
+import VuePanelHeader from "../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue";
+import VuePanelBody from "../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue";
 
 export default {
   metaInfo: {
@@ -74,7 +103,11 @@ export default {
     VueGrid,
     VueGridItem,
     VueButton,
-    VueGridRow
+    VueGridRow,
+    VuePagination,
+    VuePanel,
+    VuePanelHeader,
+    VuePanelBody
   },
   data(): any {
     return {
