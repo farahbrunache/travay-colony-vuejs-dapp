@@ -27,12 +27,12 @@
             <small>{{ $t('App.nav.components' /* Components */) }}</small>
           </router-link>
         </li> -->
-        <li>
+        <!-- <li>
           <a @click="localeSwitch('en')">
             <i class="fas fa-flag" />
             <small>{{ $t('App.nav.english' /* English */) }}</small>
           </a>
-        </li>
+        </li> -->
         <!-- <li>
           <a @click="localeSwitch('de')">
             <i class="fas fa-flag" />

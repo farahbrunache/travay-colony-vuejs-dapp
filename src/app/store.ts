@@ -1,18 +1,14 @@
-import Vue                      from 'vue';
-import Vuex, { Store }          from 'vuex';
+import Vue from 'vue';
+import Vuex, { Store } from 'vuex';
 import { DefaultState, IState } from './state';
-import { VuexPersist }          from './shared/plugins/vuex-persist/vuex-persist';
-import { PersistLocalStorage }  from './shared/plugins/vuex-persist/PersistLocalStorage';
+import { VuexPersist } from './shared/plugins/vuex-persist/vuex-persist';
+import { PersistLocalStorage } from './shared/plugins/vuex-persist/PersistLocalStorage';
 import { PersistCookieStorage } from './shared/plugins/vuex-persist/PersistCookieStorage';
-import { AppModule }            from './app/module';
-import { ProfileModule }            from './profile/module';
-import { BalanceModule }            from './balance/module';
-import { JobsModule }            from './jobs/module';
-import { JobModule }            from './job/module';
-import { JobsFilterModule }            from './jobsFilter/module';
-import { JobsGridModule }            from './jobsGrid/module';
-// Delete dummy data
-// import { CounterModule }        from './counter/module';
+import { AppModule } from './app/module';
+import { ProfileModule } from './profile/module';
+import { BalanceModule } from './balance/module';
+import { JobsModule } from './jobs/module';
+import { JobModule } from './job/module';
 
 Vue.use(Vuex);
 
@@ -58,11 +54,7 @@ export const store: Store<IState> = new Vuex.Store(
 );
 
 store.registerModule(['app'], AppModule, { preserveState: true });
-// Delete dummy data
-// store.registerModule(['counter'], CounterModule, { preserveState: true });
 store.registerModule(['profile'], ProfileModule, { preserveState: true });
 store.registerModule(['balance'], BalanceModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
-store.registerModule(['jobsFilter'], JobsFilterModule, { preserveState: true });
-store.registerModule(['jobsGrid'], JobsGridModule, { preserveState: true });

@@ -1,11 +1,7 @@
 {
-  "name": "vue-starter",
-  "version": "1.0.0",
-  "description": "A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/devCrossNet/vue-starter.git"
-  },
+  "name": "travay",
+  "version": "0.0.1",
+  "description": "Long Term Jobs Market for Developing Countries Built with Colony",
   "keywords": [
     "vue",
     "vuex",
@@ -19,14 +15,11 @@
     "datepicker",
     "slider",
     "forms",
-    "components"
+    "components",
+    "dapp",
+    "jobs"
   ],
-  "author": "Johannes Werner <johannes.werner86@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/devCrossNet/vue-starter",
-  "bugs": {
-    "url": "https://github.com/devCrossNet/vue-starter/issues"
-  },
   "scripts": {
     "g": "npm run generate",
     "dev": "concurrently \"npm run dev:dev-server\" \"npm run dev:server\"",
@@ -58,7 +51,9 @@
     "ci": "concurrently \"npm run lint\" \"npm run test:coverage -- --runInBand\"",
     "postci": "codecov -f ./coverage/*.json && npm run build:spa && npm run build && concurrently \"npm run build-storybook\" \"vuepress build docs\"",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "jest": {
     "globals": {

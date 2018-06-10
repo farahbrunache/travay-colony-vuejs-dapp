@@ -1,7 +1,7 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex                      from 'vuex';
-import Home                      from './Home.vue';
-import { i18n }                  from '../../shared/plugins/i18n/i18n';
+import Vuex from 'vuex';
+import Home from './Home.vue';
+import { i18n } from '../../shared/plugins/i18n/i18n';
 
 const localVue = createLocalVue();
 
@@ -11,16 +11,16 @@ describe('Home.vue', () => {
 
   test('renders component', () => {
     const store = new Vuex.Store({
-                                   getters: {},
-                                   actions: {},
-                                 });
+      getters: {},
+      actions: {},
+    });
     const wrapper = mount(Home, {
       store,
       localVue,
       i18n,
     });
 
-    expect(wrapper.find('h1').text()).toBe('vue-starter');
+    expect(wrapper.find('h1').text()).toBe('travay');
   });
 
 });

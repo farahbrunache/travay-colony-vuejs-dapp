@@ -17,22 +17,23 @@ TODO
 [ ] Create Privacy Policy
 [ ] Creates Terms and Conditions
 [ ] Create Code of Conduct
+[ ] Full coverage unit tests
+[ ] Create end user guide (using vue press https://vuepress.vuejs.org)
 
 ## Acceptance Criteria
+[ X ] End user can see a list of jobs
 [ ] End user can post a short-term job
 [ ] End user can post a long-term job
-[ ] End user can only have an "x" amount of tasks open at a time
-[ ] End user can generate a resume of the work they preformed
-[ ] End user can generate a reference list of people who have opted in
+[ ] End user signs up and receives "x" amount of tokens to begin
+[ ] End user can only have "x" amount of tasks open at a time
 [ ] End user can see the total amount of coins they've earned
 [ ] End user can create a savings account, that is separate from their account where coins are automatically stored
 [ ] End user can create an investment account, that is separate from their account where coins are automatically stored
 [ ] End user cannot accumulate debt
-[ ] End user can cash out in USD
-[ ] Application is translated to Haitian Creole
+[ ] End user can earn in stable token
 
 ## Product Roadmap
-[ ] Cross my fingers Colony launches on Mainnet soon
+[ ] Wait until Colony launches on Mainnet
 [ ] Learn how to incorporate off chain payments
 [ ] Add French translation
 [ ] Add Creole translation

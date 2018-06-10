@@ -17,7 +17,7 @@ operating system:
 
 ## Desired functionality.
 <!--What would like to see implemented?
-What is the usecase?-->
+What is the use case?-->
 
 
 ### Mention any other details that might be useful.

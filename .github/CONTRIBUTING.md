@@ -184,4 +184,4 @@ The footer should contain any information about **Breaking Changes** and is also
 reference GitHub issues that this commit **Closes**.
 
 
-[GitHub]: https://github.com/devCrossNet/vue-starter/issues
+[GitHub]: https://github.com

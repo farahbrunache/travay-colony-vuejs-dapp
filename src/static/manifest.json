@@ -1,8 +1,6 @@
 {
-  "name": "VueStarter",
-  "short_name": "VueStarter",
-  "theme_color": "#17BEBB",
-  "background_color": "#333333",
+  "name": "travay",
+  "short_name": "travay",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
