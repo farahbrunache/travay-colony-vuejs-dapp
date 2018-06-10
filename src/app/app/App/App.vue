@@ -4,41 +4,47 @@
     <vue-nav-bar>
       <ul :class="$style.nav">
         <li>
-          <a href="/docs" @click.native="navBarClose">
+          <a href="/jobs" @click.native="navBarClose">
             <i class="fas fa-book" />
-            <small>{{ $t('App.nav.docs' /* Documentation */) }}</small>
+            <small>{{ $t('App.nav.jobs' /* Jobs */) }}</small>
           </a>
         </li>
         <li>
-          <router-link to="/counter" @click.native="navBarClose">
-            <i class="fas fa-hashtag" />
-            <small>{{ $t('App.nav.counter' /* Counter */) }}</small>
+          <router-link to="/profile" @click.native="navBarClose">
+            <i class="fas fa-user" />
+            <small>{{ $t('App.nav.profile' /* Profile */) }}</small>
           </router-link>
         </li>
         <li>
+          <router-link to="/balance" @click.native="navBarClose">
+            <i class="fas fa-wallet" />
+            <small>{{ $t('App.nav.balance' /* Balance */) }}</small>
+          </router-link>
+        </li>
+        <!-- <li>
           <router-link to="/components" @click.native="navBarClose">
             <i class="fas fa-puzzle-piece" />
             <small>{{ $t('App.nav.components' /* Components */) }}</small>
           </router-link>
-        </li>
+        </li> -->
         <li>
           <a @click="localeSwitch('en')">
             <i class="fas fa-flag" />
             <small>{{ $t('App.nav.english' /* English */) }}</small>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a @click="localeSwitch('de')">
             <i class="fas fa-flag" />
             <small>{{ $t('App.nav.german' /* German */) }}</small>
           </a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
           <a @click="localeSwitch('pt')">
             <i class="fas fa-flag" />
             <small>{{ $t('App.nav.pt-BR' /* Portuguese */) }}</small>
           </a>
-        </li>
+        </li> -->
       </ul>
     </vue-nav-bar>
 

@@ -17,11 +17,11 @@
 
   export default {
     metaInfo:   {
-      title: 'vue-starter - flexible, scalable, opinionated, fast',
+      title: 'travay: everyone at work.',
       meta:  [
         {
           name:    'description',
-          content: 'vue-starter - A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices',
+          content: 'travay: Long Term Jobs Market for Developing Countries',
         },
         {
           name:    'robots',

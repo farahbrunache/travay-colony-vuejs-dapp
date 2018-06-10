@@ -7,18 +7,12 @@
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h1 :class="$style.title">vue-starter</h1>
+          <h1 :class="$style.title">travay</h1>
           <div :class="$style.subTitle">
             {{
-            $t('App.core.description' /* A flexible, scalable, opinionated boilerplate for production-ready PWAs with
-            focus on performance, development speed, and best practices */)
+            $t('App.core.description' /* Long Term Jobs Market for Developing Countries */)
             }}
           </div>
-
-          <a :class="$style.github" href="https://github.com/devCrossNet/vue-starter" target="_blank" rel="noopener"
-             aria-label="github repository">
-            <i class="fab fa-github"></i>
-          </a>
         </vue-grid-item>
       </vue-grid-row>
     </vue-grid>
@@ -132,7 +126,7 @@
     top:              0;
   }
 
-  .title, .subTitle, .github {
+  .title, .subTitle {
     text-shadow: 0 5px 10px rgba(0, 0, 0, 0.33);
     position:    relative;
   }
@@ -161,27 +155,4 @@
     }
   }
 
-  .github {
-    font-size:           $font-size-h1;
-    top:                 $space-unit * 17;
-    box-shadow:          $nav-bar-shadow;
-    display:             inline-block;
-    background:          $nav-bar-bg;
-    transition:          $button-transition;
-    transition-property: box-shadow, background-color;
-    color:               $text-color;
-    padding:             $button-padding;
-
-    &:hover {
-      box-shadow: $button-active-shadow;
-    }
-
-    @include media(tabletPortrait) {
-      top: $space-unit * 30;
-    }
-
-    @include media(tabletLandscape) {
-      top: $space-unit * 42;
-    }
-  }
 </style>

@@ -3,20 +3,20 @@
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item>
-          <small>&copy; Copyright {{year}} Johannes Werner</small>
+          <!-- <small>&copy; Copyright {{year}} Farah Brunache</small> -->
         </vue-grid-item>
 
         <vue-grid-item>
-          <a href="https://github.com/devCrossNet" target="_blank" rel="noopener" aria-label="github profile">
+          <a href="https://github.com/farahbrunache/travay-colony-vuejs-dapp" target="_blank" rel="noopener" aria-label="github repository">
             <i class="fab fa-github-alt" />
           </a>
-          <a href="https://twitter.com/_jwerner_" target="_blank" rel="noopener" aria-label="twitter profile">
+          <!-- <a href="https://twitter.com/farahbrunache" target="_blank" rel="noopener" aria-label="twitter profile">
             <i class="fab fa-twitter-square" />
-          </a>
+          </a> -->
         </vue-grid-item>
 
         <vue-grid-item>
-          <small><a href="https://github.com/devCrossNet/vue-starter/blob/master/LICENSE" target="_blank" rel="noopener">MIT
+          <small><a href="example.com/license" target="_blank" rel="noopener">MIT
                                                                                                                          License</a>
           </small>
         </vue-grid-item>

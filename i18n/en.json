@@ -1,8 +1,9 @@
 {
-  "App.core.description": "A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices",
+  "App.core.description": "Long Term Jobs Market for Developing Countries Built with Colony",
   "App.nav.components": "Components",
-  "App.nav.counter": "Counter",
-  "App.nav.docs": "Documentation",
+  "App.nav.jobs": "Jobs",
+  "App.nav.profile": "Profile",
+  "App.nav.balance": "Balance",
   "App.nav.english": "English",
   "App.nav.german": "German",
   "App.nav.home": "Home",

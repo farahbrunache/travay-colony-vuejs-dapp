@@ -1,7 +1,9 @@
 # Travay (pronounced "tri-vi")
 (means "work" in Haitian Creole)
 
-colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA. Front-end hosted on firebase.
+colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA.
+
+The only centralization of the dApp is the front-end hosted in Firebase: https://travay-dapp.firebaseapp.com.
 
 ## End User Guide
 
@@ -12,33 +14,30 @@ colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA. Front
 [TBC]
 
 TODO
-[] add additional components to front-end application: https://vue-starter.herokuapp.com/storybook/?selectedKind=VueAccordion&selectedStory=Default&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
-[] Create Privacy Policy
-[] Creates Terms and Conditions
-[] Create Code of Conduct
-[] Create interactive user on-boarding flow
+[ ] Create Privacy Policy
+[ ] Creates Terms and Conditions
+[ ] Create Code of Conduct
 
 ## Acceptance Criteria
-[] An end user can post a short-term job
-[] An end user can post a long-term job
-[] An end user can only have an "x" amount of tasks open at a time - to ensure high quality/priority jobs are being requested and completed
-[] An end user can generate a resume of the work they preformed
-[] An end user can generate a reference list of people who have opted in
-[] An end user can see the total amount of coins they've earned
-[] An end user can see their total financial balance
-[] An end user can create a savings account
-[] An end user can create an investment account
-[] An end user cannot accumlate debt
-[] An end user can cash out in USD
-[] Application is translated to Haitian Creole
+[ ] End user can post a short-term job
+[ ] End user can post a long-term job
+[ ] End user can only have an "x" amount of tasks open at a time
+[ ] End user can generate a resume of the work they preformed
+[ ] End user can generate a reference list of people who have opted in
+[ ] End user can see the total amount of coins they've earned
+[ ] End user can create a savings account, that is separate from their account where coins are automatically stored
+[ ] End user can create an investment account, that is separate from their account where coins are automatically stored
+[ ] End user cannot accumulate debt
+[ ] End user can cash out in USD
+[ ] Application is translated to Haitian Creole
 
 ## Product Roadmap
-[] Cross my fingers Colony launches on Mainnet soon
-[] Learn how to incorporate off chain payments
-[] Add French translation
-[] Add Creole translation
-[] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
-[] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
+[ ] Cross my fingers Colony launches on Mainnet soon
+[ ] Learn how to incorporate off chain payments
+[ ] Add French translation
+[ ] Add Creole translation
+[ ] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
+[ ] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
 
 ### Application
 
