@@ -10,6 +10,7 @@ import { BalanceModule } from './balance/module';
 import { JobsModule } from './jobs/module';
 import { JobModule } from './job/module';
 import { PrivacyAndTermsModule }            from './privacyAndTerms/module';
+import { CreateJobModule }            from './createJob/module';
 
 Vue.use(Vuex);
 
@@ -60,3 +61,4 @@ store.registerModule(['balance'], BalanceModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
 store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, { preserveState: true });
+store.registerModule(['createJob'], CreateJobModule, { preserveState: true });

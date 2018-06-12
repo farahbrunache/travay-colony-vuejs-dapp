@@ -122,8 +122,6 @@ export default {
         firstname: "",
         lastname: "",
         email: "",
-        street: "",
-        zipCode: "",
         city: "",
         country: "",
         acceptTerms: false,
@@ -131,7 +129,7 @@ export default {
       },
       countryOptions: [
         { label: "Choose a Country", value: null },
-        { label: "Germany", value: "de" },
+        { label: "Haiti", value: "haiti" },
         { label: "USA", value: "us" },
         { label: "Other", value: "other" }
       ],

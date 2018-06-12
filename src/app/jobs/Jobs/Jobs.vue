@@ -54,22 +54,23 @@
               <li >
                 Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
-                Full-time? {{job.full-time-job}}<br>
-                Short-term? {{job.short-time-job}}<br>
-                Salary: {{job.full-time-salary}}<br>
+                Salary: ${{job.salary}}<br>
                 Date Posted: {{job.date-posted}}<br>
-
               </li>
             </ul>
             </vue-panel-body>
             
             <vue-panel-footer>
-              <vue-button primary>Claim</vue-button>
+              <vue-button primary>
+              <router-link :to="`/job/${job.id}`" id="remove-hyperlink">Learn More</router-link>
+              </vue-button>
             </vue-panel-footer>
             <br>
           </vue-panel>
 
           <br>
+          <div>
+        </div>
 
         </vue-grid-item>
 
@@ -80,17 +81,16 @@
 </template>
 
 <script lang="ts">
-import { mapActions, mapGetters } from "vuex";
-import axios from "axios";
-import { IPreLoad } from "../../../server/isomorphic";
-import VueGrid from "../../shared/components/VueGrid/VueGrid";
-import VueGridItem from "../../shared/components/VueGridItem/VueGridItem";
-import VueButton from "../../shared/components/VueButton/VueButton";
-import VueGridRow from "../../shared/components/VueGridRow/VueGridRow";
-import VuePagination from "../../shared/components/VuePagination/VuePagination";
+import VueGrid from "../../shared/components/VueGrid/VueGrid.vue";
+import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
+import VueButton from "../../shared/components/VueButton/VueButton.vue";
+import VueGridRow from "../../shared/components/VueGridRow/VueGridRow.vue";
+import VuePagination from "../../shared/components/VuePagination/VuePagination.vue";
 import VuePanel from "../../shared/components/VuePanel/VuePanel.vue";
 import VuePanelHeader from "../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue";
 import VuePanelBody from "../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue";
+import VuePanelFooter from "../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue";
+import axios from "axios";
 
 export default {
   metaInfo: {
@@ -104,17 +104,19 @@ export default {
     VuePagination,
     VuePanel,
     VuePanelHeader,
-    VuePanelBody
+    VuePanelBody,
+    VuePanelFooter
   },
   data(): any {
     return {
       jobs: [],
+      posted: "",
       endRange: "300",
       startRange: "100",
       keyword: "",
       types: [
         {
-          id: "full-time-salary",
+          id: "salary",
           title: "Salary"
         }
       ],
@@ -135,10 +137,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions("jobs", ["increment", "decrement"]),
     getJobs() {
       axios.get("/mock-data.json").then((response: any) => {
-        // this.jobs = response.data.jobs;
         this.sort(response.data.jobs);
       });
     },
@@ -150,21 +150,14 @@ export default {
       });
       this.jobs = result;
     },
-
     filterJob(job: any) {
       let keywordSearchRegEx = RegExp(this.keyword, "gi");
       return (
         keywordSearchRegEx.test(job.brief) &&
-        (parseInt(job["full-time-salary"]) <= parseInt(this.endRange) &&
-          parseInt(job["full-time-salary"]) >= parseInt(this.startRange))
+        (parseInt(job["salary"]) <= parseInt(this.endRange) &&
+          parseInt(job["salary"]) >= parseInt(this.startRange))
       );
     }
-  },
-  computed: {
-    ...mapGetters("jobs", ["count", "incrementPending", "decrementPending"])
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch("jobs/increment");
   },
   mounted() {
     this.getJobs();
@@ -175,9 +168,15 @@ export default {
 
 <style lang="scss" module>
 @import "../../shared/styles";
-
 .jobs {
   margin-top: $nav-bar-height;
   min-height: 500px;
+}
+#remove-hyperlink a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: white;
 }
 </style>
