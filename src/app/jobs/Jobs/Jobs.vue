@@ -70,9 +70,6 @@
           </vue-panel>
 
           <br>
-          <div>
-          <vue-pagination :pages="10" :current="page" @change="page = $event" />
-        </div>
 
         </vue-grid-item>
 

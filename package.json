@@ -105,7 +105,7 @@
     "config": "1.30.0",
     "cookie-parser": "1.4.3",
     "deepmerge": "2.1.1",
-    "express": "4.16.3",
+    "express": "^4.16.3",
     "font-awesome": "^4.7.0",
     "js-cookie": "2.2.0",
     "lodash": "4.17.10",

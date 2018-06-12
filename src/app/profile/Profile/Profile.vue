@@ -1,9 +1,8 @@
 <template>
-
   <form @submit.prevent="onSubmit" :class="$style.profile">
     <h1>Profile</h1>
     <medium>
-      Please read your <a href="https://github.com/baianat/vee-validate" target="_blank">privacy policy and terms and conditions</a> before proceeding.
+      Please read your <a href="/privacy-and-terms" target="_blank">privacy policy and terms and conditions</a> before proceeding.
     </medium>
 
     <vue-grid-row>
@@ -24,38 +23,6 @@
           placeholder="Last Name"
           validation="required"
           v-model="form.lastname" />
-      </vue-grid-item>
-    </vue-grid-row>
-
-    <vue-input
-      name="email"
-      id="email"
-      required
-      placeholder="E-mail"
-      validation="required|email"
-      v-model="form.email" />
-
-    <vue-grid-row>
-      <vue-grid-item>
-        <vue-input
-          name="street"
-          id="street"
-          required
-          placeholder="Street"
-          v-model="form.street"
-          validation="required"
-          :disabled="addressDisabled" />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-input
-          name="zipCode"
-          id="zipCode"
-          required
-          placeholder="Zip code"
-          v-model="form.zipCode"
-          validation="required|integer"
-          :error-message="$t('components.formExample.zipCode.error' /* Please enter a Number */)"
-          :disabled="addressDisabled" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -125,12 +92,6 @@
 </template>
 
 <script lang="ts">
-import { mapActions, mapGetters } from "vuex";
-import { IPreLoad } from "../../../server/isomorphic";
-import VueGrid from "../../shared/components/VueGrid/VueGrid";
-import VueGridItem from "../../shared/components/VueGridItem/VueGridItem";
-import VueButton from "../../shared/components/VueButton/VueButton";
-import VueGridRow from "../../shared/components/VueGridRow/VueGridRow";
 import VueInput from "../../shared/components/VueInput/VueInput";
 import VueSelect from "../../shared/components/VueSelect/VueSelect";
 import VueCheckbox from "../../shared/components/VueCheckbox/VueCheckbox";
@@ -146,16 +107,10 @@ export default {
   $_veeValidate: {
     validator: "new"
   },
-  metaInfo: {
-    title: "Profile"
-  },
+  name: "Profile",
   components: {
-    VueGrid,
     VueGridItem,
     VueButton,
-    VueGridRow,
-    VueButton,
-    VueGridItem,
     VueGridRow,
     VueCheckbox,
     VueSelect,

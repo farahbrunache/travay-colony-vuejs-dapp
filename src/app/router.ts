@@ -7,6 +7,7 @@ import { ProfileRoutes } from './profile/routes';
 import { BalanceRoutes } from './balance/routes';
 import { JobsRoutes } from './jobs/routes';
 import { JobRoutes } from './job/routes';
+import { PrivacyAndTermsRoutes }         from './privacyAndTerms/routes';
 // Delete dummy data
 // import { ComponentsRoutes } from './components/routes';
 
@@ -26,7 +27,8 @@ export const router: VueRouter = new VueRouter(
       ...BalanceRoutes,
       ...JobsRoutes,
       ...JobRoutes,
-    ],
+      ...PrivacyAndTermsRoutes,
+   ],
     scrollBehavior(to, from, savedPosition) {
       if (to.hash) {
         return { selector: to.hash };

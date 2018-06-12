@@ -1,0 +1,31 @@
+{
+    "task": [
+        {
+            "job": "Sanitation Pick up",
+            "id": "a2c65f85-f01c-4b23-8e0e-34106d1afb0b",
+            "brief": "pick up trash from five homes",
+            "deliverable": "pick up trash and deposit at designated dumping area",
+            "due-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+            "domain": {
+                "enviroment": "true",
+                "transportation": "false",
+                "education": "false",
+                "civic-engagement": "false"
+            },
+            "roles": {
+                "manager": "139SG7kWj8tDiZF5azZ6WGmZpN6PGnUXbK",
+                "evaluator": "1LdwMsHme355qKHsxrEoXNGXX8CQzL7opT",
+                "worker": "Sam Morgan"
+            },
+            "status": "active",
+            "finalized": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+            "pot-donation-contributed": "false",
+            "full-time-job": "true",
+            "short-term-job": "false",
+            "mininum-reputation": "36",
+            "one-time-payout": "0",
+            "monthly-full-time-salary": "1000",
+            "date-posted": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)"
+        }
+    ]
+}

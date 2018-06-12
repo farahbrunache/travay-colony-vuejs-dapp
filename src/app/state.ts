@@ -3,6 +3,7 @@ import { ProfileDefaultState, IProfileState } from './profile/state';
 import { BalanceDefaultState, IBalanceState } from './balance/state';
 import { JobsDefaultState, IJobsState } from './jobs/state';
 import { JobDefaultState, IJobState } from './job/state';
+import { PrivacyAndTermsDefaultState, IPrivacyAndTermsState }         from './privacyAndTerms/state';
 
 export interface IState {
   [key: string]: any;
@@ -12,6 +13,7 @@ export interface IState {
   balance?: IBalanceState;
   jobs?: IJobsState;
   job?: IJobState;
+  privacyAndTerms?: IPrivacyAndTermsState;
 }
 
 export const DefaultState: IState = {
@@ -29,5 +31,8 @@ export const DefaultState: IState = {
   },
   job: {
     ...JobDefaultState,
+  },
+  privacyAndTerms: {
+    ...PrivacyAndTermsDefaultState,
   },
 };

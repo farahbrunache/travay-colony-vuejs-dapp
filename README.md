@@ -39,6 +39,7 @@ TODO
 [ ] Add Creole translation
 [ ] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
 [ ] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
+[ ] Add location based authentication that a job was done
 
 ### Application
 

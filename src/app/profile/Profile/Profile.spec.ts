@@ -1,76 +1,92 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex                      from 'vuex';
-import { i18n }                  from '../../shared/plugins/i18n/i18n';
-import Profile                   from './Profile.vue';
+import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
+import Profile from './Profile.vue';
+import { i18n } from '../../shared/plugins/i18n/i18n';
 
 const localVue = createLocalVue();
-
-localVue.use(Vuex);
 
 describe('Profile.vue', () => {
 
   test('renders component', () => {
-    const store = new Vuex.Store({
-                                   modules: {
-                                     profile: {
-                                       namespaced: true,
-                                       getters:    {
-                                         getCount: () => 0,
-                                       },
-                                       actions:    {
-                                         increment: jest.fn(),
-                                         decrement: jest.fn(),
-                                       },
-                                     },
-                                   },
-                                 });
-    const wrapper = mount(Profile, {
-      store,
-      localVue,
-      i18n,
+    const wrapper = mount(Profile,
+      {
+        i18n,
+        localVue,
+      },
+    );
+
+    expect(wrapper.vm).toBeDefined();
+  });
+
+  test('addressDisabled', () => {
+    const wrapper = mount(Profile,
+      {
+        i18n,
+        localVue,
+      },
+    ) as any;
+
+    expect(wrapper.vm.addressDisabled).toBeTruthy();
+
+    wrapper.setData({
+      form: {
+        firstname: 'foo',
+        lastname: '',
+        email: '',
+        street: '',
+        zipCode: '',
+        city: '',
+        country: '',
+        acceptTerms: false,
+        newsletter: false,
+      },
     });
+    expect(wrapper.vm.addressDisabled).toBeTruthy();
 
-    expect(wrapper.find('h1').text()).toBe('Profile');
-  });
-
-  test('should increment and decrement', () => {
-    const actions = {
-      increment: jest.fn(),
-      decrement: jest.fn(),
-    };
-    const store = new Vuex.Store({
-                                   modules: {
-                                     profile: {
-                                       namespaced: true,
-                                       getters:    {
-                                         getCount: () => 0,
-                                       },
-                                       actions,
-                                     },
-                                   },
-                                 });
-    const wrapper: any = mount(Profile, {
-      store,
-      localVue,
-      i18n,
+    wrapper.setData({
+      form: {
+        firstname: 'foo',
+        lastname: 'bar',
+        email: '',
+        street: '',
+        zipCode: '',
+        city: '',
+        country: '',
+        acceptTerms: false,
+        newsletter: false,
+      },
     });
+    expect(wrapper.vm.addressDisabled).toBeTruthy();
 
-    wrapper.vm.increment();
-    expect(actions.increment).toHaveBeenCalled();
-
-    wrapper.vm.decrement();
-    expect(actions.decrement).toHaveBeenCalled();
+    wrapper.setData({
+      form: {
+        firstname: 'foo',
+        lastname: 'bar',
+        email: 'baz',
+        street: '',
+        zipCode: '',
+        city: '',
+        country: '',
+        acceptTerms: false,
+        newsletter: false,
+      },
+    });
+    expect(wrapper.vm.addressDisabled).toBeFalsy();
   });
 
-  test('dispatches action on the server', () => {
-    const store = {
-      dispatch: jest.fn(),
-    };
+  test('renders onSubmit', (done) => {
+    const wrapper = shallowMount(Profile,
+      {
+        i18n,
+        localVue,
+      },
+    ) as any;
 
-    Profile.prefetch({ store });
+    wrapper.vm.onSubmit();
+    expect(wrapper.vm.isLoading).toBeTruthy();
 
-    expect(store.dispatch).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(`profile/increment`);
+    setTimeout(() => {
+      expect(wrapper.vm.isLoading).toBeFalsy();
+      done();
+    }, 550);
   });
-
 });
