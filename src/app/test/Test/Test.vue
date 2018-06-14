@@ -1,17 +1,30 @@
 <template>
-  <div :class="$style.balance">
-
+  <div :class="$style.test">
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item fill>
-          <h1>Balance</h1>
+          <h1>Test</h1>
         </vue-grid-item>
 
-
-    
+        <vue-grid-item fill>
+          <vue-button
+            :loading="incrementPending"
+            @click='increment'
+            accent>Increment +1
+          </vue-button>
+          <br/>
+          <br/>
+        </vue-grid-item>
+        <vue-grid-item fill>
+          <vue-button
+            :loading="decrementPending"
+            @click='decrement'
+            primary>Decrement -1
+          </vue-button>
+          <h3>Count is {{ count }}</h3>
+        </vue-grid-item>
       </vue-grid-row>
     </vue-grid>
-
   </div>
 </template>
 
@@ -25,7 +38,7 @@ import VueGridRow from "../../shared/components/VueGridRow/VueGridRow.vue";
 
 export default {
   metaInfo: {
-    title: "Balance"
+    title: "Test"
   },
   components: {
     VueGrid,
@@ -49,7 +62,7 @@ export default {
 <style lang="scss" module>
 @import "../../shared/styles";
 
-.balance {
+.test {
   margin-top: $nav-bar-height;
   min-height: 500px;
 }

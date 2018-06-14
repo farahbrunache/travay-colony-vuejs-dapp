@@ -1,4 +1,5 @@
 # Travay (pronounced "tri-vi")
+
 (means "work" in Haitian Creole)
 
 colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA.
@@ -20,7 +21,8 @@ TODO
 [ ] Full coverage unit tests
 
 ## Acceptance Criteria
-[ X ] End user can see a list of jobs
+
+[ ] End user can see a list of jobs
 [ ] End user can post a long-term job
 [ ] End user signs up and receives "x" amount of tokens to begin
 [ ] End user can only have "x" amount of tasks open at a time
@@ -32,6 +34,7 @@ TODO
 [ ] End user can use ether in their savings and investment account
 
 ## Product Road Map
+
 [ ] Wait until Colony launches on Mainnet!
 [ ] Learn how to incorporate off chain payments
 [ ] Add French translation
@@ -44,14 +47,14 @@ TODO
 
 ## Run Front-end Locally
 
-1. Install Node.js 8.x or higher. Use [nvm](https://github.com/creationix/nvm) or [n](https://github.com/tj/n) to maintain multiple Node.js versions
-2. Install npm version 5.x or higher
-3. Clone the repository
-4. Install dependencies: `npm install`
-6. Run `npm run dev`
+1.  Install Node.js 8.x or higher. Use [nvm](https://github.com/creationix/nvm) or [n](https://github.com/tj/n) to maintain multiple Node.js versions
+2.  Install npm version 5.x or higher
+3.  Clone the repository
+4.  Install dependencies: `npm install`
+5.  Run `npm run dev`
 
 ## Run End User Guide Locally
 
-1. Complete the [Getting started](#getting-started) guide
-2. Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
-3. run `vuepress dev docs`
+1.  Complete the [Getting started](#getting-started) guide
+2.  Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
+3.  run `vuepress dev docs`

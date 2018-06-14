@@ -1,103 +1,47 @@
 <template>
-  <form @submit.prevent="onSubmit" :class="$style.profile">
-    <h1>Profile</h1>
-    <medium>
-      Please read your <a href="/privacy-and-terms" target="_blank">privacy policy and terms and conditions</a> before proceeding.
-    </medium>
+  <div :class="$style.profile">
+    
+        <vue-grid>
+      <vue-grid-row>
+        <vue-grid-item fill>
+          <h1>Profile</h1>
+        </vue-grid-item>
+    
+    <vue-panel>
+<vue-panel-header title="Title" subtitle="subtitle" image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
+<vue-panel-body>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+  labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+  et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+  labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+  et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</vue-panel-body>
+<vue-panel-footer>
+  <vue-button primary>Update Profile</vue-button>
+</vue-panel-footer>
+</vue-panel>
 
-    <vue-grid-row>
-      <vue-grid-item>
-        <vue-input
-          name="firstname"
-          id="firstname"
-          required
-          placeholder="First Name"
-          validation="required"
-          v-model="form.firstname" />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-input
-          name="lastname"
-          id="lastname"
-          required
-          placeholder="Last Name"
-          validation="required"
-          v-model="form.lastname" />
-      </vue-grid-item>
-    </vue-grid-row>
+      </vue-grid-row>
+    </vue-grid>
 
-    <vue-grid-row>
-      <vue-grid-item>
-        <vue-input
-          name="city"
-          id="city"
-          required
-          placeholder="City"
-          v-model="form.city"
-          validation="required"
-          :disabled="addressDisabled" />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-select
-          name="country"
-          id="country"
-          v-model="form.country"
-          :options="countryOptions"
-          validation="required"
-          required
-          :disabled="addressDisabled" />
-      </vue-grid-item>
-    </vue-grid-row>
-
-    <vue-grid-row>
-      <vue-grid-item>
-        <vue-checkbox
-          name="acceptTerms"
-          id="acceptTerms"
-          v-model="form.acceptTerms"
-          label="I accept the terms"
-          required />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-checkbox
-          name="newsletterYes"
-          id="newsletterYes"
-          label="I want to subscribe to the newsletter"
-          :checked="form.newsletter === true"
-          @click="form.newsletter = !form.newsletter"
-          radio />
-        <br />
-        <vue-checkbox
-          name="newsletterNo"
-          id="newsletterNo"
-          label="I don't want to subscribe to the newsletter"
-          :checked="form.newsletter === false"
-          @click="form.newsletter = !form.newsletter"
-          radio />
-      </vue-grid-item>
-    </vue-grid-row>
-
-    <br />
-    <vue-button
-      primary
-      :disabled="isSubmitDisabled"
-      :loading="isLoading">
-      Save
-    </vue-button>
-
-<br />
-  </form>
-
-
+  </div>
 </template>
 
 <script lang="ts">
+import { mapActions, mapGetters } from "vuex";
+import { IPreLoad } from "../../../server/isomorphic";
+import VueGrid from "../../shared/components/VueGrid/VueGrid.vue";
+import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
+import VueButton from "../../shared/components/VueButton/VueButton.vue";
+import VueGridRow from "../../shared/components/VueGridRow/VueGridRow.vue";
+import VuePanel from "../../shared/components/VuePanel/VuePanel.vue";
+import VuePanelHeader from "../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue";
+import VuePanelBody from "../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue";
+import VuePanelFooter from "../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue";
 import VueInput from "../../shared/components/VueInput/VueInput.vue";
 import VueSelect from "../../shared/components/VueSelect/VueSelect.vue";
 import VueCheckbox from "../../shared/components/VueCheckbox/VueCheckbox.vue";
-import VueGridRow from "../../shared/components/VueGridRow/VueGridRow.vue";
-import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
-import VueButton from "../../shared/components/VueButton/VueButton.vue";
 import {
   addNotification,
   INotification
@@ -109,24 +53,22 @@ export default {
   },
   name: "Profile",
   components: {
+    VueGrid,
     VueGridItem,
     VueButton,
     VueGridRow,
-    VueCheckbox,
+    VuePanel,
+    VuePanelHeader,
+    VuePanelBody,
+    VuePanelFooter,
+    VueInput,
     VueSelect,
-    VueInput
+    VueCheckbox
   },
   data(): any {
     return {
-      form: {
-        firstname: "",
-        lastname: "",
-        email: "",
-        city: "",
-        country: "",
-        acceptTerms: false,
-        newsletter: false
-      },
+      firstname: "",
+      lastname: "",
       countryOptions: [
         { label: "Choose a Country", value: null },
         { label: "Haiti", value: "haiti" },
@@ -137,6 +79,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("test", ["count", "incrementPending", "decrementPending"]),
     addressDisabled() {
       return (
         this.form.firstname === "" ||
@@ -166,6 +109,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions("test", ["increment", "decrement"]),
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
@@ -180,6 +124,9 @@ export default {
         }, 500);
       });
     }
+  },
+  prefetch: (options: IPreLoad) => {
+    return options.store.dispatch("test/increment");
   }
 };
 </script>

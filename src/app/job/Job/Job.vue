@@ -7,13 +7,13 @@
         </vue-grid-item>
 
         <vue-grid-item fill>
-          <vue-panel v-bind:key="job.id">
-            <vue-panel-header title="Title" subtitle="subtitle"
-                              image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
+          <vue-panel v-if="job">
+            <vue-panel-header>
+              <router-link :key="`/job/${job.id}`">{{ job.task }}</router-link>
+              </vue-panel-header>
             <vue-panel-body>
             <ul>
               <li >
-                Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
                 Salary: ${{job.salary}}<br>
                 Date Posted: {{job.date-posted}}<br>
@@ -62,28 +62,23 @@
                     v-model="form.acceptTerms"
                     label="I accept the terms"
                     required />
-                </vue-grid-item>
-                <vue-grid-item>
-                  <vue-checkbox
-                    name="acceptTerms"
-                    id="acceptTerms"
-                    v-model="form.acceptTerms"
-                    label="I accept the terms"
-                    required />
-                </vue-grid-item>
-                <vue-grid-item>
-                  <vue-checkbox
-                    name="acceptTerms"
-                    id="acceptTerms"
-                    v-model="form.acceptTerms"
-                    label="I accept the terms"
-                    required />
+                    </vue-grid-item>
+              </vue-grid-row>
+              <vue-grid-row>
+                    <vue-grid-item>
+                    <vue-button primary>Claim</vue-button>
                 </vue-grid-item>
               </vue-grid-row>
 
+              </vue-accordion-item>
+            <vue-accordion-item title="Sponsor this Job">
+              <p>Coming Soon.</p>
+              <br>
+              <vue-button accent>
+                  <router-link :to="'createjob'" id="remove-hyperlink">Sponsor this Job</router-link>
+             </vue-button>
             </vue-accordion-item>
-            <vue-accordion-item title="Up Votes">
-              Coming Soon.
+
             </vue-accordion-item>
             <vue-accordion-item title="Comments">
               Coming Soon.
@@ -98,32 +93,34 @@
 </template>
 
 <script lang="ts">
-import VueGrid from "../../shared/components/VueGrid/VueGrid.vue";
-import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
-import VueButton from "../../shared/components/VueButton/VueButton.vue";
-import VueGridRow from "../../shared/components/VueGridRow/VueGridRow.vue";
-import VuePagination from "../../shared/components/VuePagination/VuePagination.vue";
-import VuePanel from "../../shared/components/VuePanel/VuePanel.vue";
-import VuePanelHeader from "../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue";
-import VuePanelBody from "../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue";
-import VuePanelFooter from "../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue";
-import VueAccordion from "../../shared/components/VueAccordion/VueAccordion.vue";
-import VueAccordionItem from "../../shared/components/VueAccordion/VueAccordionItem/VueAccordionItem.vue";
-import VueInput from "../../shared/components/VueInput/VueInput.vue";
-import VueSelect from "../../shared/components/VueSelect/VueSelect.vue";
-import VueCheckbox from "../../shared/components/VueCheckbox/VueCheckbox.vue";
-import axios from "axios";
+import { mapActions, mapGetters } from 'vuex';
+import { IPreLoad } from '../../../server/isomorphic';
+import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
+import VueButton from '../../shared/components/VueButton/VueButton.vue';
+import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
+import VuePagination from '../../shared/components/VuePagination/VuePagination.vue';
+import VuePanel from '../../shared/components/VuePanel/VuePanel.vue';
+import VuePanelHeader from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
+import VuePanelBody from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
+import VuePanelFooter from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
+import VueAccordion from '../../shared/components/VueAccordion/VueAccordion.vue';
+import VueAccordionItem from '../../shared/components/VueAccordion/VueAccordionItem/VueAccordionItem.vue';
+import VueInput from '../../shared/components/VueInput/VueInput.vue';
+import VueSelect from '../../shared/components/VueSelect/VueSelect.vue';
+import VueCheckbox from '../../shared/components/VueCheckbox/VueCheckbox.vue';
+import axios from 'axios';
 import {
   addNotification,
   INotification
-} from "../../shared/components/VueNotificationStack/utils";
+} from '../../shared/components/VueNotificationStack/utils';
 
 export default {
   metaInfo: {
-    title: "Job"
+    title: 'Job'
   },
   $_veeValidate: {
-    validator: "new"
+    validator: 'new'
   },
   components: {
     VueGrid,
@@ -144,7 +141,8 @@ export default {
   data(): any {
     return {
       job: [],
-      posted: "",
+      posted: '',
+      id: '',
       form: {
         acceptTerms: false,
         newsletter: false
@@ -152,12 +150,16 @@ export default {
       isLoading: false
     };
   },
+  created() {
+    console.log('Job ID:', this.$route.params.id); // prints value of :id
+  },
   computed: {
+    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
     addressDisabled() {
       return (
-        this.form.firstname === "" ||
-        this.form.lastname === "" ||
-        this.form.email === ""
+        this.form.firstname === '' ||
+        this.form.lastname === '' ||
+        this.form.email === ''
       );
     },
     hasErrors() {
@@ -168,8 +170,8 @@ export default {
 
       Object.keys(this.form).forEach((key: string) => {
         if (
-          key !== "newsletter" &&
-          (this.form[key] === "" || this.form[key] === false)
+          key !== 'newsletter' &&
+          (this.form[key] === '' || this.form[key] === false)
         ) {
           hasEmptyField = true;
         }
@@ -182,6 +184,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('test', ['increment', 'decrement']),
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
@@ -190,22 +193,33 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
           addNotification({
-            title: "Data has been saved!",
-            text: "Have a look at the console!"
+            title: 'Data has been saved!',
+            text: 'Have a look at the console!'
           } as INotification);
         }, 500);
       });
     }
+  },
+  prefetch: (options: IPreLoad) => {
+    return options.store.dispatch('test/increment');
   }
 };
 </script>
 
 
 <style lang="scss" module>
-@import "../../shared/styles";
+@import '../../shared/styles';
 
 .job {
   margin-top: $nav-bar-height;
   min-height: 500px;
+}
+
+#remove-hyperlink a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: white;
 }
 </style>

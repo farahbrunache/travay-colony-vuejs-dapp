@@ -5,6 +5,8 @@ import { JobsDefaultState, IJobsState } from './jobs/state';
 import { JobDefaultState, IJobState } from './job/state';
 import { PrivacyAndTermsDefaultState, IPrivacyAndTermsState }         from './privacyAndTerms/state';
 import { CreateJobDefaultState, ICreateJobState }         from './createJob/state';
+import { SignupDefaultState, ISignupState }         from './signup/state';
+import { TestDefaultState, ITestState }         from './test/state';
 
 export interface IState {
   [key: string]: any;
@@ -16,6 +18,8 @@ export interface IState {
   job?: IJobState;
   privacyAndTerms?: IPrivacyAndTermsState;
   createJob?: ICreateJobState;
+  signup?: ISignupState;
+  test?: ITestState;
 }
 
 export const DefaultState: IState = {
@@ -39,5 +43,11 @@ export const DefaultState: IState = {
   },
   createJob: {
     ...CreateJobDefaultState,
+  },
+  signup: {
+    ...SignupDefaultState,
+  },
+  test: {
+    ...TestDefaultState,
   },
 };

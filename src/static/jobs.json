@@ -1,0 +1,122 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "task": "Weekly Garabage Pick Up and Removal",
+      "brief": "Solarbreeze",
+      "deliverable": "lorem ipsum",
+      "apply-by-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "date-posted": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": "1",
+        "evaluator": "2",
+        "worker": "3"
+      },
+      "domain": "enviroment",
+      "skills": {
+        "tag-1": "enviroment",
+        "tag-2": "labor"
+      },
+      "role": {
+        "0": "Dexter Morgan",
+        "1": "Kim K",
+        "2": "Tim Horton"
+      },
+      "salary": {
+        "full-time-rate": "200",
+        "pay-frequency": {
+          "weekly": "false",
+          "bi-weekly": "false",
+          "monthly": "true"
+        },
+        "term-of-employment": {
+          "six-months": "false",
+          "one-year": "true"
+        }
+      },
+      "sponsor": {
+        "id": "5i88qehjkfhadshf9",
+        "sponsor-amount": "500"
+      }
+    },
+    {
+      "id": "2",
+      "task": "Software Engineer",
+      "brief": "Solarbreeze",
+      "deliverable": "lorem ipsum",
+      "apply-by-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "due-date": "Sat Jun 01 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": "1",
+        "evaluator": "2",
+        "worker": "3"
+      },
+      "domain": "enviroment",
+      "skills": {
+        "tag-1": "enviroment",
+        "tag-2": "labor"
+      },
+      "role": {
+        "0": "Dexter Morgan",
+        "1": "Kim K",
+        "2": "Tim Horton"
+      },
+      "salary": {
+        "full-time-rate": "100",
+        "pay-frequency": {
+          "weekly": "false",
+          "bi-weekly": "false",
+          "monthly": "true"
+        },
+        "term-of-employment": {
+          "six-months": "false",
+          "one-year": "true"
+        }
+      },
+      "sponsor": {
+        "id": "5i88qehjkfhadshf9",
+        "sponsor-amount": "500"
+      }
+    },
+    {
+      "id": "3",
+      "task": "Technician",
+      "brief": "Solarbreeze",
+      "deliverable": "lorem ipsum",
+      "apply-by-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "due-date": "Sat Jun 22 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": "1",
+        "evaluator": "2",
+        "worker": "3"
+      },
+      "domain": "enviroment",
+      "skills": {
+        "tag-1": "enviroment",
+        "tag-2": "labor"
+      },
+      "role": {
+        "0": "Dexter Morgan",
+        "1": "Kim K",
+        "2": "Tim Horton"
+      },
+      "salary": {
+        "full-time-rate": "300",
+        "pay-frequency": {
+          "weekly": "false",
+          "bi-weekly": "false",
+          "monthly": "true"
+        },
+        "term-of-employment": {
+          "six-months": "false",
+          "one-year": "true"
+        }
+      },
+      "sponsor": {
+        "id": "5i88qehjkfhadshf9",
+        "proposal-id": "333",
+        "sponsor-amount": "200"
+      }
+    }
+  ]
+}

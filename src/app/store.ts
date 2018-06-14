@@ -9,49 +9,51 @@ import { ProfileModule } from './profile/module';
 import { BalanceModule } from './balance/module';
 import { JobsModule } from './jobs/module';
 import { JobModule } from './job/module';
-import { PrivacyAndTermsModule }            from './privacyAndTerms/module';
-import { CreateJobModule }            from './createJob/module';
+import { PrivacyAndTermsModule } from './privacyAndTerms/module';
+import { CreateJobModule } from './createJob/module';
+import { SignupModule } from './signup/module';
+import { TestModule } from './test/module';
 
 Vue.use(Vuex);
 
 const state: IState = (CLIENT && window.__INITIAL_STATE__) || DefaultState;
 
 /* istanbul ignore next */
-const beforePersistLocalStorage = (localState: IState): IState => {
-  delete localState.counter.incrementPending;
-  delete localState.counter.decrementPending;
+// const beforePersistLocalStorage = (localState: IState): IState => {
+//   delete localState.counter.incrementPending;
+//   delete localState.counter.decrementPending;
 
-  return localState;
-};
+//   return localState;
+// };
 
 /* istanbul ignore next */
-const beforePersistCookieStorage = (localState: IState): IState => {
-  delete localState.app.config;
-  delete localState.app.defaultMessages;
-  delete localState.app.redirectTo;
+// const beforePersistCookieStorage = (localState: IState): IState => {
+//   delete localState.app.config;
+//   delete localState.app.defaultMessages;
+//   delete localState.app.redirectTo;
 
-  return localState;
-};
+//   return localState;
+// };
 
 export const store: Store<IState> = new Vuex.Store(
   {
     state,
-    plugins: [
-      VuexPersist(
-        [
-          new PersistLocalStorage(['counter'], beforePersistLocalStorage),
-          new PersistCookieStorage(
-            ['app'],
-            {
-              cookieOptions: {
-                expires: 365,
-              },
-              beforePersist: beforePersistCookieStorage,
-            },
-          ),
-        ],
-      ),
-    ],
+    // plugins: [
+    //   VuexPersist(
+    //     [
+    //       new PersistLocalStorage(['counter'], beforePersistLocalStorage),
+    //       new PersistCookieStorage(
+    //         ['app'],
+    //         {
+    //           cookieOptions: {
+    //             expires: 365,
+    //           },
+    //           beforePersist: beforePersistCookieStorage,
+    //         },
+    //       ),
+    //     ],
+    //   ),
+    // ],
   },
 );
 
@@ -62,3 +64,5 @@ store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
 store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, { preserveState: true });
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
+store.registerModule(['signup'], SignupModule, { preserveState: true });
+store.registerModule(['test'], TestModule, { preserveState: true });

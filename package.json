@@ -103,13 +103,7 @@
     "vue-server-renderer": "2.5.16",
     "vuex": "3.0.1",
     "vuex-router-sync": "5.0.0",
-    "winston": "2.4.2",
-    "@colony/colony-js-adapter-ethers": "^1.2.0",
-    "@colony/colony-js-client": "^1.2.0",
-    "@colony/colony-js-contract-loader-http": "^1.2.0",
-    "buffer": "^5.1.0",
-    "ethers": "^3.0.17",
-    "ipfs": "^0.29.2"
+    "winston": "2.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "6.2.0",

@@ -28,5 +28,5 @@
     "/node_modules/"
   ],
   "coverageDirectory": "../coverage",
-  "testURL": "http://localhost:3000"
+  "testURL": "http://"
 }

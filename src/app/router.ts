@@ -9,6 +9,8 @@ import { JobsRoutes } from './jobs/routes';
 import { JobRoutes } from './job/routes';
 import { PrivacyAndTermsRoutes }         from './privacyAndTerms/routes';
 import { CreateJobRoutes }         from './createJob/routes';
+import { SignupRoutes }         from './signup/routes';
+import { TestRoutes }         from './test/routes';
 // Delete dummy data
 // import { ComponentsRoutes } from './components/routes';
 
@@ -30,6 +32,8 @@ export const router: VueRouter = new VueRouter(
       ...JobRoutes,
       ...PrivacyAndTermsRoutes,
      ...CreateJobRoutes,
+     ...SignupRoutes,
+     ...TestRoutes,
    ],
     scrollBehavior(to, from, savedPosition) {
       if (to.hash) {
