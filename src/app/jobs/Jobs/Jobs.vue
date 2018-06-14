@@ -61,15 +61,17 @@
           </li>
         </ul>
       </vue-grid-item>
-
-        <vue-grid-item>
+      </vue-grid-row>
+        <br>
+        
+        <vue-grid-row>
           <vue-button accent>
             <router-link :to="'createjob'">Post a Job</router-link>
              </vue-button>
-          </vue-grid-item>
-        <br>
+        </vue-grid-row>
         <br>
 
+<vue-grid-row>
         <vue-grid-item>
         <hr>      
           <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.id">
