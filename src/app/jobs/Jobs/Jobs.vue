@@ -63,7 +63,7 @@
       </vue-grid-item>
       </vue-grid-row>
         <br>
-        
+
         <vue-grid-row>
           <vue-button accent>
             <router-link :to="'createjob'">Post a Job</router-link>
@@ -91,6 +91,12 @@
             <vue-panel-footer>
               <vue-button primary>
               <router-link :to="`/job/${job.id}`" id="remove-hyperlink">Learn More</router-link>
+              </vue-button>
+
+            <vue-button primary>
+              <router-link :to="{name:'Job', params:{id:job._id}}" id="remove-hyperlink">
+                learn
+              </router-link>
               </vue-button>
 
               <vue-button accent>
