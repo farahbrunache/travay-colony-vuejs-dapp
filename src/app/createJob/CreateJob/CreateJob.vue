@@ -19,7 +19,7 @@
 
       <vue-grid>
         <vue-grid-row>
-  <form :class="$style.formExample" @submit.prevent="onSubmit">
+  <form :class="$style.formExample" @submit.prevent="createJob()">
 
     <vue-grid-row>
       <vue-grid-item>
@@ -298,6 +298,9 @@ export default {
           } as INotification);
         }, 500);
       });
+    },
+    createJob() {
+      // https://bitbucket.org/farahbrunache/the-comic/src/master/src/components/AddPost.vue
     }
   },
   computed: {
