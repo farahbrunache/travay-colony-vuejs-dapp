@@ -93,12 +93,6 @@
               <router-link :to="`/job/${job.id}`" id="remove-hyperlink">Learn More</router-link>
               </vue-button>
 
-            <vue-button primary>
-              <router-link :to="{name:'Job', params:{id:job._id}}" id="remove-hyperlink">
-                learn
-              </router-link>
-              </vue-button>
-
               <vue-button accent>
                   <router-link :to="'createjob'">Sponsor this Job</router-link>
              </vue-button>

@@ -1,10 +1,12 @@
-# Travay (pronounced "tri-vi")
+# Travay
 
-(means "work" in Haitian Creole)
+(pronounced "try-vi")
 
-colonyNetwork smart contract dapp with the front-end done as a Vue.js PWA.
+- Means "work" in Haitian Creole
 
-The only centralization of the dApp is the front-end hosted in Firebase: https://travay-dapp.firebaseapp.com.
+- colonyNetwork smart contract dapp with the front-end completed as a Vue.js PWA.
+
+- The only centralization of the dApp is the front-end hosted in Firebase: https://travay-dapp.firebaseapp.com.
 
 ## End User Guide
 
@@ -17,21 +19,27 @@ The only centralization of the dApp is the front-end hosted in Firebase: https:/
 TODO
 [ ] Create Privacy Policy
 [ ] Creates Terms and Conditions
-[ ] Create Code of Conduct
+[ ] Create Travay Colony Code of Conduct
 [ ] Full coverage unit tests
 
 ## Acceptance Criteria
 
 [ ] End user can see a list of jobs
 [ ] End user can post a long-term job
-[ ] End user signs up and receives "x" amount of tokens to begin
-[ ] End user can only have "x" amount of tasks open at a time
+[ ] End user signs up and receives "x" amount of tokens to begin with
 [ ] End user can see the total amount of coins they've earned
-[ ] End user can create a savings account, that is separate from their account where coins are automatically stored for a long-term job
-[ ] End user can create an investment account, that is separate from their account where coins are automatically stored for a long-term job
+[ ] End user can create a savings account, that is separate from their account where coins are automatically stored for a long-term job (i.e. ether)
+[ ] End user can create an investment account, that is separate from their account where coins are automatically stored for a long-term job (i.e. bitcoin)
 [ ] End user cannot accumulate debt
-[ ] End user can earn in stable token
-[ ] End user can use ether in their savings and investment account
+[ ] End user can earn in stable token (i.e. stable coin)
+[ ] End user can upload a photo of work completed
+[ ] End user can see their reputation score
+[ ] End user can evaluate a job
+[ ] Multiple end users can evaluate a job
+[ ] End user can initiate a payout of a job
+[ ] End user can modify a job
+[ ] End user can close a job
+[ ] End user can sponsor a job
 
 ## Product Road Map
 
@@ -39,11 +47,12 @@ TODO
 [ ] Learn how to incorporate off chain payments
 [ ] Add French translation
 [ ] Add Creole translation
-[ ] Learn security practices in Blockchain so I can protect the identity of an already vulnerable population
+[ ] Learn more about security practices in Blockchain so I can protect the identity of an already vulnerable population
 [ ] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
-[ ] Add location based authentication that a job was done
+[ ] Add location based authentication as a form of proof that a job was done
+[ ] Integrate with uport / create a functioning login and signup page
 
-### Application
+### Web Application
 
 ## Run Front-end Locally
 
@@ -53,8 +62,8 @@ TODO
 4.  Install dependencies: `npm install`
 5.  Run `npm run dev`
 
-## Run End User Guide Locally
+## Run End User Guide (docs) Locally
 
 1.  Complete the [Getting started](#getting-started) guide
 2.  Install [vuepress](https://vuepress.vuejs.org/) `npm i -g vuepress`
-3.  run `vuepress dev docs`
+3.  Run `vuepress dev docs`
