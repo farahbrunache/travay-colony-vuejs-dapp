@@ -8,6 +8,18 @@
 
 - The only centralization of the dApp is the front-end hosted in Firebase: https://travay-dapp.firebaseapp.com.
 
+## Hackathon Team Members
+
+Farah Brunache | Developer
+Twitter [@farahbrunache](www.github.com/farahbrunache)
+Github [@farahbrunache](www.twitter.com/farahbrunache)
+
+Iain Barclay | Researcher
+Github [@iainbarclay](www.github.com/iainbarclay)
+
+Emily Kuo | Researcher
+Github [@bubblenote](www.github.com/bubblenote)
+
 ## End User Guide
 
 [TBC]
@@ -16,7 +28,14 @@
 
 [TBC]
 
-TODO
+## Presentation
+
+[TBC]
+
+Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the presentation slides of our project
+
+## TODO
+
 [ ] Create Privacy Policy
 [ ] Creates Terms and Conditions
 [ ] Create Travay Colony Code of Conduct

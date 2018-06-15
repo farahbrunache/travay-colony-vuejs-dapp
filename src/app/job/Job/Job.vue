@@ -13,10 +13,27 @@
               </vue-panel-header>
             <vue-panel-body>
             <ul>
-              <li >
+              <li v-if="job.salary">
                 Description: {{job.brief}}<br>
-                Salary: ${{job.salary}}<br>
-                Date Posted: {{job.date-posted}}<br>
+                Full time rate: ${{job.salary['full-time-rate']}}
+                <br>
+                <br>
+                Pay frequency: 
+                <input id="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].weekly" />
+                <label for="weekly">Weekly</label>
+                <input id="bi-weekly" type="checkbox" name="bi-weekly" v-model="job.salary['pay-frequency']['bi-weekly']" />
+                <label for="bi-weekly">Bi-weekly</label>
+                <input id="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].monthly" />
+                <label for="monthly">Monthly</label>
+                <br>
+                <br>
+                Term of employment: 
+                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job.salary['term-of-employment']['six-months']" />
+                <label for="sixmonth">6 month</label>
+                <input id="oneyear" type="checkbox" name="oneyear" v-model="job.salary['term-of-employment']['one-year']" />
+                <label for="oneyear">1 year</label>
+                <br>
+                Date Posted: {{job['date-posted']}}<br>
               </li>
             </ul>
             </vue-panel-body>
@@ -140,7 +157,7 @@ export default {
   },
   data(): any {
     return {
-      job: [],
+      job: {},
       posted: '',
       id: '',
       form: {
@@ -151,7 +168,7 @@ export default {
     };
   },
   created() {
-    console.log('Job ID:', this.$route.params.id); // prints value of :id
+    this.getJob();
   },
   computed: {
     ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
@@ -185,6 +202,17 @@ export default {
   },
   methods: {
     ...mapActions('test', ['increment', 'decrement']),
+    getJob() {
+      axios.get('/jobs.json').then((response: any) => {
+        const job = response.data.jobs.filter(
+          (job: any) => job.id == this.$route.params.id
+        );
+        console.log(job);
+        if (job.length > 0) {
+          this.job = job[0];
+        }
+      });
+    },
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));

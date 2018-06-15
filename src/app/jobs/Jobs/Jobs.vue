@@ -82,8 +82,25 @@
               <li >
                 Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
-                Salary: ${{job.salary}}<br>
-                Date Posted: {{job.date-posted}}<br>
+                Full time rate: ${{job.salary['full-time-rate']}}
+                <br>
+                <br>
+                Pay frequency: 
+                <input id="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].weekly" />
+                <label for="weekly">Weekly</label>
+                <input id="bi-weekly" type="checkbox" name="bi-weekly" v-model="job.salary['pay-frequency']['bi-weekly']" />
+                <label for="bi-weekly">Bi-weekly</label>
+                <input id="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].monthly" />
+                <label for="monthly">Monthly</label>
+                <br>
+                <br>
+                Term of employment: 
+                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job.salary['term-of-employment']['six-months']" />
+                <label for="sixmonth">6 month</label>
+                <input id="oneyear" type="checkbox" name="oneyear" v-model="job.salary['term-of-employment']['one-year']" />
+                <label for="oneyear">1 year</label>
+                <br>
+                Date Posted: {{job['date-posted']}}<br>
               </li>
             </ul>
             </vue-panel-body>
@@ -99,10 +116,7 @@
             </vue-panel-footer>
             <br>
           </vue-panel>
-
           <br>
-          <div>
-        </div>
         </vue-grid-item>
         
       </vue-grid-row>
@@ -171,7 +185,7 @@ export default {
   methods: {
     ...mapActions('test', ['increment', 'decrement']),
     getJobs() {
-      axios.get('/mock-data.json').then((response: any) => {
+      axios.get('/jobs.json').then((response: any) => {
         this.sort(response.data.jobs);
       });
     },
@@ -187,8 +201,9 @@ export default {
       let keywordSearchRegEx = RegExp(this.keyword, 'gi');
       return (
         keywordSearchRegEx.test(job.brief) &&
-        (parseInt(job['salary']) <= parseInt(this.endRange) &&
-          parseInt(job['salary']) >= parseInt(this.startRange))
+        (parseInt(job['salary']['full-time-rate']) <= parseInt(this.endRange) &&
+          parseInt(job['salary']['full-time-rate']) >=
+            parseInt(this.startRange))
       );
     }
   },

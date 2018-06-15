@@ -213,6 +213,7 @@ import {
   addNotification,
   INotification
 } from '../../shared/components/VueNotificationStack/utils';
+// import { uuid } from 'vue-uuid.vue';
 
 export default {
   metaInfo: {
@@ -233,6 +234,7 @@ export default {
   },
   data(): any {
     return {
+      // uuid: uuid.v1(), // https://github.com/VitorLuizC/vue-uuid
       form: {
         jobId: '',
         task: '',
@@ -299,9 +301,7 @@ export default {
         }, 500);
       });
     },
-    createJob() {
-      // https://bitbucket.org/farahbrunache/the-comic/src/master/src/components/AddPost.vue
-    }
+    createJob() {}
   },
   computed: {
     ...mapGetters('createJob', [

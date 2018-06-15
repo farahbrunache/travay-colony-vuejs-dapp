@@ -25,13 +25,13 @@
       "salary": {
         "full-time-rate": "200",
         "pay-frequency": {
-          "weekly": "false",
-          "bi-weekly": "false",
-          "monthly": "true"
+          "weekly": false,
+          "bi-weekly": false,
+          "monthly": true
         },
         "term-of-employment": {
-          "six-months": "false",
-          "one-year": "true"
+          "six-months": false,
+          "one-year": true
         }
       },
       "sponsor": {
@@ -45,6 +45,7 @@
       "brief": "Solarbreeze",
       "deliverable": "lorem ipsum",
       "apply-by-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "date-posted": "Sat Jun 22 2018 20:26:09 GMT-0400 (EDT)",
       "due-date": "Sat Jun 01 2018 20:26:09 GMT-0400 (EDT)",
       "payouts": {
         "manager": "1",
@@ -84,6 +85,7 @@
       "brief": "Solarbreeze",
       "deliverable": "lorem ipsum",
       "apply-by-date": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "date-posted": "Sat Jun 05 2018 20:26:09 GMT-0400 (EDT)",
       "due-date": "Sat Jun 22 2018 20:26:09 GMT-0400 (EDT)",
       "payouts": {
         "manager": "1",
