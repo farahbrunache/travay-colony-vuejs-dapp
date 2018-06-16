@@ -10,7 +10,7 @@
 
 ## Hackathon Team Members
 
-Farah Brunache | Developer | Virigina, US
+Farah Brunache | Developer | Virginia, US
 Twitter [@farahbrunache](www.github.com/farahbrunache)
 Github [@farahbrunache](www.twitter.com/farahbrunache)
 
@@ -63,7 +63,14 @@ Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the 
 
 ## Product Road Map
 
--[ ] Wait until Colony launches on Mainnet! -[ ] Learn how to incorporate off chain payments -[ ] Add French translation -[ ] Add Creole translation -[ ] Learn more about security practices in Blockchain so I can protect the identity of an already vulnerable population -[ ] Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity) -[ ] Add location based authentication as a form of proof that a job was done -[ ] Integrate with uport / create a functioning login and signup page
+- Wait until Colony launches on Mainnet!
+- Learn how to incorporate off chain payments
+- Add French translation
+- Add Creole translation
+- Learn more about security practices in Blockchain so I can protect the identity of an already vulnerable population
+- Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
+- Add location based authentication as a form of proof that a job was done
+- Integrate with uPort / create a functioning login and signup page
 
 ### Web Application
 
