@@ -7,6 +7,7 @@ import { PrivacyAndTermsDefaultState, IPrivacyAndTermsState }         from './pr
 import { CreateJobDefaultState, ICreateJobState }         from './createJob/state';
 import { SignupDefaultState, ISignupState }         from './signup/state';
 import { TestDefaultState, ITestState }         from './test/state';
+import { SigninDefaultState, ISigninState }         from './signin/state';
 
 export interface IState {
   [key: string]: any;
@@ -20,6 +21,7 @@ export interface IState {
   createJob?: ICreateJobState;
   signup?: ISignupState;
   test?: ITestState;
+  signin?: ISigninState;
 }
 
 export const DefaultState: IState = {
@@ -49,5 +51,8 @@ export const DefaultState: IState = {
   },
   test: {
     ...TestDefaultState,
+  },
+  signin: {
+    ...SigninDefaultState,
   },
 };

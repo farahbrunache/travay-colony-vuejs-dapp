@@ -70,11 +70,14 @@
              </vue-button>
         </vue-grid-row>
         <br>
-
-<vue-grid-row>
+      <sponsor-modal 
+        :job="jobToSponsor" 
+        :show.sync="showSponsoredModal"
+        @sponsorSubmit="sponsorSubmitHandler"></sponsor-modal>
+      <vue-grid-row>
         <vue-grid-item>
         <hr>      
-          <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.id">
+          <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.taskId">
             <vue-panel-header title="Title" subtitle="subtitle"
                               image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
             <vue-panel-body>
@@ -107,12 +110,13 @@
             
             <vue-panel-footer>
               <vue-button primary>
-              <router-link :to="`/job/${job.id}`" id="remove-hyperlink">Learn More</router-link>
+              <router-link :to="`/job/${job.taskId}`" class="remove-hyperlink">Learn More</router-link>
               </vue-button>
 
               <vue-button accent>
-                  <router-link :to="'createjob'">Sponsor this Job</router-link>
+                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="make-hyperlink-white">Sponsor this Job</a>
              </vue-button>
+
             </vue-panel-footer>
             <br>
           </vue-panel>
@@ -137,6 +141,11 @@ import VuePanelHeader from '../../shared/components/VuePanel/VuePanelHeader/VueP
 import VuePanelBody from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
 import VuePanelFooter from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
 import axios from 'axios';
+import firebase from 'firebase';
+import db from '../../firebaseinit';
+import SponsorModal from '../../SponsorModal/SponsorModal.vue';
+import { uuid } from 'vue-uuid';
+console.log('unique id', uuid.v1());
 
 export default {
   metaInfo: {
@@ -151,11 +160,14 @@ export default {
     VuePanel,
     VuePanelHeader,
     VuePanelBody,
-    VuePanelFooter
+    VuePanelFooter,
+    SponsorModal
   },
   data(): any {
     return {
       jobs: [],
+      selectedJobToSponsorId: null,
+      showSponsoredModal: false,
       posted: '',
       endRange: '300',
       startRange: '100',
@@ -184,10 +196,36 @@ export default {
   },
   methods: {
     ...mapActions('test', ['increment', 'decrement']),
-    getJobs() {
-      axios.get('/jobs.json').then((response: any) => {
-        this.sort(response.data.jobs);
-      });
+    sponsorJobClickedHandler(taskId) {
+      console.log('sponsor job clicked!', taskId);
+      this.selectedJobToSponsorId = taskId;
+      this.showSponsoredModal = true;
+    },
+    sponsorSubmitHandler(amount) {
+      console.log('sponsor submit initialised', amount);
+      console.log('job id to sponsor', this.selectedJobToSponsorId);
+      const data = {
+        sponsoredId: uuid.v1(),
+        userId: 'B05DVUYUHPaYS5wGfPsumFdkIcG2',
+        amount,
+        taskId: this.selectedJobToSponsorId,
+        task: this.jobToSponsor.task
+      };
+      console.log('data to send', data);
+      db
+        .collection('sponsored')
+        .add(data)
+        .then(docRef => {
+          console.log('data saved', docRef);
+          alert('You are now sponsoring this job!');
+        })
+        .catch(err => {
+          console.error('error when trying to save the data', err);
+          alert('There was a problem when trying to insert data!');
+        })
+        .then(() => {
+          this.showSponsoredModal = false;
+        });
     },
     sort(jobs: Array<object>) {
       const result = jobs.sort(function(a: any, b: any): number {
@@ -198,23 +236,53 @@ export default {
       this.jobs = result;
     },
     filterJob(job: any) {
+      console.log('job before filter!', job);
       let keywordSearchRegEx = RegExp(this.keyword, 'gi');
-      return (
+      const result =
         keywordSearchRegEx.test(job.brief) &&
         (parseInt(job['salary']['full-time-rate']) <= parseInt(this.endRange) &&
           parseInt(job['salary']['full-time-rate']) >=
-            parseInt(this.startRange))
-      );
+            parseInt(this.startRange));
+      console.log('after filter!', result);
+      return result;
     }
   },
   mounted() {
-    this.getJobs();
+    //const db = firebase.database().ref('jobs/');
+    /*const res = db.once('value').then(snapshot => {
+      console.log('snapshot', snapshot);
+    });*/
+    /*const res = axios
+      .get('https://travay-dapp.firebaseio.com/jobs.json')
+      .then(res => {
+        console.log('response', res);
+        return res;
+      });
+    console.log('firebase!', res);*/
+    // this.getJobs();
   },
   computed: {
-    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending'])
+    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
+    jobToSponsor() {
+      return (
+        this.jobs.find(job => job.taskId === this.selectedJobToSponsorId) || {}
+      );
+    }
   },
   prefetch: (options: IPreLoad) => {
     return options.store.dispatch('test/increment');
+  },
+  created() {
+    db
+      .collection('jobs')
+      .get()
+      .then(snapshot => {
+        const jobs = [];
+        snapshot.forEach(job => {
+          jobs.push(job.data());
+        });
+        this.jobs = jobs;
+      });
   }
 };
 </script>
@@ -223,11 +291,18 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-#remove-hyperlink a:hover,
+.remove-hyperlink a:hover,
 a:visited,
 a:link,
 a:active {
   text-decoration: none;
+  color: white;
+}
+
+#make-hyperlink-white a:hover,
+a:visited,
+a:link,
+a:active {
   color: white;
 }
 

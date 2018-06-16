@@ -27,6 +27,12 @@
             <small>{{ $t('App.nav.signup' /* Signup */) }}</small>
           </router-link>
         </li>
+        <li>
+          <router-link to="/signin" @click.native="navBarClose">
+            <i class="fas fa-user-plus" />
+            <small>{{ $t('App.nav.signin' /* Signin */) }}</small>
+          </router-link>
+        </li>
         <!-- <li>
           <router-link to="/components" @click.native="navBarClose">
             <i class="fas fa-puzzle-piece" />
@@ -61,14 +67,14 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from "vuex";
-import VueNavBar from "../../shared/components/VueNavBar/VueNavBar.vue";
-import VueGrid from "../../shared/components/VueGrid/VueGrid.vue";
-import VueGridItem from "../../shared/components/VueGridItem/VueGridItem.vue";
-import VueFooter from "../../shared/components/VueFooter/VueFooter.vue";
-import VueNotificationStack from "../../shared/components/VueNotificationStack/VueNotificationStack.vue";
-import { loadLocaleAsync } from "../../shared/plugins/i18n/i18n";
-import { EventBus } from "../../shared/services/EventBus";
+import { mapActions } from 'vuex';
+import VueNavBar from '../../shared/components/VueNavBar/VueNavBar.vue';
+import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
+import VueFooter from '../../shared/components/VueFooter/VueFooter.vue';
+import VueNotificationStack from '../../shared/components/VueNotificationStack/VueNotificationStack.vue';
+import { loadLocaleAsync } from '../../shared/plugins/i18n/i18n';
+import { EventBus } from '../../shared/services/EventBus';
 
 export default {
   components: {
@@ -79,7 +85,7 @@ export default {
     VueNotificationStack
   },
   methods: {
-    ...mapActions("app", ["changeLocale"]),
+    ...mapActions('app', ['changeLocale']),
     localeSwitch(locale: string): void {
       loadLocaleAsync(locale).catch((error: Error) => console.log(error));
 
@@ -87,17 +93,17 @@ export default {
       this.navBarClose();
     },
     navBarClose() {
-      EventBus.$emit("navbar.close");
+      EventBus.$emit('navbar.close');
     }
   }
 };
 </script>
 
 <style lang="scss" module>
-@import "../../shared/styles";
-@import "../../shared/styles/reset";
-@import "../../shared/styles/typo";
-@import "../../shared/styles/global";
+@import '../../shared/styles';
+@import '../../shared/styles/reset';
+@import '../../shared/styles/typo';
+@import '../../shared/styles/global';
 @import url($google-font);
 
 .app {

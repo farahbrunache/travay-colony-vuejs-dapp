@@ -13,6 +13,7 @@ import { PrivacyAndTermsModule } from './privacyAndTerms/module';
 import { CreateJobModule } from './createJob/module';
 import { SignupModule } from './signup/module';
 import { TestModule } from './test/module';
+import { SigninModule }            from './signin/module';
 
 Vue.use(Vuex);
 
@@ -66,3 +67,4 @@ store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, { preserveState
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
 store.registerModule(['signup'], SignupModule, { preserveState: true });
 store.registerModule(['test'], TestModule, { preserveState: true });
+store.registerModule(['signin'], SigninModule, { preserveState: true });

@@ -6,10 +6,15 @@
           <h1>Job</h1>
         </vue-grid-item>
 
+              <sponsor-modal 
+        :job="jobToSponsor" 
+        :show.sync="showSponsoredModal"
+        @sponsorSubmit="sponsorSubmitHandler"></sponsor-modal>
+
         <vue-grid-item fill>
           <vue-panel v-if="job">
             <vue-panel-header>
-              <router-link :key="`/job/${job.id}`">{{ job.task }}</router-link>
+              <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
             <vue-panel-body>
             <ul>
@@ -54,19 +59,14 @@
               <ul>
                 <li>Test</li>
                 <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
               </ul>
               <h3>Definition of Done </h3>
               <ul>
                 <li>Test</li>
                 <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
               </ul>
               <h3>Legal</h3>
               <ul>
-                <li>Test</li>
                 <li>Test</li>
                 <li>Test</li>
                 <li>Test</li>
@@ -92,7 +92,7 @@
               <p>Coming Soon.</p>
               <br>
               <vue-button accent>
-                  <router-link :to="'createjob'" id="remove-hyperlink">Sponsor this Job</router-link>
+                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="make-hyperlink-white">Sponsor this Job</a>
              </vue-button>
             </vue-accordion-item>
 
@@ -159,7 +159,7 @@ export default {
     return {
       job: {},
       posted: '',
-      id: '',
+      taskId: '',
       form: {
         acceptTerms: false,
         newsletter: false
@@ -205,7 +205,7 @@ export default {
     getJob() {
       axios.get('/jobs.json').then((response: any) => {
         const job = response.data.jobs.filter(
-          (job: any) => job.id == this.$route.params.id
+          (job: any) => job.taskId == this.$route.params.taskId
         );
         console.log(job);
         if (job.length > 0) {

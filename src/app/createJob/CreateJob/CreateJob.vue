@@ -213,9 +213,12 @@ import {
   addNotification,
   INotification
 } from '../../shared/components/VueNotificationStack/utils';
-// import { uuid } from 'vue-uuid.vue';
+// import { uuid } from 'vue-uuid';
+// import Something from '../../../../hackathonStarter/src/lib/colonyNetwork';
+import { colonyMixin } from '../../shared/mixins/mixins';
 
 export default {
+  mixins: [colonyMixin],
   metaInfo: {
     title: 'CreateJob'
   },
@@ -234,7 +237,6 @@ export default {
   },
   data(): any {
     return {
-      // uuid: uuid.v1(), // https://github.com/VitorLuizC/vue-uuid
       form: {
         jobId: '',
         task: '',
@@ -339,6 +341,9 @@ export default {
   },
   prefetch: (options: IPreLoad) => {
     return options.store.dispatch('createJob/increment');
+  },
+  created() {
+    this.createTask();
   }
 };
 </script>

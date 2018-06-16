@@ -10,14 +10,14 @@
 
 ## Hackathon Team Members
 
-Farah Brunache | Developer
+Farah Brunache | Developer | Virigina, US
 Twitter [@farahbrunache](www.github.com/farahbrunache)
 Github [@farahbrunache](www.twitter.com/farahbrunache)
 
-Iain Barclay | Researcher
+Iain Barclay | Researcher | United Kingdom
 Github [@iainbarclay](www.github.com/iainbarclay)
 
-Emily Kuo | Researcher
+Emily Kuo | Researcher | California, US
 Github [@bubblenote](www.github.com/bubblenote)
 
 ## End User Guide
