@@ -16,9 +16,8 @@
         </vue-grid-item>
 
         <vue-grid-item>
-          <small><a href="example.com/license" target="_blank" rel="noopener">MIT
-                                                                                                                         License</a>
-          </small>
+          <!-- <small><a href="example.com/license" target="_blank" rel="noopener">MIT License</a>
+          </small> -->
         </vue-grid-item>
       </vue-grid-row>
     </vue-grid>
@@ -26,42 +25,42 @@
 </template>
 
 <script lang="ts">
-  import VueGrid     from '../VueGrid/VueGrid';
-  import VueGridItem from '../VueGridItem/VueGridItem';
-  import VueGridRow  from '../VueGridRow/VueGridRow';
+import VueGrid from '../VueGrid/VueGrid';
+import VueGridItem from '../VueGridItem/VueGridItem';
+import VueGridRow from '../VueGridRow/VueGridRow';
 
-  export default {
-    name:       'VueFooter',
-    components: {
-      VueGrid,
-      VueGridItem,
-      VueGridRow,
-    },
-    computed:   {
-      year() {
-        return new Date().getFullYear();
-      },
-    },
-  };
+export default {
+  name: 'VueFooter',
+  components: {
+    VueGrid,
+    VueGridItem,
+    VueGridRow
+  },
+  computed: {
+    year() {
+      return new Date().getFullYear();
+    }
+  }
+};
 </script>
 
 <style lang="scss" module>
-  @import "../../styles";
+@import '../../styles';
 
-  .vueFooter {
-    padding:    $footer-padding;
-    background: $footer-bg;
-    color:      $footer-color;
-    text-align: center;
+.vueFooter {
+  padding: $footer-padding;
+  background: $footer-bg;
+  color: $footer-color;
+  text-align: center;
 
-    i {
-      font-size: $font-size-h1;
-      margin:    0 $space-unit * 2;
-    }
-
-    small {
-      display: inline-block;
-      margin:  $space-unit * 2 0;
-    }
+  i {
+    font-size: $font-size-h1;
+    margin: 0 $space-unit * 2;
   }
+
+  small {
+    display: inline-block;
+    margin: $space-unit * 2 0;
+  }
+}
 </style>

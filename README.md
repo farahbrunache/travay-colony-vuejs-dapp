@@ -8,6 +8,10 @@
 
 - The only centralization of the dApp is the front-end hosted in Firebase: https://travay-dapp.firebaseapp.com.
 
+## Project Description
+
+Many developing nations such as Haiti lack the infrastructure for providing public services, resulting in a lower quality of life with high unemployment. Travay leverages the power of the community by having citizens earn a steady livelihood by fulfilling good deeds posted by other citizens. Built with the colonyJS framework and Vue.js, Travay’s progressive web application enables citizens to create a profile to view, select, post, sponsor, and evaluate a job pertaining to a good deed. Citizens receive Ether for payment that can be stored in a savings account for long-term jobs and the Travay token which confers reputation. Travay deploys Colony’s smart contracts to codify the terms of agreements for completing work. In doing so, Travay incentivizes citizens to complete good deeds for higher reputation, and more Ether to have a greater selection in jobs and influence which posted jobs will better the community. Overall, Travay creates economic mobility by marshaling human capital appropriately via the Ethereum blockchain.
+
 ## Hackathon Team Members
 
 Farah Brunache | Developer | Virginia, US
@@ -30,9 +34,7 @@ Github [@bubblenote](www.github.com/bubblenote)
 
 ## Presentation
 
-[TBC]
-
-Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the presentation slides of our project
+Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the presentation slides of our project.
 
 ## TODO
 
@@ -64,7 +66,9 @@ Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the 
 ## Product Road Map
 
 - Wait until Colony launches on Mainnet!
+- Add to end user's profile page their reputation score
 - Learn how to incorporate off chain payments
+- Allow job poster to designate payouts to different roles beyond just the "worker" role
 - Add French translation
 - Add Creole translation
 - Learn more about security practices in Blockchain so I can protect the identity of an already vulnerable population

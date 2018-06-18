@@ -15,7 +15,7 @@
 
         <vue-grid-item fill>
    <button @click="signOut">
-            <i class="fab fa-sign-out"></i> Sign OUt
+            <i class="fab fa-sign-out"></i> Sign Out
           </button>
         </vue-grid-item>
 

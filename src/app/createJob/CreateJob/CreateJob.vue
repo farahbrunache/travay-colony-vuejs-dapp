@@ -70,7 +70,8 @@
             @change="calendarChange"
             :value="form.closingDate"
             :first-day-of-week="1"
-            placeholder="Select last date someone can apply for job" />
+            validation="required"
+            placeholder="Job Closing Date" />
         </vue-grid-item>
       <vue-grid-item>
         <vue-input
@@ -139,6 +140,7 @@
             id="termOfEmployment"
             :options="termOfEmployment"
             :value="form.selectedTermOfEmployment"
+            validation="required"
             @input="val => selectChange(val, 'selectedTermOfEmployment')" />
       </vue-grid-item>
       <vue-grid-item>
@@ -192,10 +194,10 @@
       @click.prevent.stop="submitHandler">
       Submit Job Posting
     </vue-button>
-  </form>
-  </vue-grid-row>
+      </form>
+
+        </vue-grid-row>
       </vue-grid>
-        <br>
 
   </div>
 </template>
@@ -215,10 +217,10 @@ import {
   addNotification,
   INotification
 } from '../../shared/components/VueNotificationStack/utils';
-// import { uuid } from 'vue-uuid';
-// import Something from '../../../../hackathonStarter/src/lib/colonyNetwork';
 import { colonyMixin } from '../../shared/mixins/mixins';
 import { uuid } from 'vue-uuid';
+import firebase from 'firebase';
+import db from '../../firebaseinit';
 
 export default {
   mixins: [colonyMixin],
@@ -314,7 +316,7 @@ export default {
     },
     submitHandler() {
       this.isLoading = true;
-      console.log(JSON.parse(JSON.stringify(this.form)));
+      // console.log(JSON.parse(JSON.stringify(this.form)));
       const form = this.form;
 
       let jobData = {
@@ -344,17 +346,37 @@ export default {
         task: form.task,
         taskId: uuid.v1()
       };
-
+      db
+        .collection('jobs')
+        .set('jobData')
+        .then(function(docref) {
+          self.clearForm();
+        })
+        .catch(function(error) {
+          console.error('Error adding document: ', error);
+        });
       console.log('job data', jobData);
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
           addNotification({
-            title: 'Data has been saved!',
-            text: 'Have a look at the console!'
+            title: 'Yay!',
+            text: 'Your job is now posted!'
           } as INotification);
         }, 500);
       });
+    },
+    clearForm() {
+      (this.salary = ''),
+        (this.brief = ''),
+        // (this.date-posted = ''),
+        (this.deliverable = ''),
+        (this.domain = ''),
+        (this.payouts = ''),
+        (this.role = ''),
+        (this.sponsoredAmount = ''),
+        (this.task = ''),
+        (this.taskId = '');
     },
     createJob() {}
   },

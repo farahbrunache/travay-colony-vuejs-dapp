@@ -11,7 +11,7 @@
         :show.sync="showSponsoredModal"
         @sponsorSubmit="amount => sponsorSubmitHandler({
           amount,
-          taskId: this.job.jobId,
+          taskId: this.job.taskId,
           task: this.job.task
         })"></sponsor-modal>
 
@@ -140,6 +140,7 @@ import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
+
 export default {
   mixins: [sponsorSubmitMixin],
   metaInfo: {
@@ -179,12 +180,11 @@ export default {
     };
   },
   created() {
-    //this.getJob();
-    const jobId = this.$route.params.id;
-    console.log('job id', jobId);
+    const taskId = this.$route.params.id;
+    console.log('job id', taskId);
     db
       .collection('jobs')
-      .where('jobId', '==', jobId)
+      .where('taskId', '==', taskId)
       .get()
       .then(snapshot => {
         console.log('snapshot!', snapshot);
@@ -195,7 +195,7 @@ export default {
         this.job = jobs[0];
       })
       .catch(err => {
-        console.error('err while trying to get job', err);
+        console.error('Error while trying to get job', err);
       });
     /*
       beforeCreate
