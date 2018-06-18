@@ -24,13 +24,13 @@
     <vue-grid-row>
       <vue-grid-item>
         <vue-input
-          name="jobId"
-          id="jobId"
+          name="taskId"
+          id="taskId"
           required
           placeholder="Job ID"
           validation="required"
-          v-model="form.jobId"
-          :disabled="isJobIdDisabled" />
+          v-model="form.taskId"
+          :disabled="form.isTaskIdDisabled" />
       </vue-grid-item>
       <vue-grid-item>
         <vue-input
@@ -68,6 +68,7 @@
         <vue-grid-item class="vueGridItem">
           <vue-date-picker
             @change="calendarChange"
+            :value="form.closingDate"
             :first-day-of-week="1"
             placeholder="Select last date someone can apply for job" />
         </vue-grid-item>
@@ -126,8 +127,8 @@
             name="payFrequency"
             id="payFrequency"
             :options="payFrequency"
-            :value="selectedOption"
-            @input="selectChange" />
+            :value="form.selectedPayFrequency"
+            @input="val => selectChange(val, 'selectedPayFrequency')" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -137,8 +138,8 @@
             name="termOfEmployment"
             id="termOfEmployment"
             :options="termOfEmployment"
-            :value="selectedOption"
-            @input="selectChange" />
+            :value="form.selectedTermOfEmployment"
+            @input="val => selectChange(val, 'selectedTermOfEmployment')" />
       </vue-grid-item>
       <vue-grid-item>
         <vue-select
@@ -148,7 +149,7 @@
           :options="countryOptions"
           validation="required"
           required
-          :disabled="addressDisabled" />
+          :disabled="form.addressDisabled" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -170,7 +171,7 @@
           placeholder="Date Job Posted"
           validation="required"
           v-model="form.datePosted"
-          :disabled="isDatePostedDisabled" />
+          :disabled="form.isDatePostedDisabled" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -187,7 +188,8 @@
 
     <br />
     <vue-button warn
-      :loading="isLoading">
+      :loading="isLoading"
+      @click.prevent.stop="submitHandler">
       Submit Job Posting
     </vue-button>
   </form>
@@ -216,6 +218,7 @@ import {
 // import { uuid } from 'vue-uuid';
 // import Something from '../../../../hackathonStarter/src/lib/colonyNetwork';
 import { colonyMixin } from '../../shared/mixins/mixins';
+import { uuid } from 'vue-uuid';
 
 export default {
   mixins: [colonyMixin],
@@ -235,24 +238,31 @@ export default {
     VueCheckbox,
     VueDatePicker
   },
+  mounted() {
+    console.log('instance', this);
+    console.log('userid', this.userId);
+  },
   data(): any {
     return {
       form: {
-        jobId: '',
-        task: '',
-        brief: '',
-        deliverable: '',
+        taskId: '',
+        task: 'software engineer',
+        brief: 'dadfaldsfalsd',
+        deliverable: 'dfdlfjadsf',
         datePosted: '',
-        payoutManager: '',
-        payoutEvaluator: '',
-        firstname: '',
-        domain: '',
-        skills: [],
-        salary: '',
-        cityOfWork: '',
-        isJobIdDisabled: true,
+        payoutManager: 'dlfadfasd',
+        payoutEvaluator: 'dlfadfasd',
+        firstname: 'Farah',
+        domain: 'enviroment',
+        skills: 'code',
+        salary: '10000',
+        cityOfWork: 'me',
+        isTaskIdDisabled: true,
+        closingDate: '',
         isDatePostedDisabled: true,
-        acceptTerms: false
+        acceptTerms: false,
+        selectedPayFrequency: '',
+        selectedTermOfEmployment: ''
       },
       payFrequency: [
         {
@@ -289,10 +299,53 @@ export default {
   },
   methods: {
     ...mapActions('createJob', ['increment', 'decrement']),
-    onSubmit() {
+    calendarChange(val) {
+      console.log('val from datepicker', val);
+      this.closingDate = val;
+    },
+    selectChange(value, field) {
+      this.$set(this.form, field, value);
+    },
+    getPayFrequencyLabel(selectedValue) {
+      const selected = this.payFrequency.find(
+        item => item.value === selectedValue
+      );
+      return selected ? Reflect.get(selected, 'label') : '';
+    },
+    submitHandler() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
+      const form = this.form;
 
+      let jobData = {
+        salary: {
+          'full-time-rate': form.salary,
+          'pay-frequency': {
+            label: this.getPayFrequencyLabel(form.selectedPayFrequency),
+            duration: form.selectedPayFrequency
+          }
+        },
+        brief: form.brief,
+        'date-posted': new Date(),
+        deliverable: form.deliverable,
+        domain: form.domain,
+        payouts: {
+          evaluator: 0,
+          manager: 0,
+          worker: 0
+        },
+        role: {
+          '0': this.userId,
+          '1': [],
+          '2': '',
+          '3': []
+        },
+        sponsoredAmount: 0,
+        task: form.task,
+        taskId: uuid.v1()
+      };
+
+      console.log('job data', jobData);
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
@@ -311,6 +364,7 @@ export default {
       'incrementPending',
       'decrementPending'
     ]),
+    ...mapGetters('signin', ['userId']),
     ddressDisabled() {
       return (
         this.form.firstname === '' ||

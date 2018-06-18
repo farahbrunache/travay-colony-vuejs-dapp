@@ -6,10 +6,14 @@
           <h1>Job</h1>
         </vue-grid-item>
 
-              <sponsor-modal 
-        :job="jobToSponsor" 
+        <sponsor-modal 
+          :job="job" 
         :show.sync="showSponsoredModal"
-        @sponsorSubmit="sponsorSubmitHandler"></sponsor-modal>
+        @sponsorSubmit="amount => sponsorSubmitHandler({
+          amount,
+          taskId: this.job.jobId,
+          task: this.job.task
+        })"></sponsor-modal>
 
         <vue-grid-item fill>
           <vue-panel v-if="job">
@@ -92,7 +96,7 @@
               <p>Coming Soon.</p>
               <br>
               <vue-button accent>
-                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="make-hyperlink-white">Sponsor this Job</a>
+                  <a @click.prevent.stop="e => showSponsoredModal = true" id="make-hyperlink-white">Sponsor this Job</a>
              </vue-button>
             </vue-accordion-item>
 
@@ -126,13 +130,18 @@ import VueAccordionItem from '../../shared/components/VueAccordion/VueAccordionI
 import VueInput from '../../shared/components/VueInput/VueInput.vue';
 import VueSelect from '../../shared/components/VueSelect/VueSelect.vue';
 import VueCheckbox from '../../shared/components/VueCheckbox/VueCheckbox.vue';
-import axios from 'axios';
 import {
   addNotification,
   INotification
 } from '../../shared/components/VueNotificationStack/utils';
-
+import axios from 'axios';
+import firebase from 'firebase';
+import db from '../../firebaseinit';
+import SponsorModal from '../../SponsorModal/SponsorModal.vue';
+import { uuid } from 'vue-uuid';
+import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
 export default {
+  mixins: [sponsorSubmitMixin],
   metaInfo: {
     title: 'Job'
   },
@@ -153,7 +162,8 @@ export default {
     VueAccordionItem,
     VueInput,
     VueSelect,
-    VueCheckbox
+    VueCheckbox,
+    SponsorModal
   },
   data(): any {
     return {
@@ -164,11 +174,39 @@ export default {
         acceptTerms: false,
         newsletter: false
       },
-      isLoading: false
+      isLoading: false,
+      showSponsoredModal: false
     };
   },
   created() {
-    this.getJob();
+    //this.getJob();
+    const jobId = this.$route.params.id;
+    console.log('job id', jobId);
+    db
+      .collection('jobs')
+      .where('jobId', '==', jobId)
+      .get()
+      .then(snapshot => {
+        console.log('snapshot!', snapshot);
+        const jobs = [];
+        snapshot.forEach(job => {
+          jobs.push(job.data());
+        });
+        this.job = jobs[0];
+      })
+      .catch(err => {
+        console.error('err while trying to get job', err);
+      });
+    /*
+      beforeCreate
+      created
+      beforeMount
+      mounted
+      beforeUpdate
+      updated
+      beforeDestroy
+      destroyed
+    */
   },
   computed: {
     ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),

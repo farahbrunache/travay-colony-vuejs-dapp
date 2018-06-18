@@ -70,7 +70,7 @@ Navigate to `~/presentation/deck.pptx` or `~/presentation/deck.pdf` to view the 
 - Learn more about security practices in Blockchain so I can protect the identity of an already vulnerable population
 - Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
 - Add location based authentication as a form of proof that a job was done
-- Integrate with uPort / create a functioning login and signup page
+- Integrate with uPort / decentralize login and sign-up page. For testing permissions Google auth was implemented but on a unique user ID and email address is stored on our backend
 
 ### Web Application
 

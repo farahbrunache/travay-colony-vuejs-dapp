@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+console.log('FIREBASE INIT');
 var config = {
   apiKey: 'AIzaSyANwSGI5HlCNaxSBrV66QUZofxtII4jW8o',
   authDomain: 'travay-dapp.firebaseapp.com',
@@ -13,6 +14,7 @@ var config = {
 let firebaseApp;
 let firestore;
 try {
+  console.log('Will try to initialise firebase');
   if (!firebase.apps.length) {
     console.log('Firabse not initialised yet! Initialising!');
     firebaseApp = firebase.initializeApp(config);

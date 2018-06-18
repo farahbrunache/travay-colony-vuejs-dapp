@@ -73,7 +73,10 @@
       <sponsor-modal 
         :job="jobToSponsor" 
         :show.sync="showSponsoredModal"
-        @sponsorSubmit="sponsorSubmitHandler"></sponsor-modal>
+        @sponsorSubmit="amount => sponsorSubmitHandler({
+          amount, 
+          taskId: this.selectedJobToSponsorId, task: this.jobToSponsor.task
+          })"></sponsor-modal>
       <vue-grid-row>
         <vue-grid-item>
         <hr>      
@@ -145,9 +148,11 @@ import firebase from 'firebase';
 import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
+import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
 console.log('unique id', uuid.v1());
 
 export default {
+  mixins: [sponsorSubmitMixin],
   metaInfo: {
     title: 'Jobs'
   },
@@ -197,35 +202,8 @@ export default {
   methods: {
     ...mapActions('test', ['increment', 'decrement']),
     sponsorJobClickedHandler(taskId) {
-      console.log('sponsor job clicked!', taskId);
       this.selectedJobToSponsorId = taskId;
       this.showSponsoredModal = true;
-    },
-    sponsorSubmitHandler(amount) {
-      console.log('sponsor submit initialised', amount);
-      console.log('job id to sponsor', this.selectedJobToSponsorId);
-      const data = {
-        sponsoredId: uuid.v1(),
-        userId: 'B05DVUYUHPaYS5wGfPsumFdkIcG2',
-        amount,
-        taskId: this.selectedJobToSponsorId,
-        task: this.jobToSponsor.task
-      };
-      console.log('data to send', data);
-      db
-        .collection('sponsored')
-        .add(data)
-        .then(docRef => {
-          console.log('data saved', docRef);
-          alert('You are now sponsoring this job!');
-        })
-        .catch(err => {
-          console.error('error when trying to save the data', err);
-          alert('There was a problem when trying to insert data!');
-        })
-        .then(() => {
-          this.showSponsoredModal = false;
-        });
     },
     sort(jobs: Array<object>) {
       const result = jobs.sort(function(a: any, b: any): number {
