@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.job">
-    <vue-grid>
+    <vue-grid v-if="job">
       <vue-grid-row>
         <vue-grid-item fill>
           <h1>Job</h1>
@@ -16,30 +16,36 @@
         })"></sponsor-modal>
 
         <vue-grid-item fill>
-          <vue-panel v-if="job">
+          <vue-panel >
             <vue-panel-header>
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
             <vue-panel-body>
+              <p v-if="job.role && userId">
+              <a v-if="job.role['0'] === userId" @click.prevent.stop="e => editJob(job.taskId)">
+                <i class="fa fa-edit edit-icon"></i>
+              </a>
+              </p>
             <ul>
               <li v-if="job.salary">
+                Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
                 Full time rate: ${{job.salary['full-time-rate']}}
                 <br>
                 <br>
                 Pay frequency: 
-                <input id="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].weekly" />
+                <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="weekly">Weekly</label>
-                <input id="bi-weekly" type="checkbox" name="bi-weekly" v-model="job.salary['pay-frequency']['bi-weekly']" />
+                <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="bi-weekly">Bi-weekly</label>
-                <input id="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].monthly" />
+                <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="monthly">Monthly</label>
                 <br>
                 <br>
                 Term of employment: 
-                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job.salary['term-of-employment']['six-months']" />
+                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" disabled/>
                 <label for="sixmonth">6 month</label>
-                <input id="oneyear" type="checkbox" name="oneyear" v-model="job.salary['term-of-employment']['one-year']" />
+                <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" disabled/>
                 <label for="oneyear">1 year</label>
                 <br>
                 Date Posted: {{job['date-posted']}}<br>
@@ -86,8 +92,11 @@
                     </vue-grid-item>
               </vue-grid-row>
               <vue-grid-row>
-                    <vue-grid-item>
-                    <vue-button primary>Claim</vue-button>
+                    <vue-grid-item v-if="job.role">
+                    <vue-button
+                      v-if="job.role['0'] !== userId"
+                      @click.prevent.stop="e => onClaim(job.id)"
+                     primary>Claim</vue-button>
                 </vue-grid-item>
               </vue-grid-row>
 
@@ -179,20 +188,25 @@ export default {
       showSponsoredModal: false
     };
   },
-  created() {
+  mounted() {
     const taskId = this.$route.params.id;
-    console.log('job id', taskId);
+    console.log('job id', this.userId);
     db
       .collection('jobs')
       .where('taskId', '==', taskId)
       .get()
       .then(snapshot => {
-        console.log('snapshot!', snapshot);
         const jobs = [];
+        const jobsId = [];
         snapshot.forEach(job => {
-          jobs.push(job.data());
+          let jobData = job.data();
+          let jobId = job.id;
+          jobs.push(jobData);
+          jobsId.push(jobId);
         });
         this.job = jobs[0];
+        this.job.id = jobsId[0];
+        console.log(this.job, 'job');
       })
       .catch(err => {
         console.error('Error while trying to get job', err);
@@ -209,7 +223,8 @@ export default {
     */
   },
   computed: {
-    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('job', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('signin', ['userId']),
     addressDisabled() {
       return (
         this.form.firstname === '' ||
@@ -239,7 +254,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions('test', ['increment', 'decrement']),
+    ...mapGetters('signin', ['userId']),
+    ...mapActions('job', ['increment', 'decrement']),
     getJob() {
       axios.get('/jobs.json').then((response: any) => {
         const job = response.data.jobs.filter(
@@ -264,10 +280,29 @@ export default {
           } as INotification);
         }, 500);
       });
+    },
+    onClaim(docId) {
+      const taskId = this.$route.params.id;
+      db
+        .collection('jobs')
+        .doc(docId)
+        .update({
+          'role.2': this.userId
+        });
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+          addNotification({
+            title: 'Yay!',
+            text:
+              "Job confirmed successfully! You'll be notify by the manager shortly"
+          } as INotification);
+        }, 700);
+      });
     }
   },
   prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('test/increment');
+    return options.store.dispatch('job/increment');
   }
 };
 </script>
@@ -275,6 +310,11 @@ export default {
 
 <style lang="scss" module>
 @import '../../shared/styles';
+.edit-icon {
+  float: right;
+  font-size: 2.1rem;
+  color: #eeddfc;
+}
 
 .job {
   margin-top: $nav-bar-height;

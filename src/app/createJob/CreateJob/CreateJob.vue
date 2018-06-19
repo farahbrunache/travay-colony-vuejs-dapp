@@ -268,6 +268,10 @@ export default {
       },
       payFrequency: [
         {
+          label: 'Select Pay Frequency',
+          value: 'none'
+        },
+        {
           label: 'weekly',
           value: '52'
         },
@@ -281,6 +285,10 @@ export default {
         }
       ],
       termOfEmployment: [
+        {
+          label: 'Select Terms of Employment',
+          value: 'none'
+        },
         {
           label: '6 months',
           value: '6'
@@ -318,6 +326,7 @@ export default {
       this.isLoading = true;
       // console.log(JSON.parse(JSON.stringify(this.form)));
       const form = this.form;
+      const self = this;
 
       let jobData = {
         salary: {
@@ -344,11 +353,13 @@ export default {
         },
         sponsoredAmount: 0,
         task: form.task,
-        taskId: uuid.v1()
+        taskId: uuid.v1(),
+        country: form.country,
+        'terms-of-employment': form.selectedTermOfEmployment
       };
       db
         .collection('jobs')
-        .set('jobData')
+        .add(jobData)
         .then(function(docref) {
           self.clearForm();
         })
@@ -412,6 +423,7 @@ export default {
       return hasEmptyField;
     },
     isSubmitDisabled() {
+      x;
       return this.hasErrors || this.hasEmptyFields;
     }
   },

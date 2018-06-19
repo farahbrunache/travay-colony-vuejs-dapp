@@ -13,7 +13,7 @@ import { PrivacyAndTermsModule } from './privacyAndTerms/module';
 import { CreateJobModule } from './createJob/module';
 import { SignupModule } from './signup/module';
 import { TestModule } from './test/module';
-import { SigninModule }            from './signin/module';
+import { SigninModule } from './signin/module';
 
 Vue.use(Vuex);
 
@@ -36,34 +36,34 @@ const state: IState = (CLIENT && window.__INITIAL_STATE__) || DefaultState;
 //   return localState;
 // };
 
-export const store: Store<IState> = new Vuex.Store(
-  {
-    state,
-    // plugins: [
-    //   VuexPersist(
-    //     [
-    //       new PersistLocalStorage(['counter'], beforePersistLocalStorage),
-    //       new PersistCookieStorage(
-    //         ['app'],
-    //         {
-    //           cookieOptions: {
-    //             expires: 365,
-    //           },
-    //           beforePersist: beforePersistCookieStorage,
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // ],
-  },
-);
+export const store: Store<IState> = new Vuex.Store({
+  state
+  // plugins: [
+  //   VuexPersist(
+  //     [
+  //       new PersistLocalStorage(['counter'], beforePersistLocalStorage),
+  //       new PersistCookieStorage(
+  //         ['app'],
+  //         {
+  //           cookieOptions: {
+  //             expires: 365,
+  //           },
+  //           beforePersist: beforePersistCookieStorage,
+  //         },
+  //       ),
+  //     ],
+  //   ),
+  // ],
+});
 
 store.registerModule(['app'], AppModule, { preserveState: true });
 store.registerModule(['profile'], ProfileModule, { preserveState: true });
 store.registerModule(['balance'], BalanceModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
-store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, { preserveState: true });
+store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, {
+  preserveState: true
+});
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
 store.registerModule(['signup'], SignupModule, { preserveState: true });
 store.registerModule(['test'], TestModule, { preserveState: true });

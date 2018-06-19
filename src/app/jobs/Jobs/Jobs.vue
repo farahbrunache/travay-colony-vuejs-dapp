@@ -92,25 +92,24 @@
                 <br>
                 <br>
                 Pay frequency: 
-                <input id="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].weekly" />
+                <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="weekly">Weekly</label>
-                <input id="bi-weekly" type="checkbox" name="bi-weekly" v-model="job.salary['pay-frequency']['bi-weekly']" />
+                <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="bi-weekly">Bi-weekly</label>
-                <input id="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].monthly" />
+                <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="monthly">Monthly</label>
                 <br>
                 <br>
                 Term of employment: 
-                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job.salary['term-of-employment']['six-months']" />
+                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" disabled/>
                 <label for="sixmonth">6 month</label>
-                <input id="oneyear" type="checkbox" name="oneyear" v-model="job.salary['term-of-employment']['one-year']" />
+                <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" disabled/>
                 <label for="oneyear">1 year</label>
                 <br>
                 Date Posted: {{job['date-posted']}}<br>
               </li>
-            </ul>
-            </vue-panel-body>
-            
+            </ul>        
+            </vue-panel-body>    
             <vue-panel-footer>
               <vue-button primary>
               <router-link :to="`/job/${job.taskId}`" class="remove-hyperlink">Learn More</router-link>
@@ -149,7 +148,6 @@ import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
-console.log('unique id', uuid.v1());
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -174,7 +172,7 @@ export default {
       selectedJobToSponsorId: null,
       showSponsoredModal: false,
       posted: '',
-      endRange: '300',
+      endRange: '1000000',
       startRange: '100',
       keyword: '',
       types: [
@@ -200,7 +198,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions('test', ['increment', 'decrement']),
+    ...mapGetters('signin', ['userId']),
+    ...mapActions('jobs', ['increment', 'decrement']),
     sponsorJobClickedHandler(taskId) {
       this.selectedJobToSponsorId = taskId;
       this.showSponsoredModal = true;
@@ -240,7 +239,7 @@ export default {
     // this.getJobs();
   },
   computed: {
-    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('jobs', ['count', 'incrementPending', 'decrementPending']),
     jobToSponsor() {
       return (
         this.jobs.find(job => job.taskId === this.selectedJobToSponsorId) || {}
@@ -248,7 +247,7 @@ export default {
     }
   },
   prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('test/increment');
+    return options.store.dispatch('jobs/increment');
   },
   created() {
     db
@@ -310,5 +309,9 @@ a:active {
   background: $panel-bg;
   box-shadow: $panel-shadow;
   color: #fff;
+}
+input:disabled {
+  color: #fff;
+  cursor: none;
 }
 </style>
