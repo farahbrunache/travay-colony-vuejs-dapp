@@ -16,7 +16,7 @@ export interface ISigninActions {
 export const SigninActions: ISigninActions = {
   increment({
     commit,
-    state
+    state,
   }: ActionContext<ISigninState, ISigninState>): Promise<any> {
     commit('SET_INCREMENT_PENDING', true);
 
@@ -31,7 +31,7 @@ export const SigninActions: ISigninActions = {
   },
   decrement({
     commit,
-    state
+    state,
   }: ActionContext<ISigninState, ISigninState>): Promise<any> {
     commit('SET_DECREMENT_PENDING', true);
 
@@ -45,5 +45,5 @@ export const SigninActions: ISigninActions = {
   saveUserInStorage({ commit }, userData) {
     localStorage.setItem('userData', JSON.stringify(userData));
     commit('SET_USER_DATA', userData);
-  }
+  },
 };

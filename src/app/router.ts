@@ -34,12 +34,12 @@ export const router: VueRouter = new VueRouter({
     ...CreateJobRoutes,
     ...SignupRoutes,
     ...TestRoutes,
-    ...SigninRoutes
+    ...SigninRoutes,
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return { selector: to.hash };
     }
     return savedPosition || { x: 0, y: 0 };
-  }
+  },
 });

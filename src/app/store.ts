@@ -37,7 +37,7 @@ const state: IState = (CLIENT && window.__INITIAL_STATE__) || DefaultState;
 // };
 
 export const store: Store<IState> = new Vuex.Store({
-  state
+  state,
   // plugins: [
   //   VuexPersist(
   //     [
@@ -62,7 +62,7 @@ store.registerModule(['balance'], BalanceModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
 store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, {
-  preserveState: true
+  preserveState: true,
 });
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
 store.registerModule(['signup'], SignupModule, { preserveState: true });

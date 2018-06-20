@@ -21,12 +21,12 @@
             <small>{{ $t('App.nav.balance' /* Balance */) }}</small>
           </router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/signup" @click.native="navBarClose">
             <i class="fas fa-user-plus" />
             <small>{{ $t('App.nav.signup' /* Signup */) }}</small>
           </router-link>
-        </li>
+        </li> -->
         <li>
           <router-link to="/signin" @click.native="navBarClose">
             <i class="fas fa-user-plus" />

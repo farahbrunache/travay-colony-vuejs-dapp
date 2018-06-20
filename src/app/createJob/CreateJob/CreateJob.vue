@@ -249,10 +249,10 @@ export default {
       form: {
         taskId: '',
         task: 'software engineer',
-        brief: 'dadfaldsfalsd',
-        deliverable: 'dfdlfjadsf',
+        brief: 'code',
+        deliverable: 'do coding work',
         datePosted: '',
-        payoutManager: 'dlfadfasd',
+        payoutManager: '',
         payoutEvaluator: 'dlfadfasd',
         firstname: 'Farah',
         domain: 'enviroment',
@@ -361,6 +361,7 @@ export default {
         .collection('jobs')
         .add(jobData)
         .then(function(docref) {
+          self.createTask(); // ColonyJS + IPFS
           self.clearForm();
         })
         .catch(function(error) {
@@ -398,7 +399,7 @@ export default {
       'decrementPending'
     ]),
     ...mapGetters('signin', ['userId']),
-    ddressDisabled() {
+    addressDisabled() {
       return (
         this.form.firstname === '' ||
         this.form.lastname === '' ||

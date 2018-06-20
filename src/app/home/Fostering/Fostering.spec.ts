@@ -8,7 +8,7 @@ describe('Fostering.vue', () => {
     const wrapper = mount(Fostering, { localVue });
 
     expect(wrapper.find('h2').text()).toBe(
-      'Fostering Economic and Social Mobility'
+      'Fostering Economic and Social Mobility',
     );
   });
 });

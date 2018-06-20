@@ -12,36 +12,36 @@
 </template>
 
 <script lang="ts">
-  import VueGrid     from '../../shared/components/VueGrid/VueGrid';
-  import VueGridRow  from '../../shared/components/VueGridRow/VueGridRow';
-  import VueGridItem from '../../shared/components/VueGridItem/VueGridItem';
+import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
+import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 
-  export default {
-    metaInfo:   {
-      title: 'vue-starter - page not found',
-      meta:  [
-        {
-          name:    'robots',
-          content: 'NOINDEX,NOFOLLOW',
-        },
-      ],
-    },
-    name:       'NotFound',
-    components: { VueGridItem, VueGridRow, VueGrid },
-    props:      {},
-    data(): any {
-      return {};
-    },
-    computed:   {},
-    methods:    {},
-  };
+export default {
+  metaInfo: {
+    title: 'travay - page not found',
+    meta: [
+      {
+        name: 'robots',
+        content: 'NOINDEX,NOFOLLOW'
+      }
+    ]
+  },
+  name: 'NotFound',
+  components: { VueGridItem, VueGridRow, VueGrid },
+  props: {},
+  data(): any {
+    return {};
+  },
+  computed: {},
+  methods: {}
+};
 </script>
 
 <style lang="scss" module>
-  @import "../../shared/styles";
+@import '../../shared/styles';
 
-  .notFound {
-    padding-top: $nav-bar-height;
-    text-align:  center;
-  }
+.notFound {
+  padding-top: $nav-bar-height;
+  text-align: center;
+}
 </style>

@@ -7,7 +7,7 @@ describe('TravayExperience.vue', () => {
   test('renders component', () => {
     const wrapper = mount(TravayExperience, {
       localVue,
-      stubs: ['router-link']
+      stubs: ['router-link'],
     });
 
     expect(wrapper.find('h2').text()).toBe('Travay Experience');

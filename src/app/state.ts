@@ -5,7 +5,7 @@ import { JobsDefaultState, IJobsState } from './jobs/state';
 import { JobDefaultState, IJobState } from './job/state';
 import {
   PrivacyAndTermsDefaultState,
-  IPrivacyAndTermsState
+  IPrivacyAndTermsState,
 } from './privacyAndTerms/state';
 import { CreateJobDefaultState, ICreateJobState } from './createJob/state';
 import { SignupDefaultState, ISignupState } from './signup/state';
@@ -29,33 +29,33 @@ export interface IState {
 
 export const DefaultState: IState = {
   app: {
-    ...AppDefaultState
+    ...AppDefaultState,
   },
   profile: {
-    ...ProfileDefaultState
+    ...ProfileDefaultState,
   },
   balance: {
-    ...BalanceDefaultState
+    ...BalanceDefaultState,
   },
   jobs: {
-    ...JobsDefaultState
+    ...JobsDefaultState,
   },
   job: {
-    ...JobDefaultState
+    ...JobDefaultState,
   },
   privacyAndTerms: {
-    ...PrivacyAndTermsDefaultState
+    ...PrivacyAndTermsDefaultState,
   },
   createJob: {
-    ...CreateJobDefaultState
+    ...CreateJobDefaultState,
   },
   signup: {
-    ...SignupDefaultState
+    ...SignupDefaultState,
   },
   test: {
-    ...TestDefaultState
+    ...TestDefaultState,
   },
   signin: {
-    ...SigninDefaultState
-  }
+    ...SigninDefaultState,
+  },
 };

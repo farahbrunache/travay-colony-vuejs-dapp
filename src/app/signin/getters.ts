@@ -20,5 +20,5 @@ export const SigninGetters: ISigninGetters = {
   userId(state: ISigninState): number {
     console.log('getting user Id', state);
     return Reflect.get(state.userData, 'uid');
-  }
+  },
 };

@@ -1,12 +1,16 @@
-// import Something from '../../../../hackathonStarter/src/lib/colonyNetwork';
 import { uuid } from 'vue-uuid';
-import firebase from 'firebase';
 import db from '../../firebaseinit';
+import createColony from '../services/createColony';
+import createTask from '../services/createTask';
 
 export const colonyMixin = {
   methods: {
     createTask() {
-      console.log('create task from mixin initialised');
+      createColony()
+        .then(createTask)
+        // We're exiting hard here as the providers keep polling otherwise
+        .then(() => process.exit())
+        .catch(err => console.error(err));
     },
     anotherFunc() {}
   }
@@ -18,7 +22,7 @@ export const sponsorSubmitMixin = {
       console.log('args', arguments);
       const data = {
         sponsoredId: uuid.v1(),
-        userId: 'B05DVUYUHPaYS5wGfPsumFdkIcG2',
+        userId: userId,
         amount,
         taskId: taskId,
         task: task
