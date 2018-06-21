@@ -36,8 +36,8 @@ Vue.config.errorHandler = (error: Error) => {
   HttpService.post('/log/error', {
     error: {
       message: error.message,
-      stack: error.stack
-    }
+      stack: error.stack,
+    },
   });
 
   router.replace('/error');
@@ -52,7 +52,7 @@ router.onReady(() => {
     const activated: Component[] = matched.filter(
       (component: Component, i: number) => {
         return diffed || (diffed = prevMatched[i] !== component);
-      }
+      },
     );
 
     if (!activated.length) {
@@ -66,7 +66,7 @@ router.onReady(() => {
         }
 
         return Promise.resolve();
-      })
+      }),
     )
       .then(() => {
         next();

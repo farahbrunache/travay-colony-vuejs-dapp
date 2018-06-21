@@ -1,90 +1,90 @@
 <template>
   <div :class="$style.home">
     <stage />
-    <dev-ex />
-    <enterprise-ready />
-    <user-experience />
-    <quick-start />
+    <fostering />
+    <empowering-communities />
+    <travay-experience />
+    <how-does-it-work />
   </div>
 </template>
 
 <script lang="ts">
-import Stage from "../Stage/Stage.vue";
-import DevEx from "../DevEx/DevEx.vue";
-import EnterpriseReady from "../EnterpriseReady/EnterpriseReady.vue";
-import UserExperience from "../UserExperience/UserExperience.vue";
-import QuickStart from "../QuickStart/QuickStart.vue";
+import Stage from '../Stage/Stage.vue';
+import Fostering from '../Fostering/Fostering.vue';
+import EmpoweringCommunities from '../EmpoweringCommunities/EmpoweringCommunities.vue';
+import TravayExperience from '../TravayExperience/TravayExperience.vue';
+import HowDoesItWork from '../HowDoesItWork/HowDoesItWork.vue';
 
 export default {
   metaInfo: {
-    title: "travay: everyone at work.",
+    title: 'travay: everyone at work.',
     meta: [
       {
-        name: "description",
-        content: "travay: Long Term Jobs Market for Developing Countries"
+        name: 'description',
+        content: 'travay: Long Term Jobs Market for Developing Countries'
       },
       {
-        name: "robots",
-        content: "INDEX,FOLLOW"
+        name: 'robots',
+        content: 'INDEX,FOLLOW'
       },
       {
-        name: "keywords",
+        name: 'keywords',
         content:
-          "vue.js, vuex, vuex-persist, seo, server-side-rendering, isomorphic, progressive-web-app"
+          'vue.js, vuex, vuex-persist, seo, server-side-rendering, isomorphic, progressive-web-app'
       },
 
-      { name: "og:url", content: "https://vue-starter.herokuapp.com/" },
-      { name: "og:site_name", content: "vue-starter" },
-      { name: "og:type", content: "website" },
-      { name: "og:locale", content: "en" },
+      { name: 'og:url', content: 'https://travay-dapp.firebaseapp.com' },
+      { name: 'og:site_name', content: 'travay' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:locale', content: 'en' },
       {
-        name: "og:title",
+        name: 'og:title',
         content:
-          "vue-starter - A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices"
+          'travay - Long-term jobs market for developing countries built with Colony'
       },
       {
-        name: "og:description",
+        name: 'og:description',
         content:
-          "vue-starter - A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices"
+          'travay - Long-term jobs market for developing countries built with Colony'
       },
       {
-        name: "og:image:url",
-        content: "https://vue-starter.herokuapp.com/logo.png"
+        name: 'og:image:url',
+        content: 'https://travay-dapp.firebaseapp.com/logo.png'
       },
 
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@_jwerner_" },
-      { name: "twitter:creator", content: "@_jwerner_" },
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:site', content: '@farahbrunache' },
+      { name: 'twitter:creator', content: '@farahbrunache' },
       {
-        name: "twitter:title",
+        name: 'twitter:title',
         content:
-          "vue-starter - A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices"
+          'travay - Long-term jobs market for developing countries built with Colony'
       },
-      { name: "twitter:url", content: "https://vue-starter.herokuapp.com/" },
+      { name: 'twitter:url', content: 'https://travay-dapp.firebaseapp.com' },
       {
-        name: "twitter:image",
-        content: "https://vue-starter.herokuapp.com/logo.png"
+        name: 'twitter:image',
+        content: 'https://travay-dapp.firebaseapp.com/logo.png'
       },
       {
-        name: "twitter:description",
+        name: 'twitter:description',
         content:
-          "vue-starter - A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices"
+          'travay - Long-term jobs market for developing countries built with Colony'
       }
     ]
   },
   components: {
     Stage,
-    DevEx,
-    EnterpriseReady,
-    UserExperience,
-    QuickStart
+    Fostering,
+    EmpoweringCommunities,
+    TravayExperience,
+    HowDoesItWork
   },
   computed: {}
 };
 </script>
 
 <style lang="scss" module>
-@import "../../shared/styles";
+@import '../../shared/styles';
 
 .home {
   h2 {

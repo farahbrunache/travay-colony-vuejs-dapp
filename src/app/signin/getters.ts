@@ -4,6 +4,7 @@ export interface ISigninGetters {
   incrementPending(state: ISigninState): boolean;
   decrementPending(state: ISigninState): boolean;
   count(state: ISigninState): number;
+  userId(state: ISigninState): number;
 }
 
 export const SigninGetters: ISigninGetters = {
@@ -15,5 +16,9 @@ export const SigninGetters: ISigninGetters = {
   },
   count(state: ISigninState): number {
     return state.count;
+  },
+  userId(state: ISigninState): number {
+    console.log('getting user Id', state);
+    return Reflect.get(state.userData, 'uid');
   },
 };

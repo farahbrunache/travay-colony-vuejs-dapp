@@ -4,10 +4,10 @@
     <vue-nav-bar>
       <ul :class="$style.nav">
         <li>
-          <a href="/jobs" @click.native="navBarClose">
+          <router-link to="/jobs" @click.native="navBarClose">
             <i class="fas fa-book" />
             <small>{{ $t('App.nav.jobs' /* Jobs */) }}</small>
-          </a>
+          </router-link>
         </li>
         <li>
           <router-link to="/profile" @click.native="navBarClose">
@@ -21,12 +21,12 @@
             <small>{{ $t('App.nav.balance' /* Balance */) }}</small>
           </router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/signup" @click.native="navBarClose">
             <i class="fas fa-user-plus" />
             <small>{{ $t('App.nav.signup' /* Signup */) }}</small>
           </router-link>
-        </li>
+        </li> -->
         <li>
           <router-link to="/signin" @click.native="navBarClose">
             <i class="fas fa-user-plus" />
@@ -86,6 +86,7 @@ export default {
   },
   methods: {
     ...mapActions('app', ['changeLocale']),
+    ...mapActions('signin', ['saveUserInStorage']),
     localeSwitch(locale: string): void {
       loadLocaleAsync(locale).catch((error: Error) => console.log(error));
 
@@ -94,6 +95,16 @@ export default {
     },
     navBarClose() {
       EventBus.$emit('navbar.close');
+    }
+  },
+  created() {
+    try {
+      const userData = localStorage.getItem('userData');
+      if (userData) {
+        this.saveUserInStorage(JSON.parse(userData));
+      }
+    } catch (err) {
+      console.log('err when trying to get user data from storage', err);
     }
   }
 };

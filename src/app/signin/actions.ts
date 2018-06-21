@@ -1,6 +1,6 @@
 import { ActionContext } from 'vuex';
 import { ISigninState } from './state';
-import { HttpService }   from '../shared/services/HttpService';
+import { HttpService } from '../shared/services/HttpService';
 import { AxiosResponse } from 'axios';
 
 export interface ISigninResponse {
@@ -14,28 +14,36 @@ export interface ISigninActions {
 }
 
 export const SigninActions: ISigninActions = {
-  increment({ commit, state }: ActionContext<ISigninState, ISigninState>): Promise<any> {
+  increment({
+    commit,
+    state
+  }: ActionContext<ISigninState, ISigninState>): Promise<any> {
     commit('SET_INCREMENT_PENDING', true);
 
-    return HttpService
-    .put('/counter/increment', { count: state.count })
-    .then((res: AxiosResponse<ISigninResponse>) => {
-      commit('SET_COUNT', res.data.count);
-      commit('SET_INCREMENT_PENDING', false);
-    })
-    .catch(() => {
-      commit('SET_INCREMENT_PENDING', false);
-    });
+    return HttpService.put('/counter/increment', { count: state.count })
+      .then((res: AxiosResponse<ISigninResponse>) => {
+        commit('SET_COUNT', res.data.count);
+        commit('SET_INCREMENT_PENDING', false);
+      })
+      .catch(() => {
+        commit('SET_INCREMENT_PENDING', false);
+      });
   },
-  decrement({ commit, state }: ActionContext<ISigninState, ISigninState>): Promise<any> {
+  decrement({
+    commit,
+    state
+  }: ActionContext<ISigninState, ISigninState>): Promise<any> {
     commit('SET_DECREMENT_PENDING', true);
 
-    return HttpService
-    .put('/counter/decrement', { count: state.count })
-    .then((res: AxiosResponse<ISigninResponse>) => {
-      commit('SET_COUNT', res.data.count);
-      commit('SET_DECREMENT_PENDING', false);
-    })
-    .catch(() => commit('SET_DECREMENT_PENDING', false));
+    return HttpService.put('/counter/decrement', { count: state.count })
+      .then((res: AxiosResponse<ISigninResponse>) => {
+        commit('SET_COUNT', res.data.count);
+        commit('SET_DECREMENT_PENDING', false);
+      })
+      .catch(() => commit('SET_DECREMENT_PENDING', false));
   },
+  saveUserInStorage({ commit }, userData) {
+    localStorage.setItem('userData', JSON.stringify(userData));
+    commit('SET_USER_DATA', userData);
+  }
 };

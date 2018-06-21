@@ -7,41 +7,39 @@ import { ProfileRoutes } from './profile/routes';
 import { BalanceRoutes } from './balance/routes';
 import { JobsRoutes } from './jobs/routes';
 import { JobRoutes } from './job/routes';
-import { PrivacyAndTermsRoutes }         from './privacyAndTerms/routes';
-import { CreateJobRoutes }         from './createJob/routes';
-import { SignupRoutes }         from './signup/routes';
-import { TestRoutes }         from './test/routes';
-import { SigninRoutes }         from './signin/routes';
+import { PrivacyAndTermsRoutes } from './privacyAndTerms/routes';
+import { CreateJobRoutes } from './createJob/routes';
+import { SignupRoutes } from './signup/routes';
+import { TestRoutes } from './test/routes';
+import { SigninRoutes } from './signin/routes';
 // Delete dummy data
 // import { ComponentsRoutes } from './components/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
 
-export const router: VueRouter = new VueRouter(
-  {
-    mode: 'history',
-    base: __dirname,
-    routes: [
-      ...AppRoutes,
-      ...HomeRoutes,
-      // Delete dummy data
-      // ...ComponentsRoutes,
-      ...ProfileRoutes,
-      ...BalanceRoutes,
-      ...JobsRoutes,
-      ...JobRoutes,
-      ...PrivacyAndTermsRoutes,
-     ...CreateJobRoutes,
-     ...SignupRoutes,
-     ...TestRoutes,
-     ...SigninRoutes,
-   ],
-    scrollBehavior(to, from, savedPosition) {
-      if (to.hash) {
-        return { selector: to.hash };
-      }
-      return savedPosition || { x: 0, y: 0 };
-    },
+export const router: VueRouter = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes: [
+    ...AppRoutes,
+    ...HomeRoutes,
+    // Delete dummy data
+    // ...ComponentsRoutes,
+    ...ProfileRoutes,
+    ...BalanceRoutes,
+    ...JobsRoutes,
+    ...JobRoutes,
+    ...PrivacyAndTermsRoutes,
+    ...CreateJobRoutes,
+    ...SignupRoutes,
+    ...TestRoutes,
+    ...SigninRoutes,
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return { selector: to.hash };
+    }
+    return savedPosition || { x: 0, y: 0 };
   },
-);
+});

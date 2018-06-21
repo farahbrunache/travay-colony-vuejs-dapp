@@ -12,36 +12,36 @@
 </template>
 
 <script lang="ts">
-  import VueGrid     from '../../shared/components/VueGrid/VueGrid';
-  import VueGridRow  from '../../shared/components/VueGridRow/VueGridRow';
-  import VueGridItem from '../../shared/components/VueGridItem/VueGridItem';
+import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
+import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 
-  export default {
-    metaInfo:   {
-      title: 'vue-starter - an error occurred',
-      meta:  [
-        {
-          name:    'robots',
-          content: 'NOINDEX,NOFOLLOW',
-        },
-      ],
-    },
-    name:       'Error',
-    components: { VueGridItem, VueGridRow, VueGrid },
-    props:      {},
-    data(): any {
-      return {};
-    },
-    computed:   {},
-    methods:    {},
-  };
+export default {
+  metaInfo: {
+    title: 'travay - an error occurred',
+    meta: [
+      {
+        name: 'robots',
+        content: 'NOINDEX,NOFOLLOW'
+      }
+    ]
+  },
+  name: 'Error',
+  components: { VueGridItem, VueGridRow, VueGrid },
+  props: {},
+  data(): any {
+    return {};
+  },
+  computed: {},
+  methods: {}
+};
 </script>
 
 <style lang="scss" module>
-  @import "../../shared/styles";
+@import '../../shared/styles';
 
-  .error {
-    padding-top: $nav-bar-height;
-    text-align:  center;
-  }
+.error {
+  padding-top: $nav-bar-height;
+  text-align: center;
+}
 </style>
