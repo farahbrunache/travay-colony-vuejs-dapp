@@ -28,7 +28,7 @@ Github [@bubblenote](www.github.com/bubblenote)
 
 ## End User Guide
 
-[TBC]
+This document helps users understand how to use Travay: https://travay-dapp-docs.firebaseapp.com/
 
 ## Demo Video
 
