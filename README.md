@@ -4,7 +4,7 @@
 
 - Means "work" in Haitian Creole
 
-- Colony smart contract dapp, front-end completed as a Vue.js PWA.
+- Colony smart contract dApp, front-end is a Vue.js PWA
 
 ## Run Front-end Locally
 
@@ -28,6 +28,7 @@ Github [@farahbrunache](www.twitter.com/farahbrunache)
 
 Iain Barclay | Researcher | United Kingdom
 Github [@iainbarclay](www.github.com/iainbarclay)
+Twitter [@iainbarclay](www.twitter.com/iainbarclay)
 
 Emily Kuo | Researcher | California, US
 Github [@bubblenote](www.github.com/bubblenote)
@@ -38,7 +39,7 @@ This document helps users understand how to use Travay: https://docs.google.com/
 
 ## Demo Video
 
-[TBC]
+https://youtu.be/dZVWLq2RlTw
 
 ## Presentation
 
