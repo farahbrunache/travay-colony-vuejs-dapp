@@ -16,21 +16,23 @@ const waitForIPFS = () => {
   return new Promise((resolve, reject) => {
     node.on('ready', () => resolve(true));
     node.on('error', err => reject(err));
-  })
+  });
 };
 
 exports.init = async () => {
   await waitForIPFS();
   return node.start();
-}
+};
 
-exports.saveTaskSpecification = async (spec) => {
+exports.saveTaskSpecification = async spec => {
   const data = Buffer.from(JSON.stringify(spec));
+  console.log('In save task specification', node, data);
   const result = await node.files.add(data);
+  console.log('Result!', result);
   return result[0].hash;
-}
+};
 
-exports.getTaskSpecification = async (hash) => {
+exports.getTaskSpecification = async hash => {
   const buf = await node.files.cat(`/ipfs/${hash}`);
   let spec;
   try {
@@ -39,6 +41,6 @@ exports.getTaskSpecification = async (hash) => {
     throw new Error(`Could not get task specification for hash ${hash}`);
   }
   return spec;
-}
+};
 
 exports.stop = () => node.stop();

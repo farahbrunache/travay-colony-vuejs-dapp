@@ -10,13 +10,7 @@
     <vue-panel>
 <vue-panel-header title="Title" subtitle="subtitle" image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
 <vue-panel-body>
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-  labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-  et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-  labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-  et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
+  Your Sponsored Jobs:
   <div 
     v-for="(item, index) in sponsored"
     :key="item.sponsoredId + index">
@@ -24,7 +18,7 @@
   </div>
 </vue-panel-body>
 <vue-panel-footer>
-  <vue-button primary>Update Profile</vue-button>
+  <!-- <vue-button primary>Update Profile</vue-button> -->
 </vue-panel-footer>
 </vue-panel>
 
@@ -122,7 +116,6 @@ export default {
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
-
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
@@ -146,7 +139,7 @@ export default {
       .collection('sponsored')
       .get()
       .then(snapshot => {
-        const sponsored = [];
+        const sponsored: Array<Object> = [];
         snapshot.forEach(item => {
           sponsored.push(item.data());
         });

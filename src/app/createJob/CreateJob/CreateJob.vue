@@ -10,7 +10,7 @@
               Use the form below to create a 6-month or 12-month job.
             </p>
             <p>
-              Learn more about our platform at [INSERT LINK TO DOCS PAGE].
+              <!-- Learn more about our platform at [INSERT LINK TO DOCS PAGE]. -->
             </p>
           </vue-grid-item>
         </vue-grid-row>
@@ -248,21 +248,22 @@ export default {
     return {
       form: {
         taskId: '',
-        task: 'software engineer',
-        brief: 'code',
-        deliverable: 'do coding work',
+        task: 'Weekly Trash Pickup',
+        brief: 'Pickup and deposit trash for ten homes.',
+        deliverable:
+          'Weekly: pick upt trash from five homes then deposit in local dump.',
         datePosted: '',
         payoutManager: '',
         payoutEvaluator: 'dlfadfasd',
         firstname: 'Farah',
         domain: 'enviroment',
-        skills: 'code',
-        salary: '10000',
-        cityOfWork: 'me',
+        skills: 'labor',
+        salary: '500',
+        cityOfWork: 'Port-au-Prince',
         isTaskIdDisabled: true,
         closingDate: '',
         isDatePostedDisabled: true,
-        acceptTerms: false,
+        acceptTerms: true,
         selectedPayFrequency: '',
         selectedTermOfEmployment: ''
       },

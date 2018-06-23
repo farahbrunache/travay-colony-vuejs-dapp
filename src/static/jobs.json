@@ -2,14 +2,15 @@
   "jobs": [
     {
       "taskId": "1",
-      "task": "Weekly Garabage Pick Up and Removal",
-      "brief": "Solarbreeze",
-      "deliverable": "lorem ipsum",
+      "task": "Plant a Tree",
+      "brief": "Plant a cypress tree",
+      "deliverable":
+        "Once tree is planted provide a photograph of completed work",
       "date-posted": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
       "payouts": {
-        "manager": 123,
-        "evaluator": 22,
-        "worker": 366
+        "manager": 10,
+        "evaluator": 20,
+        "worker": 0
       },
       "domain": "enviroment",
       "skills": {
@@ -22,7 +23,7 @@
         "2": "482439"
       },
       "salary": {
-        "full-time-rate": "200",
+        "full-time-rate": "150",
         "pay-frequency": {
           "weekly": false,
           "bi-weekly": false,
@@ -33,7 +34,148 @@
           "one-year": true
         }
       },
-      "sponsoredAmount": 500
+      "sponsoredAmount": 300
+    },
+    {
+      "taskId": "2",
+      "task": "Construct a House",
+      "brief": "Build a two bedroom single family house.",
+      "deliverable": "",
+      "date-posted": "Sat Jun 09 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": 200,
+        "evaluator": 60,
+        "worker": 0
+      },
+      "domain": "infrastructure",
+      "skills": {
+        "tag-1": "construction",
+        "tag-2": "architecture"
+      },
+      "role": {
+        "0": "7849313",
+        "1": "0933831",
+        "2": "482439"
+      },
+      "salary": {
+        "full-time-rate": "650",
+        "pay-frequency": {
+          "weekly": false,
+          "bi-weekly": false,
+          "monthly": true
+        },
+        "term-of-employment": {
+          "six-months": true,
+          "one-year": false
+        }
+      },
+      "sponsoredAmount": 1000
+    },
+    {
+      "taskId": "3",
+      "task": "Read to a Child",
+      "brief": "Assist in the childhood education ecosystem",
+      "deliverable":
+        "Locate a child that is not a relative and read them a story.",
+      "date-posted": "Sat Jun 17 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": 100,
+        "evaluator": 32,
+        "worker": 0
+      },
+      "domain": "education",
+      "skills": {
+        "tag-1": "teaching",
+        "tag-2": "community-engagement"
+      },
+      "role": {
+        "0": "7849313",
+        "1": "0933831",
+        "2": "482439"
+      },
+      "salary": {
+        "full-time-rate": "650",
+        "pay-frequency": {
+          "weekly": false,
+          "bi-weekly": false,
+          "monthly": true
+        },
+        "term-of-employment": {
+          "six-months": true,
+          "one-year": false
+        }
+      },
+      "sponsoredAmount": 100
+    },
+    {
+      "taskId": "4",
+      "task": "Delivery bottled water",
+      "brief": "Delivery water to three homes",
+      "deliverable": "Delivery bottled water to three consective homes.",
+      "date-posted": "Sat Jun 17 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": 300,
+        "evaluator": 62,
+        "worker": 210
+      },
+      "domain": "food",
+      "skills": {
+        "tag-1": "labor",
+        "tag-2": "community-engagement"
+      },
+      "role": {
+        "0": "7849313",
+        "1": "0933831",
+        "2": "482439"
+      },
+      "salary": {
+        "full-time-rate": "450",
+        "pay-frequency": {
+          "weekly": false,
+          "bi-weekly": false,
+          "monthly": true
+        },
+        "term-of-employment": {
+          "six-months": true,
+          "one-year": false
+        }
+      },
+      "sponsoredAmount": 60
+    },
+    {
+      "taskId": "5",
+      "task": "Provide transportation to one worker",
+      "brief": "Drive someone to their job",
+      "deliverable": "Locate a non-relative and drop them off to work.",
+      "date-posted": "Sat Jun 21 2018 20:26:09 GMT-0400 (EDT)",
+      "payouts": {
+        "manager": 100,
+        "evaluator": 52,
+        "worker": 310
+      },
+      "domain": "services",
+      "skills": {
+        "tag-1": "labor",
+        "tag-2": "community-engagement"
+      },
+      "role": {
+        "0": "7849313",
+        "1": "0933831",
+        "2": "482439"
+      },
+      "salary": {
+        "full-time-rate": "350",
+        "pay-frequency": {
+          "weekly": false,
+          "bi-weekly": false,
+          "monthly": true
+        },
+        "term-of-employment": {
+          "six-months": true,
+          "one-year": false
+        }
+      },
+      "sponsoredAmount": 50
     }
   ]
 }

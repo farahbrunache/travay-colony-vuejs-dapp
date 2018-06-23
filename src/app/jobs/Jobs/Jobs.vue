@@ -10,14 +10,13 @@
               Here you'll find 6-month and 12-month jobs.
             </p>
             <p>
-              Add more information here.
+              <!-- Add more information here. -->
             </p>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
     </div>
 <br>
-
 
     <vue-grid>
       <vue-grid-row>
@@ -81,8 +80,8 @@
         <vue-grid-item>
         <hr>      
           <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.taskId">
-            <vue-panel-header title="Title" subtitle="subtitle"
-                              image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
+            <!-- <vue-panel-header title="Title" subtitle="subtitle"
+                              image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" /> -->
             <vue-panel-body>
             <ul>
               <li >

@@ -5,6 +5,7 @@
   "App.nav.jobs": "Jobs",
   "App.nav.profile": "Profile",
   "App.nav.balance": "Balance",
+  "App.nav.wallet": "Wallet",
   "App.nav.signup": "Signup",
   "App.nav.signin": "Signin",
   "App.nav.createJob": "Post a Job",

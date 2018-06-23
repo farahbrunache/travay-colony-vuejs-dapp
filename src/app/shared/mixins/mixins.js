@@ -1,8 +1,9 @@
 import { uuid } from 'vue-uuid';
 import db from '../../firebaseinit';
-import createColony from '../services/createColony';
+const createColony = require('../services/createColony');
 import createTask from '../services/createTask';
-
+console.log('createTask!', createTask);
+console.log('createColony', createColony);
 export const colonyMixin = {
   methods: {
     createTask() {
@@ -11,8 +12,7 @@ export const colonyMixin = {
         // We're exiting hard here as the providers keep polling otherwise
         .then(() => process.exit())
         .catch(err => console.error(err));
-    },
-    anotherFunc() {}
+    }
   }
 };
 

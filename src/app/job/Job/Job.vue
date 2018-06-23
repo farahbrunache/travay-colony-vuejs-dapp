@@ -23,7 +23,7 @@
             <vue-panel-body>
               <p v-if="job.role && userId">
               <a v-if="job.role['0'] === userId" @click.prevent.stop="e => editJob(job.taskId)">
-                <i class="fa fa-edit edit-icon"></i>
+                <i class="fa fa-edit edit-icon" @click="isEditing = !isEditing" v-if="!isEditing"></i>
               </a>
               </p>
             <ul>
@@ -31,6 +31,9 @@
                 Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
                 Full time rate: ${{job.salary['full-time-rate']}}
+                <!-- TODO: fix edit field visibiliy when editing -->
+                <!-- <input type="text" ref="full-time-rate" :value="full-time-rate"               :disabled="!isEditing"
+                    :class="{view: !isEditing}">  -->
                 <br>
                 <br>
                 Pay frequency: 
@@ -67,29 +70,28 @@
               title="Claim">
               <h3>Requirements</h3>
               <ul>
-                <li>Test</li>
-                <li>Test</li>
+                <li>Requirement 1</li>
+                <li>Requirement 2</li>
               </ul>
               <h3>Definition of Done </h3>
               <ul>
-                <li>Test</li>
-                <li>Test</li>
+                <li>Lorem ipsum</li>
+                <li>Lorem impsum</li>
               </ul>
               <h3>Legal</h3>
               <ul>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
+                <li>Legal requirement 1</li>
+                <li>Legal requirement 2</li>
               </ul>
               <vue-grid-row>
-                <vue-grid-item>
+                <!-- <vue-grid-item>
                   <vue-checkbox
                     name="acceptTerms"
                     id="acceptTerms"
                     v-model="form.acceptTerms"
                     label="I accept the terms"
                     required />
-                    </vue-grid-item>
+                    </vue-grid-item> -->
               </vue-grid-row>
               <vue-grid-row>
                     <vue-grid-item v-if="job.role">
@@ -185,7 +187,8 @@ export default {
         newsletter: false
       },
       isLoading: false,
-      showSponsoredModal: false
+      showSponsoredModal: false,
+      isEditing: false
     };
   },
   mounted() {
@@ -299,6 +302,10 @@ export default {
           } as INotification);
         }, 700);
       });
+    },
+    editJob() {
+      this.job.salary['full-time-rate'] = this.$refs['full-time-rate'].value;
+      this.isEditing = !this.isEditing;
     }
   },
   prefetch: (options: IPreLoad) => {

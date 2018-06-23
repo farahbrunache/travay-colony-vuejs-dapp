@@ -11,6 +11,7 @@ import { CreateJobDefaultState, ICreateJobState } from './createJob/state';
 import { SignupDefaultState, ISignupState } from './signup/state';
 import { TestDefaultState, ITestState } from './test/state';
 import { SigninDefaultState, ISigninState } from './signin/state';
+import { WalletDefaultState, IWalletState }         from './wallet/state';
 
 export interface IState {
   [key: string]: any;
@@ -25,6 +26,7 @@ export interface IState {
   signup?: ISignupState;
   test?: ITestState;
   signin?: ISigninState;
+  wallet?: IWalletState;
 }
 
 export const DefaultState: IState = {
@@ -57,5 +59,8 @@ export const DefaultState: IState = {
   },
   signin: {
     ...SigninDefaultState,
+  },
+  wallet: {
+    ...WalletDefaultState,
   },
 };

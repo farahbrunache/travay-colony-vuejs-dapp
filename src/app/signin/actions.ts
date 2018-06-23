@@ -11,6 +11,8 @@ export interface ISigninActions {
   increment(context: ActionContext<ISigninState, ISigninState>): Promise<any>;
 
   decrement(context: ActionContext<ISigninState, ISigninState>): Promise<any>;
+
+  saveUserInStorage({ commit: any }, userData): any;
 }
 
 export const SigninActions: ISigninActions = {

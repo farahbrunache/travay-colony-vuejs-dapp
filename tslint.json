@@ -1,35 +1,23 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended"
-  ],
+  "defaultSeverity": "warning",
+  "extends": ["tslint:recommended"],
   "jsRules": {
-    "trailing-comma": [
-      true
-    ]
+    "trailing-comma": [true]
   },
   "rules": {
-    "quotemark": [
-      true,
-      "single"
-    ],
-    "indent": [
-      true
-    ],
-    "interface-name": [
-      false
-    ],
+    "quotemark": [true, "single"],
+    "indent": [true],
+    "interface-name": [false],
     "arrow-parens": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "no-var-requires": false,
-    "max-line-length": [
-      160
-    ],
-    "max-file-line-count": [
-      250
-    ],
+    "max-line-length": [160],
+    "max-file-line-count": [250],
     "import-spacing": false
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["src/**/**/*.ts"]
+  }
 }

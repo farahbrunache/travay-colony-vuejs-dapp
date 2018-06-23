@@ -16,9 +16,9 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/balance" @click.native="navBarClose">
+          <router-link to="/wallet" @click.native="navBarClose">
             <i class="far fa-credit-card" />
-            <small>{{ $t('App.nav.balance' /* Balance */) }}</small>
+            <small>{{ $t('App.nav.wallet' /* Wallet */) }}</small>
           </router-link>
         </li>
         <!-- <li>
