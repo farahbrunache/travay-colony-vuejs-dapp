@@ -67,17 +67,24 @@ This document helps users understand how to use Travay: https://docs.google.com/
 - Creates Terms and Conditions
 - Create Travay Colony Code of Conduct
 - Complete all unit tests
-- Worker signs up and receives "x" amount of tokens to begin with
-- Worker can see the total amount of coins they've earned
-- Worker can see their reputation score
-- Worker can upload a photo of work completed
-- Learn how to incorporate off chain payments
-- And End User email and/or text notifications
+
+### User Interface
+
+- Add reputation score to end user's profile page
 - Add French translation
 - Add Creole translation
+
+### User Experience
+
 - End user can earn in stable token (i.e. stable coin)
 - End user can create a "savings" ether wallet
-- Manager can set multiple evaluators
+- Add End User email and/or text notifications to mobile app
+- Manager can choose and set max number of evaluators for a job
+- Managers can enlist sub-managers for jobs
+- Incorporate off chain payments
+
+### Security and Identification
+
 - Implement identity verification to protect against fraud (i.e. sign up to use dApp after validating some form of second identity)
+- Integrate with uPort / decentralize login and sign-up page. For testing permissions Google auth was implemented but on a unique user ID and email address is stored on our backend
 - Add location based authentication as a form of proof that a job was done
-- Integrate with uPort. For testing permissions Google auth was implemented but will be replaced
