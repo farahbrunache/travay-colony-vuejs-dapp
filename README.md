@@ -53,17 +53,12 @@ https://youtu.be/dZVWLq2RlTw
 - Anyone can post a long-term job
 - Anyone can sponsor a job
 - Manager cannot complete a job they posted
-
 - Manager can modify a job
-- Manager can cancel a job
-- Worker can mark a job as complete
-- Worker can initiate a payout of a job
-- Manager can mark job as completed
-- Manager can payout a job they posted
 
 ## Product Road Map
 
 - Wait until Colony launches on Mainnet!
+- Update permissions of roles
 - Create Privacy Policy
 - Creates Terms and Conditions
 - Create Travay Colony Code of Conduct
