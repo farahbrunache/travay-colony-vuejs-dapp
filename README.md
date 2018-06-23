@@ -14,6 +14,8 @@
 4.  Install dependencies: `npm install`
 5.  Run `npm run dev`
 
+_Note to hackathon judges: There is Google Auth enabled to allow user auth until uPort is integrated to provide further decentralization. In addition we had intermittent issues with retrieiving the hask of the IPFS store of tasks. Thus for testing purposes we temporarily enabled Firebase and static JSON job data to test our UI._
+
 ## Project Description
 
 Many developing nations such as Haiti lack the infrastructure for providing public services, resulting in a lower quality of life with high unemployment. Travay leverages the power of the community by having citizens earn a steady livelihood by fulfilling good deeds posted by other citizens. Built with the colonyJS framework and Vue.js, Travay’s progressive web application enables citizens to create a profile to view, select, post, sponsor, and evaluate a job pertaining to a good deed.
