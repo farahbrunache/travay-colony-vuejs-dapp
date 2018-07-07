@@ -26,123 +26,132 @@
 </template>
 
 <script lang="ts">
-  import VueInput    from '../VueInput/VueInput.vue';
-  import VueModal    from '../VueModal/VueModal.vue';
-  import VueCalendar from '../VueCalendar/VueCalendar.vue';
+import VueInput from '../VueInput/VueInput.vue';
+import VueModal from '../VueModal/VueModal.vue';
+import VueCalendar from '../VueCalendar/VueCalendar.vue';
+import { NormalModuleReplacementPlugin } from 'webpack';
 
-  export default {
-    name:       'VueDatePicker',
-    components: {
-      VueInput,
-      VueModal,
-      VueCalendar,
+export default {
+  name: 'VueDatePicker',
+  components: {
+    VueInput,
+    VueModal,
+    VueCalendar
+  },
+  props: {
+    name: {
+      type: String,
+      default: 'date'
     },
-    props:      {
-      name:           {
-        type:    String,
-        default: 'date',
-      },
-      id:             {
-        type:    String,
-        default: 'date',
-      },
-      minDate:        {
-        type:     Date,
-        required: false,
-      },
-      maxDate:        {
-        type:     Date,
-        required: false,
-      },
-      firstDayOfWeek: {
-        type:     Number,
-        required: false,
-        default:  0,
-      },
-      placeholder:    {
-        type:     String,
-        required: false,
-        default:  '',
-      },
-      startDate:      {
-        type:     Date,
-        required: false,
-      },
-      endDate:        {
-        type:     Date,
-        required: false,
-      },
-      currentDate:    {
-        type:     Date,
-        required: false,
-      },
-      required:       {
-        type:    Boolean,
-        default: false,
-      },
-      disabled:       {
-        type:    Boolean,
-        default: false,
-      },
-      readonly:       {
-        type:    Boolean,
-        default: true,
-      },
-      message:        {
-        type:    String,
-        default: '',
-      },
+    id: {
+      type: String,
+      default: 'date'
     },
-    data(): any {
-      return {
-        show:         false,
-        selectedDate: null,
-      };
+    minDate: {
+      type: Date,
+      required: false
     },
-    computed:   {
-      inputValue() {
-        return this.date === null ? '' : this.$d(this.date, 'datePicker');
-      },
-      date() {
-        if (this.currentDate) {
-          return this.currentDate;
-        }
+    maxDate: {
+      type: Date,
+      required: false
+    },
+    firstDayOfWeek: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    startDate: {
+      type: Date,
+      required: false
+    },
+    endDate: {
+      type: Date,
+      required: false
+    },
+    currentDate: {
+      type: Date,
+      required: false
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: true
+    },
+    message: {
+      type: String,
+      default: ''
+    },
+    selectedDateValue: {
+      default: null
+    }
+  },
+  watch: {
+    selectedDateValue(val) {
+      if (!val) this.selectedDate = null;
+    }
+  },
+  data(): any {
+    return {
+      show: false,
+      selectedDate: null
+    };
+  },
+  computed: {
+    inputValue() {
+      return this.date === null ? '' : this.$d(this.date, 'datePicker');
+    },
+    date() {
+      if (this.currentDate) {
+        return this.currentDate;
+      }
 
-        return this.selectedDate;
-      },
-    },
-    methods:    {
-      onChange(date: Date): void {
-        this.selectedDate = date;
-        this.$emit('change', this.selectedDate);
-      },
-    },
-  };
+      return this.selectedDate;
+    }
+  },
+  methods: {
+    onChange(date: Date): void {
+      this.selectedDate = date;
+      this.$emit('change', this.selectedDate);
+    }
+  }
+};
 </script>
 
 <style lang="scss" module>
-  @import "../../styles";
+@import '../../styles';
 
-  .vueDatePicker {
-    display: block;
-  }
+.vueDatePicker {
+  display: block;
+}
 
-  .calendar {
-    margin:    0;
-    max-width: $modal-max-width;
+.calendar {
+  margin: 0;
+  max-width: $modal-max-width;
 
-    @include media(tabletPortrait) {
-      table {
-        tr {
-          td {
-            font-size: $font-size-h5;
+  @include media(tabletPortrait) {
+    table {
+      tr {
+        td {
+          font-size: $font-size-h5;
 
-            span {
-              top: 25%;
-            }
+          span {
+            top: 25%;
           }
         }
       }
     }
   }
+}
 </style>

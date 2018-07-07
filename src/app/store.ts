@@ -6,15 +6,13 @@ import { PersistLocalStorage } from './shared/plugins/vuex-persist/PersistLocalS
 import { PersistCookieStorage } from './shared/plugins/vuex-persist/PersistCookieStorage';
 import { AppModule } from './app/module';
 import { ProfileModule } from './profile/module';
-import { BalanceModule } from './balance/module';
 import { JobsModule } from './jobs/module';
 import { JobModule } from './job/module';
 import { PrivacyAndTermsModule } from './privacyAndTerms/module';
 import { CreateJobModule } from './createJob/module';
-import { SignupModule } from './signup/module';
-import { TestModule } from './test/module';
 import { SigninModule } from './signin/module';
-import { WalletModule }            from './wallet/module';
+import { WalletModule } from './wallet/module';
+import { SignInModalModule }            from './signInModal/module';
 
 Vue.use(Vuex);
 
@@ -38,7 +36,7 @@ const state: IState = (CLIENT && window.__INITIAL_STATE__) || DefaultState;
 // };
 
 export const store: Store<IState> = new Vuex.Store({
-  state,
+  state
   // plugins: [
   //   VuexPersist(
   //     [
@@ -59,14 +57,12 @@ export const store: Store<IState> = new Vuex.Store({
 
 store.registerModule(['app'], AppModule, { preserveState: true });
 store.registerModule(['profile'], ProfileModule, { preserveState: true });
-store.registerModule(['balance'], BalanceModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
 store.registerModule(['privacyAndTerms'], PrivacyAndTermsModule, {
-  preserveState: true,
+  preserveState: true
 });
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
-store.registerModule(['signup'], SignupModule, { preserveState: true });
-store.registerModule(['test'], TestModule, { preserveState: true });
 store.registerModule(['signin'], SigninModule, { preserveState: true });
 store.registerModule(['wallet'], WalletModule, { preserveState: true });
+store.registerModule(['signInModal'], SignInModalModule, { preserveState: true });

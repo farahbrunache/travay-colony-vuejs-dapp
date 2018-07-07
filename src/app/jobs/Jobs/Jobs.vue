@@ -65,7 +65,7 @@
 
         <vue-grid-row>
           <vue-button accent>
-            <router-link :to="'createjob'">Post a Job</router-link>
+            <router-link :to="'createJob'">Post a Job</router-link>
              </vue-button>
         </vue-grid-row>
         <br>
@@ -115,7 +115,7 @@
               </vue-button>
 
               <vue-button accent>
-                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="make-hyperlink-white">Sponsor this Job</a>
+                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" class="remove-hyperlink">Sponsor this Job</a>
              </vue-button>
 
             </vue-panel-footer>
@@ -172,7 +172,7 @@ export default {
       showSponsoredModal: false,
       posted: '',
       endRange: '1000000',
-      startRange: '100',
+      startRange: '1',
       keyword: '',
       types: [
         {
@@ -182,24 +182,32 @@ export default {
       ],
       amounts: [
         {
-          id: '$100',
-          value: '100'
+          id: '$1',
+          value: '1'
         },
         {
           id: '$200',
           value: '200'
         },
         {
-          id: '$300',
-          value: '300'
+          id: '$600',
+          value: '600'
+        },
+        {
+          id: '$1000',
+          value: '1000'
         }
       ]
     };
   },
-  methods: {
-    ...mapGetters('signin', ['userId']),
+  methods: {    
     ...mapActions('jobs', ['increment', 'decrement']),
+    ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
     sponsorJobClickedHandler(taskId) {
+      if (!this.userId) {
+        this.openLoginModal();
+        return;
+      }
       this.selectedJobToSponsorId = taskId;
       this.showSponsoredModal = true;
     },
@@ -212,14 +220,12 @@ export default {
       this.jobs = result;
     },
     filterJob(job: any) {
-      console.log('job before filter!', job);
       let keywordSearchRegEx = RegExp(this.keyword, 'gi');
       const result =
         keywordSearchRegEx.test(job.brief) &&
         (parseInt(job['salary']['full-time-rate']) <= parseInt(this.endRange) &&
           parseInt(job['salary']['full-time-rate']) >=
             parseInt(this.startRange));
-      console.log('after filter!', result);
       return result;
     }
   },
@@ -238,6 +244,7 @@ export default {
     // this.getJobs();
   },
   computed: {
+    ...mapGetters('signin', ['userId']),
     ...mapGetters('jobs', ['count', 'incrementPending', 'decrementPending']),
     jobToSponsor() {
       return (
@@ -267,19 +274,13 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-.remove-hyperlink a:hover,
+.remove-hyperlink a,
+a:hover,
 a:visited,
 a:link,
 a:active {
   text-decoration: none;
-  color: white;
-}
-
-#make-hyperlink-white a:hover,
-a:visited,
-a:link,
-a:active {
-  color: white;
+  color: white !important;
 }
 
 .components {

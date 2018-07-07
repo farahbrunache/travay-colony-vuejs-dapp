@@ -2,8 +2,10 @@ import { uuid } from 'vue-uuid';
 import db from '../../firebaseinit';
 const createColony = require('../services/createColony');
 import createTask from '../services/createTask';
+
 console.log('createTask!', createTask);
 console.log('createColony', createColony);
+
 export const colonyMixin = {
   methods: {
     createTask() {
@@ -27,7 +29,6 @@ export const sponsorSubmitMixin = {
         taskId: taskId,
         task: task
       };
-
       db.collection('sponsored')
         .add(data)
         .then(docRef => {

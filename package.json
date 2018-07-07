@@ -39,6 +39,7 @@
     "docs:build": "vuepress build docs"
   },
   "jest": {
+    "verbose": true,
     "globals": {
       "window": true
     },
@@ -90,6 +91,7 @@
     "body-parser": "1.18.3",
     "buffer": "^5.1.0",
     "buffer-compare": "^1.1.1",
+    "coinbase": "^2.0.8",
     "compression": "1.7.2",
     "config": "1.30.0",
     "cookie-parser": "1.4.3",

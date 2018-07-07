@@ -7,7 +7,8 @@
   "App.nav.balance": "Balance",
   "App.nav.wallet": "Wallet",
   "App.nav.signup": "Signup",
-  "App.nav.signin": "Signin",
+  "App.nav.signin": "Sign in",
+  "App.nav.signout": "Sign out",
   "App.nav.createJob": "Post a Job",
   "App.nav.english": "English",
   "App.nav.german": "German",
@@ -21,6 +22,7 @@
   "components.calendar.thursday.short": "T",
   "components.calendar.tuesday.short": "T",
   "components.calendar.wednesday.short": "W",
+  "components.dataTable.noResults": "No results found!",
   "components.formExample.zipCode.error": "Please enter a Number",
   "components.markdown":
     "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",

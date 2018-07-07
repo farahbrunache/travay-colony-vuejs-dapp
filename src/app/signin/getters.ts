@@ -18,7 +18,6 @@ export const SigninGetters: ISigninGetters = {
     return state.count;
   },
   userId(state: ISigninState): number {
-    console.log('getting user Id', state);
-    return Reflect.get(state.userData, 'uid');
-  },
+    return state.userData ? Reflect.get(state.userData, 'uid') : null;
+  }
 };

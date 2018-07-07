@@ -1,7 +1,8 @@
 <template>
   <div :class="$style.sponsorModal">
     <vue-modal :show="show" @close="$emit('update:show', false)">
-      <vue-button warn @click="$emit('update:show', false)">X</vue-button>        <vue-input
+      <vue-button warn @click="$emit('update:show', false)">X</vue-button>
+      <vue-input
           name="sponsorAmount"
           id="sponsorAmount"
           required

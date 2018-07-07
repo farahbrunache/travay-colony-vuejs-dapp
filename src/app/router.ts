@@ -4,17 +4,13 @@ import Meta from 'vue-meta';
 import { AppRoutes } from './app/routes';
 import { HomeRoutes } from './home/routes';
 import { ProfileRoutes } from './profile/routes';
-import { BalanceRoutes } from './balance/routes';
 import { JobsRoutes } from './jobs/routes';
 import { JobRoutes } from './job/routes';
 import { PrivacyAndTermsRoutes } from './privacyAndTerms/routes';
 import { CreateJobRoutes } from './createJob/routes';
-import { SignupRoutes } from './signup/routes';
-import { TestRoutes } from './test/routes';
 import { SigninRoutes } from './signin/routes';
-import { WalletRoutes }         from './wallet/routes';
-// Delete dummy data
-// import { ComponentsRoutes } from './components/routes';
+import { WalletRoutes } from './wallet/routes';
+import { SignInModalRoutes } from './signInModal/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -25,23 +21,19 @@ export const router: VueRouter = new VueRouter({
   routes: [
     ...AppRoutes,
     ...HomeRoutes,
-    // Delete dummy data
-    // ...ComponentsRoutes,
     ...ProfileRoutes,
-    ...BalanceRoutes,
     ...JobsRoutes,
     ...JobRoutes,
     ...PrivacyAndTermsRoutes,
     ...CreateJobRoutes,
-    ...SignupRoutes,
-    ...TestRoutes,
-    ...SigninRoutes,     ...WalletRoutes,
-
+    ...SigninRoutes,
+    ...WalletRoutes,
+    ...SignInModalRoutes
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return { selector: to.hash };
     }
     return savedPosition || { x: 0, y: 0 };
-  },
+  }
 });

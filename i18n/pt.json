@@ -1,5 +1,6 @@
 {
-  "App.core.description": "an enterprise ready boilerplate for isomorphic, progressive web apps with Vue.JS",
+  "App.core.description":
+    "an enterprise ready boilerplate for isomorphic, progressive web apps with Vue.JS",
   "App.nav.components": "Componentes",
   "App.nav.counter": "Contador",
   "App.nav.docs": "Documentation",
@@ -15,8 +16,10 @@
   "components.calendar.thursday.short": "T",
   "components.calendar.tuesday.short": "T",
   "components.calendar.wednesday.short": "W",
+  "components.dataTable.noResults": "No results found!",
   "components.formExample.zipCode.error": "Please enter a Number",
-  "components.markdown": "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
+  "components.markdown":
+    "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
   "components.pagination.next": "Next",
   "components.pagination.previous": "Previous",
   "components.register.cancellationText": "Cancel",
@@ -27,11 +30,13 @@
   "components.register.name.invalidText": "Please provide first and last name",
   "components.register.phone": "Phone",
   "components.register.phone.invalidText": "This is not a valid phone number!",
-  "components.register.submit.notification.text": "We've sent an email to: {email}!",
+  "components.register.submit.notification.text":
+    "We've sent an email to: {email}!",
   "components.register.submit.notification.title": "Hey {name}!",
   "components.register.submitText": "Submit",
   "components.register.subtitle": "Please fill in all required fields",
-  "components.register.terms": "I accept the <a href=\"/terms\">Terms and Conditions</a>",
+  "components.register.terms":
+    "I accept the <a href=\"/terms\">Terms and Conditions</a>",
   "components.register.title": "Register",
   "home.test": "this is a test!!!"
 }

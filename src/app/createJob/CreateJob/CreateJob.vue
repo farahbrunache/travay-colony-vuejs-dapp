@@ -9,9 +9,6 @@
             <p>
               Use the form below to create a 6-month or 12-month job.
             </p>
-            <p>
-              <!-- Learn more about our platform at [INSERT LINK TO DOCS PAGE]. -->
-            </p>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -22,16 +19,6 @@
   <form :class="$style.formExample" @submit.prevent="createJob()">
 
     <vue-grid-row>
-      <vue-grid-item>
-        <vue-input
-          name="taskId"
-          id="taskId"
-          required
-          placeholder="Job ID"
-          validation="required"
-          v-model="form.taskId"
-          :disabled="form.isTaskIdDisabled" />
-      </vue-grid-item>
       <vue-grid-item>
         <vue-input
           name="task"
@@ -53,27 +40,39 @@
           validation="required"
           v-model="form.brief" />
       </vue-grid-item>
+      </vue-grid-row>
+      <vue-grid-row>
       <vue-grid-item>
         <vue-input
           name="deliverable"
           id="deliverable"
           required
-          placeholder="Acceptance Criteria"
+          placeholder="Requirement for Job to be Complete"
           validation="required"
-          v-model="form.deliverable" />
+          v-model="requirement" />
+          <p @click="addRequirement">Add</p>
       </vue-grid-item>
+
+      <p v-for="(req, i) in form.deliverable" :key="i">
+        {{req}} - <span @click="removeRequirement(i)">
+          X
+        </span>
+        <br/>
+      </p>
     </vue-grid-row>
 
     <vue-grid-row>
         <vue-grid-item class="vueGridItem">
           <vue-date-picker
             @change="calendarChange"
-            :value="form.closingDate"
             :first-day-of-week="1"
+            ref="closingDatepicker"
+            :selectedDateValue="form.closingDate"
             validation="required"
             placeholder="Job Closing Date" />
         </vue-grid-item>
-      <vue-grid-item>
+      <!-- TODO: determine how to use this -->
+      <!-- <vue-grid-item>
         <vue-input
           name="payoutManager"
           id="payoutManager"
@@ -81,7 +80,7 @@
           placeholder="Job Owner"
           validation="required"
           v-model="form.payoutManager" />
-      </vue-grid-item>
+      </vue-grid-item> -->
     </vue-grid-row>
 
     <vue-input
@@ -129,7 +128,8 @@
             id="payFrequency"
             :options="payFrequency"
             :value="form.selectedPayFrequency"
-            @input="val => selectChange(val, 'selectedPayFrequency')" />
+            @input="val => selectChange(val, 'selectedPayFrequency')"
+            validation="required" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -140,8 +140,8 @@
             id="termOfEmployment"
             :options="termOfEmployment"
             :value="form.selectedTermOfEmployment"
-            validation="required"
-            @input="val => selectChange(val, 'selectedTermOfEmployment')" />
+            @input="val => selectChange(val, 'selectedTermOfEmployment')"
+            validation="required" />
       </vue-grid-item>
       <vue-grid-item>
         <vue-select
@@ -164,16 +164,6 @@
           placeholder="City where work is to be performed"
           v-model="form.cityOfWork"
           validation="required" />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-input
-          name="datePosted"
-          id="datePosted"
-          required
-          placeholder="Date Job Posted"
-          validation="required"
-          v-model="form.datePosted"
-          :disabled="form.isDatePostedDisabled" />
       </vue-grid-item>
     </vue-grid-row>
 
@@ -221,6 +211,7 @@ import { colonyMixin } from '../../shared/mixins/mixins';
 import { uuid } from 'vue-uuid';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
+import { AssertionError } from 'assert';
 
 export default {
   mixins: [colonyMixin],
@@ -241,8 +232,7 @@ export default {
     VueDatePicker
   },
   mounted() {
-    console.log('instance', this);
-    console.log('userid', this.userId);
+    console.log('refs', this.$refs);
   },
   data(): any {
     return {
@@ -250,15 +240,13 @@ export default {
         taskId: '',
         task: 'Weekly Trash Pickup',
         brief: 'Pickup and deposit trash for ten homes.',
-        deliverable:
-          'Weekly: pick upt trash from five homes then deposit in local dump.',
+        deliverable: [],
         datePosted: '',
-        payoutManager: '',
-        payoutEvaluator: 'dlfadfasd',
+        payoutEvaluator: 'Dexter Morgan',
         firstname: 'Farah',
-        domain: 'enviroment',
-        skills: 'labor',
-        salary: '500',
+        domain: 'Enviroment',
+        skills: 'Labor',
+        salary: '650',
         cityOfWork: 'Port-au-Prince',
         isTaskIdDisabled: true,
         closingDate: '',
@@ -303,16 +291,16 @@ export default {
         { label: 'Choose a Country', value: null },
         { label: 'Haiti', value: 'haiti' },
         { label: 'USA', value: 'us' }
-        // { label: 'Other', value: 'other' }
       ],
-      isLoading: false
+      isLoading: false,
+      requirement: ''
     };
   },
   methods: {
     ...mapActions('createJob', ['increment', 'decrement']),
     calendarChange(val) {
       console.log('val from datepicker', val);
-      this.closingDate = val;
+      this.form.closingDate = val;
     },
     selectChange(value, field) {
       this.$set(this.form, field, value);
@@ -323,12 +311,34 @@ export default {
       );
       return selected ? Reflect.get(selected, 'label') : '';
     },
+    addRequirement() {
+      if (this.requirement) this.form.deliverable.push(this.requirement);
+      console.log(
+        'adding requirement',
+        this.requirement,
+        this.form.deliverable
+      );
+      this.requirement = '';
+    },
+    removeRequirement(i) {
+      this.form.deliverable.splice(i, 1);
+    },
     submitHandler() {
-      this.isLoading = true;
       // console.log(JSON.parse(JSON.stringify(this.form)));
       const form = this.form;
       const self = this;
+      console.log('form', form);
+      if (this.hasEmptyFields) {
+        addNotification({
+          title: 'Oops',
+          text: 'Please fill in all the fields.'
+        } as INotification);
+        return false;
+      }
 
+      this.isLoading = true;
+
+      const jobId = uuid.v1();
       let jobData = {
         salary: {
           'full-time-rate': form.salary,
@@ -354,7 +364,7 @@ export default {
         },
         sponsoredAmount: 0,
         task: form.task,
-        taskId: uuid.v1(),
+        taskId: jobId,
         country: form.country,
         'terms-of-employment': form.selectedTermOfEmployment
       };
@@ -364,6 +374,7 @@ export default {
         .then(function(docref) {
           self.createTask(); // ColonyJS + IPFS
           self.clearForm();
+          console.log('ref', docref);
         })
         .catch(function(error) {
           console.error('Error adding document: ', error);
@@ -374,22 +385,28 @@ export default {
           this.isLoading = false;
           addNotification({
             title: 'Yay!',
-            text: 'Your job is now posted!'
+            text: `Your job is now posted! Click here to see the job`,
+            link: `/job/${jobId}`
           } as INotification);
         }, 500);
       });
     },
     clearForm() {
-      (this.salary = ''),
-        (this.brief = ''),
-        // (this.date-posted = ''),
-        (this.deliverable = ''),
-        (this.domain = ''),
-        (this.payouts = ''),
-        (this.role = ''),
-        (this.sponsoredAmount = ''),
-        (this.task = ''),
-        (this.taskId = '');
+      /*(this.form.salary = ''),
+        (this.form.brief = ''),
+        (this.form.deliverable = ''),
+        (this.form.domain = ''),
+        (this.form.payouts = ''),
+        (this.form.role = ''),
+        (this.form.sponsoredAmount = ''),
+        (this.form.task = ''),
+        (this.form.taskId = '');*/
+
+      Object.keys(this.form).forEach(key => {
+        this.form[key] = '';
+      });
+
+      //this.$refs.closingDatepicker.selectedDate = null;
     },
     createJob() {}
   },
@@ -415,7 +432,8 @@ export default {
 
       Object.keys(this.form).forEach((key: string) => {
         if (
-          key !== 'newsletter' &&
+          key !== 'taskId' &&
+          key !== 'datePosted' &&
           (this.form[key] === '' || this.form[key] === false)
         ) {
           hasEmptyField = true;

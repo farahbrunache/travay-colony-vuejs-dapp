@@ -73,25 +73,16 @@
                 <li>Requirement 1</li>
                 <li>Requirement 2</li>
               </ul>
-              <h3>Definition of Done </h3>
-              <ul>
-                <li>Lorem ipsum</li>
-                <li>Lorem impsum</li>
-              </ul>
-              <h3>Legal</h3>
-              <ul>
-                <li>Legal requirement 1</li>
-                <li>Legal requirement 2</li>
-              </ul>
+              <p>Claiming this position is to accpet the requirements and legal requirements.</p>
               <vue-grid-row>
-                <!-- <vue-grid-item>
+                <vue-grid-item>
                   <vue-checkbox
                     name="acceptTerms"
                     id="acceptTerms"
                     v-model="form.acceptTerms"
                     label="I accept the terms"
                     required />
-                    </vue-grid-item> -->
+                    </vue-grid-item>
               </vue-grid-row>
               <vue-grid-row>
                     <vue-grid-item v-if="job.role">
@@ -111,6 +102,25 @@
              </vue-button>
             </vue-accordion-item>
 
+            <vue-accordion-item title="Upload Proof of Work">
+                <div class="input-group">
+                    <!--<input type="text" class="form-control" placeholder="Upload an Image" v-model="file.name" aria-label="post image" aria-describedby="basic-addon2">-->
+                    <div class="input-group-append">
+                      <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
+                        Browse
+                        <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+                      </span>
+                    </div>
+                </div>
+                  <div>
+                    <img class="img-responsive" :src="image_preview" alt="" style="width: 200px; height:  200px;">
+                  </div>
+
+                  <div>
+                    <p>{{loadingText}}</p>
+                  </div>
+
+                <vue-button accent><a @click.prevent="uploadFile">Upload file</a></vue-button>
             </vue-accordion-item>
             <vue-accordion-item title="Comments">
               Coming Soon.
@@ -151,6 +161,7 @@ import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
+const firebaseStorage = firebase.storage();
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -188,7 +199,11 @@ export default {
       },
       isLoading: false,
       showSponsoredModal: false,
-      isEditing: false
+      isEditing: false,
+      file: '',
+      image: '',
+      image_preview: '',
+      loadingText: ''
     };
   },
   mounted() {
@@ -259,6 +274,10 @@ export default {
   methods: {
     ...mapGetters('signin', ['userId']),
     ...mapActions('job', ['increment', 'decrement']),
+    fileUploaded(e) {
+      console.log('file uploaded', e.target.files[0]);
+      this.file = e.target.files[0];
+    },
     getJob() {
       axios.get('/jobs.json').then((response: any) => {
         const job = response.data.jobs.filter(
@@ -306,6 +325,49 @@ export default {
     editJob() {
       this.job.salary['full-time-rate'] = this.$refs['full-time-rate'].value;
       this.isEditing = !this.isEditing;
+    },
+    uploadFile() {
+      return new Promise((resolve, reject) => {
+        const self = this;
+        const storageRef = firebaseStorage
+          .ref()
+          .child('images/' + this.file.name + '');
+        let uploadTask = storageRef.put(this.file);
+        uploadTask.on(
+          'state_changed',
+          function(snapshot) {
+            var progress =
+              snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            console.log(progress);
+            self.loadingText =
+              'Upload is ' + progress + '% done. Processing post.';
+          },
+          function(error) {
+            // Handle unsuccessful uploads
+            reject(error);
+          },
+          function() {
+            // Handle successful uploads on complete
+            resolve(uploadTask.snapshot.downloadURL);
+          }
+        );
+      });
+    },
+    uploadProofOfWork() {
+      this.uploadFile().then(imageUrl => {
+        data.image = imageUrl;
+        db
+          .collection('jobs')
+          .where('taskId', '==', taskId)
+          .add(data)
+          .then(function(docRef) {
+            self.clearForm();
+            self.loadingText = 'Post was created successfully.';
+          })
+          .catch(function(error) {
+            console.error('Error adding document: ', error);
+          });
+      });
     }
   },
   prefetch: (options: IPreLoad) => {
@@ -328,7 +390,8 @@ export default {
   min-height: 500px;
 }
 
-#remove-hyperlink a:hover,
+#remove-hyperlink a,
+a:hover,
 a:visited,
 a:link,
 a:active {

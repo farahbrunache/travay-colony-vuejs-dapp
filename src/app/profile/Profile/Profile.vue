@@ -7,20 +7,66 @@
           <h1>Profile</h1>
         </vue-grid-item>
     
-    <vue-panel>
-<vue-panel-header title="Title" subtitle="subtitle" image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" />
-<vue-panel-body>
-  Your Sponsored Jobs:
-  <div 
-    v-for="(item, index) in sponsored"
-    :key="item.sponsoredId + index">
-    <p>{{item.task}}</p>
-  </div>
-</vue-panel-body>
-<vue-panel-footer>
-  <!-- <vue-button primary>Update Profile</vue-button> -->
-</vue-panel-footer>
-</vue-panel>
+        <vue-panel>
+          <vue-panel-header title="First Name" subtitle="Last Name" />
+          <vue-panel-body>
+            <p>Phone Number</p>
+            <p>Email Address</p>
+            <p>City</p>
+            <p>Country</p>
+          </vue-panel-body>
+          <vue-panel-footer>
+            <vue-button primary>Update Profile</vue-button>
+          </vue-panel-footer>
+        </vue-panel>
+
+          <vue-panel>
+          <vue-panel-header title="Your Sponsored Jobs" />
+          <vue-panel-body>
+            <div 
+              v-for="(item, index) in sponsored"
+              :key="item.sponsoredId + index">
+              <p>{{item.task}}</p>
+            </div>
+          </vue-panel-body>
+          <vue-panel-footer>
+          </vue-panel-footer>
+        </vue-panel>
+
+          <vue-panel>
+          <vue-panel-header title="Your In-Progress Jobs" />
+          <vue-panel-body>
+            <div 
+              v-for="(item, index) in sponsored"
+              :key="item.sponsoredId + index">
+              <p>{{item.task}}</p>
+            </div>
+          </vue-panel-body>
+          <vue-panel-footer>
+          </vue-panel-footer>
+        </vue-panel>
+
+        <vue-panel>
+          <vue-panel-header title="Your Completed Jobs" />
+          <vue-panel-body>
+            <div 
+              v-for="(item, index) in sponsored"
+              :key="item.sponsoredId + index">
+              <p>{{item.task}}</p>
+            </div>
+          </vue-panel-body>
+          <vue-panel-footer>
+          </vue-panel-footer>
+        </vue-panel>
+
+        <vue-panel>
+          <vue-panel-header title="Reputation Score" />
+          <vue-panel-body>
+ 
+          </vue-panel-body>
+          <vue-panel-footer>
+          </vue-panel-footer>
+        </vue-panel>
 
       </vue-grid-row>
     </vue-grid>

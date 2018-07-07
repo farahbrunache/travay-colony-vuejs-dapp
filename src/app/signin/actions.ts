@@ -13,6 +13,8 @@ export interface ISigninActions {
   decrement(context: ActionContext<ISigninState, ISigninState>): Promise<any>;
 
   saveUserInStorage({ commit: any }, userData): any;
+
+  logoutUser(context: ActionContext<ISigninState>): void;
 }
 
 export const SigninActions: ISigninActions = {
@@ -47,5 +49,9 @@ export const SigninActions: ISigninActions = {
   saveUserInStorage({ commit }, userData) {
     localStorage.setItem('userData', JSON.stringify(userData));
     commit('SET_USER_DATA', userData);
+  },
+  logoutUser({ commit }: ActionContext<ISigninState>): void {
+    localStorage.removeItem('userData');
+    commit('SET_USER_DATA', null);
   }
 };

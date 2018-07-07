@@ -33,7 +33,9 @@ import VueButton from '../../shared/components/VueButton/VueButton.vue';
 import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
+
 console.log('logging firebase', firebase, db);
+
 export default {
   metaInfo: {
     title: 'Signin'
@@ -98,7 +100,7 @@ export default {
 
         this.user = data;
         this.saveUserInStorage(data);
-        console.log('data in update user data!', data);
+        console.log('data in update, user data!', data);
         this.$router.push('/jobs');
       } catch (err) {
         console.error('error while getting user by uid', err);

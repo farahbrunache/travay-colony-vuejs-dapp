@@ -449,43 +449,106 @@
             @change="onAutocompleteChange" />
         </vue-grid-item>
       </vue-grid-row>
+
+      <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <h2>Text truncate</h2>
+
+          <vue-truncate :lines="2" :duration="500">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et<br />
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet<br />
+            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+            amet,<br />
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,<br />
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,<br />
+            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </vue-truncate>
+        </vue-grid-item>
+
+        <vue-grid-item class="vueGridItem">
+          <h2>Carousel</h2>
+          <vue-carousel :images="images" />
+        </vue-grid-item>
+      </vue-grid-row>
+
+      <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <h2>DataTable</h2>
+          <vue-data-table
+            :header="dataTableHeader"
+            :data="dataTableData"
+            placeholder="Search"
+            @click="dataTableClick" />
+        </vue-grid-item>
+
+        <vue-grid-item class="vueGridItem">
+          <h2>Toggle</h2>
+          <vue-toggle
+            name="toggle"
+            id="toggle"
+            v-model="toggle"
+            label="toggle me!"
+          />
+          <br />
+          <vue-toggle
+            :disabled="true"
+            name="toggle2"
+            id="toggle2"
+            v-model="toggle"
+            label="toggle me!"
+          />
+        </vue-grid-item>
+      </vue-grid-row>
     </vue-grid>
   </div>
 </template>
 
 <script lang="ts">
-  import VueGrid                            from '../../shared/components/VueGrid/VueGrid.vue';
-  import VueGridItem                        from '../../shared/components/VueGridItem/VueGridItem.vue';
-  import VueButton                          from '../../shared/components/VueButton/VueButton.vue';
-  import VueLoader                          from '../../shared/components/VueLoader/VueLoader.vue';
-  import VuePanel                           from '../../shared/components/VuePanel/VuePanel.vue';
-  import VuePanelHeader                     from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
-  import VuePanelBody                       from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
-  import VuePanelFooter                     from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
-  import VueInput                           from '../../shared/components/VueInput/VueInput.vue';
-  import VueCollapse                        from '../../shared/components/VueCollapse/VueCollapse.vue';
-  import VueModal                           from '../../shared/components/VueModal/VueModal.vue';
-  import VueTabGroup                        from '../../shared/components/VueTabGroup/VueTabGroup.vue';
-  import VueTabItem                         from '../../shared/components/VueTabGroup/VueTabItem/VueTabItem.vue';
-  import VueCheckbox                        from '../../shared/components/VueCheckbox/VueCheckbox.vue';
-  import VueTooltip                         from '../../shared/components/VueTooltip/VueTooltip.vue';
-  import VueSlider                          from '../../shared/components/VueSlider/VueSlider.vue';
-  import VueAccordion                       from '../../shared/components/VueAccordion/VueAccordion.vue';
+  import VueGrid                                          from '../../shared/components/VueGrid/VueGrid.vue';
+  import VueGridItem                                      from '../../shared/components/VueGridItem/VueGridItem.vue';
+  import VueButton                                        from '../../shared/components/VueButton/VueButton.vue';
+  import VueLoader                                        from '../../shared/components/VueLoader/VueLoader.vue';
+  import VuePanel                                         from '../../shared/components/VuePanel/VuePanel.vue';
+  import VuePanelHeader
+                                                          from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
+  import VuePanelBody
+                                                          from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
+  import VuePanelFooter
+                                                          from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
+  import VueInput                                         from '../../shared/components/VueInput/VueInput.vue';
+  import VueCollapse                                      from '../../shared/components/VueCollapse/VueCollapse.vue';
+  import VueModal                                         from '../../shared/components/VueModal/VueModal.vue';
+  import VueTabGroup                                      from '../../shared/components/VueTabGroup/VueTabGroup.vue';
+  import VueTabItem
+                                                          from '../../shared/components/VueTabGroup/VueTabItem/VueTabItem.vue';
+  import VueCheckbox                                      from '../../shared/components/VueCheckbox/VueCheckbox.vue';
+  import VueTooltip                                       from '../../shared/components/VueTooltip/VueTooltip.vue';
+  import VueSlider                                        from '../../shared/components/VueSlider/VueSlider.vue';
+  import VueAccordion                                     from '../../shared/components/VueAccordion/VueAccordion.vue';
   import VueAccordionItem
-                                            from '../../shared/components/VueAccordion/VueAccordionItem/VueAccordionItem.vue';
-  import VuePagination                      from '../../shared/components/VuePagination/VuePagination.vue';
-  import VueSelect                          from '../../shared/components/VueSelect/VueSelect.vue';
-  import VueCalendar                        from '../../shared/components/VueCalendar/VueCalendar.vue';
-  import VueDatePicker                      from '../../shared/components/VueDatePicker/VueDatePicker.vue';
-  import VueDateRangePicker                 from '../../shared/components/VueDateRangePicker/VueDateRangePicker.vue';
-  import { addNotification, INotification } from '../../shared/components/VueNotificationStack/utils';
-  import VueMarkdown                        from '../../shared/components/VueMarkdown/VueMarkdown';
-  import VueGridRow                         from '../../shared/components/VueGridRow/VueGridRow';
-  import VueAutocomplete                    from '../../shared/components/VueAutocomplete/VueAutocomplete';
-  import { AutocompleteOptionsFixture }     from '../../shared/components/VueAutocomplete/fixtures/IAutocompleteFixture';
-  import VueBadge                           from '../../shared/components/VueBadge/VueBadge';
-  import FormExample                        from '../FormExample/FormExample';
-  import { IAutocompleteOption }            from '../../shared/components/VueAutocomplete/IAutocompleteOption';
+                                                          from '../../shared/components/VueAccordion/VueAccordionItem/VueAccordionItem.vue';
+  import VuePagination
+                                                          from '../../shared/components/VuePagination/VuePagination.vue';
+  import VueSelect                                        from '../../shared/components/VueSelect/VueSelect.vue';
+  import VueCalendar                                      from '../../shared/components/VueCalendar/VueCalendar.vue';
+  import VueDatePicker
+                                                          from '../../shared/components/VueDatePicker/VueDatePicker.vue';
+  import VueDateRangePicker
+                                                          from '../../shared/components/VueDateRangePicker/VueDateRangePicker.vue';
+  import { addNotification, INotification }               from '../../shared/components/VueNotificationStack/utils';
+  import VueMarkdown                                      from '../../shared/components/VueMarkdown/VueMarkdown';
+  import VueGridRow                                       from '../../shared/components/VueGridRow/VueGridRow';
+  import VueAutocomplete
+                                                          from '../../shared/components/VueAutocomplete/VueAutocomplete';
+  import { AutocompleteOptionsFixture }                   from '../../shared/components/VueAutocomplete/fixtures/IAutocompleteFixture';
+  import VueBadge                                         from '../../shared/components/VueBadge/VueBadge';
+  import FormExample                                      from '../FormExample/FormExample';
+  import { IAutocompleteOption }                          from '../../shared/components/VueAutocomplete/IAutocompleteOption';
+  import VueTruncate                                      from '../../shared/components/VueTruncate/VueTruncate';
+  import VueCarousel                                      from '../../shared/components/VueCarousel/VueCarousel';
+  import VueDataTable                                     from '../../shared/components/VueDataTable/VueDataTable';
+  import { dataTableDataFixture, dataTableHeaderFixture } from '../../shared/components/VueDataTable/DataTableFixtures';
+  import VueToggle                                        from '../../shared/components/VueToggle/VueToggle';
 
   export default {
     metaInfo:   {
@@ -534,6 +597,10 @@
       ],
     },
     components: {
+      VueToggle,
+      VueDataTable,
+      VueCarousel,
+      VueTruncate,
       FormExample,
       VueBadge,
       VueAutocomplete,
@@ -606,6 +673,41 @@
         inputValue:          'test',
         autocompleteOptions: [],
         autocompleteLoading: false,
+        images:              [
+          {
+            alt:       'Slide 1',
+            copyright: 'unsplash.com/@hahnbo',
+            url:       'https://images.unsplash.com/photo-1485932465394-d20cc595f08b?ixlib=rb-0.3.5&s=e8798191cfef2e78f4ac91e71c92ea57&auto=format&fit=crop&w=3750&q=80',
+          },
+          {
+            alt:       'Slide 2',
+            copyright: 'unsplash.com/@mitr',
+            url:       'https://images.unsplash.com/photo-1486068338746-bc8c63a2d7ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=348afc4c4ac324a022630fbce9204348&auto=format&fit=crop&w=3890&q=80',
+          },
+          {
+            alt:       'Slide 3',
+            copyright: 'unsplash.com/@peter_oslanec',
+            url:       'https://images.unsplash.com/photo-1517365884913-3c33884b06fa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=05c7363bcb2c0a2c2241e6cdcf0dfb8b&auto=format&fit=crop&w=1234&q=80',
+          },
+          {
+            alt:       'Slide 4',
+            copyright: 'unsplash.com/@ihs_photo',
+            url:       'https://images.unsplash.com/photo-1496348323715-c11f0fc6aeed?ixlib=rb-0.3.5&s=52406f147b73f1000c032dcc5e4e0aea&auto=format&fit=crop&w=1388&q=80',
+          },
+          {
+            alt:       'Slide 5',
+            copyright: 'unsplash.com/@parkamstutz',
+            url:       'https://images.unsplash.com/photo-1528150395403-992a693e26c8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0651fee03ef0f9dad95014a45adf898a&auto=format&fit=crop&w=1234&q=80',
+          },
+          {
+            alt:       'Slide 6',
+            copyright: 'unsplash.com/@mrandybae',
+            url:       'https://images.unsplash.com/photo-1492970471430-bc6bd7eb2b13?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9893bc89e46e2b77a5d8c091fbba04e9&auto=format&fit=crop&w=2710&q=80',
+          },
+        ],
+        dataTableHeader:     dataTableHeaderFixture,
+        dataTableData:       dataTableDataFixture,
+        toggle:              false,
       };
     },
     methods:    {
@@ -630,7 +732,6 @@
         console.log(option);
         this.selectedOption = option;
       },
-      /* istanbul ignore next */
       onRequest(query: string, shouldReturn: boolean = true) {
         this.autocompleteLoading = true;
 
@@ -653,6 +754,9 @@
       },
       onAutocompleteChange(option: IAutocompleteOption) {
         console.log(option);
+      },
+      dataTableClick(row: any) {
+        console.log(row);
       },
     },
   };

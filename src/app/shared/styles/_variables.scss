@@ -1,18 +1,18 @@
 /* Brand */
-$brand-dark-primary: #264D99;
-$brand-light-primary: #8F44FF;
-$brand-primary: #B35AFF;
-$brand-accent: #704BFF;
-$brand-warn: #FB3640;
+$brand-dark-primary: #264d99;
+$brand-light-primary: #8f44ff;
+$brand-primary: #b35aff;
+$brand-accent: #704bff;
+$brand-warn: #fb3640;
 
 /* Background Colors */
 $bg-color: #333;
-$bg-color-inverse: #FFF;
+$bg-color-inverse: #fff;
 
 /* Text Colors */
-$text-color: #FFF;
+$text-color: #fff;
 $text-color-inverse: #333;
-$secondary-text-color: #BABABA;
+$secondary-text-color: #bababa;
 
 /* Border Colors */
 $divider-color: lighten($bg-color, 20%);
@@ -52,13 +52,13 @@ $line-height-h5: 1.5;
 $line-height-h6: 1.4;
 
 /* Letter Spacings */
-$letter-spacing: .01em;
-$letter-spacing-h1: -.1rem;
-$letter-spacing-h2: -.1rem;
-$letter-spacing-h3: -.1rem;
-$letter-spacing-h4: -.08rem;
-$letter-spacing-h5: -.05rem;
-$letter-spacing-h6: -.1rem;
+$letter-spacing: 0.01em;
+$letter-spacing-h1: -0.1rem;
+$letter-spacing-h2: -0.1rem;
+$letter-spacing-h3: -0.1rem;
+$letter-spacing-h4: -0.08rem;
+$letter-spacing-h5: -0.05rem;
+$letter-spacing-h6: -0.1rem;
 
 /* General */
 $google-font: 'https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Lato:300,400,700';
@@ -84,7 +84,12 @@ $screen-small-desktop-gutter: $space-unit * 4;
 $screen-large-desktop-gutter: $space-unit * 4;
 
 /* AppNavBar*/
-$nav-bar-bg: linear-gradient(to bottom, $bg-color 0%, lighten($bg-color, 2%) 50%, $bg-color 100%);
+$nav-bar-bg: linear-gradient(
+  to bottom,
+  $bg-color 0%,
+  lighten($bg-color, 2%) 50%,
+  $bg-color 100%
+);
 $nav-bar-color: $text-color;
 $nav-bar-width: 100%;
 $nav-bar-height: $space-unit * 10;
@@ -93,7 +98,11 @@ $nav-bar-index: 1000;
 $nav-bar-bg-transition: opacity $transition-duration ease-in-out;
 $nav-bar-bg-accent-transition: transform $transition-duration ease-in-out;
 $nav-bar-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-$nav-bar-accent-bg: linear-gradient(to left, $brand-dark-primary 0%, $brand-primary 100%);
+$nav-bar-accent-bg: linear-gradient(
+  to left,
+  $brand-dark-primary 0%,
+  $brand-primary 100%
+);
 $nav-bar-accent-shadow: $nav-bar-shadow;
 $nav-bar-hamburger-bg: $divider-color;
 $nav-bar-menu-border-color: lighten($bg-color, 5%);
@@ -109,23 +118,40 @@ $button-font-size: inherit;
 $button-font-weight: 400;
 $button-border-radius: 0;
 $button-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
-$button-transition: all 300ms cubic-bezier(.25, .8, .25, 1);
-$button-active-shadow: 0 12px 20px rgba(0, 0, 0, 0.20), 0 10px 10px rgba(0, 0, 0, 0.18);
+$button-transition: all 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+$button-active-shadow: 0 12px 20px rgba(0, 0, 0, 0.2),
+  0 10px 10px rgba(0, 0, 0, 0.18);
 
-$button-default-color: #FFF;
-$button-default-bg: linear-gradient(171deg, $divider-color 0%, lighten($divider-color, 5%) 100%);
+$button-default-color: #fff;
+$button-default-bg: linear-gradient(
+  171deg,
+  $divider-color 0%,
+  lighten($divider-color, 5%) 100%
+);
 $button-default-hover-bg: $button-default-bg;
 
 $button-primary-color: #000;
-$button-primary-bg: linear-gradient(171deg, $brand-primary 0%, lighten($brand-primary, 5%) 100%);
+$button-primary-bg: linear-gradient(
+  171deg,
+  $brand-primary 0%,
+  lighten($brand-primary, 5%) 100%
+);
 $button-primary-hover-bg: $button-primary-bg;
 
 $button-accent-color: #000;
-$button-accent-bg: linear-gradient(171deg, $brand-accent 0%, lighten($brand-accent, 5%) 100%);
+$button-accent-bg: linear-gradient(
+  171deg,
+  $brand-accent 0%,
+  lighten($brand-accent, 5%) 100%
+);
 $button-accent-hover-bg: $button-accent-bg;
 
 $button-warn-color: #000;
-$button-warn-bg: linear-gradient(171deg, $brand-warn 0%, lighten($brand-warn, 5%) 100%);
+$button-warn-bg: linear-gradient(
+  171deg,
+  $brand-warn 0%,
+  lighten($brand-warn, 5%) 100%
+);
 $button-warn-hover-bg: $button-warn-bg;
 
 /* Loader */
@@ -192,7 +218,12 @@ $modal-max-width: 480px;
 
 /* Footer */
 $footer-padding: $space-unit * 2 0 $space-unit * 2 0;
-$footer-bg: linear-gradient(to bottom, darken($bg-color-inverse, 3%) 0%, $bg-color-inverse 50%, darken($bg-color-inverse, 3%) 100%);
+$footer-bg: linear-gradient(
+  to bottom,
+  darken($bg-color-inverse, 3%) 0%,
+  $bg-color-inverse 50%,
+  darken($bg-color-inverse, 3%) 100%
+);
 $footer-color: $text-color-inverse;
 
 /* Tabs */
@@ -216,12 +247,13 @@ $checkbox-color: $text-color;
 $checkbox-padding: 0;
 $checkbox-margin: $space-unit 0;
 $checkbox-size: $space-unit * 3;
-$checkbox-bg: #FFF;
-$checkbox-transition: background $transition-duration cubic-bezier(0, .84, .83, .67);
-$checkbox-check: 2px solid #FFF;
+$checkbox-bg: #fff;
+$checkbox-transition: background $transition-duration
+  cubic-bezier(0, 0.84, 0.83, 0.67);
+$checkbox-check: 2px solid #fff;
 $checkbox-check-margin: 0 $space-unit * 2 0 0;
 $checkbox-checked-bg: $brand-accent;
-$checkbox-shadow: -2px 2px 2px rgba(0, 0, 0, .24);
+$checkbox-shadow: -2px 2px 2px rgba(0, 0, 0, 0.24);
 
 /* Tooltip */
 $tooltip-bg: $brand-accent;
@@ -236,13 +268,18 @@ $slider-padding: $space-unit * 3 $space-unit * 2;
 $slider-track-bg: lighten($bg-color, 15%);
 $slider-track-shadow: $panel-shadow;
 $slider-progress-height: $space-unit * 0.5;
-$slider-progress-bg: linear-gradient(to left, $brand-dark-primary 0%, $brand-accent 100%);
+$slider-progress-bg: linear-gradient(
+  to left,
+  $brand-dark-primary 0%,
+  $brand-accent 100%
+);
 $slider-handle-size: $space-unit * 4;
 $slider-handle-shadow: $panel-shadow;
 $slider-handle-bg: $bg-color;
 $slider-handle-border: 2px solid $brand-accent;
 $slider-handle-transition: box-shadow $transition-duration / 2 ease-in-out;
-$slider-handle-active-shadow: 0 0 0 8px rgba(red($brand-accent), green($brand-accent), blue($brand-accent), .5);
+$slider-handle-active-shadow: 0 0 0 8px
+  rgba(red($brand-accent), green($brand-accent), blue($brand-accent), 0.5);
 $slider-values-margin: 0 0 40px -16px;
 
 /* Accordion */
@@ -285,8 +322,12 @@ $calendar-margin: 0 $space-unit * 2 $space-unit * 2 0;
 
 $calendar-header-color: $text-color;
 $calendar-header-padding: $space-unit * 2 $space-unit * 3;
-$calendar-header-bg: linear-gradient(170deg, $brand-accent 0%, $brand-dark-primary 100%);
-$calendar-header-text-shadow: 0 2px 5px rgba(0, 0, 0, .33);
+$calendar-header-bg: linear-gradient(
+  170deg,
+  $brand-accent 0%,
+  $brand-dark-primary 100%
+);
+$calendar-header-text-shadow: 0 2px 5px rgba(0, 0, 0, 0.33);
 
 $calendar-body-border: $accordion-item-header-border-top;
 $calendar-body-padding: $space-unit * 2;
@@ -309,7 +350,8 @@ $notifications-index: $modal-index + 1;
 $notifications-padding: $space-unit;
 $notifications-max-width: $space-unit * 50;
 
-$notification-padding: $space-unit * 2 $space-unit * 5 $space-unit * 2 $space-unit * 2;
+$notification-padding: $space-unit * 2 $space-unit * 5 $space-unit * 2
+  $space-unit * 2;
 $notification-margin: 0 0 $space-unit 0;
 $notification-shadow: $modal-shadow;
 $notification-max-height: $space-unit * 10;
@@ -349,3 +391,37 @@ $badge-accent-bg: $button-accent-bg;
 
 $badge-warn-color: $button-warn-color;
 $badge-warn-bg: $button-warn-bg;
+
+/* Carousel */
+
+$carousel-min-height: 500px;
+$carousel-transition: opacity $transition-duration * 4 ease-in-out;
+$carousel-copyright-color: $text-color;
+$carousel-copyright-bottom: $space-unit * 2;
+$carousel-copyright-left: $space-unit * 2;
+$carousel-copyright-shadow: 0 0 3px $bg-color;
+$carousel-copyright-font-size: 75%;
+$carousel-indicator-bottom: 0;
+$carousel-indicator-size: $space-unit;
+$carousel-indicator-space: $space-unit;
+$carousel-indicator-shadow: $panel-shadow;
+$carousel-indicator-bg: $bg-color-inverse;
+$carousel-indicator-active-bg: $brand-accent;
+
+/* Toggle */
+$toggle-bg: $panel-bg;
+$toggle-shadow: $panel-shadow;
+$toggle-border-radius: $space-unit * 3;
+$toggle-width: $space-unit * 6;
+$toggle-height: $space-unit * 1.5;
+$toggle-transition: all $transition-duration ease-in-out;
+
+$toggle-handle-border-radius: 50%;
+$toggle-handle-size: $space-unit * 3;
+$toggle-handle-bg: $bg-color-inverse;
+$toggle-handle-shadow: $panel-shadow;
+$toggle-handle-checked-bg: $brand-accent;
+$toggle-handle-focused-shadow: $slider-handle-active-shadow;
+
+$toggle-disabled-bg: $panel-bg;
+$toggle-handle-disabled-bg: $divider-color;

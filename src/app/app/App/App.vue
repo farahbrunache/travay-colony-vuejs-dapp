@@ -1,6 +1,7 @@
 <template>
   <div id="app" :class="$style.app">
     <vue-notification-stack />
+    <sign-in-modal />
     <vue-nav-bar>
       <ul :class="$style.nav">
         <li>
@@ -21,17 +22,11 @@
             <small>{{ $t('App.nav.wallet' /* Wallet */) }}</small>
           </router-link>
         </li>
-        <!-- <li>
-          <router-link to="/signup" @click.native="navBarClose">
-            <i class="fas fa-user-plus" />
-            <small>{{ $t('App.nav.signup' /* Signup */) }}</small>
-          </router-link>
-        </li> -->
         <li>
-          <router-link to="/signin" @click.native="navBarClose">
+          <a @click="signInClicked">
             <i class="fas fa-user-plus" />
-            <small>{{ $t('App.nav.signin' /* Signin */) }}</small>
-          </router-link>
+            <small>{{ userId ? $t('App.nav.signout') : $t('App.nav.signin' /* Signin */) }}</small>
+          </a>
         </li>
         <!-- <li>
           <router-link to="/components" @click.native="navBarClose">
@@ -67,12 +62,13 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 import VueNavBar from '../../shared/components/VueNavBar/VueNavBar.vue';
 import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
 import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 import VueFooter from '../../shared/components/VueFooter/VueFooter.vue';
 import VueNotificationStack from '../../shared/components/VueNotificationStack/VueNotificationStack.vue';
+import SignInModal from '../../signInModal/SignInModal/SignInModal';
 import { loadLocaleAsync } from '../../shared/plugins/i18n/i18n';
 import { EventBus } from '../../shared/services/EventBus';
 
@@ -82,11 +78,21 @@ export default {
     VueGrid,
     VueGridItem,
     VueFooter,
-    VueNotificationStack
+    VueNotificationStack,
+    SignInModal
+  },
+  computed: {
+    ...mapGetters('signin', ['userId'])
   },
   methods: {
     ...mapActions('app', ['changeLocale']),
     ...mapActions('signin', ['saveUserInStorage']),
+    ...mapActions('signInModal', ['openLoginModal']),
+    signInClicked() {
+      console.log('signin modal');
+      this.navBarClose();
+      this.openLoginModal();
+    },
     localeSwitch(locale: string): void {
       loadLocaleAsync(locale).catch((error: Error) => console.log(error));
 
