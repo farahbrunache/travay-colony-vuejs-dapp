@@ -200,8 +200,8 @@ export default {
       ]
     };
   },
-  methods: {    
-    ...mapActions('jobs', ['increment', 'decrement']),
+  methods: {
+    ...mapActions('jobs', []),
     ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
     sponsorJobClickedHandler(taskId) {
       if (!this.userId) {
@@ -229,31 +229,15 @@ export default {
       return result;
     }
   },
-  mounted() {
-    //const db = firebase.database().ref('jobs/');
-    /*const res = db.once('value').then(snapshot => {
-      console.log('snapshot', snapshot);
-    });*/
-    /*const res = axios
-      .get('https://travay-dapp.firebaseio.com/jobs.json')
-      .then(res => {
-        console.log('response', res);
-        return res;
-      });
-    console.log('firebase!', res);*/
-    // this.getJobs();
-  },
+  mounted() {},
   computed: {
     ...mapGetters('signin', ['userId']),
-    ...mapGetters('jobs', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('jobs', []),
     jobToSponsor() {
       return (
         this.jobs.find(job => job.taskId === this.selectedJobToSponsorId) || {}
       );
     }
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('jobs/increment');
   },
   created() {
     db

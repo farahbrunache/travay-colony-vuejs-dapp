@@ -2,10 +2,6 @@ import { AppDefaultState, IAppState } from './app/state';
 import { ProfileDefaultState, IProfileState } from './profile/state';
 import { JobsDefaultState, IJobsState } from './jobs/state';
 import { JobDefaultState, IJobState } from './job/state';
-import {
-  PrivacyAndTermsDefaultState,
-  IPrivacyAndTermsState
-} from './privacyAndTerms/state';
 import { CreateJobDefaultState, ICreateJobState } from './createJob/state';
 import { SigninDefaultState, ISigninState } from './signin/state';
 import { WalletDefaultState, IWalletState } from './wallet/state';
@@ -13,6 +9,7 @@ import {
   SignInModalDefaultState,
   ISignInModalState
 } from './signInModal/state';
+import { TestDefaultState, ITestState } from './test/state';
 
 export interface IState {
   [key: string]: any;
@@ -21,11 +18,11 @@ export interface IState {
   profile?: IProfileState;
   jobs?: IJobsState;
   job?: IJobState;
-  privacyAndTerms?: IPrivacyAndTermsState;
   createJob?: ICreateJobState;
   signin?: ISigninState;
   wallet?: IWalletState;
   signInModal?: ISignInModalState;
+  test?: ITestState;
 }
 
 export const DefaultState: IState = {
@@ -41,9 +38,6 @@ export const DefaultState: IState = {
   job: {
     ...JobDefaultState
   },
-  privacyAndTerms: {
-    ...PrivacyAndTermsDefaultState
-  },
   createJob: {
     ...CreateJobDefaultState
   },
@@ -55,5 +49,8 @@ export const DefaultState: IState = {
   },
   signInModal: {
     ...SignInModalDefaultState
+  },
+  test: {
+    ...TestDefaultState
   }
 };

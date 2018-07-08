@@ -1,25 +1,25 @@
 import { ActionContext } from 'vuex';
-import { IPrivacyAndTermsState } from './state';
+import { ITestState } from './state';
 import { HttpService }   from '../shared/services/HttpService';
 import { AxiosResponse } from 'axios';
 
-export interface IPrivacyAndTermsResponse {
+export interface ITestResponse {
   count: number;
 }
 
-export interface IPrivacyAndTermsActions {
-  increment(context: ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>): Promise<any>;
+export interface ITestActions {
+  increment(context: ActionContext<ITestState, ITestState>): Promise<any>;
 
-  decrement(context: ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>): Promise<any>;
+  decrement(context: ActionContext<ITestState, ITestState>): Promise<any>;
 }
 
-export const PrivacyAndTermsActions: IPrivacyAndTermsActions = {
-  increment({ commit, state }: ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>): Promise<any> {
+export const TestActions: ITestActions = {
+  increment({ commit, state }: ActionContext<ITestState, ITestState>): Promise<any> {
     commit('SET_INCREMENT_PENDING', true);
 
     return HttpService
     .put('/counter/increment', { count: state.count })
-    .then((res: AxiosResponse<IPrivacyAndTermsResponse>) => {
+    .then((res: AxiosResponse<ITestResponse>) => {
       commit('SET_COUNT', res.data.count);
       commit('SET_INCREMENT_PENDING', false);
     })
@@ -27,12 +27,12 @@ export const PrivacyAndTermsActions: IPrivacyAndTermsActions = {
       commit('SET_INCREMENT_PENDING', false);
     });
   },
-  decrement({ commit, state }: ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>): Promise<any> {
+  decrement({ commit, state }: ActionContext<ITestState, ITestState>): Promise<any> {
     commit('SET_DECREMENT_PENDING', true);
 
     return HttpService
     .put('/counter/decrement', { count: state.count })
-    .then((res: AxiosResponse<IPrivacyAndTermsResponse>) => {
+    .then((res: AxiosResponse<ITestResponse>) => {
       commit('SET_COUNT', res.data.count);
       commit('SET_DECREMENT_PENDING', false);
     })

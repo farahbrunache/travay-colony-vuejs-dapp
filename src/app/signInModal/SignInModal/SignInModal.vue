@@ -10,13 +10,13 @@
         </vue-grid-item>
 
         <vue-grid-item v-if="!userId" fill>
-   <button @click="signInWithGoogle">
+          <button @click="signInWithGoogle">
             <i class="fab fa-google"></i> Login with Google
           </button>
         </vue-grid-item>
 
         <vue-grid-item v-else fill>
-   <button @click="signOut">
+        <button @click="signOut">
             <i class="fab fa-sign-out"></i> Sign Out
           </button>
         </vue-grid-item>
@@ -30,15 +30,16 @@
 <script lang="ts">
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { IPreLoad } from '../../../server/isomorphic';
-import VueGrid from '../../shared/components/VueGrid/VueGrid';
-import VueGridItem from '../../shared/components/VueGridItem/VueGridItem';
-import VueButton from '../../shared/components/VueButton/VueButton';
-import VueGridRow from '../../shared/components/VueGridRow/VueGridRow';
-import VueModal from '../../shared/components/VueModal/VueModal';
+import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
+import VueButton from '../../shared/components/VueButton/VueButton.vue';
+import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
+import VueModal from '../../shared/components/VueModal/VueModal.vue';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 
 console.log('logging firebase', firebase, db);
+
 export default {
   metaInfo: {
     title: 'SignInModal'
@@ -118,12 +119,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" module>
 @import '../../shared/styles';
-
-.signInModal {
-  //margin-top: $nav-bar-height;
-  //min-height: 500px;
-}
 </style>

@@ -1,18 +1,18 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex                      from 'vuex';
 import { i18n }                  from '../../shared/plugins/i18n/i18n';
-import PrivacyAndTerms                   from './PrivacyAndTerms.vue';
+import Test                   from './Test.vue';
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe('PrivacyAndTerms.vue', () => {
+describe('Test.vue', () => {
 
   test('renders component', () => {
     const store = new Vuex.Store({
                                    modules: {
-                                     privacyAndTerms: {
+                                     test: {
                                        namespaced: true,
                                        getters:    {
                                          getCount: () => 0,
@@ -24,13 +24,13 @@ describe('PrivacyAndTerms.vue', () => {
                                      },
                                    },
                                  });
-    const wrapper = mount(PrivacyAndTerms, {
+    const wrapper = mount(Test, {
       store,
       localVue,
       i18n,
     });
 
-    expect(wrapper.find('h1').text()).toBe('PrivacyAndTerms');
+    expect(wrapper.find('h1').text()).toBe('Test');
   });
 
   test('should increment and decrement', () => {
@@ -40,7 +40,7 @@ describe('PrivacyAndTerms.vue', () => {
     };
     const store = new Vuex.Store({
                                    modules: {
-                                     privacyAndTerms: {
+                                     test: {
                                        namespaced: true,
                                        getters:    {
                                          getCount: () => 0,
@@ -49,7 +49,7 @@ describe('PrivacyAndTerms.vue', () => {
                                      },
                                    },
                                  });
-    const wrapper: any = mount(PrivacyAndTerms, {
+    const wrapper: any = mount(Test, {
       store,
       localVue,
       i18n,
@@ -67,10 +67,10 @@ describe('PrivacyAndTerms.vue', () => {
       dispatch: jest.fn(),
     };
 
-    PrivacyAndTerms.prefetch({ store });
+    Test.prefetch({ store });
 
     expect(store.dispatch).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(`privacyAndTerms/increment`);
+    expect(store.dispatch).toHaveBeenCalledWith(`test/increment`);
   });
 
 });

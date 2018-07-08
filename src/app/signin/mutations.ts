@@ -1,30 +1,15 @@
 import { ISigninState } from './state';
 
 export interface ISigninMutations {
-  SET_INCREMENT_PENDING(state: ISigninState, pending: boolean): void;
-
-  SET_DECREMENT_PENDING(state: ISigninState, pending: boolean): void;
-
-  SET_COUNT(state: ISigninState, count: number): void;
-
   SET_USER_DATA(state: ISigninState, userData: object): void;
 }
 
 export const SigninMutations: ISigninMutations = {
-  SET_INCREMENT_PENDING: (state: ISigninState, pending: boolean) => {
-    state.incrementPending = pending;
-  },
-  SET_DECREMENT_PENDING: (state: ISigninState, pending: boolean) => {
-    state.decrementPending = pending;
-  },
-  SET_COUNT: (state: ISigninState, count: number) => {
-    state.count = count;
-  },
   SET_USER_DATA: (state: ISigninState, userData: object) => {
     console.log('Setting user data in vuex!');
     state.userData = userData;
     console.log('User data set!', state);
-  },
+  }
 };
 
 /*

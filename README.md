@@ -6,10 +6,6 @@ Means "work" in Haitian Creole
 
 A decentralized long-term jobs market for the unbanked of Haiti.
 
-## Technology Stack
-
-- colonyJS: https://github.com/JoinColony/hackathonStarter
-
 ## Run Front-end Locally
 
 1.  Install Node.js 8.x or higher. Use [nvm](https://github.com/creationix/nvm) or [n](https://github.com/tj/n) to maintain multiple Node.js versions

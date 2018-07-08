@@ -122,9 +122,6 @@
 
                 <vue-button accent><a @click.prevent="uploadFile">Upload file</a></vue-button>
             </vue-accordion-item>
-            <vue-accordion-item title="Comments">
-              Coming Soon.
-            </vue-accordion-item>
           </vue-accordion>
         </vue-grid-item>
 
@@ -241,7 +238,7 @@ export default {
     */
   },
   computed: {
-    ...mapGetters('job', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('job', []),
     ...mapGetters('signin', ['userId']),
     addressDisabled() {
       return (
@@ -273,7 +270,7 @@ export default {
   },
   methods: {
     ...mapGetters('signin', ['userId']),
-    ...mapActions('job', ['increment', 'decrement']),
+    ...mapActions('job', []),
     fileUploaded(e) {
       console.log('file uploaded', e.target.files[0]);
       this.file = e.target.files[0];
@@ -369,13 +366,9 @@ export default {
           });
       });
     }
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('job/increment');
   }
 };
 </script>
-
 
 <style lang="scss" module>
 @import '../../shared/styles';

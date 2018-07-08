@@ -1,11 +1,3 @@
-export interface IWalletState {
-  incrementPending: boolean;
-  decrementPending: boolean;
-  count: number;
-}
+export interface IWalletState {}
 
-export const WalletDefaultState: IWalletState = {
-  incrementPending: false,
-  decrementPending: false,
-  count:            0,
-};
+export const WalletDefaultState: IWalletState = {};

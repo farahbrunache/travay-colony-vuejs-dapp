@@ -1,23 +1,23 @@
 import MockAdapter                            from 'axios-mock-adapter';
 import { HttpService }                        from '../shared/services/HttpService';
 import { ActionContext, Commit, Dispatch }    from 'vuex';
-import { PrivacyAndTermsActions }                     from './actions';
-import { PrivacyAndTermsDefaultState, IPrivacyAndTermsState } from './state';
-import { PrivacyAndTermsGetters }                     from './getters';
+import { TestActions }                     from './actions';
+import { TestDefaultState, ITestState } from './state';
+import { TestGetters }                     from './getters';
 
-describe('PrivacyAndTermsActions', () => {
-  let testContext: ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>;
+describe('TestActions', () => {
+  let testContext: ActionContext<ITestState, ITestState>;
   let mockAxios: MockAdapter;
 
   beforeEach(() => {
     testContext = {
       dispatch: jest.fn() as Dispatch,
       commit:   jest.fn() as Commit,
-      state:    PrivacyAndTermsDefaultState,
+      state:    TestDefaultState,
       getters:  {
-        ...PrivacyAndTermsGetters,
+        ...TestGetters,
       },
-    } as ActionContext<IPrivacyAndTermsState, IPrivacyAndTermsState>;
+    } as ActionContext<ITestState, ITestState>;
 
     mockAxios = new MockAdapter(HttpService);
   });
@@ -29,7 +29,7 @@ describe('PrivacyAndTermsActions', () => {
     .onPut('/counter/increment')
     .reply(200, { count: 1337 });
 
-    PrivacyAndTermsActions
+    TestActions
     .increment(testContext)
     .then(() => {
       expect(commitMock.mock.calls[0]).toEqual(['SET_INCREMENT_PENDING', true]);
@@ -46,7 +46,7 @@ describe('PrivacyAndTermsActions', () => {
     .onPut('/counter/increment')
     .reply(500);
 
-    PrivacyAndTermsActions
+    TestActions
     .increment(testContext)
     .then(() => {
       expect(commitMock.mock.calls[0]).toEqual(['SET_INCREMENT_PENDING', true]);
@@ -62,7 +62,7 @@ describe('PrivacyAndTermsActions', () => {
     .onPut('/counter/decrement')
     .reply(200, { count: 1337 });
 
-    PrivacyAndTermsActions
+    TestActions
     .decrement(testContext)
     .then(() => {
       expect(commitMock.mock.calls[0]).toEqual(['SET_DECREMENT_PENDING', true]);
@@ -79,7 +79,7 @@ describe('PrivacyAndTermsActions', () => {
     .onPut('/counter/decrement')
     .reply(500);
 
-    PrivacyAndTermsActions
+    TestActions
     .decrement(testContext)
     .then(() => {
       expect(commitMock.mock.calls[0]).toEqual(['SET_DECREMENT_PENDING', true]);

@@ -1,10 +1,10 @@
-export interface IPrivacyAndTermsState {
+export interface ITestState {
   incrementPending: boolean;
   decrementPending: boolean;
   count: number;
 }
 
-export const PrivacyAndTermsDefaultState: IPrivacyAndTermsState = {
+export const TestDefaultState: ITestState = {
   incrementPending: false,
   decrementPending: false,
   count:            0,

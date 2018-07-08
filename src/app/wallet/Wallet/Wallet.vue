@@ -15,7 +15,6 @@
           </vue-tab-item>
           </vue-tab-group>
 
-
       </vue-grid-row>
     </vue-grid>
   </div>
@@ -52,17 +51,13 @@ export default {
     VueDataTableSearch
   },
   methods: {
-    ...mapActions('wallet', ['increment', 'decrement'])
+    ...mapActions('wallet', [])
   },
   computed: {
-    ...mapGetters('wallet', ['count', 'incrementPending', 'decrementPending'])
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('wallet/increment');
+    ...mapGetters('wallet', [])
   }
 };
 </script>
-
 
 <style lang="scss" module>
 @import '../../shared/styles';

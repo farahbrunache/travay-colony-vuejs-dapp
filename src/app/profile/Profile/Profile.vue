@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.profile">
     
-        <vue-grid>
+    <vue-grid>
       <vue-grid-row>
         <vue-grid-item fill>
           <h1>Profile</h1>
@@ -128,7 +128,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('test', ['count', 'incrementPending', 'decrementPending']),
+    ...mapGetters('test', []),
     addressDisabled() {
       return (
         this.form.firstname === '' ||
@@ -158,7 +158,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('test', ['increment', 'decrement']),
+    ...mapActions('test', []),
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
@@ -173,14 +173,9 @@ export default {
       });
     }
   },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('test/increment');
-  },
   created() {
     console.log('IN PROFILE');
     this.isLoading = true;
-    // TODO Refactor this to get sponsored jobs only for this user
-    // Use user's id to find results
     db
       .collection('sponsored')
       .get()
@@ -190,7 +185,7 @@ export default {
           sponsored.push(item.data());
         });
 
-        console.log('sponsored!', sponsored);
+        console.log('Sponsored!', sponsored);
         this.sponsored = sponsored;
       })
       .catch(err => {
@@ -202,7 +197,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" module>
 @import '../../shared/styles';

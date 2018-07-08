@@ -1,11 +1,3 @@
-export interface IProfileState {
-  incrementPending: boolean;
-  decrementPending: boolean;
-  count: number;
-}
+export interface IProfileState {}
 
-export const ProfileDefaultState: IProfileState = {
-  incrementPending: false,
-  decrementPending: false,
-  count:            0,
-};
+export const ProfileDefaultState: IProfileState = {};

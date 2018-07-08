@@ -1,11 +1,3 @@
-export interface ICreateJobState {
-  incrementPending: boolean;
-  decrementPending: boolean;
-  count: number;
-}
+export interface ICreateJobState {}
 
-export const CreateJobDefaultState: ICreateJobState = {
-  incrementPending: false,
-  decrementPending: false,
-  count:            0,
-};
+export const CreateJobDefaultState: ICreateJobState = {};

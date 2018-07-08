@@ -188,7 +188,6 @@
 
         </vue-grid-row>
       </vue-grid>
-
   </div>
 </template>
 
@@ -297,7 +296,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('createJob', ['increment', 'decrement']),
+    ...mapActions('createJob', []),
     calendarChange(val) {
       console.log('val from datepicker', val);
       this.form.closingDate = val;
@@ -324,7 +323,6 @@ export default {
       this.form.deliverable.splice(i, 1);
     },
     submitHandler() {
-      // console.log(JSON.parse(JSON.stringify(this.form)));
       const form = this.form;
       const self = this;
       console.log('form', form);
@@ -392,30 +390,14 @@ export default {
       });
     },
     clearForm() {
-      /*(this.form.salary = ''),
-        (this.form.brief = ''),
-        (this.form.deliverable = ''),
-        (this.form.domain = ''),
-        (this.form.payouts = ''),
-        (this.form.role = ''),
-        (this.form.sponsoredAmount = ''),
-        (this.form.task = ''),
-        (this.form.taskId = '');*/
-
       Object.keys(this.form).forEach(key => {
         this.form[key] = '';
       });
-
-      //this.$refs.closingDatepicker.selectedDate = null;
     },
     createJob() {}
   },
   computed: {
-    ...mapGetters('createJob', [
-      'count',
-      'incrementPending',
-      'decrementPending'
-    ]),
+    ...mapGetters('createJob', []),
     ...mapGetters('signin', ['userId']),
     addressDisabled() {
       return (
@@ -446,9 +428,6 @@ export default {
       x;
       return this.hasErrors || this.hasEmptyFields;
     }
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('createJob/increment');
   },
   created() {
     this.createTask();

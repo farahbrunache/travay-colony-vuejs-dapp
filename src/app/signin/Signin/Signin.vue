@@ -8,13 +8,13 @@
         </vue-grid-item>
 
         <vue-grid-item fill>
-   <button @click="signInWithGoogle">
+            <button @click="signInWithGoogle">
             <i class="fab fa-google"></i> Login with Google
           </button>
         </vue-grid-item>
 
         <vue-grid-item fill>
-   <button @click="signOut">
+            <button @click="signOut">
             <i class="fab fa-sign-out"></i> Sign Out
           </button>
         </vue-grid-item>
@@ -34,7 +34,7 @@ import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 
-console.log('logging firebase', firebase, db);
+console.log('Logging firebase', firebase, db);
 
 export default {
   metaInfo: {
@@ -97,7 +97,6 @@ export default {
           const user = await db.collection('users').add(data);
           console.log('doc ref!', user);
         }
-
         this.user = data;
         this.saveUserInStorage(data);
         console.log('data in update, user data!', data);
@@ -108,14 +107,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('signin', ['count', 'incrementPending', 'decrementPending'])
-  },
-  prefetch: (options: IPreLoad) => {
-    return options.store.dispatch('signin/increment');
+    ...mapGetters('signin', [])
   }
 };
 </script>
-
 
 <style lang="scss" module>
 @import '../../shared/styles';
