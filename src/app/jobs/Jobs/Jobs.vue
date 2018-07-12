@@ -54,6 +54,26 @@
                 {{ amount.id }}
               </option>
             </select>
+            <select v-if="isFilteringBySkill" v-model='skill'>
+              <option>Select a Skill</option>
+              <option
+                v-for="skill in skills"
+                v-bind:value="skill.value"
+                v-bind:key="skill.id"
+              >
+                {{ skill.id }}
+              </option>
+            </select>
+            <select v-if="isFilteringByDomain" v-model='domain'>
+              <option>Select a Domain</option>
+              <option
+                v-for="domain in domains"
+                v-bind:value="domain.value"
+                v-bind:key="domain.id"
+              >
+                {{ domain.id }}
+              </option>
+            </select>
           </li>
         </ul>
       </vue-grid-item>
@@ -88,6 +108,8 @@
               <li >
                 Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
+                Domain: {{job.domain}}<br>
+                Top Desired Skill: {{job.skill}}<br>
                 Full time rate: ${{job.salary['full-time-rate']}}
                 <br>
                 <br>
@@ -178,11 +200,21 @@ export default {
       filterType: 'all',
       endRange: '1000000',
       startRange: '1',
+      skill: '',
+      domain: '',
       keyword: '',
       types: [
         {
           id: 'salary',
           title: 'Salary'
+        },
+        {
+          id: 'skill',
+          title: 'Skill'
+        },
+        {
+          id: 'domain',
+          title: 'Domain'
         }
       ],
       amounts: [
@@ -195,12 +227,48 @@ export default {
           value: '200'
         },
         {
+          id: '$400',
+          value: '400'
+        },
+        {
           id: '$600',
-          value: '600'
+          value: '400'
+        },
+        {
+          id: '$800',
+          value: '800'
         },
         {
           id: '$1000',
           value: '1000'
+        }
+      ],
+      skills: [
+        {
+          id: 'labor',
+          value: 'Labor'
+        },
+        {
+          id: 'teaching',
+          value: 'Teaching'
+        },
+        {
+          id: 'engineering',
+          value: 'Engineering'
+        }
+      ],
+      domains: [
+        {
+          id: 'enviroment',
+          value: 'Enviroment'
+        },
+        {
+          id: 'community',
+          value: 'Community'
+        },
+        {
+          id: 'education',
+          value: 'Education'
         }
       ]
     };
@@ -279,6 +347,12 @@ export default {
     },
     isFilteringBySalary() {
       return this.filterType === 'salary';
+    },
+    isFilteringBySkill() {
+      return this.filterType === 'skill';
+    },
+    isFilteringByDomain() {
+      return this.filterType === 'domain';
     },
     filteredJobs() {
       return this.filterType === 'all' ? this.jobs : this.filterJobs(this.jobs);

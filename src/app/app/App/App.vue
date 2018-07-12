@@ -28,29 +28,29 @@
             <small>{{ userId ? $t('App.nav.signout') : $t('App.nav.signin' /* Signin */) }}</small>
           </a>
         </li>
+        <li>
+          <a @click="localeSwitch('kr')">
+            <i class="fas fa-flag" />
+            <small>{{ $t('App.nav.kreyol' /* Haitian Creole */) }}</small>
+          </a>
+        </li>
+        <li>
+          <a @click="localeSwitch('fr')">
+            <i class="fas fa-flag" />
+            <small>{{ $t('App.nav.french' /* French */) }}</small>
+          </a>
+        </li>
+        <li>
+          <a @click="localeSwitch('en')">
+            <i class="fas fa-flag" />
+            <small>{{ $t('App.nav.english' /* English */) }}</small>
+          </a>
+        </li>
         <!-- <li>
           <router-link to="/components" @click.native="navBarClose">
             <i class="fas fa-puzzle-piece" />
             <small>{{ $t('App.nav.components' /* Components */) }}</small>
           </router-link>
-        </li> -->
-        <!-- <li>
-          <a @click="localeSwitch('en')">
-            <i class="fas fa-flag" />
-            <small>{{ $t('App.nav.english' /* English */) }}</small>
-          </a>
-        </li> -->
-        <!-- <li>
-          <a @click="localeSwitch('de')">
-            <i class="fas fa-flag" />
-            <small>{{ $t('App.nav.german' /* German */) }}</small>
-          </a>
-        </li> -->
-        <!-- <li>
-          <a @click="localeSwitch('pt')">
-            <i class="fas fa-flag" />
-            <small>{{ $t('App.nav.pt-BR' /* Portuguese */) }}</small>
-          </a>
         </li> -->
       </ul>
     </vue-nav-bar>

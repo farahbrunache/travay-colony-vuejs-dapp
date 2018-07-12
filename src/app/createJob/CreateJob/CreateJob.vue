@@ -24,7 +24,7 @@
           name="task"
           id="task"
           required
-          placeholder="Job Name"
+          placeholder="Job Title"
           validation="required"
           v-model="form.task" />
       </vue-grid-item>
@@ -71,48 +71,17 @@
             validation="required"
             placeholder="Job Closing Date" />
         </vue-grid-item>
-      <!-- TODO: determine how to use this -->
-      <!-- <vue-grid-item>
-        <vue-input
-          name="payoutManager"
-          id="payoutManager"
-          required
-          placeholder="Job Owner"
-          validation="required"
-          v-model="form.payoutManager" />
-      </vue-grid-item> -->
     </vue-grid-row>
 
-    <vue-input
+    <!-- <vue-input
       name="payoutEvaluator"
       id="payoutEvaluator"
       required
       placeholder="Job Reviewer"
       validation="required"
-      v-model="form.payoutEvaluator" />
+      v-model="form.payoutEvaluator" /> -->
 
-    <vue-grid-row>
-      <vue-grid-item>
-        <vue-input
-          name="domain"
-          id="domain"
-          required
-          placeholder="Job Category"
-          v-model="form.domain"
-          validation="required" />
-      </vue-grid-item>
-      <vue-grid-item>
-        <vue-input
-          name="skills"
-          id="skills"
-          required
-          placeholder="Desired Skills"
-          v-model="form.skills"
-          validation="required" />
-      </vue-grid-item>
-    </vue-grid-row>
-
-    <vue-grid-row>
+          <vue-grid-row>
       <vue-grid-item>
         <vue-input
           name="salary"
@@ -122,6 +91,32 @@
           v-model="form.salary"
           validation="required" />
       </vue-grid-item>
+      </vue-grid-row>
+
+          <vue-grid-row>
+      <vue-grid-item>
+        <vue-select
+          name="domain"
+          id="domain"
+          required
+          placeholder="Job Category"
+          v-model="form.domain"
+          :options="domainOptions"
+          validation="required" />
+      </vue-grid-item>
+      <vue-grid-item>
+        <vue-select
+          name="skill"
+          id="skill"
+          required
+          placeholder="Top Desired Skill"
+          v-model="form.skill"
+          :options="skillOptions"
+          validation="required" />
+      </vue-grid-item>
+    </vue-grid-row>
+
+      <vue-grid-row>
       <vue-grid-item>
           <vue-select
             name="payFrequency"
@@ -230,9 +225,6 @@ export default {
     VueCheckbox,
     VueDatePicker
   },
-  mounted() {
-    console.log('refs', this.$refs);
-  },
   data(): any {
     return {
       form: {
@@ -242,9 +234,6 @@ export default {
         deliverable: [],
         datePosted: '',
         payoutEvaluator: 'Dexter Morgan',
-        firstname: 'Farah',
-        domain: 'Enviroment',
-        skills: 'Labor',
         salary: '650',
         cityOfWork: 'Port-au-Prince',
         isTaskIdDisabled: true,
@@ -260,15 +249,15 @@ export default {
           value: 'none'
         },
         {
-          label: 'weekly',
+          label: 'Weekly',
           value: '52'
         },
         {
-          label: 'bi-weekly',
+          label: 'Bi-weekly',
           value: '26'
         },
         {
-          label: 'monthly',
+          label: 'Monthly',
           value: '12'
         }
       ],
@@ -290,6 +279,18 @@ export default {
         { label: 'Choose a Country', value: null },
         { label: 'Haiti', value: 'haiti' },
         { label: 'USA', value: 'us' }
+      ],
+      skillOptions: [
+        { label: 'Choose Top Desired Skill', value: null },
+        { label: 'Labor', value: 'labor' },
+        { label: 'Teaching', value: 'teaching' },
+        { label: 'Engineering', value: 'engineering' }
+      ],
+      domainOptions: [
+        { label: 'Choose a Job Category', value: null },
+        { label: 'Enviroment', value: 'enviroment' },
+        { label: 'Community', value: 'community' },
+        { label: 'Education', value: 'education' }
       ],
       isLoading: false,
       requirement: ''
@@ -333,9 +334,7 @@ export default {
         } as INotification);
         return false;
       }
-
       this.isLoading = true;
-
       const jobId = uuid.v1();
       let jobData = {
         salary: {
@@ -348,6 +347,7 @@ export default {
         brief: form.brief,
         'date-posted': new Date(),
         deliverable: form.deliverable,
+        skill: form.skill,
         domain: form.domain,
         payouts: {
           evaluator: 0,
@@ -383,7 +383,7 @@ export default {
           this.isLoading = false;
           addNotification({
             title: 'Yay!',
-            text: `Your job is now posted! Click here to see the job`,
+            text: `Your job is now posted! Click here to see the job.`,
             link: `/job/${jobId}`
           } as INotification);
         }, 500);
@@ -393,8 +393,7 @@ export default {
       Object.keys(this.form).forEach(key => {
         this.form[key] = '';
       });
-    },
-    createJob() {}
+    }
   },
   computed: {
     ...mapGetters('createJob', []),

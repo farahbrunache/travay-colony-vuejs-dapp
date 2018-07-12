@@ -1,13 +1,18 @@
 {
-  "App.core.description":
-    "an enterprise ready boilerplate for isomorphic, progressive web apps with Vue.JS",
-  "App.nav.components": "Componentes",
-  "App.nav.counter": "Contador",
-  "App.nav.docs": "Documentation",
-  "App.nav.english": "Inglês",
-  "App.nav.german": "Alemão",
-  "App.nav.home": "Início",
-  "App.nav.pt-BR": "Português",
+  "App.core.description": "Le marché des emplois à long terme d'Haïti",
+  "App.nav.components": "Components",
+  "App.nav.jobs": "Jobs",
+  "App.nav.profile": "Profile",
+  "App.nav.balance": "Balance",
+  "App.nav.wallet": "Wallet",
+  "App.nav.signup": "Signup",
+  "App.nav.signin": "Sign in",
+  "App.nav.signout": "Sign out",
+  "App.nav.createJob": "Post a Job",
+  "App.nav.kreyol": "Haitian Creole",
+  "App.nav.french": "French",
+  "App.nav.english": "Angle",
+  "App.nav.home": "Home",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",
@@ -36,7 +41,6 @@
   "components.register.submitText": "Submit",
   "components.register.subtitle": "Please fill in all required fields",
   "components.register.terms":
-    "I accept the <a href=\"/terms\">Terms and Conditions</a>",
-  "components.register.title": "Register",
-  "home.test": "this is a test!!!"
+    "I accept the <a href=\"/\">Terms and Conditions</a>",
+  "components.register.title": "Register"
 }
