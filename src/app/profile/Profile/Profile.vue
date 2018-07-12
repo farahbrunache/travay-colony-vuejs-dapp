@@ -128,37 +128,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('test', []),
-    addressDisabled() {
-      return (
-        this.form.firstname === '' ||
-        this.form.lastname === '' ||
-        this.form.email === ''
-      );
-    },
-    hasErrors() {
-      return this.errors && this.errors.items.length > 0;
-    },
-    hasEmptyFields() {
-      let hasEmptyField: boolean = false;
-
-      Object.keys(this.form).forEach((key: string) => {
-        if (
-          key !== 'newsletter' &&
-          (this.form[key] === '' || this.form[key] === false)
-        ) {
-          hasEmptyField = true;
-        }
-      });
-
-      return hasEmptyField;
-    },
-    isSubmitDisabled() {
-      return this.hasErrors || this.hasEmptyFields;
-    }
+    ...mapGetters('profile', [])
   },
   methods: {
-    ...mapActions('test', []),
+    ...mapActions('profile', []),
     onSubmit() {
       this.isLoading = true;
       console.log(JSON.parse(JSON.stringify(this.form)));
@@ -174,7 +147,6 @@ export default {
     }
   },
   created() {
-    console.log('IN PROFILE');
     this.isLoading = true;
     db
       .collection('sponsored')

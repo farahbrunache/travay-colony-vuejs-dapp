@@ -68,7 +68,7 @@ import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
 import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 import VueFooter from '../../shared/components/VueFooter/VueFooter.vue';
 import VueNotificationStack from '../../shared/components/VueNotificationStack/VueNotificationStack.vue';
-import SignInModal from '../../signInModal/SignInModal/SignInModal';
+import SignInModal from '../../signInModal/SignInModal/SignInModal.vue';
 import { loadLocaleAsync } from '../../shared/plugins/i18n/i18n';
 import { EventBus } from '../../shared/services/EventBus';
 
@@ -89,7 +89,6 @@ export default {
     ...mapActions('signin', ['saveUserInStorage']),
     ...mapActions('signInModal', ['openLoginModal']),
     signInClicked() {
-      console.log('signin modal');
       this.navBarClose();
       this.openLoginModal();
     },

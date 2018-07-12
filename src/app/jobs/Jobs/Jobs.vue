@@ -9,9 +9,6 @@
             <p>
               Here you'll find 6-month and 12-month jobs.
             </p>
-            <p>
-              <!-- Add more information here. -->
-            </p>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -27,7 +24,7 @@
             <input type="text" name="search" v-model="keyword" />
           </li>
           <li class="filter__item">Filter by:
-            <select>
+            <select v-model="filterType">
               <option value="all">All</option>
               <option
                 v-for="type in types"
@@ -37,7 +34,7 @@
                 {{ type.title }}
               </option>
             </select>
-            <select v-model='startRange'>
+            <select v-if="isFilteringBySalary" v-model='startRange'>
               <option>Select a Start range</option>
               <option
                 v-for="amount in amounts"
@@ -47,7 +44,7 @@
                 {{ amount.id }}
               </option>
             </select>
-            <select v-model='endRange'>
+            <select v-if="isFilteringBySalary" v-model='endRange'>
               <option>Select a End range</option>
               <option
                 v-for="amount in amounts"
@@ -64,8 +61,12 @@
         <br>
 
         <vue-grid-row>
-          <vue-button accent>
+          <!-- <vue-button accent>
             <router-link :to="'createJob'">Post a Job</router-link>
+             </vue-button> -->
+            <vue-button
+            class="sponsor-btn--container" accent>
+              <a style="color: white !important;" @click.prevent.stop="e => createJobClickedHandler()" class="remove-hyperlink">Post a Job</a>
              </vue-button>
         </vue-grid-row>
         <br>
@@ -79,7 +80,7 @@
       <vue-grid-row>
         <vue-grid-item>
         <hr>      
-          <vue-panel v-for="job in jobs" v-if="filterJob(job)" v-bind:key="job.taskId">
+          <vue-panel v-for="job in filteredJobs" v-bind:key="job.taskId">
             <!-- <vue-panel-header title="Title" subtitle="subtitle"
                               image="https://avatars2.githubusercontent.com/u/1667598?s=460&v=4" /> -->
             <vue-panel-body>
@@ -105,7 +106,7 @@
                 <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" disabled/>
                 <label for="oneyear">1 year</label>
                 <br>
-                Date Posted: {{job['date-posted']}}<br>
+                Date Posted: {{ job['date-posted'] | moment }}<br>
               </li>
             </ul>        
             </vue-panel-body>    
@@ -114,8 +115,8 @@
               <router-link :to="`/job/${job.taskId}`" class="remove-hyperlink">Learn More</router-link>
               </vue-button>
 
-              <vue-button accent>
-                  <a @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" class="remove-hyperlink">Sponsor this Job</a>
+              <vue-button class="sponsor-btn--container" accent>
+                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" class="remove-hyperlink">Sponsor this Job</a>
              </vue-button>
 
             </vue-panel-footer>
@@ -141,11 +142,14 @@ import VuePanel from '../../shared/components/VuePanel/VuePanel.vue';
 import VuePanelHeader from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
 import VuePanelBody from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
 import VuePanelFooter from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
+
 import axios from 'axios';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
+import moment from 'moment';
+
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
 
 export default {
@@ -171,6 +175,7 @@ export default {
       selectedJobToSponsorId: null,
       showSponsoredModal: false,
       posted: '',
+      filterType: 'all',
       endRange: '1000000',
       startRange: '1',
       keyword: '',
@@ -200,9 +205,31 @@ export default {
       ]
     };
   },
+  watch: {
+    filterType(selectedValue, oldValue) {
+      console.log('filter type value changed', selectedValue, oldValue);
+    }
+  },
+  // TODO refactor to a service
+  filters: {
+    moment: function(date: any) {
+      return moment(date).format('MMMM Do YYYY');
+    }
+  },
   methods: {
     ...mapActions('jobs', []),
     ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
+    moment: function() {
+      return moment();
+    },
+    createJobClickedHandler() {
+      // TODO after sign in redirect to the intended target page
+      if (!this.userId) {
+        this.openLoginModal();
+        return;
+      }
+      this.$router.push('createJob');
+    },
     sponsorJobClickedHandler(taskId) {
       if (!this.userId) {
         this.openLoginModal();
@@ -227,6 +254,18 @@ export default {
           parseInt(job['salary']['full-time-rate']) >=
             parseInt(this.startRange));
       return result;
+    },
+    filterJobs(jobs: any) {
+      return jobs.filter((job: any, index: Number) => {
+        let keywordSearchRegEx = RegExp(this.keyword, 'gi');
+        const result =
+          keywordSearchRegEx.test(job.brief) &&
+          (parseInt(job['salary']['full-time-rate']) <=
+            parseInt(this.endRange) &&
+            parseInt(job['salary']['full-time-rate']) >=
+              parseInt(this.startRange));
+        return result;
+      });
     }
   },
   mounted() {},
@@ -237,6 +276,12 @@ export default {
       return (
         this.jobs.find(job => job.taskId === this.selectedJobToSponsorId) || {}
       );
+    },
+    isFilteringBySalary() {
+      return this.filterType === 'salary';
+    },
+    filteredJobs() {
+      return this.filterType === 'all' ? this.jobs : this.filterJobs(this.jobs);
     }
   },
   created() {
@@ -253,8 +298,6 @@ export default {
   }
 };
 </script>
-
-
 <style lang="scss" module>
 @import '../../shared/styles';
 

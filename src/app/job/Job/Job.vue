@@ -15,43 +15,72 @@
           task: this.job.task
         })"></sponsor-modal>
 
+        <p v-if="job.role && userId">
+          <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
+            <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
+            Icon
+          </a>
+        </p>
+
         <vue-grid-item fill>
           <vue-panel >
             <vue-panel-header>
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
             <vue-panel-body>
-              <p v-if="job.role && userId">
-              <a v-if="job.role['0'] === userId" @click.prevent.stop="e => editJob(job.taskId)">
-                <i class="fa fa-edit edit-icon" @click="isEditing = !isEditing" v-if="!isEditing"></i>
-              </a>
-              </p>
+
             <ul>
               <li v-if="job.salary">
-                Job: {{job.task}}<br>
-                Description: {{job.brief}}<br>
-                Full time rate: ${{job.salary['full-time-rate']}}
-                <!-- TODO: fix edit field visibiliy when editing -->
-                <!-- <input type="text" ref="full-time-rate" :value="full-time-rate"               :disabled="!isEditing"
-                    :class="{view: !isEditing}">  -->
+                Job: {{job.task}}><br>
+                <template v-if="isEditing">
+                  Description:<br/>
+                  <input 
+                    id="job-description" 
+                    type="text" 
+                    v-model="job.brief"/> <br/>
+
+                  Full time rate: <br/>
+                  <input 
+                    id="job-salary-rate"
+                    type="text"
+                    v-model="job.salary['full-time-rate']"/> <br/>
+
+                </template>
+                <template v-else>
+                  Description: {{job.brief}}<br>
+                  Full time rate: ${{job.salary['full-time-rate']}}
+                </template>
+                
                 <br>
-                <br>
+                <template v-if="isEditing">
+                  <br>
                 Pay frequency: 
-                <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" disabled/>
+                <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
                 <label for="weekly">Weekly</label>
-                <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" disabled/>
+                <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
                 <label for="bi-weekly">Bi-weekly</label>
-                <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" disabled/>
+                <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
                 <label for="monthly">Monthly</label>
                 <br>
+                </template>
+                <template v-else>
+                  Pay frequency: {{job.salary['pay-frequency'].label}}
+                </template>
+
+
                 <br>
-                Term of employment: 
-                <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" disabled/>
-                <label for="sixmonth">6 month</label>
-                <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" disabled/>
-                <label for="oneyear">1 year</label>
+                <template v-if="isEditing">
+                  Term of employment: 
+                  <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" :disabled="!isJobManager"/>
+                  <label for="sixmonth">6 month</label>
+                  <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" :disabled="!isJobManager"/>
+                  <label for="oneyear">1 year</label>
+                </template>
+                <template v-else>
+                  Term of employment: {{ job['terms-of-employment'] }}
+                </template>
                 <br>
-                Date Posted: {{job['date-posted']}}<br>
+                Date Posted: {{ job['date-posted'] | moment }}<br>
               </li>
             </ul>
             </vue-panel-body>
@@ -69,6 +98,9 @@
             <vue-accordion-item
               title="Claim">
               <h3>Requirements</h3>
+              <template v-if="isEditing">
+
+              </template>
               <ul>
                 <li>Requirement 1</li>
                 <li>Requirement 2</li>
@@ -77,6 +109,7 @@
               <vue-grid-row>
                 <vue-grid-item>
                   <vue-checkbox
+                    v-if="isJobWorker"
                     name="acceptTerms"
                     id="acceptTerms"
                     v-model="form.acceptTerms"
@@ -124,7 +157,6 @@
             </vue-accordion-item>
           </vue-accordion>
         </vue-grid-item>
-
     <br>
       </vue-grid-row>
     </vue-grid>
@@ -159,6 +191,7 @@ import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
 const firebaseStorage = firebase.storage();
+import moment from 'moment';
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -203,6 +236,12 @@ export default {
       loadingText: ''
     };
   },
+  // TODO refactor to a service
+  filters: {
+    moment: function(date: any) {
+      return moment(date).format('MMMM Do YYYY');
+    }
+  },
   mounted() {
     const taskId = this.$route.params.id;
     console.log('job id', this.userId);
@@ -240,6 +279,12 @@ export default {
   computed: {
     ...mapGetters('job', []),
     ...mapGetters('signin', ['userId']),
+    isJobManager() {
+      return this.userId === this.job.role[0];
+    },
+    isJobWorker() {
+      return this.userId === this.job.role[2];
+    },
     addressDisabled() {
       return (
         this.form.firstname === '' ||
@@ -280,7 +325,6 @@ export default {
         const job = response.data.jobs.filter(
           (job: any) => job.taskId == this.$route.params.taskId
         );
-        console.log(job);
         if (job.length > 0) {
           this.job = job[0];
         }
@@ -300,7 +344,7 @@ export default {
         }, 500);
       });
     },
-    onClaim(docId) {
+    onClaim(docId: any) {
       const taskId = this.$route.params.id;
       db
         .collection('jobs')
@@ -319,10 +363,7 @@ export default {
         }, 700);
       });
     },
-    editJob() {
-      this.job.salary['full-time-rate'] = this.$refs['full-time-rate'].value;
-      this.isEditing = !this.isEditing;
-    },
+    editJob() {},
     uploadFile() {
       return new Promise((resolve, reject) => {
         const self = this;

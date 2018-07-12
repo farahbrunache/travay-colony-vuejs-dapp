@@ -370,7 +370,7 @@ export default {
         .collection('jobs')
         .add(jobData)
         .then(function(docref) {
-          self.createTask(); // ColonyJS + IPFS
+          // self.createTask(); // ColonyJS + IPFS
           self.clearForm();
           console.log('ref', docref);
         })
