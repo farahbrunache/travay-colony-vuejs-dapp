@@ -26,9 +26,7 @@ exports.init = async () => {
 
 exports.saveTaskSpecification = async spec => {
   const data = Buffer.from(JSON.stringify(spec));
-  console.log('In save task specification', node, data);
   const result = await node.files.add(data);
-  console.log('Result!', result);
   return result[0].hash;
 };
 

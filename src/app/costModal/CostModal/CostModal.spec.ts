@@ -1,31 +1,34 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { i18n } from '../../shared/plugins/i18n/i18n';
-import Signin from './Signin.vue';
+import CostModal from './CostModal.vue';
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe('Signin.vue', () => {
+describe('CostModal.vue', () => {
   test('renders component', () => {
     const store = new Vuex.Store({
       modules: {
-        signin: {
+        costModal: {
           namespaced: true,
           getters: {
             getCount: () => 0
           },
-          actions: {}
+          actions: {
+            increment: jest.fn(),
+            decrement: jest.fn()
+          }
         }
       }
     });
-    const wrapper = mount(Signin, {
+    const wrapper = mount(CostModal, {
       store,
       localVue,
       i18n
     });
 
-    expect(wrapper.find('h1').text()).toBe('Signin');
+    expect(wrapper.find('h1').text()).toBe('CostModal');
   });
 });

@@ -7,10 +7,15 @@
   "App.nav.signin": "Sign in",
   "App.nav.signout": "Sign out",
   "App.nav.createJob": "Post a Job",
-  "App.nav.kreyol": "Haitian Creole",
-  "App.nav.french": "French",
+  "App.nav.kreyol": "Kreyol",
+  "App.nav.french": "Francias",
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
+  "App.job.jobClaimed":
+    "Job confirmed successfully! You'll be notified by the manager shortly",
+  "App.job.jobPayout": "Payout Complete. Your account is being debited.",
+  "App.createJob.salaryPayoutDisclaimer":
+    "Note: It is free to a post job. When a job is paid out we collect 2% of the salary amount.",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",

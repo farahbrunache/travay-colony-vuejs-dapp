@@ -7,10 +7,11 @@ import { ProfileRoutes } from './profile/routes';
 import { JobsRoutes } from './jobs/routes';
 import { JobRoutes } from './job/routes';
 import { CreateJobRoutes } from './createJob/routes';
-import { SigninRoutes } from './signin/routes';
 import { WalletRoutes } from './wallet/routes';
 import { SignInModalRoutes } from './signInModal/routes';
 import { TestRoutes } from './test/routes';
+import { AdminRoutes } from './admin/routes';
+import { CostModalRoutes } from './costModal/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -25,10 +26,11 @@ export const router: VueRouter = new VueRouter({
     ...JobsRoutes,
     ...JobRoutes,
     ...CreateJobRoutes,
-    ...SigninRoutes,
     ...WalletRoutes,
     ...SignInModalRoutes,
-    ...TestRoutes
+    ...TestRoutes,
+    ...AdminRoutes,
+    ...CostModalRoutes
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

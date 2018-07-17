@@ -9,6 +9,14 @@
     
         <vue-panel>
           <vue-panel-header title="First Name" subtitle="Last Name" />
+
+        <p v-if="job.role && userId">
+          <a v-if="job.role === userId" @click.prevent.stop="e => {}">
+            <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
+            Icon
+          </a>
+        </p>
+
           <vue-panel-body>
             <p>Phone Number</p>
             <p>Email Address</p>
@@ -124,7 +132,9 @@ export default {
         { label: 'Other', value: 'other' }
       ],
       isLoading: false,
-      sponsored: false
+      sponsored: false,
+      isEditing: false,
+      job: {}
     };
   },
   computed: {
@@ -156,8 +166,6 @@ export default {
         snapshot.forEach(item => {
           sponsored.push(item.data());
         });
-
-        console.log('Sponsored!', sponsored);
         this.sponsored = sponsored;
       })
       .catch(err => {

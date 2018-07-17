@@ -36,7 +36,7 @@ const example = async () => {
   // Let's deploy a new ERC20 token for our Colony.
   // You could also skip this step and use a pre-existing/deployed contract.
   const tokenAddress = await networkClient.createToken({
-    name: 'Travay Colony',
+    name: 'Travay',
     symbol: 'TRAVAY'
   });
   console.log('Token address: ' + tokenAddress);

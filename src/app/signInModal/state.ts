@@ -1,7 +1,9 @@
 export interface ISignInModalState {
   isOpen: boolean;
+  userData: object;
 }
 
 export const SignInModalDefaultState: ISignInModalState = {
-  isOpen: false
+  isOpen: false,
+  userData: null
 };

@@ -13,13 +13,10 @@ var config = {
 let firebaseApp;
 let firestore;
 try {
-  // console.log('Will try to initialise firebase');
   if (!firebase.apps.length) {
-    // console.log('Firabse not initialised yet! Initialising!');
     firebaseApp = firebase.initializeApp(config);
     firestore = firebaseApp.firestore();
   } else {
-    // console.log('Firebase already initialised! Not initialising!');
     firebaseApp = firebase.app();
     firestore = firebaseApp.firestore();
   }

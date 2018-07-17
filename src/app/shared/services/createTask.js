@@ -1,14 +1,14 @@
 const ecp = require('./ecp');
 
-const example = async colonyClient => {
+const createTask = async colonyClient => {
   // Initialise the Extended Colony Protocol
-  console.log('Colony client initialised');
+
   await ecp.init();
-  console.log('ECP initialised');
+
   // Create a task!
   const specificationHash = await ecp.saveTaskSpecification({
-    title: this.task,
-    description: this.brief
+    title: 'newtask',
+    description: 'taskdesc'
   });
 
   // Unique, immutable hash on IPFS
@@ -21,10 +21,10 @@ const example = async colonyClient => {
 
   // Let's take a look at the newly created task
   const task = await colonyClient.getTask.call({ taskId });
-  console.log('task added', task);
+  console.log(task);
 
   // Do some cleanup
   await ecp.stop();
 };
 
-module.exports = example;
+module.exports = createTask;

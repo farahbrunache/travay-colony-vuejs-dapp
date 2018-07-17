@@ -12,26 +12,29 @@
         @sponsorSubmit="amount => sponsorSubmitHandler({
           amount,
           taskId: this.job.taskId,
-          task: this.job.task
+          task: this.job.task,
+          job: this.job
         })"></sponsor-modal>
 
-        <p v-if="job.role && userId">
+        <vue-grid-item fill>
+          <vue-panel >
+            <vue-panel-header title="Details">
+
+             <p v-if="job.role && userId">
           <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
             <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
             Icon
           </a>
         </p>
 
-        <vue-grid-item fill>
-          <vue-panel >
-            <vue-panel-header>
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
             <vue-panel-body>
 
             <ul>
               <li v-if="job.salary">
-                Job: {{job.task}}><br>
+                Job: {{job.task}}<br>
+
                 <template v-if="isEditing">
                   Description:<br/>
                   <input 
@@ -39,30 +42,50 @@
                     type="text" 
                     v-model="job.brief"/> <br/>
 
+                    Domain:<br/>
+                    <input
+                    id="domain"
+                    type="text"
+                    v-model="job.domain" /><br>
+
+                    Top Desired Skill:<br/>
+                    <input
+                    id="skill"
+                    type="text"
+                    v-model="job.skill" /><br>
+
                   Full time rate: <br/>
                   <input 
                     id="job-salary-rate"
                     type="text"
                     v-model="job.salary['full-time-rate']"/> <br/>
-
+                    <br>
+                    <vue-button primary>
+                      Post Changes
+                    </vue-button>
                 </template>
+
                 <template v-else>
                   Description: {{job.brief}}<br>
-                  Full time rate: ${{job.salary['full-time-rate']}}
+                  Domain: {{job.domain}}<br>
+                  Top Desired Skill: {{job.skill}}<br>
+                  Full time rate: ${{job.salary['full-time-rate']}}<br>
+                  Sponsored amount: ${{ job.sponsoredAmount }}
                 </template>
                 
                 <br>
-                <template v-if="isEditing">
-                  <br>
+                <template v-if="isEditing"><br>
                 Pay frequency: 
                 <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
                 <label for="weekly">Weekly</label>
+
                 <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
                 <label for="bi-weekly">Bi-weekly</label>
+
                 <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
-                <label for="monthly">Monthly</label>
-                <br>
+                <label for="monthly">Monthly</label><br>
                 </template>
+
                 <template v-else>
                   Pay frequency: {{job.salary['pay-frequency'].label}}
                 </template>
@@ -86,6 +109,21 @@
             </vue-panel-body>
             
             <vue-panel-footer>
+
+              <vue-grid-row>
+                <vue-grid-item>
+    <vue-button primary v-userRole.signedIn.manager="{role: job.role}">
+                Post Changes
+              </vue-button>
+                </vue-grid-item>
+                <br>
+              <br>
+                <vue-grid-item>
+    <vue-button warn v-userRole.signedIn.manager="{role: job.role}">
+                Cancel Job
+              </vue-button>
+                </vue-grid-item>
+              </vue-grid-row>
               
             </vue-panel-footer>
             <br>
@@ -95,21 +133,32 @@
 
         <vue-grid-item fill>
           <vue-accordion multiple>
-            <vue-accordion-item
-              title="Claim">
-              <h3>Requirements</h3>
-              <template v-if="isEditing">
+            <vue-accordion-item title="Claim">
 
-              </template>
-              <ul>
-                <li>Requirement 1</li>
-                <li>Requirement 2</li>
-              </ul>
-              <p>Claiming this position is to accpet the requirements and legal requirements.</p>
+      <p v-if="job.role && userId">
+          <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
+            <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
+            Icon
+          </a>
+        </p>
+
+              <h3>Requirements</h3>
+
+                  <template v-if="isEditing">
+                  Requirements: 
+                  <input
+                  id="deliverable"
+                  type="text"
+                  v-model="job.deliverable" />
+                </template>
+                <template v-else>
+                    <p>{{ job.deliverable }}</p>
+                </template>
+              
               <vue-grid-row>
-                <vue-grid-item>
+                <vue-grid-item v-if="isJobWorker">
+                  <p>Claiming this position is to accpet the requirements and legal requirements.</p>
                   <vue-checkbox
-                    v-if="isJobWorker"
                     name="acceptTerms"
                     id="acceptTerms"
                     v-model="form.acceptTerms"
@@ -119,43 +168,71 @@
               </vue-grid-row>
               <vue-grid-row>
                     <vue-grid-item v-if="job.role">
-                    <vue-button
+                    <vue-button primary
                       v-if="job.role['0'] !== userId"
                       @click.prevent.stop="e => onClaim(job.id)"
-                     primary>Claim</vue-button>
+                      v-userRole.signedIn.canClaim="{role: job.role}">
+                     Claim
+                     </vue-button>
                 </vue-grid-item>
               </vue-grid-row>
 
               </vue-accordion-item>
+
             <vue-accordion-item title="Sponsor this Job">
-              <p>Coming Soon.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               <br>
-              <vue-button accent>
-                  <a @click.prevent.stop="e => showSponsoredModal = true" id="make-hyperlink-white">Sponsor this Job</a>
+              <vue-button id="make-hyperlink-white" v-userRole.canSponsor="{role: job.role}" accent>
+                  <a @click.prevent.stop="e => showSponsoredModal = true"  style="color: white;"
+                    >Sponsor this Job</a>
              </vue-button>
             </vue-accordion-item>
 
             <vue-accordion-item title="Upload Proof of Work">
-                <div class="input-group">
-                    <!--<input type="text" class="form-control" placeholder="Upload an Image" v-model="file.name" aria-label="post image" aria-describedby="basic-addon2">-->
-                    <div class="input-group-append">
+
+              <vue-grid-row>
+                    <vue-grid-item>
                       <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
                         Browse
                         <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
                       </span>
-                    </div>
-                </div>
                   <div>
-                    <img class="img-responsive" :src="image_preview" alt="" style="width: 200px; height:  200px;">
+                    <img class="img-responsive" :src="imagePreview" alt="" style="width:500px; height:500px;">
                   </div>
 
                   <div>
-                    <p>{{loadingText}}</p>
+                    <p>{{ loadingText }}</p>
                   </div>
 
-                <vue-button accent><a @click.prevent="uploadFile">Upload file</a></vue-button>
+                <vue-button accent
+                v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
+                <a @click.prevent="uploadFile" style="color: white;">
+                  Upload file</a>
+                  </vue-button>
+              </vue-grid-item>
+              </vue-grid-row>
             </vue-accordion-item>
+
+            <vue-accordion-item title="Approve Work">
+          
+              <vue-grid-row>
+                    <vue-grid-item>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </vue-grid-item>
+              </vue-grid-row>
+
+              <vue-grid-row>
+                    <vue-grid-item v-if="job.role">
+                    <vue-button
+                      v-if="job.role['0'] == userId"
+                      @click.prevent.stop="e => onPayout(job.id)"
+                     primary>Payout Job</vue-button>
+                </vue-grid-item>
+              </vue-grid-row>
+            </vue-accordion-item>
+
           </vue-accordion>
+
         </vue-grid-item>
     <br>
       </vue-grid-row>
@@ -190,6 +267,7 @@ import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
+import { userRole } from '../../shared/directives/userRole.js';
 const firebaseStorage = firebase.storage();
 import moment from 'moment';
 
@@ -231,12 +309,15 @@ export default {
       showSponsoredModal: false,
       isEditing: false,
       file: '',
+      fileName: '',
       image: '',
-      image_preview: '',
-      loadingText: ''
+      imagePreview: '',
+      images: [],
+      loadingText: '',
+      isJobManager: false,
+      isJobWorker: false
     };
   },
-  // TODO refactor to a service
   filters: {
     moment: function(date: any) {
       return moment(date).format('MMMM Do YYYY');
@@ -244,7 +325,6 @@ export default {
   },
   mounted() {
     const taskId = this.$route.params.id;
-    console.log('job id', this.userId);
     db
       .collection('jobs')
       .where('taskId', '==', taskId)
@@ -278,7 +358,7 @@ export default {
   },
   computed: {
     ...mapGetters('job', []),
-    ...mapGetters('signin', ['userId']),
+    ...mapGetters('signInModal', ['userId']),
     isJobManager() {
       return this.userId === this.job.role[0];
     },
@@ -314,11 +394,21 @@ export default {
     }
   },
   methods: {
-    ...mapGetters('signin', ['userId']),
+    ...mapGetters('signInModal', ['userId']),
     ...mapActions('job', []),
     fileUploaded(e) {
       console.log('file uploaded', e.target.files[0]);
       this.file = e.target.files[0];
+
+      if (this.file) {
+        const reader = new FileReader();
+
+        reader.onload = e => {
+          this.imagePreview = e.target.result;
+        };
+
+        reader.readAsDataURL(this.file);
+      }
     },
     getJob() {
       axios.get('/jobs.json').then((response: any) => {
@@ -332,8 +422,6 @@ export default {
     },
     onSubmit() {
       this.isLoading = true;
-      console.log(JSON.parse(JSON.stringify(this.form)));
-
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
@@ -357,8 +445,28 @@ export default {
           this.isLoading = false;
           addNotification({
             title: 'Yay!',
-            text:
-              "Job confirmed successfully! You'll be notify by the manager shortly"
+            text: this.$t(
+              'App.job.jobClaimed'
+            ) /* Job confirmed successfully! You'll be notified by the manager shortly. */
+          } as INotification);
+        }, 700);
+      });
+    },
+    onPayout(docId: any) {
+      const taskId = this.$route.params.id;
+      db
+        .collection('jobs')
+        .doc(docId)
+        .update({});
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+
+          addNotification({
+            title: 'Your Worker Thanks You!',
+            text: this.$t(
+              'App.job.jobPayout' /* Payout Complete. Your account is being debited. */
+            )
           } as INotification);
         }, 700);
       });

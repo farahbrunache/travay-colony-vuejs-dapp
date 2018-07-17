@@ -9,10 +9,11 @@ import { ProfileModule } from './profile/module';
 import { JobsModule } from './jobs/module';
 import { JobModule } from './job/module';
 import { CreateJobModule } from './createJob/module';
-import { SigninModule } from './signin/module';
 import { WalletModule } from './wallet/module';
 import { SignInModalModule } from './signInModal/module';
 import { TestModule } from './test/module';
+import { AdminModule }            from './admin/module';
+import { CostModalModule }            from './costModal/module';
 
 Vue.use(Vuex);
 
@@ -60,9 +61,10 @@ store.registerModule(['profile'], ProfileModule, { preserveState: true });
 store.registerModule(['jobs'], JobsModule, { preserveState: true });
 store.registerModule(['job'], JobModule, { preserveState: true });
 store.registerModule(['createJob'], CreateJobModule, { preserveState: true });
-store.registerModule(['signin'], SigninModule, { preserveState: true });
 store.registerModule(['wallet'], WalletModule, { preserveState: true });
 store.registerModule(['signInModal'], SignInModalModule, {
   preserveState: true
 });
 store.registerModule(['test'], TestModule, { preserveState: true });
+store.registerModule(['admin'], AdminModule, { preserveState: true });
+store.registerModule(['costModal'], CostModalModule, { preserveState: true });

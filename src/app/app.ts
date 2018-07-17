@@ -1,17 +1,18 @@
-import Vue           from 'vue';
-import VueI18n       from 'vue-i18n';
-import VeeValidate   from 'vee-validate';
-import { Store }     from 'vuex';
-import { sync }      from 'vuex-router-sync';
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import VeeValidate from 'vee-validate';
+import { Store } from 'vuex';
+import { sync } from 'vuex-router-sync';
 import { VueRouter } from 'vue-router/types/router';
-import { i18n }      from './shared/plugins/i18n/i18n';
-import { store }     from './store';
-import { router }    from './router';
-import { IState }    from './state';
-import App           from './app/App/App.vue';
+import { i18n } from './shared/plugins/i18n/i18n';
+import { store } from './store';
+import { router } from './router';
+import { IState } from './state';
+import App from './app/App/App.vue';
+import { userRole } from './shared/directives/userRole.js';
 
 Vue.use(VeeValidate, { inject: false });
-
+Vue.directive('userRole', userRole);
 export interface IApp {
   app: Vue;
   router: VueRouter;
@@ -21,14 +22,12 @@ export interface IApp {
 
 export const createApp = (): IApp => {
   sync(store, router);
-  const app: Vue = new Vue(
-    {
-      router,
-      store,
-      i18n,
-      render: (h) => h(App),
-    },
-  );
+  const app: Vue = new Vue({
+    router,
+    store,
+    i18n,
+    render: h => h(App)
+  });
 
   return { app, router, store, i18n };
 };

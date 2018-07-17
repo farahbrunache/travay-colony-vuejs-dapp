@@ -65,7 +65,7 @@
               </option>
             </select>
             <select v-if="isFilteringByDomain" v-model='domain'>
-              <option>Select a Domain</option>
+              <option value="">Select a Domain</option>
               <option
                 v-for="domain in domains"
                 v-bind:value="domain.value"
@@ -137,7 +137,9 @@
               <router-link :to="`/job/${job.taskId}`" class="remove-hyperlink">Learn More</router-link>
               </vue-button>
 
-              <vue-button class="sponsor-btn--container" accent>
+              <vue-button v-userRole.canSponsor="{
+                role: job.role
+              }" class="sponsor-btn--container" accent>
                   <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" class="remove-hyperlink">Sponsor this Job</a>
              </vue-button>
 
@@ -164,6 +166,7 @@ import VuePanel from '../../shared/components/VuePanel/VuePanel.vue';
 import VuePanelHeader from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
 import VuePanelBody from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
 import VuePanelFooter from '../../shared/components/VuePanel/VuePanelFooter/VuePanelFooter.vue';
+import { userRole } from '../../shared/directives/userRole.js';
 
 import axios from 'axios';
 import firebase from 'firebase';
@@ -171,8 +174,8 @@ import db from '../../firebaseinit';
 import SponsorModal from '../../SponsorModal/SponsorModal.vue';
 import { uuid } from 'vue-uuid';
 import moment from 'moment';
-
 import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
+import { directive } from 'vee-validate';
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -276,9 +279,15 @@ export default {
   watch: {
     filterType(selectedValue, oldValue) {
       console.log('filter type value changed', selectedValue, oldValue);
+      this.filterJobs();
+    },
+    keyword(keyword) {
+      this.filterJobs(keyword);
+    },
+    domain(domain) {
+      this.filterJobs();
     }
   },
-  // TODO refactor to a service
   filters: {
     moment: function(date: any) {
       return moment(date).format('MMMM Do YYYY');
@@ -314,31 +323,59 @@ export default {
       });
       this.jobs = result;
     },
-    filterJob(job: any) {
-      let keywordSearchRegEx = RegExp(this.keyword, 'gi');
-      const result =
-        keywordSearchRegEx.test(job.brief) &&
-        (parseInt(job['salary']['full-time-rate']) <= parseInt(this.endRange) &&
-          parseInt(job['salary']['full-time-rate']) >=
-            parseInt(this.startRange));
-      return result;
-    },
-    filterJobs(jobs: any) {
-      return jobs.filter((job: any, index: Number) => {
-        let keywordSearchRegEx = RegExp(this.keyword, 'gi');
-        const result =
+    filterJobs(keyword: string, jobs: any) {
+      console.log('filtering in filterJobs', keyword);
+      if (!Reflect.has(this.$options, 'originalJobs')) return [];
+      const jobs = this.$options.originalJobs.reduce((acc, job) => {
+        console.log(
+          'Checking the domain',
+          this.isFilteringByDomain,
+          this.domain
+        );
+        if (this.isFilteringByDomain && this.domain) {
+          console.log('Will filter by domain');
+          if (job.domain.toLowerCase() !== this.domain.toLowerCase()) {
+            console.log('Job should not be added!');
+            return acc;
+          }
+        }
+
+        let keywordSearchRegEx = RegExp(keyword, 'gi');
+        let valid =
           keywordSearchRegEx.test(job.brief) &&
           (parseInt(job['salary']['full-time-rate']) <=
             parseInt(this.endRange) &&
             parseInt(job['salary']['full-time-rate']) >=
               parseInt(this.startRange));
-        return result;
-      });
+        if (valid) acc.push(job);
+        return acc;
+      }, []);
+
+      this.jobs = jobs;
+
+      /*if (this.isFilteringByDomain && this.domain) {
+        return this.$options.originalJobs.filter(job => {
+          console.log('job domain', job.domain, this.domain);
+          return job.domain.toLowerCase() === this.domain.toLowerCase();
+        });
+      }
+      this.jobs = this.$options.originalJobs.filter(
+        (job: any, index: Number) => {
+          let keywordSearchRegEx = RegExp(keyword, 'gi');
+          return (
+            keywordSearchRegEx.test(job.brief) &&
+            (parseInt(job['salary']['full-time-rate']) <=
+              parseInt(this.endRange) &&
+              parseInt(job['salary']['full-time-rate']) >=
+                parseInt(this.startRange))
+          );
+        }
+      );*/
     }
   },
   mounted() {},
   computed: {
-    ...mapGetters('signin', ['userId']),
+    ...mapGetters('signInModal', ['userId']),
     ...mapGetters('jobs', []),
     jobToSponsor() {
       return (
@@ -355,7 +392,7 @@ export default {
       return this.filterType === 'domain';
     },
     filteredJobs() {
-      return this.filterType === 'all' ? this.jobs : this.filterJobs(this.jobs);
+      return this.jobs;
     }
   },
   created() {
@@ -368,6 +405,7 @@ export default {
           jobs.push(job.data());
         });
         this.jobs = jobs;
+        this.$options.originalJobs = jobs;
       });
   }
 };

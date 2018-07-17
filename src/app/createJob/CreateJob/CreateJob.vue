@@ -41,6 +41,7 @@
           v-model="form.brief" />
       </vue-grid-item>
       </vue-grid-row>
+
       <vue-grid-row>
       <vue-grid-item>
         <vue-input
@@ -61,6 +62,7 @@
       </p>
     </vue-grid-row>
 
+
     <vue-grid-row>
         <vue-grid-item class="vueGridItem">
           <vue-date-picker
@@ -73,15 +75,19 @@
         </vue-grid-item>
     </vue-grid-row>
 
-    <!-- <vue-input
+      <vue-grid-row>
+      <vue-grid-item>
+    <vue-input
       name="payoutEvaluator"
       id="payoutEvaluator"
       required
       placeholder="Job Reviewer"
       validation="required"
-      v-model="form.payoutEvaluator" /> -->
+      v-model="form.payoutEvaluator" />
+        </vue-grid-item>
+    </vue-grid-row>
 
-          <vue-grid-row>
+    <vue-grid-row>
       <vue-grid-item>
         <vue-input
           name="salary"
@@ -90,10 +96,13 @@
           placeholder="Salary"
           v-model="form.salary"
           validation="required" />
+          {{ $t('App.createJob.salaryPayoutDisclaimer' /* Note: It is free to post jobs. When a job is paid out we collect 2% of the salary amount. */) }}
+          <br>
+          <p>Based on the salary you entered above the worker would receive {{ estimatedWorkerPayout }} </p>
       </vue-grid-item>
       </vue-grid-row>
 
-          <vue-grid-row>
+    <vue-grid-row>
       <vue-grid-item>
         <vue-select
           name="domain"
@@ -201,14 +210,17 @@ import {
   addNotification,
   INotification
 } from '../../shared/components/VueNotificationStack/utils';
-import { colonyMixin } from '../../shared/mixins/mixins';
+import {
+  colonyCallersMixin,
+  colonySendersMixin
+} from '../../shared/mixins/mixins';
 import { uuid } from 'vue-uuid';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 import { AssertionError } from 'assert';
 
 export default {
-  mixins: [colonyMixin],
+  mixins: [colonyCallersMixin, colonySendersMixin],
   metaInfo: {
     title: 'CreateJob'
   },
@@ -368,7 +380,8 @@ export default {
       };
       db
         .collection('jobs')
-        .add(jobData)
+        .doc(jobId)
+        .set(jobData)
         .then(function(docref) {
           // self.createTask(); // ColonyJS + IPFS
           self.clearForm();
@@ -397,7 +410,10 @@ export default {
   },
   computed: {
     ...mapGetters('createJob', []),
-    ...mapGetters('signin', ['userId']),
+    ...mapGetters('signInModal', ['userId']),
+    estimatedWorkerPayout: function() {
+      return this.form.salary - this.form.salary * 0.02;
+    },
     addressDisabled() {
       return (
         this.form.firstname === '' ||
@@ -427,9 +443,6 @@ export default {
       x;
       return this.hasErrors || this.hasEmptyFields;
     }
-  },
-  created() {
-    this.createTask();
   }
 };
 </script>

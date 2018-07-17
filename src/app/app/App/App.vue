@@ -82,12 +82,13 @@ export default {
     SignInModal
   },
   computed: {
-    ...mapGetters('signin', ['userId'])
+    // ...mapGetters('signin', ['userId'])
+    ...mapGetters('signInModal', ['userId'])
   },
   methods: {
     ...mapActions('app', ['changeLocale']),
-    ...mapActions('signin', ['saveUserInStorage']),
-    ...mapActions('signInModal', ['openLoginModal']),
+    // ...mapActions('signin', ['saveUserInStorage']),
+    ...mapActions('signInModal', ['openLoginModal', 'saveUserInStorage']),
     signInClicked() {
       this.navBarClose();
       this.openLoginModal();
