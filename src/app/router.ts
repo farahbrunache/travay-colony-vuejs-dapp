@@ -12,6 +12,7 @@ import { SignInModalRoutes } from './signInModal/routes';
 import { TestRoutes } from './test/routes';
 import { AdminRoutes } from './admin/routes';
 import { CostModalRoutes } from './costModal/routes';
+import { UserGuideRoutes } from './userGuide/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -30,7 +31,8 @@ export const router: VueRouter = new VueRouter({
     ...SignInModalRoutes,
     ...TestRoutes,
     ...AdminRoutes,
-    ...CostModalRoutes
+    ...CostModalRoutes,
+    ...UserGuideRoutes
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

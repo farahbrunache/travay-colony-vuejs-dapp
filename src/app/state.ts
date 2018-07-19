@@ -11,6 +11,7 @@ import {
 import { TestDefaultState, ITestState } from './test/state';
 import { AdminDefaultState, IAdminState } from './admin/state';
 import { CostModalDefaultState, ICostModalState } from './costModal/state';
+import { UserGuideDefaultState, IUserGuideState } from './userGuide/state';
 
 export interface IState {
   [key: string]: any;
@@ -25,6 +26,7 @@ export interface IState {
   test?: ITestState;
   admin?: IAdminState;
   costModal?: ICostModalState;
+  userGuide?: IUserGuideState;
 }
 
 export const DefaultState: IState = {
@@ -57,5 +59,8 @@ export const DefaultState: IState = {
   },
   costModal: {
     ...CostModalDefaultState
+  },
+  userGuide: {
+    ...UserGuideDefaultState
   }
 };

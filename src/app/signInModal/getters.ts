@@ -2,15 +2,14 @@ import { ISignInModalState } from './state';
 
 export interface ISignInModalGetters {
   isOpen(state: ISignInModalState): boolean;
-  userId(state: ISigninState): number;
+  userId(state: ISignInModalState): number;
 }
 
 export const SignInModalGetters: ISignInModalGetters = {
   isOpen(state) {
-    console.log('In SignInModalGetter', state);
     return state.isOpen;
   },
-  userId(state: ISigninState): number {
+  userId(state: ISignInModalState): number {
     return state.userData ? Reflect.get(state.userData, 'uid') : null;
   }
 };

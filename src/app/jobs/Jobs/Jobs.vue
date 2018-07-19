@@ -86,7 +86,7 @@
              </vue-button> -->
             <vue-button
             class="sponsor-btn--container" accent>
-              <a style="color: white !important;" @click.prevent.stop="e => createJobClickedHandler()" class="remove-hyperlink">Post a Job</a>
+              <a style="color: white !important;" @click.prevent.stop="e => createJobClickedHandler()" id="remove-hyperlink">Post a Job</a>
              </vue-button>
         </vue-grid-row>
         <br>
@@ -134,13 +134,13 @@
             </vue-panel-body>    
             <vue-panel-footer>
               <vue-button primary>
-              <router-link :to="`/job/${job.taskId}`" class="remove-hyperlink">Learn More</router-link>
+              <router-link :to="`/job/${job.taskId}`" id="remove-hyperlink" style="color:white;">Learn More</router-link>
               </vue-button>
 
               <vue-button v-userRole.canSponsor="{
                 role: job.role
               }" class="sponsor-btn--container" accent>
-                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" class="remove-hyperlink">Sponsor this Job</a>
+                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="remove-hyperlink">Sponsor this Job</a>
              </vue-button>
 
             </vue-panel-footer>
@@ -300,7 +300,6 @@ export default {
       return moment();
     },
     createJobClickedHandler() {
-      // TODO after sign in redirect to the intended target page
       if (!this.userId) {
         this.openLoginModal();
         return;
@@ -413,13 +412,12 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-.remove-hyperlink a,
+#remove-hyperlink a,
 a:hover,
 a:visited,
 a:link,
 a:active {
   text-decoration: none;
-  color: white !important;
 }
 
 .components {

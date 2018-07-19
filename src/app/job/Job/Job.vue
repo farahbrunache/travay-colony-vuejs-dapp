@@ -182,16 +182,22 @@
             <vue-accordion-item title="Sponsor this Job">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               <br>
-              <vue-button id="make-hyperlink-white" v-userRole.canSponsor="{role: job.role}" accent>
-                  <a @click.prevent.stop="e => showSponsoredModal = true"  style="color: white;"
-                    >Sponsor this Job</a>
+              <vue-button v-userRole.canSponsor="{
+                role: job.role
+              }" class="sponsor-btn--container" accent>
+                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="remove-hyperlink">Sponsor this Job</a>
              </vue-button>
             </vue-accordion-item>
 
-            <vue-accordion-item title="Upload Proof of Work">
+            <vue-accordion-item title="Proof of Work">
+
+               <vue-grid-item>
+                <vue-carousel :images="images"></vue-carousel>
+              </vue-grid-item>
 
               <vue-grid-row>
                     <vue-grid-item>
+                      <h5>Upload Proof of Work</h5>
                       <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
                         Browse
                         <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
@@ -210,6 +216,7 @@
                   Upload file</a>
                   </vue-button>
               </vue-grid-item>
+
               </vue-grid-row>
             </vue-accordion-item>
 
@@ -257,6 +264,7 @@ import VueAccordionItem from '../../shared/components/VueAccordion/VueAccordionI
 import VueInput from '../../shared/components/VueInput/VueInput.vue';
 import VueSelect from '../../shared/components/VueSelect/VueSelect.vue';
 import VueCheckbox from '../../shared/components/VueCheckbox/VueCheckbox.vue';
+import VueCarousel from '../../shared/components/VueCarousel/VueCarousel.vue';
 import {
   addNotification,
   INotification
@@ -274,7 +282,13 @@ import moment from 'moment';
 export default {
   mixins: [sponsorSubmitMixin],
   metaInfo: {
-    title: 'Job'
+    title: 'Job',
+    meta: [
+      {
+        name: 'Job',
+        content: 'Details of jobs in Travay.'
+      }
+    ]
   },
   $_veeValidate: {
     validator: 'new'
@@ -294,7 +308,8 @@ export default {
     VueInput,
     VueSelect,
     VueCheckbox,
-    SponsorModal
+    SponsorModal,
+    VueCarousel
   },
   data(): any {
     return {
@@ -315,7 +330,46 @@ export default {
       images: [],
       loadingText: '',
       isJobManager: false,
-      isJobWorker: false
+      isJobWorker: false,
+      sponsoredAmount: '',
+      images: [
+        {
+          alt: 'Slide 1',
+          copyright: 'unsplash.com/@hahnbo',
+          url:
+            'https://images.unsplash.com/photo-1485932465394-d20cc595f08b?ixlib=rb-0.3.5&s=e8798191cfef2e78f4ac91e71c92ea57&auto=format&fit=crop&w=3750&q=80'
+        },
+        {
+          alt: 'Slide 2',
+          copyright: 'unsplash.com/@mitr',
+          url:
+            'https://images.unsplash.com/photo-1486068338746-bc8c63a2d7ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=348afc4c4ac324a022630fbce9204348&auto=format&fit=crop&w=3890&q=80'
+        },
+        {
+          alt: 'Slide 3',
+          copyright: 'unsplash.com/@peter_oslanec',
+          url:
+            'https://images.unsplash.com/photo-1517365884913-3c33884b06fa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=05c7363bcb2c0a2c2241e6cdcf0dfb8b&auto=format&fit=crop&w=1234&q=80'
+        },
+        {
+          alt: 'Slide 4',
+          copyright: 'unsplash.com/@ihs_photo',
+          url:
+            'https://images.unsplash.com/photo-1496348323715-c11f0fc6aeed?ixlib=rb-0.3.5&s=52406f147b73f1000c032dcc5e4e0aea&auto=format&fit=crop&w=1388&q=80'
+        },
+        {
+          alt: 'Slide 5',
+          copyright: 'unsplash.com/@parkamstutz',
+          url:
+            'https://images.unsplash.com/photo-1528150395403-992a693e26c8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0651fee03ef0f9dad95014a45adf898a&auto=format&fit=crop&w=1234&q=80'
+        },
+        {
+          alt: 'Slide 6',
+          copyright: 'unsplash.com/@mrandybae',
+          url:
+            'https://images.unsplash.com/photo-1492970471430-bc6bd7eb2b13?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9893bc89e46e2b77a5d8c091fbba04e9&auto=format&fit=crop&w=2710&q=80'
+        }
+      ]
     };
   },
   filters: {
@@ -395,7 +449,7 @@ export default {
   },
   methods: {
     ...mapGetters('signInModal', ['userId']),
-    ...mapActions('job', []),
+    ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
     fileUploaded(e) {
       console.log('file uploaded', e.target.files[0]);
       this.file = e.target.files[0];
@@ -409,6 +463,14 @@ export default {
 
         reader.readAsDataURL(this.file);
       }
+    },
+    sponsorJobClickedHandler(taskId) {
+      if (!this.userId) {
+        this.openLoginModal();
+        return;
+      }
+      this.selectedJobToSponsorId = taskId;
+      this.showSponsoredModal = true;
     },
     getJob() {
       axios.get('/jobs.json').then((response: any) => {
@@ -530,14 +592,5 @@ export default {
 .job {
   margin-top: $nav-bar-height;
   min-height: 500px;
-}
-
-#remove-hyperlink a,
-a:hover,
-a:visited,
-a:link,
-a:active {
-  text-decoration: none;
-  color: white;
 }
 </style>

@@ -6,7 +6,10 @@
         <vue-grid-item fill>
           <h1>Profile</h1>
         </vue-grid-item>
-    
+      </vue-grid-row>
+
+      <vue-grid-row>
+    <vue-grid-item>
         <vue-panel>
           <vue-panel-header title="First Name" subtitle="Last Name" />
 
@@ -27,56 +30,40 @@
             <vue-button primary>Update Profile</vue-button>
           </vue-panel-footer>
         </vue-panel>
-
-          <vue-panel>
-          <vue-panel-header title="Your Sponsored Jobs" />
-          <vue-panel-body>
-            <div 
-              v-for="(item, index) in sponsored"
-              :key="item.sponsoredId + index">
-              <p>{{item.task}}</p>
-            </div>
-          </vue-panel-body>
-          <vue-panel-footer>
-          </vue-panel-footer>
-        </vue-panel>
-
-          <vue-panel>
-          <vue-panel-header title="Your In-Progress Jobs" />
-          <vue-panel-body>
-            <div 
-              v-for="(item, index) in sponsored"
-              :key="item.sponsoredId + index">
-              <p>{{item.task}}</p>
-            </div>
-          </vue-panel-body>
-          <vue-panel-footer>
-          </vue-panel-footer>
-        </vue-panel>
-
-        <vue-panel>
-          <vue-panel-header title="Your Completed Jobs" />
-          <vue-panel-body>
-            <div 
-              v-for="(item, index) in sponsored"
-              :key="item.sponsoredId + index">
-              <p>{{item.task}}</p>
-            </div>
-          </vue-panel-body>
-          <vue-panel-footer>
-          </vue-panel-footer>
-        </vue-panel>
-
-        <vue-panel>
-          <vue-panel-header title="Reputation Score" />
-          <vue-panel-body>
- 
-          </vue-panel-body>
-          <vue-panel-footer>
-          </vue-panel-footer>
-        </vue-panel>
-
+    </vue-grid-item>
       </vue-grid-row>
+
+      <vue-grid-row>
+    <vue-grid-item>
+          <vue-accordion multiple>
+            <vue-accordion-item title="Incomplete Jobs">
+                <div 
+              v-for="(item, index) in sponsored"
+              :key="item.sponsoredId + index">
+              <p>{{item.task}}</p>
+            </div>
+            </vue-accordion-item>
+
+            <vue-accordion-item title="Completed Jobs">
+                
+            </vue-accordion-item>
+
+            <vue-accordion-item title="Jobs You're Managing">
+                
+            </vue-accordion-item>
+
+            <vue-accordion-item title="Jobs You're Evaluating">
+                
+            </vue-accordion-item>
+
+            <vue-accordion-item title="Jobs You've Sponsored">
+                
+            </vue-accordion-item>
+
+            </vue-accordion>
+    </vue-grid-item>
+      </vue-grid-row>
+
     </vue-grid>
 
   </div>
@@ -96,6 +83,8 @@ import VuePanelFooter from '../../shared/components/VuePanel/VuePanelFooter/VueP
 import VueInput from '../../shared/components/VueInput/VueInput.vue';
 import VueSelect from '../../shared/components/VueSelect/VueSelect.vue';
 import VueCheckbox from '../../shared/components/VueCheckbox/VueCheckbox.vue';
+import VueAccordion from '../../shared/components/VueAccordion/VueAccordion.vue';
+import VueAccordionItem from '../../shared/components/VueAccordion/VueAccordionItem/VueAccordionItem.vue';
 import {
   addNotification,
   INotification
@@ -119,7 +108,9 @@ export default {
     VuePanelFooter,
     VueInput,
     VueSelect,
-    VueCheckbox
+    VueCheckbox,
+    VueAccordion,
+    VueAccordionItem
   },
   data(): any {
     return {

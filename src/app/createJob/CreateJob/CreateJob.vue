@@ -7,7 +7,7 @@
           <vue-grid-item class="vueGridItem">
             <h1>{{ $t('App.nav.createJob' /* Create Job */) }}</h1>
             <p>
-              Use the form below to create a 6-month or 12-month job.
+              {{ $t('App.createJob.pageDescription' /* Use the form below to create a 6-month or 12-month job. */) }}
             </p>
           </vue-grid-item>
         </vue-grid-row>
@@ -43,23 +43,32 @@
       </vue-grid-row>
 
       <vue-grid-row>
+        <vue-grid-item>
+        <i>{{ $t('App.createJob.requirementInstructions' /* Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements. */) }}</i>
+      </vue-grid-item>
+
       <vue-grid-item>
         <vue-input
           name="deliverable"
           id="deliverable"
-          required
           placeholder="Requirement for Job to be Complete"
           validation="required"
-          v-model="requirement" />
-          <p @click="addRequirement">Add</p>
+          v-model="requirement"
+          required />
+          <button accent @click="addRequirement">Add Requirement</button><br>
       </vue-grid-item>
-
+      <br>
+      <br>
+      <vue-grid-item>
       <p v-for="(req, i) in form.deliverable" :key="i">
-        {{req}} - <span @click="removeRequirement(i)">
+        <vue-badge accent>{{req}} -</vue-badge>
+        <span @click="removeRequirement(i)">
           X
         </span>
-        <br/>
+        <br>
+        <br>
       </p>
+      </vue-grid-item>
     </vue-grid-row>
 
 
@@ -92,16 +101,16 @@
         <vue-input
           name="salary"
           id="salary"
+          type="number"
           required
-          placeholder="Salary"
+          placeholder="Salary in USD"
           v-model="form.salary"
           validation="required" />
-          {{ $t('App.createJob.salaryPayoutDisclaimer' /* Note: It is free to post jobs. When a job is paid out we collect 2% of the salary amount. */) }}
-          <br>
-          <p>Based on the salary you entered above the worker would receive {{ estimatedWorkerPayout }} </p>
+          {{ $t('App.createJob.salaryPayoutDisclaimer' /* Note: It is free to post jobs. When a job is paid out we collect 2% of the salary amount. */) }} <strong>${{ estimatedWorkerPayout }}</strong>.
       </vue-grid-item>
       </vue-grid-row>
-
+<br>
+<br>
     <vue-grid-row>
       <vue-grid-item>
         <vue-select
@@ -205,6 +214,7 @@ import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
 import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 import VueButton from '../../shared/components/VueButton/VueButton.vue';
 import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
+import VueBadge from '../../shared/components/VueBadge/VueBadge.vue';
 import VueDatePicker from '../../shared/components/VueDatePicker/VueDatePicker.vue';
 import {
   addNotification,
@@ -235,7 +245,8 @@ export default {
     VueInput,
     VueSelect,
     VueCheckbox,
-    VueDatePicker
+    VueDatePicker,
+    VueBadge
   },
   data(): any {
     return {

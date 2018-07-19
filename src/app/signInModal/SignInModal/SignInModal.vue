@@ -24,14 +24,6 @@
                 <i class="fab fa-google"></i> uPort
               </vue-button>
             </vue-grid-item>
-
-          <br>
-          <br>
-            <vue-grid-item>
-              <vue-button @click="signInWithCoinbase">
-                <i class="fa fa-coinbase"></i> Coinbase
-              </vue-button>
-            </vue-grid-item>
             
             </vue-grid-row>
           </template>
@@ -91,17 +83,6 @@ export default {
       'logoutUser'
     ]),
     ...mapMutations('signInModal', ['SET_USER_DATA']),
-    signInWithCoinbase: function() {
-      // https://coderwall.com/p/u4chaq/javascript-coinbase-social-login-button-for-oauth
-      OAuth.initialize('HwAr2OtSxRgEEnO2-JnYjsuA3tc');
-      OAuth.popup('coinbase').then(coinbase => {
-        console.log('coinbase:', coinbase);
-        coinbase.me().then(data => {});
-        coinbase.get('/api/v1/users').then(data => {
-          console.log('self data:', data);
-        });
-      });
-    },
     siginInWithUport: function() {
       // Request credentials to login
       uport

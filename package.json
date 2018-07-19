@@ -3,6 +3,22 @@
   "version": "0.0.1",
   "description": "Long Term Jobs Market for Developing Countries Built with Colony",
   "license": "MIT",
+  "author": "Farah Brunache",
+  "keywords": [
+    "vue",
+    "vuex",
+    "vue-router",
+    "webpack",
+    "typescript",
+    "server-side-rendering",
+    "boilerplate",
+    "jest",
+    "haiti",
+    "haitian",
+    "kreyol",
+    "travay",
+    "blockchain"
+  ],
   "scripts": {
     "g": "npm run generate",
     "dev": "concurrently \"npm run dev:dev-server\" \"npm run dev:server\"",

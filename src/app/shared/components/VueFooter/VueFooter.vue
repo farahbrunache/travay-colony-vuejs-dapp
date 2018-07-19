@@ -2,32 +2,21 @@
   <div :class="$style.vueFooter">
     <vue-grid>
       <vue-grid-row>
-        <vue-grid-item>
-          <!-- <small>&copy; Copyright {{year}} Farah Brunache</small> -->
-        </vue-grid-item>
 
         <vue-grid-item>
-          <a href="https://github.com/farahbrunache/travay-colony-vuejs-dapp" target="_blank" rel="noopener" aria-label="github repository">
-            <i class="fab fa-github-alt" />
-          </a>
-          <!-- <a href="https://twitter.com/farahbrunache" target="_blank" rel="noopener" aria-label="twitter profile">
-            <i class="fab fa-twitter-square" />
-          </a> -->
+          &copy; Copyright {{year}} Electric Feel<br>
+          <router-link :to="'userGuide'">User Guide &amp; Glossary</router-link><br>
         </vue-grid-item>
 
-        <vue-grid-item>
-          <!-- <small><a href="example.com/license" target="_blank" rel="noopener">MIT License</a>
-          </small> -->
-        </vue-grid-item>
       </vue-grid-row>
     </vue-grid>
   </div>
 </template>
 
 <script lang="ts">
-import VueGrid from '../VueGrid/VueGrid';
-import VueGridItem from '../VueGridItem/VueGridItem';
-import VueGridRow from '../VueGridRow/VueGridRow';
+import VueGrid from '../VueGrid/VueGrid.vue';
+import VueGridItem from '../VueGridItem/VueGridItem.vue';
+import VueGridRow from '../VueGridRow/VueGridRow.vue';
 
 export default {
   name: 'VueFooter',
@@ -50,7 +39,8 @@ export default {
 .vueFooter {
   padding: $footer-padding;
   background: $footer-bg;
-  color: $footer-color;
+  // color: $footer-color;
+  color: black;
   text-align: center;
 
   i {

@@ -15,7 +15,11 @@
     "Job confirmed successfully! You'll be notified by the manager shortly",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",
   "App.createJob.salaryPayoutDisclaimer":
-    "Note: It is free to a post job. When a job is paid out we collect 2% of the salary amount.",
+    "Remember: It is free to a post job. However, when a job is paid out to the worker, we collect 2% of the total salary amount. Based on the salary you have entered above the worker would receive, per pay frequency, approximately: ",
+  "App.createJob.pageDescription":
+    "Use the form below to create a 6-month or 12-month job.",
+  "App.createJob.requirementInstructions":
+    "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",
