@@ -4,7 +4,7 @@
       <vue-grid-row>
 
         <vue-grid-item>
-          &copy; Copyright {{year}} Electric Feel<br>
+          &copy; Copyright {{year}} Project Civique<br>
           <router-link :to="'userGuide'">User Guide &amp; Glossary</router-link><br>
         </vue-grid-item>
 

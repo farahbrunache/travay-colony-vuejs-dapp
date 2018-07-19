@@ -1,11 +1,14 @@
 <template>
   <div :class="$style.userGuide">
     <vue-grid>
+
       <vue-grid-row>
         <vue-grid-item fill>
           <h1>User Guide</h1>
         </vue-grid-item>
+      </vue-grid-row>
 
+      <vue-grid-row>
         <vue-grid-item fill>
           <vue-accordion >
             <vue-accordion-item title="What is Travay?" :initOpen="true">
@@ -51,10 +54,6 @@
             A paid position of regular employment. In the context of Travay most jobs are posted to better the community and all are for long-term employment only (6 or 12-month terms). 
           </p><br>
           <p>
-            <strong>Wallet</strong><br>
-            The virtual wallet stores the stable coin earned from completing jobs in Travay.
-          </p><br>
-          <p>
             <strong>Roles</strong><br>
             Roles are defined based on the different actions an individual can take within Travay.<br><br>
 
@@ -66,14 +65,19 @@
 
             Sponsor: a person who donates to the funding of a job.<br><br>
           </p>
+          <p>
+            <strong>Wallet</strong><br>
+            The virtual wallet stores the stable coin earned from completing jobs in Travay.
+          </p>
         </vue-grid-item>
-            <br>
-            <br>
+      </vue-grid-row>
+<br>
+<br>
+      <vue-grid-row>
             <vue-grid-item>
             <p><i>Feedback? Questions? Email info@electricfeel.co.</i></p>
             </vue-grid-item>
-
-      </vue-grid-row>
+            </vue-grid-row>
     </vue-grid>
   </div>
 </template>
