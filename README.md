@@ -28,4 +28,4 @@ lsof -Pnl +M -i4 | grep 9230
 kill -9 2010
 ```
 
-Source: https://www.chrisnewland.com/mac-os-x-netstat-show-pid-process-id-285
+Resource: https://www.chrisnewland.com/mac-os-x-netstat-show-pid-process-id-285

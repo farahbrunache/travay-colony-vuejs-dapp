@@ -8,18 +8,14 @@
   "App.nav.signout": "Sign out",
   "App.nav.createJob": "Post a Job",
   "App.nav.kreyol": "Kreyol",
-  "App.nav.french": "Francias",
+  "App.nav.french": "Francais",
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
-  "App.job.jobClaimed":
-    "Job confirmed successfully! You'll be notified by the manager shortly",
+  "App.job.jobClaimed": "Job confirmed successfully! You'll be notified by the manager shortly",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",
-  "App.createJob.salaryPayoutDisclaimer":
-    "Remember: It is free to a post job. However, when a job is paid out to the worker, we collect 2% of the total salary amount. Based on the salary you have entered above the worker would receive, per pay frequency, approximately: ",
-  "App.createJob.pageDescription":
-    "Use the form below to create a 6-month or 12-month job.",
-  "App.createJob.requirementInstructions":
-    "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
+  "App.createJob.salaryPayoutDisclaimer": "Remember: It is free to a post job. However, when a job is paid out to the worker, we collect 2% of the total salary amount. Based on the salary you have entered above the worker would receive, per pay frequency, approximately: ",
+  "App.createJob.pageDescription": "Use the form below to create a 6-month or 12-month job.",
+  "App.createJob.requirementInstructions": "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",
@@ -30,8 +26,7 @@
   "components.calendar.wednesday.short": "W",
   "components.dataTable.noResults": "No results found!",
   "components.formExample.zipCode.error": "Please enter a Number",
-  "components.markdown":
-    "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
+  "components.markdown": "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
   "components.pagination.next": "Next",
   "components.pagination.previous": "Previous",
   "components.register.cancellationText": "Cancel",
@@ -42,12 +37,10 @@
   "components.register.name.invalidText": "Please provide first and last name",
   "components.register.phone": "Phone",
   "components.register.phone.invalidText": "This is not a valid phone number!",
-  "components.register.submit.notification.text":
-    "We've sent an email to: {email}!",
+  "components.register.submit.notification.text": "We've sent an email to: {email}!",
   "components.register.submit.notification.title": "Hey {name}!",
   "components.register.submitText": "Submit",
   "components.register.subtitle": "Please fill in all required fields",
-  "components.register.terms":
-    "I accept the <a href=\"/\">Terms and Conditions</a>",
+  "components.register.terms": "I accept the <a href=\"/\">Terms and Conditions</a>",
   "components.register.title": "Register"
 }

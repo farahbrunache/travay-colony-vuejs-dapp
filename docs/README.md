@@ -2,8 +2,13 @@
 
 ## Environment Variables
 
-Tutorial: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
+Sample file: `.env.sample`. Currently has uPort setup.
 
 ## Technology Stack
 
 - colonyJS: https://github.com/JoinColony/hackathonStarter
+- VueJs
+- Firebase
+- Google Auth
+- uPort Auth
+- IPFS

@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const { VueLoaderPlugin } = require('vue-loader');
+const {
+  VueLoaderPlugin
+} = require('vue-loader');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 require('dotenv').config();
@@ -20,13 +22,11 @@ const baseConfig = {
     extensions: ['.ts', '.js', '.vue', '.json', '.node', '.scss'],
     modules: [
       path.join(__dirname, '..', 'src'),
-      path.join(__dirname, '..', 'hackathonStarter'),
       path.join(__dirname, '..', 'node_modules')
     ]
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
         loader: 'vue-loader'
       },
