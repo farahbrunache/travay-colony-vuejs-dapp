@@ -1,4 +1,4 @@
-import MockAdapter from 'axios-mock-adapter';
+import MockAdapter from 'axios-mock-adapter/types';
 import { HttpService } from '../shared/services/HttpService';
 import { ActionContext, Commit, Dispatch } from 'vuex';
 import { ProfileActions } from './actions';

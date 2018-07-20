@@ -3,7 +3,12 @@ const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+require('dotenv').config();
 const isProd = process.env.NODE_ENV === 'production';
+const uPortConfig = JSON.stringify({
+  TRAVAY_UPORT_SIMPLE_SIGNER: process.env.TRAVAY_UPORT_SIMPLE_SIGNER,
+  TRAVAY_UPORT_CLIENT_ID: process.env.TRAVAY_UPORT_CLIENT_ID
+});
 
 const baseConfig = {
   stats: {
@@ -121,7 +126,8 @@ const baseConfig = {
     new webpack.DefinePlugin({
       PRODUCTION: isProd,
       DEVELOPMENT: !isProd,
-      TEST: false
+      TEST: false,
+      UPORT_CONFIG: uPortConfig
     })
   ]
 };

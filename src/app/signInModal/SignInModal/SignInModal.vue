@@ -58,9 +58,9 @@ import { travaySlackBotMixin } from '../../shared/mixins/mixins';
 import { Connect, SimpleSigner } from 'uport-connect';
 
 const uport = new Connect('Travay', {
-  clientId: 'TRAVAY_UPORT_CLIENT_ID',
+  clientId: UPORT_CONFIG.TRAVAY_UPORT_CLIENT_ID,
   network: 'rinkeby',
-  signer: SimpleSigner('TRAVAY_UPORT_SIMPLE_SIGNER')
+  signer: SimpleSigner(UPORT_CONFIG.TRAVAY_UPORT_SIMPLE_SIGNER)
 });
 
 export default {
@@ -84,18 +84,21 @@ export default {
     ]),
     ...mapMutations('signInModal', ['SET_USER_DATA']),
     siginInWithUport: function() {
-      // Request credentials to login
+      this.closeLoginModal();
       uport
         .requestCredentials({
           requested: ['name', 'avatar', 'phone', 'country'],
           notifications: true // Required for UX so users don't have to scan QR per interaction
         })
-        .then(credentials => {
-          console.log('creds:' + credentials);
+        .then((credentials: any) => {
+          console.log(credentials);
           console.log(credentials.name);
-          console.log(credentials.avatar.uri);
-          this.closeLoginModal();
-          this.updateUserData(credentials.user);
+          const data = {
+            name: credentials.name,
+            country: credentials.country,
+            phone: credentials.phone
+          };
+          this.updateUserData(data);
         });
       this.$router.push('/jobs');
     },
