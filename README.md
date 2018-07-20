@@ -10,7 +10,7 @@ A decentralized long-term jobs market for the unbanked of Haiti.
 
 Our Smart Contracts and implementation of our DAO via Colony is not ready for Mainnet. Thus most of the app is centralized, however, in the coming months the entire application will incrementally be decentralized after we iterate the product based on end user feedback and thorough testing of decentralized services.
 
-## Run Front-end Locally
+## Run Locally
 
 1.  Install Node.js 8.x or higher. Use [nvm](https://github.com/creationix/nvm) or [n](https://github.com/tj/n) to maintain multiple Node.js versions
 2.  Install npm version 5.x or higher
