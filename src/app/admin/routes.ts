@@ -6,6 +6,9 @@ export const AdminRoutes: RouteConfig[] = [
     component: () =>
       import(/* webpackChunkName: "admin" */ './Admin/Admin.vue').then(
         m => m.default
-      )
+      ),
+    meta: {
+      adminOnly: true
+    }
   }
 ];

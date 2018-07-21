@@ -439,9 +439,10 @@ export default {
 
       Object.keys(this.form).forEach((key: string) => {
         if (
-          key !== 'taskId' &&
-          key !== 'datePosted' &&
-          (this.form[key] === '' || this.form[key] === false)
+          (key !== 'taskId' &&
+            key !== 'datePosted' &&
+            (this.form[key] === '' || this.form[key] === false)) ||
+          (Array.isArray(this.form[key]) && this.form[key].length === 0)
         ) {
           hasEmptyField = true;
         }

@@ -151,7 +151,7 @@ export default {
           .collection('users')
           .where('uid', '==', user.uid)
           .get();
-        if (snapshot.empty) {
+        if (snapshot.docs.length === 0) {
           const user = await db.collection('users').add(data);
           // add slack notification if new user, here?
         }

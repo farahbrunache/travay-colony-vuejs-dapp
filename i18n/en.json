@@ -20,6 +20,9 @@
     "Use the form below to create a 6-month or 12-month job.",
   "App.createJob.requirementInstructions":
     "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
+  "App.jobs.pageSubtitle": "Here you'll find 6-month and 12-month jobs.",
+  "App.jobs.search": "Search",
+  "App.jobs.filter": "Filter",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",

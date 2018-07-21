@@ -10,6 +10,10 @@ import {
 } from './signInModal/state';
 import { AdminDefaultState, IAdminState } from './admin/state';
 import { UserGuideDefaultState, IUserGuideState } from './userGuide/state';
+import {
+  TransactionModalDefaultState,
+  ITransactionModalState
+} from './transactionModal/state';
 
 export interface IState {
   [key: string]: any;
@@ -23,6 +27,7 @@ export interface IState {
   signInModal?: ISignInModalState;
   admin?: IAdminState;
   userGuide?: IUserGuideState;
+  transactionModal?: ITransactionModalState;
 }
 
 export const DefaultState: IState = {
@@ -52,5 +57,8 @@ export const DefaultState: IState = {
   },
   userGuide: {
     ...UserGuideDefaultState
+  },
+  transactionModal: {
+    ...TransactionModalDefaultState
   }
 };

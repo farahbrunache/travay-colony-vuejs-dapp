@@ -7,7 +7,7 @@
           <vue-grid-item class="vueGridItem">
             <h1>{{ $t('App.nav.jobs' /* Jobs */) }}</h1>
             <p>
-              Here you'll find 6-month and 12-month jobs.
+              {{ $t('App.jobs.pageSubtitle' /* Here you'll find 6-month and 12-month jobs. */) }}
             </p>
           </vue-grid-item>
         </vue-grid-row>
@@ -20,10 +20,10 @@
 
         <vue-grid-item>
         <ul class="filter-bar">
-          <li class="filter__item">Search:
+          <li class="filter__item">{{ $t('App.jobs.search' /* Search */) }}:
             <input type="text" name="search" v-model="keyword" />
           </li>
-          <li class="filter__item">Filter by:
+          <li class="filter__item">{{ $t('App.jobs.filter' /* Filter */) }}:
             <select v-model="filterType">
               <option value="all">All</option>
               <option
@@ -81,13 +81,12 @@
         <br>
 
         <vue-grid-row>
-          <!-- <vue-button accent>
-            <router-link :to="'createJob'">Post a Job</router-link>
-             </vue-button> -->
+          <vue-grid-item>
             <vue-button
             class="sponsor-btn--container" accent>
               <a style="color: white !important;" @click.prevent.stop="e => createJobClickedHandler()" id="remove-hyperlink">Post a Job</a>
              </vue-button>
+             </vue-grid-item>
         </vue-grid-row>
         <br>
       <sponsor-modal 
@@ -95,7 +94,9 @@
         :show.sync="showSponsoredModal"
         @sponsorSubmit="amount => sponsorSubmitHandler({
           amount, 
-          taskId: this.selectedJobToSponsorId, task: this.jobToSponsor.task
+          taskId: this.selectedJobToSponsorId, task: this.jobToSponsor.task,
+          task: this.jobToSponsor.task || '',
+          job: this.jobToSponsor
           })"></sponsor-modal>
       <vue-grid-row>
         <vue-grid-item>
@@ -136,7 +137,8 @@
               <vue-button primary>
               <router-link :to="`/job/${job.taskId}`" id="remove-hyperlink" style="color:white;">Learn More</router-link>
               </vue-button>
-
+              <br />
+              <br />
               <vue-button v-userRole.canSponsor="{
                 role: job.role
               }" class="sponsor-btn--container" accent>
@@ -262,16 +264,16 @@ export default {
       ],
       domains: [
         {
-          id: 'enviroment',
-          value: 'Enviroment'
-        },
-        {
           id: 'community',
           value: 'Community'
         },
         {
           id: 'education',
           value: 'Education'
+        },
+        {
+          id: 'enviroment',
+          value: 'Enviroment'
         }
       ]
     };

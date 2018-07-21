@@ -120,7 +120,14 @@ export const sponsorSubmitMixin = {
 
       try {
         const sponsoredResult = await db.collection('sponsored').add(data);
-        const totalAmount = +job.sponsoredAmount + +amount;
+        const totalAmount =
+          +(isNaN(job.sponsoredAmount) ? 0 : job.sponsoredAmount) + +amount;
+        console.log('job', job);
+        console.log('amount for the sponsored job', amount);
+        console.log(
+          'check',
+          +(isNaN(job.sponsoredAmount) ? 0 : job.sponsoredAmount)
+        );
         const updateResult = await db
           .collection('jobs')
           .doc(taskId)
@@ -130,7 +137,18 @@ export const sponsorSubmitMixin = {
 
         console.log('jobUpdated', updateResult);
         console.log('total', totalAmount);
-        this.job.sponsoredAmount = totalAmount;
+
+        if (Reflect.has(this, 'job')) {
+          this.job.sponsoredAmount = totalAmount;
+        } else {
+          const jobs = this.jobs.map(job => {
+            if (job.taskId === taskId) {
+              job.sponsoredAmount = totalAmount;
+            }
+            return job;
+          });
+          this.jobs = jobs;
+        }
       } catch (err) {
         console.error('error when trying to save the data', err);
         alert('There was a problem when trying to insert data!');

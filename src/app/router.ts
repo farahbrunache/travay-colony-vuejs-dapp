@@ -11,6 +11,7 @@ import { WalletRoutes } from './wallet/routes';
 import { SignInModalRoutes } from './signInModal/routes';
 import { AdminRoutes } from './admin/routes';
 import { UserGuideRoutes } from './userGuide/routes';
+import { TransactionModalRoutes } from './transactionModal/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -28,7 +29,8 @@ export const router: VueRouter = new VueRouter({
     ...WalletRoutes,
     ...SignInModalRoutes,
     ...AdminRoutes,
-    ...UserGuideRoutes
+    ...UserGuideRoutes,
+    ...TransactionModalRoutes
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

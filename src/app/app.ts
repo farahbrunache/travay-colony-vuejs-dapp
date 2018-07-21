@@ -11,6 +11,19 @@ import { IState } from './state';
 import App from './app/App/App.vue';
 import { userRole } from './shared/directives/userRole.js';
 
+router.beforeEach((to, from, next) => {
+  if (Reflect.has(to.meta, 'adminOnly')) {
+    /*
+      if (user.role === 'admin') {
+        next()
+      } else {
+        next('/')
+      }
+      return;
+    */
+  }
+  next();
+});
 Vue.use(VeeValidate, { inject: false });
 Vue.directive('userRole', userRole);
 export interface IApp {

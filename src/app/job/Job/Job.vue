@@ -191,7 +191,13 @@
             <vue-accordion-item title="Proof of Work">
 
                <vue-grid-item>
-                <vue-carousel :images="images"></vue-carousel>
+                <div
+                  v-for="(image, index) in images"
+                  :key="index"
+                >
+                  <a @click.prevent="removeImage(index)">X</a>
+                  <img :src="image.src" />
+                </div>
               </vue-grid-item>
 
               <vue-grid-row>
@@ -199,7 +205,7 @@
                       <h5>Upload Proof of Work</h5>
                       <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
                         Browse
-                        <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+                        <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview" multiple/>
                       </span>
                   <div>
                     <img class="img-responsive" :src="imagePreview" alt="" style="width:500px; height:500px;">
@@ -277,6 +283,7 @@ import { sponsorSubmitMixin } from '../../shared/mixins/mixins';
 import { userRole } from '../../shared/directives/userRole.js';
 const firebaseStorage = firebase.storage();
 import moment from 'moment';
+import { filter } from 'compression';
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -330,7 +337,7 @@ export default {
       isJobManager: false,
       isJobWorker: false,
       sponsoredAmount: 0,
-      images: [
+      /*images: [
         {
           alt: 'Slide 1',
           copyright: 'unsplash.com/@hahnbo',
@@ -367,7 +374,8 @@ export default {
           url:
             'https://images.unsplash.com/photo-1492970471430-bc6bd7eb2b13?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9893bc89e46e2b77a5d8c091fbba04e9&auto=format&fit=crop&w=2710&q=80'
         }
-      ]
+      ]*/
+      images: []
     };
   },
   filters: {
@@ -448,19 +456,27 @@ export default {
   methods: {
     ...mapGetters('signInModal', ['userId']),
     ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
-    fileUploaded(e) {
-      console.log('file uploaded', e.target.files[0]);
-      this.file = e.target.files[0];
+    removeImage(i) {
+      this.images = this.images.filter((img, index) => index !== i);
+    },
+    async fileUploaded(e) {
+      console.log('file uploaded', e, e.target.files);
 
-      if (this.file) {
-        const reader = new FileReader();
+      const images = await Promise.all(
+        Array.from(e.target.files).map(file => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
 
-        reader.onload = e => {
-          this.imagePreview = e.target.result;
-        };
+            reader.onload = e => {
+              resolve({ src: e.target.result, file, progress: null });
+            };
 
-        reader.readAsDataURL(this.file);
-      }
+            reader.readAsDataURL(file);
+          });
+        })
+      );
+      console.log('Images', images);
+      this.images = images;
     },
     sponsorJobClickedHandler(taskId) {
       if (!this.userId) {
@@ -492,13 +508,32 @@ export default {
         }, 500);
       });
     },
-    onClaim(docId: any) {
+    async onClaim(docId: any) {
       const taskId = this.$route.params.id;
-      db
+      /*db
         .collection('jobs')
         .doc(docId)
         .update({
           'role.2': this.userId
+        });*/
+      console.log('user ID', this.userId);
+      const result = db
+        .collection('users')
+        .where('uid', '==', this.userId)
+        .get()
+        .then(snapshots => {
+          const doc = snapshots.docs[0];
+          const userData = doc.data();
+          const obj = { doc, user: userData, claimedJobs: [] };
+          if (Reflect.has(userData, 'claimedJobs')) {
+            obj.claimedJobs = userData.claimedJobs;
+          }
+          return obj;
+        })
+        .then(({ doc, user, claimedJobs }) => {
+          doc.ref.update({
+            claimedJobs: [...claimedJobs, this.job.taskId]
+          });
         });
       this.$nextTick(() => {
         setTimeout(() => {
@@ -532,35 +567,76 @@ export default {
       });
     },
     editJob() {},
-    uploadFile() {
-      return new Promise((resolve, reject) => {
-        const self = this;
-        const storageRef = firebaseStorage
-          .ref()
-          .child('images/' + this.file.name + '');
-        let uploadTask = storageRef.put(this.file);
-        uploadTask.on(
-          'state_changed',
-          function(snapshot) {
-            var progress =
-              snapshot.bytesTransferred / snapshot.totalBytes * 100;
-            console.log(progress);
-            self.loadingText =
-              'Upload is ' + progress + '% done. Processing post.';
-          },
-          function(error) {
-            // Handle unsuccessful uploads
-            reject(error);
-          },
-          function() {
-            // Handle successful uploads on complete
-            resolve(uploadTask.snapshot.downloadURL);
-          }
-        );
-      });
+    async uploadFile() {
+      console.log('UPLOADING');
+
+      const urls = await Promise.all(
+        this.images.map(({ file }, index) => {
+          console.log('file', file);
+          return new Promise((resolve, reject) => {
+            const self = this;
+            const storageRef = firebaseStorage
+              .ref()
+              .child('images/jobs/' + this.job.taskId + '/' + file.name);
+            let uploadTask = storageRef.put(file);
+            uploadTask.on(
+              'state_changed',
+              function(snapshot) {
+                var progress =
+                  snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                console.log(progress);
+                self.loadingText =
+                  'Upload is ' + progress + '% done. Processing post.';
+              },
+              function(error) {
+                // Handle unsuccessful uploads
+                reject(error);
+              },
+              function() {
+                // Handle successful uploads on complete
+                resolve({ url: uploadTask.snapshot.ref.getDownloadURL() });
+              }
+            );
+          });
+        })
+      );
+      console.log('urls', urls);
+      console.log('taskId', this.job.taskId);
+      const job = { ...this.job, images: urls };
+      const result = await db
+        .collection('jobs')
+        .doc(this.job.taskId)
+        .get()
+        .add({ images: urls })
+        .then(docRef => {
+          console.log('updated!', docRef);
+        });
+
+      /*
+firebase.firestore()
+  .collection('proprietary')
+  .doc(docID)
+  .collection('sharedWith')
+  .add({ who: "third@test.com", when: new Date() }) 
+        */
+
+      /*.get()
+        .then(doc => {
+          console.log('doc', doc);
+          doc
+            .update({
+              images: urls
+            })
+            .then(res => {
+              console.log('doc updated!', res);
+            });
+        });*/
+
+      console.log('result of jobs', result);
     },
     uploadProofOfWork() {
       this.uploadFile().then(imageUrl => {
+        console.log('IN UPLOAD PROOF OF WORK', imageUrl);
         data.image = imageUrl;
         db
           .collection('jobs')

@@ -11,7 +11,7 @@
           type="number"
           v-model="sponsorAmount" />
 
-        <vue-button primary @click.prevent.stop="$emit('sponsorSubmit', sponsorAmount)">Sponsor</vue-button>
+        <vue-button primary @click.prevent.stop="clickHandler">Sponsor</vue-button>
     </vue-modal>
   </div>
 </template>
@@ -46,7 +46,12 @@ export default {
     };
   },
   computed: {},
-  methods: {}
+  methods: {
+    clickHandler() {
+      this.$emit('sponsorSubmit', this.sponsorAmount);
+      this.sponsorAmount = '';
+    }
+  }
 };
 </script>
 
