@@ -401,7 +401,6 @@ export default {
         .catch(function(error) {
           console.error('Error adding document: ', error);
         });
-      console.log('job data', jobData);
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;

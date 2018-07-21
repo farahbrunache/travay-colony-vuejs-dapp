@@ -8,9 +8,7 @@ import {
   SignInModalDefaultState,
   ISignInModalState
 } from './signInModal/state';
-import { TestDefaultState, ITestState } from './test/state';
 import { AdminDefaultState, IAdminState } from './admin/state';
-import { CostModalDefaultState, ICostModalState } from './costModal/state';
 import { UserGuideDefaultState, IUserGuideState } from './userGuide/state';
 
 export interface IState {
@@ -23,9 +21,7 @@ export interface IState {
   createJob?: ICreateJobState;
   wallet?: IWalletState;
   signInModal?: ISignInModalState;
-  test?: ITestState;
   admin?: IAdminState;
-  costModal?: ICostModalState;
   userGuide?: IUserGuideState;
 }
 
@@ -51,14 +47,8 @@ export const DefaultState: IState = {
   signInModal: {
     ...SignInModalDefaultState
   },
-  test: {
-    ...TestDefaultState
-  },
   admin: {
     ...AdminDefaultState
-  },
-  costModal: {
-    ...CostModalDefaultState
   },
   userGuide: {
     ...UserGuideDefaultState

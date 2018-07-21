@@ -11,10 +11,8 @@ import { JobModule } from './job/module';
 import { CreateJobModule } from './createJob/module';
 import { WalletModule } from './wallet/module';
 import { SignInModalModule } from './signInModal/module';
-import { TestModule } from './test/module';
 import { AdminModule } from './admin/module';
-import { CostModalModule } from './costModal/module';
-import { UserGuideModule }            from './userGuide/module';
+import { UserGuideModule } from './userGuide/module';
 
 Vue.use(Vuex);
 
@@ -66,7 +64,5 @@ store.registerModule(['wallet'], WalletModule, { preserveState: true });
 store.registerModule(['signInModal'], SignInModalModule, {
   preserveState: true
 });
-store.registerModule(['test'], TestModule, { preserveState: true });
 store.registerModule(['admin'], AdminModule, { preserveState: true });
-store.registerModule(['costModal'], CostModalModule, { preserveState: true });
 store.registerModule(['userGuide'], UserGuideModule, { preserveState: true });

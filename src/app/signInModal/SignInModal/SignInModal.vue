@@ -54,6 +54,7 @@ import VueModal from '../../shared/components/VueModal/VueModal.vue';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 import { travaySlackBotMixin } from '../../shared/mixins/mixins';
+import { uuid } from 'vue-uuid';
 
 import { Connect, SimpleSigner } from 'uport-connect';
 
@@ -87,18 +88,28 @@ export default {
       this.closeLoginModal();
       uport
         .requestCredentials({
-          requested: ['name', 'avatar', 'phone', 'country'],
+          requested: ['name', 'phone', 'country'],
           notifications: true // Required for UX so users don't have to scan QR per interaction
         })
         .then((credentials: any) => {
-          console.log(credentials);
-          console.log(credentials.name);
-          const data = {
+          const uid = uuid.v1();
+          const uPortUserData = {
             name: credentials.name,
             country: credentials.country,
-            phone: credentials.phone
+            phone: credentials.phone,
+            address: credentials.address,
+            uid: uuid.v1()
           };
-          this.updateUserData(data);
+          db
+            .collection('users')
+            .doc(uid)
+            .set(uPortUserData)
+            .then(function(docref) {})
+            .catch(function(error) {
+              console.error('Error adding user: ', error);
+            });
+          console.log('uport user data', uPortUserData);
+          this.updateUserData(uPortUserData);
         });
       this.$router.push('/jobs');
     },
@@ -110,12 +121,10 @@ export default {
         .then(result => {
           this.closeLoginModal();
           this.updateUserData(result.user);
-          console.log('user data!', result);
         })
         .catch(err => console.log(err));
     },
     signOut: function() {
-      console.log('Signing user out');
       firebase
         .auth()
         .signOut()
@@ -131,18 +140,21 @@ export default {
         uid: user.uid,
         email: user.email || null,
         displayName: user.displayName || null,
-        photoURL: user.photoURL || null
+        name: user.name || null,
+        photoURL: user.photoURL || null,
+        phone: user.phone || null,
+        country: user.country || null,
+        address: user.address || null
       };
       try {
         const snapshot = await db
           .collection('users')
           .where('uid', '==', user.uid)
           .get();
-
         if (snapshot.empty) {
           const user = await db.collection('users').add(data);
+          // add slack notification if new user, here?
         }
-
         this.user = data;
         this.saveUserInStorage(data);
         this.$router.push('/jobs');

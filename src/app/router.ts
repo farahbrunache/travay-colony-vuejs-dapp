@@ -9,9 +9,7 @@ import { JobRoutes } from './job/routes';
 import { CreateJobRoutes } from './createJob/routes';
 import { WalletRoutes } from './wallet/routes';
 import { SignInModalRoutes } from './signInModal/routes';
-import { TestRoutes } from './test/routes';
 import { AdminRoutes } from './admin/routes';
-import { CostModalRoutes } from './costModal/routes';
 import { UserGuideRoutes } from './userGuide/routes';
 
 Vue.use(VueRouter);
@@ -29,9 +27,7 @@ export const router: VueRouter = new VueRouter({
     ...CreateJobRoutes,
     ...WalletRoutes,
     ...SignInModalRoutes,
-    ...TestRoutes,
     ...AdminRoutes,
-    ...CostModalRoutes,
     ...UserGuideRoutes
   ],
   scrollBehavior(to, from, savedPosition) {

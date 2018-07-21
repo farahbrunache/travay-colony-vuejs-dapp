@@ -17,15 +17,14 @@
         })"></sponsor-modal>
 
         <vue-grid-item fill>
-          <vue-panel >
+          <vue-panel>
             <vue-panel-header title="Details">
-
              <p v-if="job.role && userId">
-          <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
-            <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
-            Icon
-          </a>
-        </p>
+                <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
+                  <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
+                  Icon
+                </a>
+            </p>
 
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
@@ -70,7 +69,7 @@
                   Domain: {{job.domain}}<br>
                   Top Desired Skill: {{job.skill}}<br>
                   Full time rate: ${{job.salary['full-time-rate']}}<br>
-                  Sponsored amount: ${{ job.sponsoredAmount }}
+                  Total Sponsored Amount: ${{ job.sponsoredAmount }}
                 </template>
                 
                 <br>
@@ -327,11 +326,10 @@ export default {
       fileName: '',
       image: '',
       imagePreview: '',
-      images: [],
       loadingText: '',
       isJobManager: false,
       isJobWorker: false,
-      sponsoredAmount: '',
+      sponsoredAmount: 0,
       images: [
         {
           alt: 'Slide 1',
@@ -397,7 +395,7 @@ export default {
         console.log(this.job, 'job');
       })
       .catch(err => {
-        console.error('Error while trying to get job', err);
+        console.error('Error while trying to get the job', err);
       });
     /*
       beforeCreate
@@ -509,7 +507,7 @@ export default {
             title: 'Yay!',
             text: this.$t(
               'App.job.jobClaimed'
-            ) /* Job confirmed successfully! You'll be notified by the manager shortly. */
+            ) /* Job confirmed successfully! You can start work immediately. */
           } as INotification);
         }, 700);
       });
