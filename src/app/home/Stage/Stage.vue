@@ -27,7 +27,12 @@ import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 
 export default {
   components: { VueGridItem, VueGridRow, VueGrid },
-  props: {},
+  props: {
+    disableParticles: {
+      type: Boolean,
+      required: true
+    }
+  },
   data() {
     return {};
   },
