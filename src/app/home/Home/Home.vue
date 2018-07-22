@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.home">
-    <stage />
+    <stage
+      :disable-particles="disableParticles" />
     <fostering />
     <empowering-communities />
     <travay-experience />
@@ -9,19 +10,21 @@
 </template>
 
 <script lang="ts">
+import { mapState } from 'vuex';
 import Stage from '../Stage/Stage.vue';
 import Fostering from '../Fostering/Fostering.vue';
 import EmpoweringCommunities from '../EmpoweringCommunities/EmpoweringCommunities.vue';
 import TravayExperience from '../TravayExperience/TravayExperience.vue';
 import HowDoesItWork from '../HowDoesItWork/HowDoesItWork.vue';
+import { IState } from '../../state';
 
 export default {
   metaInfo: {
-    title: 'travay: everyone at work.',
+    title: 'travay: opportunity for all.',
     meta: [
       {
         name: 'description',
-        content: 'travay: Long Term Jobs Market for Developing Countries'
+        content: 'travay: Long-Term Jobs Market for Haiti'
       },
       {
         name: 'robots',
@@ -29,27 +32,24 @@ export default {
       },
       {
         name: 'keywords',
-        content:
-          'vue.js, vuex, vuex-persist, seo, server-side-rendering, isomorphic, progressive-web-app'
+        content: 'haiti, haitian, kreyol, travay, blockchain, colonyJS'
       },
 
-      { name: 'og:url', content: 'https://travay-dapp.firebaseapp.com' },
+      { name: 'og:url', content: 'travay.co' },
       { name: 'og:site_name', content: 'travay' },
       { name: 'og:type', content: 'website' },
-      { name: 'og:locale', content: 'en' },
+      { name: 'og:locale', content: 'kr' },
       {
         name: 'og:title',
-        content:
-          'travay - Long-term jobs market for developing countries built with Colony'
+        content: 'travay - Long-term jobs market of Haiti'
       },
       {
         name: 'og:description',
-        content:
-          'travay - Long-term jobs market for developing countries built with Colony'
+        content: 'travay - Long-term jobs market of Haiti'
       },
       {
         name: 'og:image:url',
-        content: 'https://travay-dapp.firebaseapp.com/logo.png'
+        content: 'https://travay.co/logo.png'
       },
 
       { name: 'twitter:card', content: 'summary' },
@@ -57,18 +57,16 @@ export default {
       { name: 'twitter:creator', content: '@farahbrunache' },
       {
         name: 'twitter:title',
-        content:
-          'travay - Long-term jobs market for developing countries built with Colony'
+        content: 'travay - opportunity for all.'
       },
-      { name: 'twitter:url', content: 'https://travay-dapp.firebaseapp.com' },
+      { name: 'twitter:url', content: 'https://travay.co' },
       {
         name: 'twitter:image',
-        content: 'https://travay-dapp.firebaseapp.com/logo.png'
+        content: 'https://travay.co/logo.png'
       },
       {
         name: 'twitter:description',
-        content:
-          'travay - Long-term jobs market for developing countries built with Colony'
+        content: 'travay - opportunity for all.'
       }
     ]
   },
@@ -79,7 +77,12 @@ export default {
     TravayExperience,
     HowDoesItWork
   },
-  computed: {}
+  computed: {
+    ...mapState({
+      disableParticles: (state: IState) =>
+        state.app.config.features.disableParticles
+    })
+  }
 };
 </script>
 

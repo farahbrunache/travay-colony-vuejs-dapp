@@ -8,7 +8,8 @@
       :required="required"
       :disabled="disabled"
       :readonly="readonly"
-      :message="message" />
+      :message="message"
+      @focus="onFocus" />
     <vue-modal :show="show" :fit-content="true" @close="show = false">
       <vue-calendar
         :min-date="minDate"
@@ -29,7 +30,6 @@
 import VueInput from '../VueInput/VueInput.vue';
 import VueModal from '../VueModal/VueModal.vue';
 import VueCalendar from '../VueCalendar/VueCalendar.vue';
-import { NormalModuleReplacementPlugin } from 'webpack';
 
 export default {
   name: 'VueDatePicker',
@@ -121,6 +121,10 @@ export default {
     }
   },
   methods: {
+    onFocus(e: any) {
+      e.currentTarget.blur();
+      this.show = true;
+    },
     onChange(date: Date): void {
       this.selectedDate = date;
       this.$emit('change', this.selectedDate);

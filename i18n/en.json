@@ -15,7 +15,7 @@
     "Job confirmed successfully! You can start work immediately.",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",
   "App.createJob.salaryPayoutDisclaimer":
-    "Remember: It is free to a post job. However, when a job is paid out to the worker, we collect 2% of the total salary amount. Based on the salary you have entered above the worker would receive, per pay frequency, approximately: ",
+    "Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: ",
   "App.createJob.pageDescription":
     "Use the form below to create a 6-month or 12-month job.",
   "App.createJob.requirementInstructions":
@@ -52,5 +52,7 @@
   "components.register.subtitle": "Please fill in all required fields",
   "components.register.terms":
     "I accept the <a href=\"/\">Terms and Conditions</a>",
-  "components.register.title": "Register"
+  "components.register.title": "Register",
+  "components.truncate.showLess": "Show less",
+  "components.truncate.showMore": "Show more"
 }
