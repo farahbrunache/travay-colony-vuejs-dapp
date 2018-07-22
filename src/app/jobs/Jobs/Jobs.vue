@@ -340,7 +340,6 @@ export default {
             return acc;
           }
         }
-
         let keywordSearchRegEx = RegExp(keyword, 'gi');
         let valid =
           keywordSearchRegEx.test(job.brief) &&
@@ -351,7 +350,6 @@ export default {
         if (valid) acc.push(job);
         return acc;
       }, []);
-
       this.jobs = jobs;
 
       /*if (this.isFilteringByDomain && this.domain) {

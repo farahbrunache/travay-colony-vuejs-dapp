@@ -153,7 +153,6 @@ export default {
           .get();
         if (snapshot.docs.length === 0) {
           const user = await db.collection('users').add(data);
-          // add slack notification if new user, here?
         }
         this.user = data;
         this.saveUserInStorage(data);

@@ -109,7 +109,6 @@ export const colonySendersMixin = {
 export const sponsorSubmitMixin = {
   methods: {
     async sponsorSubmitHandler({ amount, taskId, task, job = {} }) {
-      console.log('args', arguments);
       const data = {
         sponsoredId: uuid.v1(),
         userId: this.$store.getters['signInModal/userId'],
@@ -117,27 +116,16 @@ export const sponsorSubmitMixin = {
         taskId: taskId,
         task: task
       };
-
       try {
         const sponsoredResult = await db.collection('sponsored').add(data);
         const totalAmount =
           +(isNaN(job.sponsoredAmount) ? 0 : job.sponsoredAmount) + +amount;
-        console.log('job', job);
-        console.log('amount for the sponsored job', amount);
-        console.log(
-          'check',
-          +(isNaN(job.sponsoredAmount) ? 0 : job.sponsoredAmount)
-        );
         const updateResult = await db
           .collection('jobs')
           .doc(taskId)
           .update({
             sponsoredAmount: totalAmount
           });
-
-        console.log('jobUpdated', updateResult);
-        console.log('total', totalAmount);
-
         if (Reflect.has(this, 'job')) {
           this.job.sponsoredAmount = totalAmount;
         } else {
@@ -161,26 +149,24 @@ export const sponsorSubmitMixin = {
 
 export const travaySlackBotMixin = {
   methods: {
-    // async newUserNotification(user, context, callback) {
-    //   // short-circuit if the user signed up already
-    //   if (context.stats.loginsCount > 1) return callback(null, user, context);
-    //   // get your slack's hook url from: https://slack.com/services/10525858050
-    //   const SLACK_HOOK = 'TRAVAY_SLACK_HOOK';
-    //   const slack = require('slack-notify')(SLACK_HOOK);
-    //   const message =
-    //     'You have a new User: ' +
-    //     (user.name || user.email) +
-    //     ' (' +
-    //     user.email +
-    //     ')';
-    //   const channel = '#travay';
-    //   slack.success({
-    //     text: message,
-    //     channel: channel,
-    //     color: 'good'
-    //   });
-    //   // don’t wait for the Slack API call to finish, return right away (the request will continue on the sandbox)
-    //   callback(null, user, context);
-    // }
+    //   async newUserNotification(user, context, callback) {
+    //     if (context.stats.loginsCount > 1) return callback(null, user, context);
+    //     const SLACK_HOOK = 'TRAVAY_SLACK_HOOK';
+    //     const slack = require('slack-notify')(SLACK_HOOK);
+    //     const message =
+    //       'You have a new User: ' +
+    //       (user.name || user.email) +
+    //       ' (' +
+    //       user.email +
+    //       ')';
+    //     const channel = '#travay';
+    //     slack.success({
+    //       text: message,
+    //       channel: channel,
+    //       color: 'good'
+    //     });
+    //     // don’t wait for the Slack API call to finish, return right away (the request will continue on the sandbox)
+    //     callback(null, user, context);
+    //   }
   }
 };

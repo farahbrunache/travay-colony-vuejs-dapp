@@ -55,7 +55,7 @@ export const userRole = {
         if (
           value.role[0] === userId ||
           value.role[1] === userId ||
-          value.role[3] === userId
+          (value.role[3] === userId && value.role[2] === userId)
         )
           hide(vnode);
       }

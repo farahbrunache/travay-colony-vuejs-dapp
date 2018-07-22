@@ -217,7 +217,7 @@
 
                 <vue-button accent
                 v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
-                <a @click.prevent="uploadFile" style="color: white;">
+                <a @click.prevent="uploadImages" style="color: white;">
                   Upload file</a>
                   </vue-button>
               </vue-grid-item>
@@ -284,6 +284,7 @@ import { userRole } from '../../shared/directives/userRole.js';
 const firebaseStorage = firebase.storage();
 import moment from 'moment';
 import { filter } from 'compression';
+import { Promise } from 'bluebird';
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -337,44 +338,6 @@ export default {
       isJobManager: false,
       isJobWorker: false,
       sponsoredAmount: 0,
-      /*images: [
-        {
-          alt: 'Slide 1',
-          copyright: 'unsplash.com/@hahnbo',
-          url:
-            'https://images.unsplash.com/photo-1485932465394-d20cc595f08b?ixlib=rb-0.3.5&s=e8798191cfef2e78f4ac91e71c92ea57&auto=format&fit=crop&w=3750&q=80'
-        },
-        {
-          alt: 'Slide 2',
-          copyright: 'unsplash.com/@mitr',
-          url:
-            'https://images.unsplash.com/photo-1486068338746-bc8c63a2d7ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=348afc4c4ac324a022630fbce9204348&auto=format&fit=crop&w=3890&q=80'
-        },
-        {
-          alt: 'Slide 3',
-          copyright: 'unsplash.com/@peter_oslanec',
-          url:
-            'https://images.unsplash.com/photo-1517365884913-3c33884b06fa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=05c7363bcb2c0a2c2241e6cdcf0dfb8b&auto=format&fit=crop&w=1234&q=80'
-        },
-        {
-          alt: 'Slide 4',
-          copyright: 'unsplash.com/@ihs_photo',
-          url:
-            'https://images.unsplash.com/photo-1496348323715-c11f0fc6aeed?ixlib=rb-0.3.5&s=52406f147b73f1000c032dcc5e4e0aea&auto=format&fit=crop&w=1388&q=80'
-        },
-        {
-          alt: 'Slide 5',
-          copyright: 'unsplash.com/@parkamstutz',
-          url:
-            'https://images.unsplash.com/photo-1528150395403-992a693e26c8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0651fee03ef0f9dad95014a45adf898a&auto=format&fit=crop&w=1234&q=80'
-        },
-        {
-          alt: 'Slide 6',
-          copyright: 'unsplash.com/@mrandybae',
-          url:
-            'https://images.unsplash.com/photo-1492970471430-bc6bd7eb2b13?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9893bc89e46e2b77a5d8c091fbba04e9&auto=format&fit=crop&w=2710&q=80'
-        }
-      ]*/
       images: []
     };
   },
@@ -510,12 +473,12 @@ export default {
     },
     async onClaim(docId: any) {
       const taskId = this.$route.params.id;
-      /*db
+      await db
         .collection('jobs')
         .doc(docId)
         .update({
           'role.2': this.userId
-        });*/
+        });
       console.log('user ID', this.userId);
       const result = db
         .collection('users')
@@ -567,72 +530,53 @@ export default {
       });
     },
     editJob() {},
-    async uploadFile() {
-      console.log('UPLOADING');
-
-      const urls = await Promise.all(
-        this.images.map(({ file }, index) => {
-          console.log('file', file);
-          return new Promise((resolve, reject) => {
-            const self = this;
-            const storageRef = firebaseStorage
-              .ref()
-              .child('images/jobs/' + this.job.taskId + '/' + file.name);
-            let uploadTask = storageRef.put(file);
-            uploadTask.on(
-              'state_changed',
-              function(snapshot) {
-                var progress =
-                  snapshot.bytesTransferred / snapshot.totalBytes * 100;
-                console.log(progress);
-                self.loadingText =
-                  'Upload is ' + progress + '% done. Processing post.';
-              },
-              function(error) {
-                // Handle unsuccessful uploads
-                reject(error);
-              },
-              function() {
-                // Handle successful uploads on complete
-                resolve({ url: uploadTask.snapshot.ref.getDownloadURL() });
-              }
-            );
-          });
-        })
-      );
-      console.log('urls', urls);
-      console.log('taskId', this.job.taskId);
-      const job = { ...this.job, images: urls };
-      const result = await db
-        .collection('jobs')
-        .doc(this.job.taskId)
-        .get()
-        .add({ images: urls })
-        .then(docRef => {
-          console.log('updated!', docRef);
+    async uploadImages() {
+      console.log('UPLOADING', this.images);
+      const self = this;
+      const results = this.images.map(async ({ file }) => {
+        const imageUrl = await this.uploadFile(file, self.job.taskId);
+        return { name: file.name, url: imageUrl };
+      });
+      Promise.all(results).then(async imageUrls => {
+        console.log(imageUrls, this.job);
+        const imageData = {};
+        imageUrls.map((image: any) => {
+          imageData[image.name] = image;
         });
+        console.log(imageData);
+        const result = await db
+          .collection('jobs')
+          .doc(this.job.taskId)
+          .set({ images: imageData }, { merge: true })
+          .then(docRef => {
+            console.log('updated!', docRef);
+          });
+      });
 
-      /*
-firebase.firestore()
-  .collection('proprietary')
-  .doc(docID)
-  .collection('sharedWith')
-  .add({ who: "third@test.com", when: new Date() }) 
-        */
+      // console.log('taskId', this.job.taskId);
+      // const job = { ...this.job, images: urls };
 
-      /*.get()
-        .then(doc => {
-          console.log('doc', doc);
-          doc
-            .update({
-              images: urls
-            })
-            .then(res => {
-              console.log('doc updated!', res);
-            });
-        });*/
+      //       /*
+      // firebase.firestore()
+      //   .collection('proprietary')
+      //   .doc(docID)
+      //   .collection('sharedWith')
+      //   .add({ who: "third@test.com", when: new Date() }) 
+      //         */
 
-      console.log('result of jobs', result);
+      //       /*.get()
+      //         .then(doc => {
+      //           console.log('doc', doc);
+      //           doc
+      //             .update({
+      //               images: urls
+      //             })
+      //             .then(res => {
+      //               console.log('doc updated!', res);
+      //             });
+      //         });*/
+
+      //       console.log('result of jobs', result);
     },
     uploadProofOfWork() {
       this.uploadFile().then(imageUrl => {
@@ -649,6 +593,35 @@ firebase.firestore()
           .catch(function(error) {
             console.error('Error adding document: ', error);
           });
+      });
+    },
+    uploadFile(file: any, jobId: string) {
+      return new Promise((resolve, reject) => {
+        const self = this;
+        const storageRef = firebaseStorage
+          .ref()
+          .child('jobs/' + jobId + '/' + file.name + '');
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          'state_changed',
+          function(snapshot) {
+            var progress =
+              snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            console.log(progress);
+            self.loadingText =
+              'Upload is ' + progress + '% done. Processing post.';
+          },
+          function(error) {
+            // Handle unsuccessful uploads
+            reject(error);
+          },
+          async function() {
+            // Handle successful uploads on complete
+            const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+            console.log(downloadUrl);
+            resolve(downloadUrl);
+          }
+        );
       });
     }
   }
