@@ -110,24 +110,23 @@
                 Job: {{job.task}}<br>
                 Description: {{job.brief}}<br>
                 Domain: {{job.domain}}<br>
-                Top Desired Skill: {{job.skill}}<br>
-                Full time rate: ${{job.salary['full-time-rate']}}
+                Top Desired Skill: {{job.skill}}
                 <br>
                 <br>
+                Full time rate: ${{job.salary['full-time-rate']}}<br>
                 Pay frequency: 
                 <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="weekly">Weekly</label>
                 <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" disabled/>
                 <label for="bi-weekly">Bi-weekly</label>
                 <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" disabled/>
-                <label for="monthly">Monthly</label>
-                <br>
-                <br>
+                <label for="monthly">Monthly</label><br>
                 Term of employment: 
                 <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" disabled/>
                 <label for="sixmonth">6 month</label>
                 <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" disabled/>
                 <label for="oneyear">1 year</label>
+                <br>
                 <br>
                 Date Posted: {{ job['date-posted'] | moment }}<br>
               </li>

@@ -3,7 +3,7 @@
     <vue-grid v-if="job">
       <vue-grid-row>
         <vue-grid-item fill>
-          <h1>Job</h1>
+          <h1>{{ $t('App.job.jobTitle' /* Job */) }}</h1>
         </vue-grid-item>
 
         <sponsor-modal 
@@ -19,22 +19,24 @@
         <vue-grid-item fill>
           <vue-panel>
             <vue-panel-header title="Details">
-             <p v-if="job.role && userId">
-                <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
-                  <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
-                  Icon
-                </a>
-            </p>
 
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
+
             <vue-panel-body>
+              <p v-if="job.role && userId">
+                <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
+                  <i class="fa edit-icon" :class="isEditingJobDetails ? 'fa-times' : 'fa-edit'" @click="isEditingJobDetails = !isEditingJobDetails" ></i>
+                  Edit
+                </a>
+              </p>
 
             <ul>
               <li v-if="job.salary">
                 Job: {{job.task}}<br>
 
-                <template v-if="isEditing">
+                <template v-if="isEditingJobDetails">
+
                   Description:<br/>
                   <input 
                     id="job-description" 
@@ -51,17 +53,38 @@
                     <input
                     id="skill"
                     type="text"
-                    v-model="job.skill" /><br>
+                    v-model="job.skill" /> <br/>
 
                   Full time rate: <br/>
                   <input 
                     id="job-salary-rate"
                     type="text"
                     v-model="job.salary['full-time-rate']"/> <br/>
-                    <br>
-                    <vue-button primary>
-                      Post Changes
-                    </vue-button>
+
+                    {{ $t('App.job.payFrequencyIsEditing' /* Pay frequency cannot be changed after job is posted.  */) }}<br>
+                    {{ $t('App.job.termOfEmploymentIsEditing' /* Term of Employment cannot be changed after job is posted. */) }}<br>
+
+                    <!-- Pay frequency: 
+                        <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
+                        <label for="weekly">Weekly</label>
+
+                        <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
+                        <label for="bi-weekly">Bi-weekly</label>
+
+                        <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
+                        <label for="monthly">Monthly</label><br> -->
+
+                    <!-- Term of employment: 
+                    <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" :disabled="!isJobManager"/>
+                    <label for="sixmonth">6 month</label>
+                    <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" :disabled="!isJobManager"/>
+                    <label for="oneyear">1 year</label> -->
+
+                    Requirements: <br/>
+                      <input
+                      id="deliverable"
+                      type="text"
+                      v-model="job.deliverable" />
                 </template>
 
                 <template v-else>
@@ -69,63 +92,36 @@
                   Domain: {{job.domain}}<br>
                   Top Desired Skill: {{job.skill}}<br>
                   Full time rate: ${{job.salary['full-time-rate']}}<br>
-                  Total Sponsored Amount: ${{ job.sponsoredAmount }}
-                </template>
-                
+                  Total Sponsored Amount: ${{ job.sponsoredAmount }}<br>
+                  Pay frequency: {{job.salary['pay-frequency'].label}}<br>
+                  Term of Employment: {{ job['terms-of-employment'] }}<br>
+                  Requirements: {{ job.deliverable }}<br>
+                </template> 
                 <br>
-                <template v-if="isEditing"><br>
-                Pay frequency: 
-                <input id="weekly" true-value="weekly" type="checkbox" name="weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
-                <label for="weekly">Weekly</label>
-
-                <input id="bi-weekly" type="checkbox" true-value="bi-weekly" name="bi-weekly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
-                <label for="bi-weekly">Bi-weekly</label>
-
-                <input id="monthly" true-value="monthly" type="checkbox" name="monthly" v-model="job.salary['pay-frequency'].label" :disabled="!isJobManager"/>
-                <label for="monthly">Monthly</label><br>
-                </template>
-
-                <template v-else>
-                  Pay frequency: {{job.salary['pay-frequency'].label}}
-                </template>
-
-
                 <br>
-                <template v-if="isEditing">
-                  Term of employment: 
-                  <input id="sixmonth" type="checkbox" name="sixmonth" v-model="job['terms-of-employment']" true-value="6" :disabled="!isJobManager"/>
-                  <label for="sixmonth">6 month</label>
-                  <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" :disabled="!isJobManager"/>
-                  <label for="oneyear">1 year</label>
-                </template>
-                <template v-else>
-                  Term of employment: {{ job['terms-of-employment'] }}
+
+                <template v-if="isEditingJobDetails">
+                  <vue-grid-row>
+                        <vue-grid-item>
+                          <vue-button primary>
+                            Post Changes
+                          </vue-button>
+                        </vue-grid-item>
+                        <br>
+                        <br>
+                        <br>
+                        <vue-grid-item>
+                        <vue-button warn>
+                            Cancel Job
+                        </vue-button>
+                        </vue-grid-item>
+                      </vue-grid-row>
                 </template>
                 <br>
                 Date Posted: {{ job['date-posted'] | moment }}<br>
               </li>
             </ul>
             </vue-panel-body>
-            
-            <vue-panel-footer>
-
-              <vue-grid-row>
-                <vue-grid-item>
-    <vue-button primary v-userRole.signedIn.manager="{role: job.role}">
-                Post Changes
-              </vue-button>
-                </vue-grid-item>
-                <br>
-              <br>
-                <vue-grid-item>
-    <vue-button warn v-userRole.signedIn.manager="{role: job.role}">
-                Cancel Job
-              </vue-button>
-                </vue-grid-item>
-              </vue-grid-row>
-              
-            </vue-panel-footer>
-            <br>
 
           </vue-panel>
         </vue-grid-item>
@@ -134,43 +130,28 @@
           <vue-accordion multiple>
             <vue-accordion-item title="Claim">
 
-      <p v-if="job.role && userId">
-          <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
-            <i class="fa edit-icon" :class="isEditing ? 'fa-times' : 'fa-edit'" @click="isEditing = !isEditing" ></i>
-            Icon
-          </a>
-        </p>
-
-              <h3>Requirements</h3>
-
-                  <template v-if="isEditing">
-                  Requirements: 
-                  <input
-                  id="deliverable"
-                  type="text"
-                  v-model="job.deliverable" />
-                </template>
-                <template v-else>
-                    <p>{{ job.deliverable }}</p>
-                </template>
-              
               <vue-grid-row>
-                <vue-grid-item v-if="isJobWorker">
+                <vue-grid-item>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </vue-grid-item>
+              </vue-grid-row>
+              
+              <vue-grid-row v-userRole.signedIn.canClaim="{role: job.role}">
+                <vue-grid-item>
                   <p>Claiming this position is to accpet the requirements and legal requirements.</p>
                   <vue-checkbox
                     name="acceptTerms"
                     id="acceptTerms"
                     v-model="form.acceptTerms"
                     label="I accept the terms"
-                    required />
-                    </vue-grid-item>
+                    validation="required" />
+                  </vue-grid-item>
               </vue-grid-row>
               <vue-grid-row>
-                    <vue-grid-item v-if="job.role">
+                    <vue-grid-item>
                     <vue-button primary
-                      v-if="job.role['0'] !== userId"
                       @click.prevent.stop="e => onClaim(job.id)"
-                      v-userRole.signedIn.canClaim="{role: job.role}">
+                      v-userRole.signedIn.canClaim="{role: job.role}"                      >
                      Claim
                      </vue-button>
                 </vue-grid-item>
@@ -329,14 +310,12 @@ export default {
       },
       isLoading: false,
       showSponsoredModal: false,
-      isEditing: false,
+      isEditingJobDetails: false,
       file: '',
       fileName: '',
       image: '',
       imagePreview: '',
       loadingText: '',
-      isJobManager: false,
-      isJobWorker: false,
       sponsoredAmount: 0,
       images: []
     };
@@ -363,7 +342,6 @@ export default {
         });
         this.job = jobs[0];
         this.job.id = jobsId[0];
-        console.log(this.job, 'job');
       })
       .catch(err => {
         console.error('Error while trying to get the job', err);
@@ -382,19 +360,6 @@ export default {
   computed: {
     ...mapGetters('job', []),
     ...mapGetters('signInModal', ['userId']),
-    isJobManager() {
-      return this.userId === this.job.role[0];
-    },
-    isJobWorker() {
-      return this.userId === this.job.role[2];
-    },
-    addressDisabled() {
-      return (
-        this.form.firstname === '' ||
-        this.form.lastname === '' ||
-        this.form.email === ''
-      );
-    },
     hasErrors() {
       return this.errors && this.errors.items.length > 0;
     },
@@ -423,8 +388,6 @@ export default {
       this.images = this.images.filter((img, index) => index !== i);
     },
     async fileUploaded(e) {
-      console.log('file uploaded', e, e.target.files);
-
       const images = await Promise.all(
         Array.from(e.target.files).map(file => {
           return new Promise((resolve, reject) => {
@@ -473,13 +436,19 @@ export default {
     },
     async onClaim(docId: any) {
       const taskId = this.$route.params.id;
+      if (this.hasEmptyFields) {
+        addNotification({
+          title: 'Oops',
+          text: 'To claim this job, you must agree to the terms.'
+        } as INotification);
+        return false;
+      }
       await db
         .collection('jobs')
         .doc(docId)
         .update({
           'role.2': this.userId
         });
-      console.log('user ID', this.userId);
       const result = db
         .collection('users')
         .where('uid', '==', this.userId)
@@ -552,31 +521,6 @@ export default {
             console.log('updated!', docRef);
           });
       });
-
-      // console.log('taskId', this.job.taskId);
-      // const job = { ...this.job, images: urls };
-
-      //       /*
-      // firebase.firestore()
-      //   .collection('proprietary')
-      //   .doc(docID)
-      //   .collection('sharedWith')
-      //   .add({ who: "third@test.com", when: new Date() }) 
-      //         */
-
-      //       /*.get()
-      //         .then(doc => {
-      //           console.log('doc', doc);
-      //           doc
-      //             .update({
-      //               images: urls
-      //             })
-      //             .then(res => {
-      //               console.log('doc updated!', res);
-      //             });
-      //         });*/
-
-      //       console.log('result of jobs', result);
     },
     uploadProofOfWork() {
       this.uploadFile().then(imageUrl => {
@@ -618,7 +562,6 @@ export default {
           async function() {
             // Handle successful uploads on complete
             const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
-            console.log(downloadUrl);
             resolve(downloadUrl);
           }
         );

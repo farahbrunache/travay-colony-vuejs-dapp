@@ -56,8 +56,11 @@ export const userRole = {
           value.role[0] === userId ||
           value.role[1] === userId ||
           (value.role[3] === userId && value.role[2] === userId)
-        )
-          hide(vnode);
+        ) {
+        } else {
+          value.role[2] == null;
+        }
+        hide(vnode);
       }
 
       // Only sponsor if not claimed, not the evaluator, not the manager, and not the worker

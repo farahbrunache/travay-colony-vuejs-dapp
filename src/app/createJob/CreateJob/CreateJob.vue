@@ -99,6 +99,15 @@
     <vue-grid-row>
       <vue-grid-item>
           <vue-select
+            name="termOfEmployment"
+            id="termOfEmployment"
+            :options="termOfEmployment"
+            :value="form.selectedTermOfEmployment"
+            @input="val => selectChange(val, 'selectedTermOfEmployment')"
+            validation="required" />
+      </vue-grid-item>
+      <vue-grid-item>
+          <vue-select
             name="payFrequency"
             id="payFrequency"
             :options="payFrequency"
@@ -119,9 +128,6 @@
           v-model="form.salary"
           validation="required" />
           <div>{{ $t('App.createJob.salaryPayoutDisclaimer' /* Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: */) }} <strong>${{ estimatedWorkerPayout }}</strong>.</div>
-          <div>
-
-          </div>
       </vue-grid-item>
       </vue-grid-row>
 <br>
@@ -150,15 +156,6 @@
     </vue-grid-row>
 
     <vue-grid-row>
-      <vue-grid-item>
-          <vue-select
-            name="termOfEmployment"
-            id="termOfEmployment"
-            :options="termOfEmployment"
-            :value="form.selectedTermOfEmployment"
-            @input="val => selectChange(val, 'selectedTermOfEmployment')"
-            validation="required" />
-      </vue-grid-item>
       <vue-grid-item>
         <vue-select
           name="country"
@@ -352,7 +349,6 @@ export default {
     submitHandler() {
       const form = this.form;
       const self = this;
-      console.log('form', form);
       if (this.hasEmptyFields) {
         addNotification({
           title: 'Oops',

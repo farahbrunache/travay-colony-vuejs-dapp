@@ -2,9 +2,7 @@ import { ActionContext } from 'vuex';
 import { ISignInModalState } from './state';
 import { HttpService } from '../shared/services/HttpService';
 import { AxiosResponse } from 'axios';
-export interface ISignInModalResponse {
-  // count: number;
-}
+export interface ISignInModalResponse {}
 
 export interface ISignInModalActions {
   openLoginModal(context: ActionContext<ISignInModalState>): void;
