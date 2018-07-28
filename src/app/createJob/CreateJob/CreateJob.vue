@@ -228,6 +228,7 @@ import { uuid } from 'vue-uuid';
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 import { AssertionError } from 'assert';
+import { any } from 'bluebird';
 
 export default {
   mixins: [colonyCallersMixin, colonySendersMixin],
@@ -321,14 +322,14 @@ export default {
   },
   methods: {
     ...mapActions('createJob', []),
-    calendarChange(val) {
-      console.log('val from datepicker', val);
-      this.form.closingDate = val;
+    calendarChange(value: any) {
+      console.log('value from datepicker', value);
+      this.form.closingDate = value;
     },
-    selectChange(value, field) {
+    selectChange(value: any, field: any) {
       this.$set(this.form, field, value);
     },
-    getPayFrequencyLabel(selectedValue) {
+    getPayFrequencyLabel(selectedValue: any) {
       const selected = this.payFrequency.find(
         item => item.value === selectedValue
       );
@@ -386,19 +387,21 @@ export default {
         task: form.task,
         taskId: jobId,
         country: form.country,
-        'terms-of-employment': form.selectedTermOfEmployment
+        'terms-of-employment': form.selectedTermOfEmployment,
+        status: {
+          status: 'incomplete'
+        }
       };
       db
         .collection('jobs')
         .doc(jobId)
         .set(jobData)
-        .then(function(docref) {
+        .then(function(docref: any) {
           // self.createTask(); // ColonyJS + IPFS
           self.clearForm();
-          console.log('ref', docref);
         })
-        .catch(function(error) {
-          console.error('Error adding document: ', error);
+        .catch(function(error: any) {
+          console.error('Error adding new job: ', error);
         });
       this.$nextTick(() => {
         setTimeout(() => {
@@ -446,7 +449,6 @@ export default {
           hasEmptyField = true;
         }
       });
-
       return hasEmptyField;
     },
     isSubmitDisabled() {

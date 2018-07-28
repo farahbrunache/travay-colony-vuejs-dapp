@@ -12,6 +12,8 @@
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
   "App.job.jobTitle": "Job",
+  "App.job.salaryIsEditing": "Salary cannot be changed after job is posted.",
+  "App.job.jobUpdated": "Job updated successfully!",
   "App.job.jobClaimed":
     "Job confirmed successfully! You can start work immediately.",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",

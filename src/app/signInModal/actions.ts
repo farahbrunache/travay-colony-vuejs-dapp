@@ -7,7 +7,7 @@ export interface ISignInModalResponse {}
 export interface ISignInModalActions {
   openLoginModal(context: ActionContext<ISignInModalState>): void;
   closeLoginModal(context: ActionContent<ISignInModalState>): void;
-  saveUserInStorage({ commit: any }, userData): any;
+  saveUserInStorage({ commit: any }, userData: any): any;
   logoutUser(context: ActionContext<ISigninState>): void;
 }
 

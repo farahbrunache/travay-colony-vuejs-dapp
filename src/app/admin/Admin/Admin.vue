@@ -7,6 +7,7 @@
         </vue-grid-item>
 
         <vue-grid-item fill>
+          test
         </vue-grid-item>
 
       </vue-grid-row>

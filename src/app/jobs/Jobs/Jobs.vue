@@ -278,14 +278,14 @@ export default {
     };
   },
   watch: {
-    filterType(selectedValue, oldValue) {
+    filterType(selectedValue: any, oldValue: any) {
       console.log('filter type value changed', selectedValue, oldValue);
       this.filterJobs();
     },
-    keyword(keyword) {
+    keyword(keyword: any) {
       this.filterJobs(keyword);
     },
-    domain(domain) {
+    domain(domain: any) {
       this.filterJobs();
     }
   },
@@ -307,7 +307,7 @@ export default {
       }
       this.$router.push('createJob');
     },
-    sponsorJobClickedHandler(taskId) {
+    sponsorJobClickedHandler(taskId: string) {
       if (!this.userId) {
         this.openLoginModal();
         return;
@@ -323,10 +323,10 @@ export default {
       });
       this.jobs = result;
     },
-    filterJobs(keyword: string, jobs: any) {
+    filterJobs(keyword: any) {
       console.log('filtering in filterJobs', keyword);
       if (!Reflect.has(this.$options, 'originalJobs')) return [];
-      const jobs = this.$options.originalJobs.reduce((acc, job) => {
+      const jobs = this.$options.originalJobs.reduce((acc: any, job: any) => {
         console.log(
           'Checking the domain',
           this.isFilteringByDomain,
@@ -350,7 +350,6 @@ export default {
         return acc;
       }, []);
       this.jobs = jobs;
-
       /*if (this.isFilteringByDomain && this.domain) {
         return this.$options.originalJobs.filter(job => {
           console.log('job domain', job.domain, this.domain);
@@ -396,9 +395,11 @@ export default {
   created() {
     db
       .collection('jobs')
+      .where('status.state', '==', 'incomplete')
       .get()
       .then(snapshot => {
-        const jobs = [];
+        console.log('getting jobs', snapshot);
+        const jobs: any = [];
         snapshot.forEach(job => {
           jobs.push(job.data());
         });

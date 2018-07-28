@@ -98,8 +98,8 @@ export default {
     }
   },
   watch: {
-    selectedDateValue(val) {
-      if (!val) this.selectedDate = null;
+    selectedDateValue(value: any) {
+      if (!value) this.selectedDate = null;
     }
   },
   data(): any {

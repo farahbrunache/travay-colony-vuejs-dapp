@@ -4,11 +4,7 @@
 
 Means "work" in Haitian Creole
 
-A decentralized long-term jobs market for the unbanked of Haiti.
-
-## Roadmap
-
-Our Smart Contracts and implementation of our DAO via Colony is not ready for Mainnet. Thus most of the app is centralized, however, in the coming months the entire application will incrementally be decentralized after we iterate the product based on end user feedback and thorough testing of decentralized services.
+A long-term jobs market for the unbanked of Haiti.
 
 ## Run Locally
 

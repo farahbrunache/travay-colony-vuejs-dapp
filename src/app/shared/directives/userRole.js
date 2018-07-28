@@ -4,7 +4,8 @@ const role = {
   manager: 0,
   evaluator: 1,
   worker: 2,
-  sponsor: 3
+  sponsor: 3,
+  admin: 4
 };
 
 const hide = vnode => {
@@ -52,15 +53,16 @@ export const userRole = {
 
       // Only if user did not claim the job && is not the evaluator
       if (Reflect.has(modifiers, 'canClaim')) {
+        console.log('canClaim is in modifiers');
         if (
           value.role[0] === userId ||
-          value.role[1] === userId ||
-          (value.role[3] === userId && value.role[2] === userId)
+          value.role[1].includes(userId) ||
+          (value.role[3].includes(userId) && value.role[2] === userId)
         ) {
+          console.log('NOT HIDING');
         } else {
-          value.role[2] == null;
+          hide(vnode);
         }
-        hide(vnode);
       }
 
       // Only sponsor if not claimed, not the evaluator, not the manager, and not the worker

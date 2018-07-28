@@ -31,15 +31,4 @@ describe('Admin.vue', () => {
 
     expect(wrapper.find('h1').text()).toBe('Admin');
   });
-
-  test('dispatches action on the server', () => {
-    const store = {
-      dispatch: jest.fn()
-    };
-
-    Admin.prefetch({ store });
-
-    expect(store.dispatch).toHaveBeenCalled();
-    expect(store.dispatch).toHaveBeenCalledWith(`admin/increment`);
-  });
 });

@@ -104,8 +104,8 @@ export default {
             .collection('users')
             .doc(uid)
             .set(uPortUserData)
-            .then(function(docref) {})
-            .catch(function(error) {
+            .then(function(docref: any) {})
+            .catch(function(error: any) {
               console.error('Error adding user: ', error);
             });
           console.log('uport user data', uPortUserData);
@@ -134,7 +134,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    async updateUserData(user) {
+    async updateUserData(user: any) {
       const userRef = db.doc(`users/${user.uid}`);
       const data = {
         uid: user.uid,

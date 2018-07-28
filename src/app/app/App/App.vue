@@ -10,13 +10,13 @@
             <small>{{ $t('App.nav.jobs' /* Jobs */) }}</small>
           </router-link>
         </li>
-        <li>
+        <li v-if="userId">
           <router-link to="/profile" @click.native="navBarClose">
             <i class="fas fa-user" />
             <small>{{ $t('App.nav.profile' /* Profile */) }}</small>
           </router-link>
         </li>
-        <li>
+        <li v-if="userId">
           <router-link to="/wallet" @click.native="navBarClose">
             <i class="far fa-credit-card" />
             <small>{{ $t('App.nav.wallet' /* Wallet */) }}</small>
@@ -46,12 +46,6 @@
             <small>{{ $t('App.nav.english' /* English */) }}</small>
           </a>
         </li>
-        <!-- <li>
-          <router-link to="/components" @click.native="navBarClose">
-            <i class="fas fa-puzzle-piece" />
-            <small>{{ $t('App.nav.components' /* Components */) }}</small>
-          </router-link>
-        </li> -->
       </ul>
     </vue-nav-bar>
 

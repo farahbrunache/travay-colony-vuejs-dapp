@@ -20,11 +20,13 @@
           <vue-panel>
             <vue-panel-header title="Details">
 
+
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
 
             <vue-panel-body>
-              <p v-if="job.role && userId">
+              <p v-if="'status' in job && job.status.state === 'cancelled'">This job has been cancelled</p>
+              <p v-if="job.role && userId && ('status' in job && job.status.state !== 'cancelled')">
                 <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
                   <i class="fa edit-icon" :class="isEditingJobDetails ? 'fa-times' : 'fa-edit'" @click="isEditingJobDetails = !isEditingJobDetails" ></i>
                   Edit
@@ -55,13 +57,10 @@
                     type="text"
                     v-model="job.skill" /> <br/>
 
-                  Full time rate: <br/>
-                  <input 
-                    id="job-salary-rate"
-                    type="text"
-                    v-model="job.salary['full-time-rate']"/> <br/>
+                    {{ $t('App.job.salaryIsEditing' /* Salary cannot be changed after job is posted.  */) }}<br>
 
                     {{ $t('App.job.payFrequencyIsEditing' /* Pay frequency cannot be changed after job is posted.  */) }}<br>
+
                     {{ $t('App.job.termOfEmploymentIsEditing' /* Term of Employment cannot be changed after job is posted. */) }}<br>
 
                     <!-- Pay frequency: 
@@ -80,11 +79,29 @@
                     <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" :disabled="!isJobManager"/>
                     <label for="oneyear">1 year</label> -->
 
-                    Requirements: <br/>
-                      <input
-                      id="deliverable"
-                      type="text"
-                      v-model="job.deliverable" />
+                    Requirements: (Please place a "comma" after each requirement) <br/>
+                      <vue-grid-item>
+                        <vue-input
+                          name="deliverable"
+                          id="deliverable"
+                          placeholder="Requirement for Job to be Complete"
+                          validation="required"
+                          v-model="requirement"
+                          required />
+                          <button accent @click="addRequirement">Add Requirement</button><br>
+                      </vue-grid-item>
+                      <br>
+                      <br>
+                      <vue-grid-item>
+                      <p v-for="(req, i) in job.deliverable" :key="i">
+                        <vue-badge accent>{{req}} -</vue-badge>
+                        <span @click="removeRequirement(i)">
+                          X
+                        </span>
+                        <br>
+                        <br>
+                      </p>
+                      </vue-grid-item>
                 </template>
 
                 <template v-else>
@@ -94,27 +111,33 @@
                   Full time rate: ${{job.salary['full-time-rate']}}<br>
                   Total Sponsored Amount: ${{ job.sponsoredAmount }}<br>
                   Pay frequency: {{job.salary['pay-frequency'].label}}<br>
-                  Term of Employment: {{ job['terms-of-employment'] }}<br>
-                  Requirements: {{ job.deliverable }}<br>
-                </template> 
-                <br>
-                <br>
+                  Term of Employment: {{ job['terms-of-employment'] }}<br><br>
+                  Requirements:<br>
+                      <p v-for="(item, index) in job.deliverable" :key="index">
+                        + {{item}}
+                      </p>
+                </template>
 
                 <template v-if="isEditingJobDetails">
                   <vue-grid-row>
                         <vue-grid-item>
-                          <vue-button primary>
+                          <vue-button primary
+                          @click.prevent.stop="e => postEditedJob(job.id)">
                             Post Changes
                           </vue-button>
                         </vue-grid-item>
+
                         <br>
                         <br>
                         <br>
+
                         <vue-grid-item>
-                        <vue-button warn>
+                        <vue-button warn
+                        @click="cancelJobHandler">
                             Cancel Job
                         </vue-button>
                         </vue-grid-item>
+
                       </vue-grid-row>
                 </template>
                 <br>
@@ -136,6 +159,7 @@
                 </vue-grid-item>
               </vue-grid-row>
               
+              <template v-if="!claimed">
               <vue-grid-row v-userRole.signedIn.canClaim="{role: job.role}">
                 <vue-grid-item>
                   <p>Claiming this position is to accpet the requirements and legal requirements.</p>
@@ -147,16 +171,18 @@
                     validation="required" />
                   </vue-grid-item>
               </vue-grid-row>
+
               <vue-grid-row>
-                    <vue-grid-item>
+              <vue-grid-item>
                     <vue-button primary
                       @click.prevent.stop="e => onClaim(job.id)"
-                      v-userRole.signedIn.canClaim="{role: job.role}"                      >
+                      v-userRole.signedIn.canClaim="{role: job.role}">
                      Claim
                      </vue-button>
+                     
                 </vue-grid-item>
               </vue-grid-row>
-
+            </template>
               </vue-accordion-item>
 
             <vue-accordion-item title="Sponsor this Job">
@@ -185,33 +211,42 @@
                     <vue-grid-item>
                       <h5>Upload Proof of Work</h5>
                       <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
-                        Browse
                         <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview" multiple/>
                       </span>
                   <div>
-                    <img class="img-responsive" :src="imagePreview" alt="" style="width:500px; height:500px;">
                   </div>
 
                   <div>
                     <p>{{ loadingText }}</p>
                   </div>
 
-                <vue-button accent
-                v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
+                  <vue-button accent
+                  v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
                 <a @click.prevent="uploadImages" style="color: white;">
                   Upload file</a>
                   </vue-button>
               </vue-grid-item>
-
+              <br/>
+              <vue-grid-item>
+              <br>
+              <div class="job-images">
+                <div 
+                  v-for="(img, index) in this.job.images"
+                  :key="index"
+                  class="job-image-blocxk">
+                  <img :src="img.url" :alt="img.name" />
+                </div>
+              </div>
+              </vue-grid-item>
               </vue-grid-row>
             </vue-accordion-item>
 
             <vue-accordion-item title="Approve Work">
           
               <vue-grid-row>
-                    <vue-grid-item>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              </vue-grid-item>
+                <vue-grid-item>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  </vue-grid-item>
               </vue-grid-row>
 
               <vue-grid-row>
@@ -227,7 +262,7 @@
           </vue-accordion>
 
         </vue-grid-item>
-    <br>
+        <br>
       </vue-grid-row>
     </vue-grid>
   </div>
@@ -240,7 +275,6 @@ import VueGrid from '../../shared/components/VueGrid/VueGrid.vue';
 import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 import VueButton from '../../shared/components/VueButton/VueButton.vue';
 import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
-import VuePagination from '../../shared/components/VuePagination/VuePagination.vue';
 import VuePanel from '../../shared/components/VuePanel/VuePanel.vue';
 import VuePanelHeader from '../../shared/components/VuePanel/VuePanelHeader/VuePanelHeader.vue';
 import VuePanelBody from '../../shared/components/VuePanel/VuePanelBody/VuePanelBody.vue';
@@ -250,7 +284,7 @@ import VueAccordionItem from '../../shared/components/VueAccordion/VueAccordionI
 import VueInput from '../../shared/components/VueInput/VueInput.vue';
 import VueSelect from '../../shared/components/VueSelect/VueSelect.vue';
 import VueCheckbox from '../../shared/components/VueCheckbox/VueCheckbox.vue';
-import VueCarousel from '../../shared/components/VueCarousel/VueCarousel.vue';
+import VueBadge from '../../shared/components/VueBadge/VueBadge.vue';
 import {
   addNotification,
   INotification
@@ -266,6 +300,8 @@ const firebaseStorage = firebase.storage();
 import moment from 'moment';
 import { filter } from 'compression';
 import { Promise } from 'bluebird';
+import { AssertionError } from 'assert';
+import { any } from 'bluebird';
 
 export default {
   mixins: [sponsorSubmitMixin],
@@ -286,7 +322,6 @@ export default {
     VueGridItem,
     VueButton,
     VueGridRow,
-    VuePagination,
     VuePanel,
     VuePanelHeader,
     VuePanelBody,
@@ -297,7 +332,7 @@ export default {
     VueSelect,
     VueCheckbox,
     SponsorModal,
-    VueCarousel
+    VueBadge
   },
   data(): any {
     return {
@@ -317,23 +352,21 @@ export default {
       imagePreview: '',
       loadingText: '',
       sponsoredAmount: 0,
-      images: []
+      images: [],
+      requirement: '',
+      requirements: [],
+      claimed: false
     };
   },
-  filters: {
-    moment: function(date: any) {
-      return moment(date).format('MMMM Do YYYY');
-    }
-  },
-  mounted() {
+  created() {
     const taskId = this.$route.params.id;
     db
       .collection('jobs')
       .where('taskId', '==', taskId)
       .get()
       .then(snapshot => {
-        const jobs = [];
-        const jobsId = [];
+        const jobs: any = [];
+        const jobsId: any = [];
         snapshot.forEach(job => {
           let jobData = job.data();
           let jobId = job.id;
@@ -343,9 +376,16 @@ export default {
         this.job = jobs[0];
         this.job.id = jobsId[0];
       })
-      .catch(err => {
-        console.error('Error while trying to get the job', err);
+      .catch(error => {
+        console.error('Error while trying to get the job', error);
       });
+  },
+  filters: {
+    moment: function(date: any) {
+      return moment(date).format('MMMM Do YYYY');
+    }
+  },
+  mounted() {
     /*
       beforeCreate
       created
@@ -384,10 +424,45 @@ export default {
   methods: {
     ...mapGetters('signInModal', ['userId']),
     ...mapActions('signInModal', ['openLoginModal', 'closeLoginModal']),
-    removeImage(i) {
-      this.images = this.images.filter((img, index) => index !== i);
+    removeImage(i: any) {
+      this.images = this.images.filter((img: any, index: any) => index !== i);
     },
-    async fileUploaded(e) {
+    addRequirement() {
+      if (this.requirement) {
+        if (Reflect.has(this.job, 'deliverable')) {
+          this.job.deliverable.push(this.requirement);
+        } else {
+          this.job.deliverable = [this.requirement];
+        }
+      }
+      console.log('adding requirement', this.requirement, this.job.deliverable);
+      this.requirement = '';
+    },
+    removeRequirement(i) {
+      console.log('removing requirement', i);
+      this.job.deliverable.splice(i, 1);
+    },
+    async cancelJobHandler() {
+      const jobId = this.job.taskId;
+
+      try {
+        const job = await db.collection('jobs').doc(jobId);
+        const update = await job.update({
+          status: {
+            status: 'cancelled'
+          }
+        });
+        console.log('job found', job);
+        console.log('update status', update);
+        this.job.status = 'cancelled';
+        this.isEditingJobDetails = false;
+        addNotification({
+          title: 'Success',
+          text: 'This job has been cancelled!'
+        } as INotification);
+      } catch (error) {}
+    },
+    async fileUploaded(e: any) {
       const images = await Promise.all(
         Array.from(e.target.files).map(file => {
           return new Promise((resolve, reject) => {
@@ -404,7 +479,7 @@ export default {
       console.log('Images', images);
       this.images = images;
     },
-    sponsorJobClickedHandler(taskId) {
+    sponsorJobClickedHandler(taskId: string) {
       if (!this.userId) {
         this.openLoginModal();
         return;
@@ -467,6 +542,7 @@ export default {
             claimedJobs: [...claimedJobs, this.job.taskId]
           });
         });
+      this.claimed = true;
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
@@ -498,7 +574,43 @@ export default {
         }, 700);
       });
     },
-    editJob() {},
+    async postEditedJob() {
+      const jobData = {
+        brief: this.job.brief,
+        deliverable: this.job.deliverable,
+        skill: this.job.skill,
+        domain: this.job.domain
+      };
+      var jobRef = await db
+        .collection('jobs')
+        .doc(this.job.taskId)
+        .get();
+      console.log('JOb reference', jobRef, this.job.taskId, jobRef.ref);
+      console.log('data', jobData);
+      jobRef.ref
+        .update({
+          ...jobData
+        })
+        .then(function() {
+          console.log('Document successfully updated!');
+        })
+        .catch(function(error: any) {
+          console.error('Error updating document: ', error);
+        });
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+          addNotification({
+            title: 'Yay!',
+            text: this.$t(
+              'App.job.jobClaimed'
+            ) /* Job confirmed successfully! You can start work immediately. */
+          } as INotification);
+        }, 700);
+      });
+
+      this.isEditingJobDetails = false;
+    },
     async uploadImages() {
       console.log('UPLOADING', this.images);
       const self = this;
@@ -508,15 +620,16 @@ export default {
       });
       Promise.all(results).then(async imageUrls => {
         console.log(imageUrls, this.job);
-        const imageData = {};
-        imageUrls.map((image: any) => {
+        /*const images = imageUrls.map((image: any) => {
           imageData[image.name] = image;
         });
-        console.log(imageData);
+        console.log(imageData);*/
+        if (!Reflect.has(this.job, 'images')) this.job.images = [];
+        const images = [...this.job.images, ...imageUrls];
         const result = await db
           .collection('jobs')
           .doc(this.job.taskId)
-          .set({ images: imageData }, { merge: true })
+          .set({ images }, { merge: true })
           .then(docRef => {
             console.log('updated!', docRef);
           });
@@ -529,12 +642,12 @@ export default {
         db
           .collection('jobs')
           .where('taskId', '==', taskId)
-          .add(data)
-          .then(function(docRef) {
-            self.clearForm();
-            self.loadingText = 'Post was created successfully.';
+          .add(this.data)
+          .then(function(docRef: any) {
+            this.self.clearForm();
+            this.self.loadingText = 'Post was created successfully.';
           })
-          .catch(function(error) {
+          .catch(function(error: any) {
             console.error('Error adding document: ', error);
           });
       });
@@ -544,7 +657,7 @@ export default {
         const self = this;
         const storageRef = firebaseStorage
           .ref()
-          .child('jobs/' + jobId + '/' + file.name + '');
+          .child('jobs/' + jobId + '/' + file.name + '-' + uuid.v1());
         let uploadTask = storageRef.put(file);
         uploadTask.on(
           'state_changed',

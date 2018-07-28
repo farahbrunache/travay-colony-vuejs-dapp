@@ -31,14 +31,4 @@ describe('Job.vue', () => {
 
     expect(wrapper.find('h1').text()).toBe('Job');
   });
-
-  test('dispatches action on the server', () => {
-    const store = {
-      dispatch: jest.fn()
-    };
-
-    Job.prefetch({ store });
-
-    expect(store.dispatch).toHaveBeenCalled();
-  });
 });

@@ -14,14 +14,17 @@ import { userRole } from './shared/directives/userRole.js';
 
 router.beforeEach((to, from, next) => {
   if (Reflect.has(to.meta, 'adminOnly')) {
-    /*
-      if (user.role === 'admin') {
-        next()
-      } else {
-        next('/')
-      }
-      return;
-    */
+    if (this.value.role === '[4]') {
+      next();
+    } else {
+      this.$router.push('/');
+    }
+    return;
+  } else if (Reflect.has(to.meta, 'signedIn')) {
+    /*if (!userID) {
+      next('/')
+      return
+    }*/
   }
   next();
 });
