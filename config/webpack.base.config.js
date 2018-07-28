@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const {
-  VueLoaderPlugin
-} = require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 require('dotenv').config();
@@ -26,7 +24,8 @@ const baseConfig = {
     ]
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
@@ -36,7 +35,7 @@ const baseConfig = {
         exclude: /node_modules/,
         options: {
           appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: !isProd
+          transpileOnly: isProd
         }
       },
       {
