@@ -16,12 +16,12 @@
             <small>{{ $t('App.nav.profile' /* Profile */) }}</small>
           </router-link>
         </li>
-        <li v-if="userId">
+        <!-- <li v-if="userId">
           <router-link to="/wallet" @click.native="navBarClose">
             <i class="far fa-credit-card" />
             <small>{{ $t('App.nav.wallet' /* Wallet */) }}</small>
           </router-link>
-        </li>
+        </li> -->
         <li>
           <a @click="signInClicked">
             <i class="fas fa-user-plus" />

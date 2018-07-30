@@ -7,7 +7,7 @@ Sample file: `.env.sample`. Currently has uPort setup.
 ## Technology Stack
 
 - colonyJS: https://github.com/JoinColony/hackathonStarter
-- VueJs
+- Vue.js
 - Firebase
 - Google Auth
 - uPort Auth
