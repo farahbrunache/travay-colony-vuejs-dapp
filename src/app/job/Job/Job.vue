@@ -18,40 +18,40 @@
 
         <vue-grid-item fill>
           <vue-panel>
-            <vue-panel-header title="Details">
-
-
+            <vue-panel-header>
               <router-link :key="`/job/${job.taskId}`">{{ job.task }}</router-link>
               </vue-panel-header>
 
             <vue-panel-body>
-              <p v-if="'status' in job && job.status.state === 'cancelled'">This job has been cancelled</p>
+              <!-- TODO ADD TRANSLATION -->
+              <!-- <p v-if="'status' in job && job.status.state === 'cancelled'">This job has been cancelled</p>
+              
               <p v-if="job.role && userId && ('status' in job && job.status.state !== 'cancelled')">
                 <a v-if="job.role['0'] === userId" @click.prevent.stop="e => {}">
                   <i class="fa edit-icon" :class="isEditingJobDetails ? 'fa-times' : 'fa-edit'" @click="isEditingJobDetails = !isEditingJobDetails" ></i>
-                  Edit
+                  {{ $t('App.job.editJobIcon' /* Edit */) }}
                 </a>
-              </p>
+              </p> -->
 
             <ul>
               <li v-if="job.salary">
-                Job: {{job.task}}<br>
+                {{ $t('App.job.jobTitle' /* Job */) }}: {{job.task}}<br>
 
                 <template v-if="isEditingJobDetails">
 
-                  Description:<br/>
+                  {{ $t('App.job.jobDescription' /* Description */) }}:<br/>
                   <input 
                     id="job-description" 
                     type="text" 
                     v-model="job.brief"/> <br/>
 
-                    Domain:<br/>
+                    {{ $t('App.job.jobDomain' /* Domain */) }}:<br/>
                     <input
                     id="domain"
                     type="text"
                     v-model="job.domain" /><br>
 
-                    Top Desired Skill:<br/>
+                    {{ $t('App.job.jobSkill' /* Desired Skill */) }}:<br/>
                     <input
                     id="skill"
                     type="text"
@@ -79,7 +79,8 @@
                     <input id="oneyear" type="checkbox" name="oneyear" v-model="job['terms-of-employment']" true-value="12" :disabled="!isJobManager"/>
                     <label for="oneyear">1 year</label> -->
 
-                    Requirements: (Please place a "comma" after each requirement) <br/>
+                    {{ $t('App.job.requirementInstructions' /* Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements. */) }}<br/>
+
                       <vue-grid-item>
                         <vue-input
                           name="deliverable"
@@ -88,7 +89,9 @@
                           validation="required"
                           v-model="requirement"
                           required />
-                          <button accent @click="addRequirement">Add Requirement</button><br>
+                          <button accent @click="addRequirement">
+                            {{ $t('App.job.addRequirement' /* Add Requirement */) }}
+                            </button><br>
                       </vue-grid-item>
                       <br>
                       <br>
@@ -105,14 +108,21 @@
                 </template>
 
                 <template v-else>
-                  Description: {{job.brief}}<br>
-                  Domain: {{job.domain}}<br>
-                  Top Desired Skill: {{job.skill}}<br>
-                  Full time rate: ${{job.salary['full-time-rate']}}<br>
-                  Total Sponsored Amount: ${{ job.sponsoredAmount }}<br>
-                  Pay frequency: {{job.salary['pay-frequency'].label}}<br>
-                  Term of Employment: {{ job['terms-of-employment'] }}<br><br>
-                  Requirements:<br>
+                  {{ $t('App.job.jobDescription' /* Description */) }}: {{job.brief}}<br>
+
+                  {{ $t('App.job.jobDomain' /* Domain */) }}: {{job.domain}}<br>
+
+                  {{ $t('App.job.jobSkill' /* Desired Skill */) }}: {{job.skill}}<br>
+
+                  {{ $t('App.job.jobFullTimeRate' /* Full-Time Rate */) }}: {{job.skill}}: ${{job.salary['full-time-rate']}}<br>
+
+                  {{ $t('App.job.jobSponsoredAmount' /* Sponsored Amount */) }}: ${{ job.sponsoredAmount }}<br>
+
+                  {{ $t('App.job.jobPayFrequency' /* Pay Frequency */) }}: {{job.salary['pay-frequency'].label}}<br>
+
+                  {{ $t('App.job.termsOfEmployment' /* Terms of Employment */) }}: {{ job['terms-of-employment'] }}<br><br>
+
+                  {{ $t('App.job.requirements' /* Requirements */) }}:<br>
                       <p v-for="(item, index) in job.deliverable" :key="index">
                         + {{item}}
                       </p>
@@ -123,7 +133,7 @@
                         <vue-grid-item>
                           <vue-button primary
                           @click.prevent.stop="e => postEditedJob(job.id)">
-                            Post Changes
+                            {{ $t('App.job.postChangesButton' /* Post Changes */) }}
                           </vue-button>
                         </vue-grid-item>
 
@@ -134,14 +144,13 @@
                         <vue-grid-item>
                         <vue-button warn
                         @click="cancelJobHandler">
-                            Cancel Job
+                            {{ $t('App.job.cancleJob' /* Cancel Job */) }}
                         </vue-button>
                         </vue-grid-item>
-
                       </vue-grid-row>
                 </template>
                 <br>
-                Date Posted: {{ job['date-posted'] | moment }}<br>
+                {{ $t('App.job.datePosted' /* Date Posted */) }}: {{ job['date-posted'] | moment }}<br>
               </li>
             </ul>
             </vue-panel-body>
@@ -153,16 +162,18 @@
           <vue-accordion multiple>
             <vue-accordion-item title="Claim">
 
+            <!-- <vue-accordion-item title="{{ $t('App.job.claimTitle' /* Claim */) }}"> -->
+
               <vue-grid-row>
                 <vue-grid-item>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  {{ $t('App.job.claimDescription' /* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. */) }}
                 </vue-grid-item>
               </vue-grid-row>
               
               <template v-if="!claimed">
               <vue-grid-row v-userRole.signedIn.canClaim="{role: job.role}">
                 <vue-grid-item>
-                  <p>Claiming this position is to accpet the requirements and legal requirements.</p>
+                  {{ $t('App.job.claimDisclaimer' /* Claiming this position is to accpet the requirements and legal requirements. */) }}
                   <vue-checkbox
                     name="acceptTerms"
                     id="acceptTerms"
@@ -185,17 +196,24 @@
             </template>
               </vue-accordion-item>
 
-            <vue-accordion-item title="Sponsor this Job">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <vue-accordion-item title="Sponsor Job}">
+
+            <!-- <vue-accordion-item title="{{ $t('App.job.sponsorJobButton' /* Sponsor Job */) }}"> -->
+
+              {{ $t('App.job.sponsorDescription' /* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. */) }}
               <br>
               <vue-button v-userRole.canSponsor="{
                 role: job.role
               }" class="sponsor-btn--container" accent>
-                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="remove-hyperlink">Sponsor this Job</a>
+                  <a style="color: white !important;" @click.prevent.stop="e => sponsorJobClickedHandler(job.taskId)" id="remove-hyperlink">
+                    {{ $t('App.job.sponsorJobButton' /* Sponsor Job */) }}
+                    </a>
              </vue-button>
             </vue-accordion-item>
 
             <vue-accordion-item title="Proof of Work">
+
+            <!-- <vue-accordion-item title="{{ $t('App.job.proofOfWorkTitle' /* Proof of Work */) }}"> -->
 
                <vue-grid-item>
                 <div
@@ -209,7 +227,7 @@
 
               <vue-grid-row>
                     <vue-grid-item>
-                      <h5>Upload Proof of Work</h5>
+                      <h5>{{ $t('App.job.uploadProofOfWork' /* Upload Proof of Work */) }}</h5>
                       <span class="input-group-text btn btn-primary btn-file" id="basic-addon2">
                         <input type="file" v-on:change="fileUploaded" accept="image/png, image/jpeg, image/gif" name="input-file-preview" multiple/>
                       </span>
@@ -223,7 +241,8 @@
                   <vue-button accent
                   v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
                 <a @click.prevent="uploadImages" style="color: white;">
-                  Upload file</a>
+                  {{ $t('App.job.uploadFileButton' /* Upload File */) }}
+                  </a>
                   </vue-button>
               </vue-grid-item>
               <br/>
@@ -242,10 +261,12 @@
             </vue-accordion-item>
 
             <vue-accordion-item title="Approve Work">
+
+            <!-- <vue-accordion-item title="{{ $t('App.job.approveWork' /* Approve Work */) }}"> -->
           
               <vue-grid-row>
                 <vue-grid-item>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  {{ $t('App.job.approveWorkDescription' /* Lorem impsum */) }}
                   </vue-grid-item>
               </vue-grid-row>
 
@@ -254,7 +275,9 @@
                     <vue-button
                       v-if="job.role['0'] == userId"
                       @click.prevent.stop="e => onPayout(job.id)"
-                     primary>Payout Job</vue-button>
+                     primary>
+                     {{ $t('App.job.payoutJobButton' /* Payout Job */) }}
+                     </vue-button>
                 </vue-grid-item>
               </vue-grid-row>
             </vue-accordion-item>
@@ -310,7 +333,7 @@ export default {
     meta: [
       {
         name: 'Job',
-        content: 'Details of jobs in Travay.'
+        content: 'Details of a job in Travay.'
       }
     ]
   },
@@ -405,7 +428,6 @@ export default {
     },
     hasEmptyFields() {
       let hasEmptyField: boolean = false;
-
       Object.keys(this.form).forEach((key: string) => {
         if (
           key !== 'newsletter' &&
@@ -414,7 +436,6 @@ export default {
           hasEmptyField = true;
         }
       });
-
       return hasEmptyField;
     },
     isSubmitDisabled() {
@@ -435,12 +456,10 @@ export default {
           this.job.deliverable = [this.requirement];
         }
       }
-      console.log('adding requirement', this.requirement, this.job.deliverable);
       this.requirement = '';
     },
-    removeRequirement(i) {
-      console.log('removing requirement', i);
-      this.job.deliverable.splice(i, 1);
+    removeRequirement(index: any) {
+      this.job.deliverable.splice(index, 1);
     },
     async cancelJobHandler() {
       const jobId = this.job.taskId;
@@ -452,13 +471,13 @@ export default {
             status: 'cancelled'
           }
         });
-        console.log('job found', job);
-        console.log('update status', update);
         this.job.status = 'cancelled';
         this.isEditingJobDetails = false;
         addNotification({
-          title: 'Success',
-          text: 'This job has been cancelled!'
+          title: this.$t('App.job.jobCanceledNotificationTitle') /* Success! */,
+          text: this.$t(
+            'App.job.jobCanceledNotificationText'
+          ) /* This job has been cancelled. */
         } as INotification);
       } catch (error) {}
     },
@@ -467,16 +486,13 @@ export default {
         Array.from(e.target.files).map(file => {
           return new Promise((resolve, reject) => {
             const reader = new FileReader();
-
             reader.onload = e => {
               resolve({ src: e.target.result, file, progress: null });
             };
-
             reader.readAsDataURL(file);
           });
         })
       );
-      console.log('Images', images);
       this.images = images;
     },
     sponsorJobClickedHandler(taskId: string) {
@@ -503,8 +519,10 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
           addNotification({
-            title: 'Data has been saved!',
-            text: 'Have a look at the console!'
+            title: this.$t('App.job.jobSavedNotificationTitle') /* Success */,
+            text: this.$t(
+              'App.job.jobSavedNotificationText'
+            ) /* The job has been saved! */
           } as INotification);
         }, 500);
       });
@@ -513,8 +531,10 @@ export default {
       const taskId = this.$route.params.id;
       if (this.hasEmptyFields) {
         addNotification({
-          title: 'Oops',
-          text: 'To claim this job, you must agree to the terms.'
+          title: this.$t('App.job.jobEmptyFieldNotificationTitle') /* Oops */,
+          text: this.$t(
+            'App.job.jobEmptyFieldNotificationText'
+          ) /* Please complete all fields. */
         } as INotification);
         return false;
       }
@@ -547,9 +567,9 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
           addNotification({
-            title: 'Yay!',
+            title: this.$t('App.job.jobClaimedNotificationTitle') /* Yay! */,
             text: this.$t(
-              'App.job.jobClaimed'
+              'App.job.jobClaimedNotificationText'
             ) /* Job confirmed successfully! You can start work immediately. */
           } as INotification);
         }, 700);
@@ -564,11 +584,11 @@ export default {
       this.$nextTick(() => {
         setTimeout(() => {
           this.isLoading = false;
-
           addNotification({
-            title: 'Your Worker Thanks You!',
+            title: this.$t(
+              'App.job.jobPayoutNotificationTitle' /* Your worker thanks you! */,
             text: this.$t(
-              'App.job.jobPayout' /* Payout Complete. Your account is being debited. */
+              'App.job.jobPayoutNotificationTitleText' /* Payout Complete. Your account is being debited. */
             )
           } as INotification);
         }, 700);
@@ -585,8 +605,6 @@ export default {
         .collection('jobs')
         .doc(this.job.taskId)
         .get();
-      console.log('JOb reference', jobRef, this.job.taskId, jobRef.ref);
-      console.log('data', jobData);
       jobRef.ref
         .update({
           ...jobData
@@ -601,29 +619,24 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
           addNotification({
-            title: 'Yay!',
+            title: this.$t(
+              'App.job.jobUpdatedNotificationTitle'
+            ) /* Job updated successfully! */,
             text: this.$t(
-              'App.job.jobClaimed'
+              'App.job.jobUpdatedNotificationText'
             ) /* Job confirmed successfully! You can start work immediately. */
           } as INotification);
         }, 700);
       });
-
       this.isEditingJobDetails = false;
     },
     async uploadImages() {
-      console.log('UPLOADING', this.images);
       const self = this;
       const results = this.images.map(async ({ file }) => {
         const imageUrl = await this.uploadFile(file, self.job.taskId);
         return { name: file.name, url: imageUrl };
       });
       Promise.all(results).then(async imageUrls => {
-        console.log(imageUrls, this.job);
-        /*const images = imageUrls.map((image: any) => {
-          imageData[image.name] = image;
-        });
-        console.log(imageData);*/
         if (!Reflect.has(this.job, 'images')) this.job.images = [];
         const images = [...this.job.images, ...imageUrls];
         const result = await db
@@ -637,7 +650,6 @@ export default {
     },
     uploadProofOfWork() {
       this.uploadFile().then(imageUrl => {
-        console.log('IN UPLOAD PROOF OF WORK', imageUrl);
         data.image = imageUrl;
         db
           .collection('jobs')
@@ -645,7 +657,9 @@ export default {
           .add(this.data)
           .then(function(docRef: any) {
             this.self.clearForm();
-            this.self.loadingText = 'Post was created successfully.';
+            this.self.loadingText = this.$t(
+              'App.job.uploadedPhotoSuccessfully'
+            ) /* Post was created successfully. */;
           })
           .catch(function(error: any) {
             console.error('Error adding document: ', error);
@@ -664,9 +678,12 @@ export default {
           function(snapshot) {
             var progress =
               snapshot.bytesTransferred / snapshot.totalBytes * 100;
-            console.log(progress);
             self.loadingText =
-              'Upload is ' + progress + '% done. Processing post.';
+              this.$t(
+              'App.job.uploadedPhotoProgress'
+            ) /* Upload is */ + progress + this.$t(
+              'App.job.uploadedPhotoProgress2'
+            ) /* % done. Processing post. */
           },
           function(error) {
             // Handle unsuccessful uploads

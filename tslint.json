@@ -18,6 +18,6 @@
   },
   "rulesDirectory": [],
   "linterOptions": {
-    "exclude": ["src/**/**/*.ts"]
+    "exclude": ["src/**/**/*.ts", "./src/**/*"]
   }
 }

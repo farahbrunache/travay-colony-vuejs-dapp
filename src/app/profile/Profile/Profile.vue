@@ -114,6 +114,9 @@ import firebase from 'firebase';
 import db from '../../firebaseinit';
 import { userRole } from '../../shared/directives/userRole.js';
 
+let db: any;
+let snapshot: any;
+
 export default {
   name: 'Profile',
   components: {
@@ -170,7 +173,6 @@ export default {
         .where('role.0', '==', this.userId)
         .get()
         .then(snapshot => {
-          console.log('JOBS FETCHED', snapshot);
           const jobs: Array<Object> = [];
           const incompleteJobs: Array<Object> = [];
           const completedJobs: Array<Object> = [];

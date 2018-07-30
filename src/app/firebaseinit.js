@@ -26,3 +26,5 @@ try {
 
 export default firestore;
 export const firebaseDatabase = firebaseApp.database();
+export default firebaseApp.firestore()
+
