@@ -452,7 +452,7 @@ export default {
       return hasEmptyField;
     },
     isSubmitDisabled() {
-      x;
+      this.x;
       return this.hasErrors || this.hasEmptyFields;
     }
   }

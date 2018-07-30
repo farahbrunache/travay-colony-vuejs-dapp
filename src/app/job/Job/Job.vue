@@ -322,7 +322,6 @@ import { userRole } from '../../shared/directives/userRole.js';
 const firebaseStorage = firebase.storage();
 import moment from 'moment';
 import { filter } from 'compression';
-import { Promise } from 'bluebird';
 import { AssertionError } from 'assert';
 import { any } from 'bluebird';
 
@@ -489,7 +488,7 @@ export default {
             reader.onload = e => {
               resolve({ src: e.target.result, file, progress: null });
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(this.file);
           });
         })
       );
@@ -586,7 +585,8 @@ export default {
           this.isLoading = false;
           addNotification({
             title: this.$t(
-              'App.job.jobPayoutNotificationTitle' /* Your worker thanks you! */,
+              'App.job.jobPayoutNotificationTitle' /* Your worker thanks you! */
+            ),
             text: this.$t(
               'App.job.jobPayoutNotificationTitleText' /* Payout Complete. Your account is being debited. */
             )
@@ -650,10 +650,10 @@ export default {
     },
     uploadProofOfWork() {
       this.uploadFile().then(imageUrl => {
-        data.image = imageUrl;
+        this.data.image = imageUrl;
         db
           .collection('jobs')
-          .where('taskId', '==', taskId)
+          .where('taskId', '==', this.taskId)
           .add(this.data)
           .then(function(docRef: any) {
             this.self.clearForm();
@@ -676,14 +676,14 @@ export default {
         uploadTask.on(
           'state_changed',
           function(snapshot) {
-            var progress =
-              snapshot.bytesTransferred / snapshot.totalBytes * 100;
-            self.loadingText =
-              this.$t(
-              'App.job.uploadedPhotoProgress'
-            ) /* Upload is */ + progress + this.$t(
-              'App.job.uploadedPhotoProgress2'
-            ) /* % done. Processing post. */
+            // var progress =
+            //   snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            // self.loadingText =
+            //   this.$t('App.job.uploadedPhotoProgress') /* Upload is */ +
+            //   progress +
+            //   this.$t(
+            //     'App.job.uploadedPhotoProgress2'
+            //   ); /* % done. Processing post. */
           },
           function(error) {
             // Handle unsuccessful uploads
