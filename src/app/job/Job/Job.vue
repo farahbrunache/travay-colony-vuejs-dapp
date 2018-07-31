@@ -241,10 +241,19 @@
                   <vue-button accent
                   v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
                 <a @click.prevent="uploadImages" style="color: white;">
-                  {{ $t('App.job.uploadFileButton' /* Upload File */) }}
+                  {{ $t('App.job.uploadFileButton' /* Submit Work */) }}
                   </a>
                   </vue-button>
               </vue-grid-item>
+
+              <vue-grid-item>
+                <vue-button warn v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
+                <a @click="markJobCompleteHandler">
+                    {{ $t('App.job.markJobComplete' /* Job is Done */) }}
+                </a>
+                </vue-button>
+                </vue-grid-item>
+
               <br/>
               <vue-grid-item>
               <br>
@@ -407,18 +416,6 @@ export default {
       return moment(date).format('MMMM Do YYYY');
     }
   },
-  mounted() {
-    /*
-      beforeCreate
-      created
-      beforeMount
-      mounted
-      beforeUpdate
-      updated
-      beforeDestroy
-      destroyed
-    */
-  },
   computed: {
     ...mapGetters('job', []),
     ...mapGetters('signInModal', ['userId']),
@@ -462,21 +459,41 @@ export default {
     },
     async cancelJobHandler() {
       const jobId = this.job.taskId;
-
       try {
         const job = await db.collection('jobs').doc(jobId);
         const update = await job.update({
           status: {
-            status: 'cancelled'
+            state: 'cancelled'
           }
         });
-        this.job.status = 'cancelled';
+        this.job.status.state = 'cancelled';
         this.isEditingJobDetails = false;
         addNotification({
           title: this.$t('App.job.jobCanceledNotificationTitle') /* Success! */,
           text: this.$t(
             'App.job.jobCanceledNotificationText'
           ) /* This job has been cancelled. */
+        } as INotification);
+      } catch (error) {}
+    },
+    async markJobCompleteHandler() {
+      const jobId = this.job.taskId;
+      try {
+        const job = await db.collection('jobs').doc(jobId);
+        const update = await job.update({
+          status: {
+            state: 'complete'
+          }
+        });
+        this.job.status.state = 'complete';
+        this.isEditingJobDetails = false;
+        addNotification({
+          title: this.$t(
+            'App.job.jobCompletedNotificationTitle'
+          ) /* Success! */,
+          text: this.$t(
+            'App.job.jobCompleteNotificationText'
+          ) /* This job has been marked completed. Your Job Manager will review the work and send payment after confirmting. */
         } as INotification);
       } catch (error) {}
     },
