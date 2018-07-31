@@ -2,20 +2,20 @@
   <div :class="$style.home">
     <stage
       :disable-particles="disableParticles" />
-    <fostering />
-    <empowering-communities />
-    <travay-experience />
-    <how-does-it-work />
+    <section-one />
+    <section-two />
+    <!-- <section-three /> -->
+    <section-four />
   </div>
 </template>
 
 <script lang="ts">
 import { mapState } from 'vuex';
 import Stage from '../Stage/Stage.vue';
-import Fostering from '../Fostering/Fostering.vue';
-import EmpoweringCommunities from '../EmpoweringCommunities/EmpoweringCommunities.vue';
-import TravayExperience from '../TravayExperience/TravayExperience.vue';
-import HowDoesItWork from '../HowDoesItWork/HowDoesItWork.vue';
+import SectionOne from '../SectionOne/SectionOne.vue';
+import SectionTwo from '../SectionTwo/SectionTwo.vue';
+import SectionThree from '../SectionThree/SectionThree.vue';
+import SectionFour from '../SectionFour/SectionFour.vue';
 import { IState } from '../../state';
 
 export default {
@@ -72,10 +72,10 @@ export default {
   },
   components: {
     Stage,
-    Fostering,
-    EmpoweringCommunities,
-    TravayExperience,
-    HowDoesItWork
+    SectionOne,
+    SectionTwo,
+    SectionThree,
+    SectionFour
   },
   computed: {
     ...mapState({

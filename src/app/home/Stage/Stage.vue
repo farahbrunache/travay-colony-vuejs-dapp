@@ -10,7 +10,7 @@
           <h1 :class="$style.title">travay</h1>
           <div :class="$style.subTitle">
             {{
-            $t('App.core.description' /* Long-Term Jobs Market for Developing Countries */)
+            $t('App.core.description' /* Long-Term Jobs Market of Haiti */)
             }}
           </div>
         </vue-grid-item>

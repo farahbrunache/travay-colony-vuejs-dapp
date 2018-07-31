@@ -2,11 +2,11 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { i18n } from '../../shared/plugins/i18n/i18n';
 import Home from './Home.vue';
-import EmpoweringCommunities from '../EmpoweringCommunities/EmpoweringCommunities.vue';
-import Fostering from '../Fostering/Fostering.vue';
-import HowDoesItWork from '../HowDoesItWork/HowDoesItWork.vue';
+import SectionTwo from '../SectionTwo/SectionTwo.vue';
+import SectionOne from '../SectionOne/SectionOne.vue';
+import SectionFour from '../SectionFour/SectionFour.vue';
 import Stage from '../Stage/Stage.vue';
-import TravayExperience from '../TravayExperience/TravayExperience.vue';
+import SectionThree from '../SectionThree/SectionThree.vue';
 
 const localVue = createLocalVue();
 
@@ -31,10 +31,10 @@ describe('Home.vue', () => {
       i18n
     });
 
-    expect(wrapper.findAll(Fostering)).toHaveLength(1);
-    expect(wrapper.findAll(EmpoweringCommunities)).toHaveLength(1);
-    expect(wrapper.findAll(HowDoesItWork)).toHaveLength(1);
+    expect(wrapper.findAll(SectionOne)).toHaveLength(1);
+    expect(wrapper.findAll(SectionTwo)).toHaveLength(1);
+    expect(wrapper.findAll(SectionFour)).toHaveLength(1);
     expect(wrapper.findAll(Stage)).toHaveLength(1);
-    expect(wrapper.findAll(TravayExperience)).toHaveLength(1);
+    expect(wrapper.findAll(SectionThree)).toHaveLength(1);
   });
 });

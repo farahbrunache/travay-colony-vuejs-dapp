@@ -1,21 +1,21 @@
 <template>
-  <div :class="[$style.EmpoweringCommunities, 'featureSection']">
+  <div :class="[$style.SectionTwo, 'featureSection']">
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item fill class="vueGridItem">
-          <h2>Empowering Communities</h2>
+          <h2>{{ $t('App.sectionTwo.blockTitle' /* Receive Instant Payments */) }}</h2>
         </vue-grid-item>
         <vue-grid-item class="vueGridItem">
           <vue-panel class="vuePanel">
             <vue-panel-body>
-              <i class="fas fa-road" />
-              <h3>Critical Infrastructure</h3>
-              <p>Governments of developing nations struggle to provide consistent public services, and critical infrastructure.</p>
+              <i class="far fa-money-bill-alt" />
+              <h3>{{ $t('App.sectionTwo.blockHeader' /* Jobs Paid in Cryptocurrency */) }}</h3>
+              <p>{{ $t('App.sectionTwo.blockText' /* Cryptocurrency Payment = Instant Access to Your Money. And wealth creation. */) }}</p>
             </vue-panel-body>
           </vue-panel>
         </vue-grid-item>
 
-        <vue-grid-item class="vueGridItem">
+        <!-- <vue-grid-item class="vueGridItem">
           <vue-panel class="vuePanel">
             <vue-panel-body>
               <i class="fas fa-briefcase" />
@@ -23,9 +23,9 @@
               <p>Everyday citizens are skilled and able to fill the gaps - Travay empowers them to do so, rewarding them economically.</p>
             </vue-panel-body>
           </vue-panel>
-        </vue-grid-item>
+        </vue-grid-item> -->
 
-        <vue-grid-item class="vueGridItem">
+        <!-- <vue-grid-item class="vueGridItem">
           <vue-panel class="vuePanel">
             <vue-panel-body>
               <i class="fas fa-thumbs-up" />
@@ -33,7 +33,7 @@
               <p>Citizens are rewarded with payment for their work, and have the opportunity to build a resume and a reputation.</p>
             </vue-panel-body>
           </vue-panel>
-        </vue-grid-item>
+        </vue-grid-item> -->
       </vue-grid-row>
     </vue-grid>
   </div>
@@ -60,7 +60,7 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-.EmpoweringCommunities {
+.SectionTwo {
   display: block;
   text-align: center;
 

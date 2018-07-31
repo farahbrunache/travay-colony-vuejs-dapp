@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import HowDoesItWork from './HowDoesItWork.vue';
+import SectionFour from './SectionFour.vue';
 
 const localVue = createLocalVue();
 
-describe('HowDoesItWork.vue', () => {
+describe('SectionFour.vue', () => {
   test('renders component', () => {
-    const wrapper = mount(HowDoesItWork, { localVue });
+    const wrapper = mount(SectionFour, { localVue });
 
     expect(wrapper.find('h2').text()).toBe('Quick start');
   });

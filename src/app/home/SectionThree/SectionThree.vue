@@ -1,5 +1,5 @@
 <template>
-  <div :class="[$style.TravayExperience, 'featureSection']">
+  <div :class="[$style.SectionThree, 'featureSection']">
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item fill class="vueGridItem">
@@ -61,7 +61,7 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-.TravayExperience {
+.SectionThree {
   display: block;
   text-align: center;
 

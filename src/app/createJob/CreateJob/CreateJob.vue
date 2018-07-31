@@ -317,7 +317,8 @@ export default {
         { label: 'Education', value: 'education' }
       ],
       isLoading: false,
-      requirement: ''
+      requirement: '',
+      status: {}
     };
   },
   methods: {
@@ -389,7 +390,7 @@ export default {
         country: form.country,
         'terms-of-employment': form.selectedTermOfEmployment,
         status: {
-          status: 'incomplete'
+          state: 'incomplete'
         }
       };
       db

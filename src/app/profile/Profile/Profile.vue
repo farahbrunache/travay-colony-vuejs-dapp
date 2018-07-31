@@ -16,7 +16,6 @@
           v-for="user in users"
           :key="user.uid">
             <p>{{ user.name || user.displayName }}</p>
-            <p>{{ user.email || null }}</p>
             <p>{{ user.phone || null }}</p>
             <p>{{ user.address || null }}</p>
             <p>{{ user.country || null }}</p>
@@ -113,9 +112,6 @@ import {
 import firebase from 'firebase';
 import db from '../../firebaseinit';
 import { userRole } from '../../shared/directives/userRole.js';
-
-let db: any;
-let snapshot: any;
 
 export default {
   name: 'Profile',
@@ -226,7 +222,6 @@ export default {
         .where('userId', '==', this.userId)
         .get()
         .then(snapshot => {
-          console.log('Sponsored jobs', snapshot);
           const sponsored: Array<Object> = [];
           snapshot.forEach(item => {
             sponsored.push(item.data());

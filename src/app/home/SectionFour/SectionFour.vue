@@ -1,24 +1,24 @@
 <template>
-  <div :class="[$style.HowDoesItWork, 'featureSection']">
+  <div :class="[$style.SectionFour, 'featureSection']">
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item fill class="vueGridItem">
-          <h2>How Does it Work?</h2>
+          <h2>{{ $t('App.sectionFour.blockTitle' /* How Does Travay Work? */) }}</h2>
         </vue-grid-item>
 
         <vue-grid-item class="vueGridItem">
           <vue-panel class="vuePanel">
             <vue-panel-body class="vuePanelBody">
               <ol>
-                <li>New users create a profile for membership</li>
-                <li>Members of the community post jobs</li>
-                <li>Sponsors can contribute to job salaries</li>
-                <li>Workers claim jobs</li>
-                <li>They do work, and when work is approved they get paid</li>
-                <li>Their wages can be cashed out, or saved in an investment wallet</li>
-                <li>Workers earn reputation for a job well done, and get to build a resume</li>
-                <li>Successful workers can post their own jobs for others to do</li>
+                <li>{{ $t('App.sectionFour.bullet1' /* Register by signing in */) }}</li>
+                
+                <li>{{ $t('App.sectionFour.bullet2' /* Find a job your want and click "claim" */) }}</li>
+
+                <li>{{ $t('App.sectionFour.bullet3' /* When work is complete, upload your proof of work and click "complete job" */) }}</li>
+
+                <li>{{ $t('App.sectionFour.bullet4' /* Your Job Manager will approve work and issue payment */) }}</li>
               </ol>
+              <p>{{ $t('App.sectionFour.paragraph' /* Find a job, claim it with no experience needed! */) }}</p>
             </vue-panel-body>
           </vue-panel>
         </vue-grid-item>
@@ -48,10 +48,10 @@ export default {
 <style lang="scss" module>
 @import '../../shared/styles';
 
-.HowDoesItWork {
+.SectionFour {
   display: block;
   text-align: center;
-  @include background-gradient($brand-dark-primary, $brand-primary, -31deg);
+  // @include background-gradient($brand-dark-primary, $brand-primary, -31deg);
 
   :global {
     .vuePanelBody {

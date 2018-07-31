@@ -34,12 +34,12 @@
             <small>{{ $t('App.nav.kreyol' /* Haitian Creole */) }}</small>
           </a>
         </li>
-        <li>
-          <a @click="localeSwitch('fr')">
-            <i class="fas fa-flag" />
-            <small>{{ $t('App.nav.french' /* French */) }}</small>
-          </a>
-        </li>
+        <!--<li>-->
+          <!--<a @click="localeSwitch('fr')">-->
+            <!--<i class="fas fa-flag" />-->
+            <!--<small>{{ $t('App.nav.french' /* French */) }}</small>-->
+          <!--</a>-->
+        <!--</li>-->
         <li>
           <a @click="localeSwitch('en')">
             <i class="fas fa-flag" />

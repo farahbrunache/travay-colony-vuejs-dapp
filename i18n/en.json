@@ -1,6 +1,5 @@
 {
   "App.core.description": "The Long-Term Jobs Market of Haiti",
-  "App.nav.components": "Components",
   "App.nav.jobs": "Jobs",
   "App.nav.profile": "Profile",
   "App.nav.wallet": "Wallet",
@@ -11,8 +10,25 @@
   "App.nav.french": "Francais",
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
-  "App.job.jobTitle": "Job",
+  "App.sectionOne.blockTitle": "Earn Stable Income",
+  "App.sectionOne.blockHeader": "Same Day Jobs Marketplace",
+  "App.sectionOne.blockText":
+    "Travay provides a citizen driven, long-term jobs market, helping to provide to economic mobility.",
+  "App.sectionTwo.blockTitle": "Receive Instant Payments",
+  "App.sectionTwo.blockHeader": "Jobs Paid in Cryptocurrency",
+  "App.sectionTwo.blockText":
+    "Cryptocurrency Payment = Instant Access to Your Money.",
+  "App.sectionFour.blockTitle": "How Does Travay Work?",
+  "App.sectionFour.bullet1": "Register by signing in",
+  "App.sectionFour.bullet2": "Find a job your want and click claim",
+  "App.sectionFour.bullet3":
+    "When work is complete, upload your proof of work and click complete job",
+  "App.sectionFour.bullet4":
+    "Your Job Manager will approve work and issue payment",
+  "App.sectionFour.paragraph":
+    "Find a job, claim it with no experience needed!",
   "App.job.editJobIcon": "Edit",
+  "App.job.pageHeader": "Job",
   "App.job.jobDescription": "Description",
   "App.job.jobDomain": "Domain",
   "App.job.jobSkill": "Skill",
@@ -31,17 +47,17 @@
   "App.job.requirements": "Requirements",
   "App.job.postChangesButton": "Post Changes",
   "App.job.cancleJob": "Cancel Job",
-  "App.job.datePoste": "Date Posted",
+  "App.job.datePosted": "Date Posted",
   "App.job.claimTitle": "Claim",
   "App.job.claimDescription":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "App.job.claimDisclaimer":
-    "Claiming this position is to accpet the requirements and legal requirements.",
+    "A job is claimed when an individual has chosen to accept the work. A potential worker will see in this area any additional criteria and requirements before accepting the job.",
   "App.job.sponsorDescription":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Job sponsorship is where anyone in the world can donate and contribute to the workplace ecosystem. Choosing to sponsor ensures transparency in funds donated and incentives job workers to continue to perform and accept jobs.",
+  "App.job.claimDisclaimer":
+    "Claiming this position is to accept the job requirements and terms and conditions of Travay.",
   "App.job.sponsorJobButton": "Sponsor Job",
   "App.job.proofOfWorkTitle": "Proof of Work",
-  "App.job.uploadProofOfWork": "Upload Proof of Work",
+  "App.job.uploadProofOfWorkTitle": "Upload Proof of Work",
   "App.job.uploadFileButton": "Submit Proof",
   "App.job.approveWork": "Approve Work",
   "App.job.approveWorkDescription": "Lorem impsum",
@@ -68,7 +84,7 @@
   "App.job.markJobComplete": "Job is Done",
   "App.job.jobCompletedNotificationTitle": "Success",
   "App.job.jobCompleteNotificationText":
-    "This job has been marked completed. Your Job Manager will review the work and send payment after confirmting.",
+    "This job has been marked completed. Your Job Manager will review the work and send payment after confirming.",
   "App.jobs.pageSubtitle": "Here you'll find 6-month and 12-month jobs.",
   "App.jobs.search": "Search",
   "App.jobs.filter": "Filter",
