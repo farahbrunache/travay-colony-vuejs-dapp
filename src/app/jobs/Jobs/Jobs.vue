@@ -398,7 +398,6 @@ export default {
       .where('status.state', '==', 'incomplete')
       .get()
       .then(snapshot => {
-        console.log('getting jobs', snapshot);
         const jobs: any = [];
         snapshot.forEach(job => {
           jobs.push(job.data());
