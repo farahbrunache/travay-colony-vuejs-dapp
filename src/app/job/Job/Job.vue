@@ -539,7 +539,9 @@
               reader.onload = e => {
                 resolve({src: e.target.result, file, progress: null});
               };
-              reader.readAsDataURL(this.file);
+              if(e.target.file){
+                reader.readAsDataURL(e.target.this.file[0]);
+              }
             });
           })
         );
@@ -727,7 +729,7 @@
           uploadTask.on(
             "state_changed",
             function (snapshot) {
-              // var progress =
+              // const progress =
               //   snapshot.bytesTransferred / snapshot.totalBytes * 100;
               // self.loadingText =
               //   this.$t('App.job.uploadedPhotoProgress') /* Upload is */ +
@@ -735,6 +737,8 @@
               //   this.$t(
               //     'App.job.uploadedPhotoProgress2'
               //   ); /* % done. Processing post. */
+              this.upload.progress = (uploadTask.snapshot.bytesTransferred / uploadTask.snapshot.totalBytes) * 100;
+              console.log(this.upload.progress);
             },
             function (error) {
               // Handle unsuccessful uploads
