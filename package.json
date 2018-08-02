@@ -55,7 +55,7 @@
     "postci": "codecov -f ./coverage/*.json && npm run build:spa && npm run build && concurrently \"npm run build-storybook\" \"vuepress build docs\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build:spa"
   },
   "jest": {
     "verbose": true,
