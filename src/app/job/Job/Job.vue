@@ -244,7 +244,10 @@
                   <h3>{{ $t('App.job.proofOfWorkTitle' /* Proof of Work */) }}</h3>
 
                   <vue-grid-item>
-                    <p>Description of what proof of work is ...</p><br>
+                    <p>{{ $t('App.job.proofOfWorkDescription' /* Based on the requirements of a job, the Job Manager may
+                      request proof that work was completed. For example, a picture of a planted tree or that trash was
+                      deposited in the correct location. */)
+                      }}</p><br>
                     <div class="job-images">
                       <div
                         v-for="(img, index) in this.job.images"
@@ -304,7 +307,9 @@
                   <h3>{{ $t('App.job.approveWork' /* Approve Work */) }}</h3>
 
                   <vue-grid-item>
-                    <p>{{ $t('App.job.approveWorkDescription' /* Lorem impsum */) }}</p>
+                    <p>{{ $t('App.job.approveWorkDescription' /* Approval history will be shown here. Once a job is
+                      approved, the job is marked complete and the worker receives their salary. This is not reversible.
+                      */) }}</p>
                   </vue-grid-item>
                 </vue-panel-body>
                 <vue-panel-footer>
@@ -354,7 +359,6 @@
   import SponsorModal from "../../SponsorModal/SponsorModal.vue";
   import {uuid} from "vue-uuid";
   import {sponsorSubmitMixin} from "../../shared/mixins/mixins";
-  import {userRole} from "../../shared/directives/userRole.js";
 
   const firebaseStorage = firebase.storage();
   import moment from "moment";
@@ -668,10 +672,10 @@
             addNotification({
               title: this.$t(
                 "App.job.jobUpdatedNotificationTitle"
-              ) /* Job updated successfully! */,
+              ) /* Success! */,
               text: this.$t(
                 "App.job.jobUpdatedNotificationText"
-              ) /* Job confirmed successfully! You can start work immediately. */
+              ) /* Job updated successfully! */
             } as INotification);
           }, 700);
         });

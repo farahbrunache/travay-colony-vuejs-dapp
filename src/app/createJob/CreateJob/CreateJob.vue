@@ -127,7 +127,7 @@
           placeholder="Total Funding (aka Salary) for Job in USD"
           v-model="form.salary"
           validation="required" />
-          <div>{{ $t('App.createJob.salaryPayoutDisclaimer' /* Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: */) }} <strong>${{ estimatedWorkerPayout }}</strong>.</div>
+          <div>{{ $t('App.createJob.salaryPayoutDisclaimer' /* Remember: (1) The salary you list above will be deducted and paid to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: */) }} <strong>${{ estimatedWorkerPayout }}</strong>.</div>
       </vue-grid-item>
       </vue-grid-row>
 <br>
@@ -312,7 +312,7 @@ export default {
       ],
       domainOptions: [
         { label: 'Choose a Job Category', value: null },
-        { label: 'Enviroment', value: 'enviroment' },
+        { label: 'Environment', value: 'environment' },
         { label: 'Community', value: 'community' },
         { label: 'Education', value: 'education' }
       ],

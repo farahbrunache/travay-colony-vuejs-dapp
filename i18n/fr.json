@@ -6,27 +6,27 @@
   "App.nav.signin": "Sign in",
   "App.nav.signout": "Sign out",
   "App.nav.createJob": "Post a Job",
-  "App.nav.kreyol": "Kreyol",
+  "App.nav.kreyol": "kreyòl",
   "App.nav.french": "Francais",
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
   "App.sectionOne.blockTitle": "Earn Stable Income",
   "App.sectionOne.blockHeader": "Same Day Jobs Marketplace",
   "App.sectionOne.blockText":
-  "Travay provides a citizen driven, long-term jobs market, helping to provide to economic mobility.",
+    "Travay provides a citizen driven, long-term jobs market, helping to provide to economic mobility.",
   "App.sectionTwo.blockTitle": "Receive Instant Payments",
   "App.sectionTwo.blockHeader": "Jobs Paid in Cryptocurrency",
   "App.sectionTwo.blockText":
-  "Cryptocurrency Payment = Instant Access to Your Money.",
+    "Cryptocurrency Payment = Instant Access to Your Money.",
   "App.sectionFour.blockTitle": "How Does Travay Work?",
   "App.sectionFour.bullet1": "Register by signing in",
   "App.sectionFour.bullet2": "Find a job your want and click claim",
   "App.sectionFour.bullet3":
-  "When work is complete, upload your proof of work and click complete job",
+    "When work is complete, upload your proof of work and click complete job",
   "App.sectionFour.bullet4":
-  "Your Job Manager will approve work and issue payment",
+    "Your Job Manager will approve work and issue payment",
   "App.sectionFour.paragraph":
-  "Find a job, claim it with no experience needed!",
+    "Find a job, claim it with no experience needed!",
   "App.job.editJobIcon": "Edit",
   "App.job.pageHeader": "Job",
   "App.job.jobDescription": "Description",
@@ -34,11 +34,11 @@
   "App.job.jobSkill": "Skill",
   "App.job.salaryIsEditing": "Salary cannot be changed after job is posted.",
   "App.job.payFrequencyIsEditing":
-  "Pay frequency cannot be changed after job is posted.",
+    "Pay frequency cannot be changed after job is posted.",
   "App.job.termOfEmploymentIsEditing":
-  "Term of Employment cannot be changed after job is posted.",
+    "Term of Employment cannot be changed after job is posted.",
   "App.job.requirementInstructions":
-  "Add one requirement, then click Add Requirement, to add additional requirements.",
+    "Add one requirement, then click Add Requirement, to add additional requirements.",
   "App.job.addRequirement": "Add Requirement",
   "App.job.jobFullTimeRate": "Full-Time-Rate",
   "App.job.jobSponsoredAmount": "Sponsored Amount",
@@ -50,11 +50,11 @@
   "App.job.datePosted": "Date Posted",
   "App.job.claimTitle": "Claim",
   "App.job.claimDescription":
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "App.job.sponsorDescription":
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "App.job.claimDisclaimer":
-  "Claiming this position is to accept the job requirements and terms and conditions of Travay.",
+    "Claiming this position is to accept the job requirements and terms and conditions of Travay.",
   "App.job.sponsorJobButton": "Sponsor Job",
   "App.job.proofOfWorkTitle": "Proof of Work",
   "App.job.uploadProofOfWorkTitle": "Upload Proof of Work",
@@ -70,13 +70,13 @@
   "App.job.jobEmptyFieldNotificationText": "Please complete all fields.",
   "App.job.jobClaimedNotificationTitle": "Yay!",
   "App.job.jobClaimedNotificationText":
-  "Job confirmed successfully! You can start work immediately.",
+    "Job confirmed successfully! You can start work immediately.",
   "App.job.jobPayoutNotificationTitle": "Your worker thanks you!",
   "App.job.jobPayoutNotificationTitleText":
-  "Payout Complete. Your account is being debited.",
+    "Payout Complete. Your account is being debited.",
   "App.job.jobUpdatedNotificationTitle": "Job updated successfully!",
   "App.job.jobUpdatedNotificationText":
-  "Job confirmed successfully! You can start work immediately.",
+    "Job confirmed successfully! You can start work immediately.",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",
   "App.job.uploadedPhotoSuccessfully": "Post was created successfully.",
   "App.job.uploadedPhotoProgress": "Upload is",
@@ -84,16 +84,16 @@
   "App.job.markJobComplete": "Job is Done",
   "App.job.jobCompletedNotificationTitle": "Success",
   "App.job.jobCompleteNotificationText":
-  "This job has been marked completed. Your Job Manager will review the work and send payment after confirmting.",
+    "This job has been marked completed. Your Job Manager will review the work and send payment after confirmting.",
   "App.jobs.pageSubtitle": "Here you'll find 6-month and 12-month jobs.",
   "App.jobs.search": "Search",
   "App.jobs.filter": "Filter",
   "App.createJob.salaryPayoutDisclaimer":
-  "Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: ",
+    "Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: ",
   "App.createJob.pageDescription":
-  "Use the form below to create a 6-month or 12-month job.",
+    "Use the form below to create a 6-month or 12-month job.",
   "App.createJob.requirementInstructions":
-  "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
+    "Please add your requirements in order for the job to be considered as complete. Add one requirement, then click Add Requirement, to add additional requirements.",
   "components.autocomplete.emptyMessage": "No options found for %s",
   "components.calendar.friday.short": "F",
   "components.calendar.monday.short": "M",
@@ -105,7 +105,7 @@
   "components.dataTable.noResults": "No results found!",
   "components.formExample.zipCode.error": "Please enter a Number",
   "components.markdown":
-  "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
+    "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
   "components.pagination.next": "Next",
   "components.pagination.previous": "Previous",
   "components.register.cancellationText": "Cancel",
@@ -117,12 +117,12 @@
   "components.register.phone": "Phone",
   "components.register.phone.invalidText": "This is not a valid phone number!",
   "components.register.submit.notification.text":
-  "We've sent an email to: {email}!",
+    "We've sent an email to: {email}!",
   "components.register.submit.notification.title": "Hey {name}!",
   "components.register.submitText": "Submit",
   "components.register.subtitle": "Please fill in all required fields",
   "components.register.terms":
-  "I accept the <a href=\"/\">Terms and Conditions</a>",
+    "I accept the <a href=\"/\">Terms and Conditions</a>",
   "components.register.title": "Register",
   "components.truncate.showLess": "Show less",
   "components.truncate.showMore": "Show more"

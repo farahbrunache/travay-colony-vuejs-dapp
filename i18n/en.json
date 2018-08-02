@@ -6,7 +6,7 @@
   "App.nav.signin": "Sign in",
   "App.nav.signout": "Sign out",
   "App.nav.createJob": "Post a Job",
-  "App.nav.kreyol": "Kreyol",
+  "App.nav.kreyol": "kreyòl",
   "App.nav.french": "Francais",
   "App.nav.english": "Angle",
   "App.nav.home": "Home",
@@ -58,9 +58,12 @@
   "App.job.sponsorJobButton": "Sponsor Job",
   "App.job.proofOfWorkTitle": "Proof of Work",
   "App.job.uploadProofOfWorkTitle": "Upload Proof of Work",
+  "App.job.proofOfWorkDescription":
+    "Based on the requirements of a job, the Job Manager may request proof that work was completed. For example, a picture of a planted tree or that trash was deposited in the correct location.",
   "App.job.uploadFileButton": "Submit Proof",
   "App.job.approveWork": "Approve Work",
-  "App.job.approveWorkDescription": "Lorem impsum",
+  "App.job.approveWorkDescription":
+    "Approval history will be shown here. Once a job is approved, the job is marked complete and the worker receives their salary. This is not reversible.",
   "App.job.payoutJobButton": "Payout Job",
   "App.job.jobCanceledNotificationTitle": "Success!",
   "App.job.jobCanceledNotificationText": "This job has been cancelled.",
@@ -74,9 +77,8 @@
   "App.job.jobPayoutNotificationTitle": "Your worker thanks you!",
   "App.job.jobPayoutNotificationTitleText":
     "Payout Complete. Your account is being debited.",
-  "App.job.jobUpdatedNotificationTitle": "Job updated successfully!",
-  "App.job.jobUpdatedNotificationText":
-    "Job confirmed successfully! You can start work immediately.",
+  "App.job.jobUpdatedNotificationTitle": "Success!",
+  "App.job.jobUpdatedNotificationText": "Job updated successfully",
   "App.job.jobPayout": "Payout Complete. Your account is being debited.",
   "App.job.uploadedPhotoSuccessfully": "Post was created successfully.",
   "App.job.uploadedPhotoProgress": "Upload is",
@@ -89,7 +91,7 @@
   "App.jobs.search": "Search",
   "App.jobs.filter": "Filter",
   "App.createJob.salaryPayoutDisclaimer":
-    "Remember: (1) The salary you list above will be deducted and paided to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: ",
+    "Remember: (1) The salary you list above will be deducted and paid to the worker evenly based on the pay frequency (aka pay period) you've selected. (2) We collect 2% of the total salary amount. Based on the salary you have entered above the worker in total will receive approximately: ",
   "App.createJob.pageDescription":
     "Use the form below to create a 6-month or 12-month job.",
   "App.createJob.requirementInstructions":

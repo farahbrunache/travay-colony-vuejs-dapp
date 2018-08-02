@@ -21,7 +21,7 @@ export const userRole = {
     if (value.role) {
       // Manager only
       if (Reflect.has(modifiers, 'manager')) {
-        if (value.role[0] == userId) hide(vnode);
+        if (value.role[0] === userId) hide(vnode);
       }
 
       // Evaluator only

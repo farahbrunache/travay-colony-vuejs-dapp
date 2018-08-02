@@ -1,6 +1,6 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import {createLocalVue, mount} from '@vue/test-utils';
 import Stage from './Stage.vue';
-import { i18n } from '../../shared/plugins/i18n/i18n';
+import {i18n} from '../../shared/plugins/i18n/i18n';
 
 const localVue = createLocalVue();
 
@@ -12,8 +12,8 @@ describe('Stage.vue', () => {
       localVue,
       i18n,
       propsData: {
-        disableParticles: true
-      }
+        disableParticles: true,
+      },
     });
 
     expect(wrapper.find('h1').text()).toBe('travay');
@@ -24,9 +24,9 @@ describe('Stage.vue', () => {
         item() {
           return {
             width: 100,
-            height: 100
+            height: 100,
           };
-        }
+        },
       };
     };
 
@@ -41,8 +41,8 @@ describe('Stage.vue', () => {
       localVue,
       i18n,
       propsData: {
-        disableParticles: false
-      }
+        disableParticles: false,
+      },
     });
 
     wrapper.destroy();

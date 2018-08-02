@@ -1,14 +1,16 @@
-import Vue from 'vue';
-import { Route } from 'vue-router';
-import { Component } from 'vue-router/types/router';
+import Vue                 from 'vue';
+import { Route }           from 'vue-router';
+import { Component }       from 'vue-router/types/router';
 import { createApp, IApp } from '../app/app';
-import { IPreLoad } from '../server/isomorphic';
-import { HttpService } from '../app/shared/services/HttpService';
+import { IPreLoad }        from '../server/isomorphic';
+import { HttpService }     from '../app/shared/services/HttpService';
 
 if (PRODUCTION) {
   const runtime: any = require('serviceworker-webpack-plugin/lib/runtime');
   if ('serviceWorker' in navigator) {
-    runtime.register().then((registration: ServiceWorkerRegistration) => {
+    runtime
+    .register()
+    .then((registration: ServiceWorkerRegistration) => {
       registration.update();
     });
   }
@@ -36,7 +38,7 @@ Vue.config.errorHandler = (error: Error) => {
   HttpService.post('/log/error', {
     error: {
       message: error.message,
-      stack: error.stack,
+      stack:   error.stack,
     },
   });
 
@@ -44,34 +46,33 @@ Vue.config.errorHandler = (error: Error) => {
 };
 
 router.onReady(() => {
-  router.beforeResolve((to: Route, from: Route, next: any) => {
+  router
+  .beforeResolve((to: Route, from: Route, next: any) => {
     const matched: Component[] = router.getMatchedComponents(to);
     const prevMatched: Component[] = router.getMatchedComponents(from);
     let diffed: boolean = false;
 
-    const activated: Component[] = matched.filter(
-      (component: Component, i: number) => {
-        return diffed || (diffed = prevMatched[i] !== component);
-      },
-    );
+    const activated: Component[] = matched.filter((component: Component, i: number) => {
+      return diffed || (diffed = (prevMatched[i] !== component));
+    });
 
     if (!activated.length) {
       return next();
     }
 
-    Promise.all(
-      activated.map((component: Component) => {
-        if ((component as any).prefetch) {
-          return (component as any).prefetch({ store, route: to } as IPreLoad);
-        }
+    Promise
+    .all(activated.map((component: Component) => {
 
-        return Promise.resolve();
-      }),
-    )
-      .then(() => {
-        next();
-      })
-      .catch(next);
+      if ((component as any).prefetch) {
+        return (component as any).prefetch({ store, route: to } as IPreLoad);
+      }
+
+      return Promise.resolve();
+    }))
+    .then(() => {
+      next();
+    })
+    .catch(next);
   });
 
   app.$mount('#app');
