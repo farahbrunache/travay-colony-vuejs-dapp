@@ -10,7 +10,7 @@ import {router} from './router';
 import {IState} from './state';
 import App from './app/App/App.vue';
 import {HttpService} from './shared/services/HttpService';
-import {userRole} from './shared/directives/userRole.js';
+import {userRole} from './shared/directives/userRole';
 
 router.beforeEach((to, from, next) => {
   if (Reflect.has(to.meta, 'adminOnly')) {
