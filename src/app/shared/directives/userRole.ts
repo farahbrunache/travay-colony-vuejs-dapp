@@ -31,6 +31,7 @@ export const userRole = {
 
       // Worker only
       if (Reflect.has(modifiers, 'worker')) {
+        // console.log(value, userId, 'comming from here');
         if (value.role[2] !== userId) hide(vnode);
       }
 

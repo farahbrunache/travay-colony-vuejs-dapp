@@ -16,8 +16,8 @@
               v-for="user in users"
               :key="user.uid">
               <p>{{ user.name || user.displayName }}</p>
-              <p>{{ user.phone || null }}</p>
-              <p>{{ user.address || null }}</p>
+              <!--<p>{{ user.phone || null }}</p>-->
+              <!--<p>{{ user.address || null }}</p>-->
               <p>{{ user.country || null }}</p>
             </vue-panel-body>
           </vue-panel>

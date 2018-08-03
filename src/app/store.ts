@@ -13,7 +13,7 @@ import { WalletModule } from './wallet/module';
 import { SignInModalModule } from './signInModal/module';
 import { AdminModule } from './admin/module';
 import { UserGuideModule } from './userGuide/module';
-import { TransactionModalModule }            from './transactionModal/module';
+import { TransactionModalModule } from './transactionModal/module';
 
 Vue.use(Vuex);
 
@@ -67,4 +67,6 @@ store.registerModule(['signInModal'], SignInModalModule, {
 });
 store.registerModule(['admin'], AdminModule, { preserveState: true });
 store.registerModule(['userGuide'], UserGuideModule, { preserveState: true });
-store.registerModule(['transactionModal'], TransactionModalModule, { preserveState: true });
+store.registerModule(['transactionModal'], TransactionModalModule, {
+  preserveState: true
+});

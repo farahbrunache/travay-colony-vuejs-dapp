@@ -55,7 +55,7 @@
     "postci": "codecov -f ./coverage/*.json && npm run build:spa && npm run build && concurrently \"npm run build-storybook\" \"vuepress build docs\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "heroku-postbuild": "npm run build:spa"
+    "heroku-postbuild": "npm run build"
   },
   "jest": {
     "verbose": true,
@@ -100,8 +100,6 @@
     ]
   },
   "dependencies": {
-    "@firebase/app": "^0.3.3",
-    "@firebase/firestore": "^0.6.0",
     "accept-language": "3.0.18",
     "animejs": "2.2.0",
     "async": "^2.6.1",
@@ -115,8 +113,8 @@
     "deepmerge": "2.1.1",
     "dotenv": "^6.0.0",
     "express": "4.16.3",
-    "firebase": "^5.0.4",
-    "ipfs": "^0.31.0",
+    "firebase": "^5.3.0",
+    "ipfs": "^0.31.2",
     "js-cookie": "2.2.0",
     "leveldown": "^4.0.1",
     "lodash": "4.17.10",
@@ -128,7 +126,6 @@
     "uuid": "^3.2.1",
     "vee-validate": "2.0.9",
     "vue": "2.5.16",
-    "vue-firestore": "^0.2.9",
     "vue-i18n": "8.0.0",
     "vue-meta": "1.5.0",
     "vue-moment": "^4.0.0",
@@ -146,7 +143,6 @@
     "@colony/colony-js-contract-loader-http": "^1.4.1",
     "@commitlint/cli": "7.0.0",
     "@commitlint/config-conventional": "7.0.1",
-    "@google-cloud/firestore": "^0.9.0",
     "@storybook/addon-actions": "4.0.0-alpha.10",
     "@storybook/addon-links": "4.0.0-alpha.10",
     "@storybook/addons": "4.0.0-alpha.10",
@@ -185,7 +181,7 @@
     "css-loader": "0.28.11",
     "css-mqpacker": "6.0.2",
     "cssnano": "3.10.0",
-    "cypress": "^3.0.2",
+    "cypress": "^3.0.3",
     "file-loader": "1.1.11",
     "generate-changelog": "1.7.1",
     "glob": "7.1.2",

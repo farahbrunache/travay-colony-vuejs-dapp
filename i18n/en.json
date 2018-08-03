@@ -86,7 +86,7 @@
   "App.job.markJobComplete": "Job is Done",
   "App.job.jobCompletedNotificationTitle": "Success",
   "App.job.jobCompleteNotificationText":
-    "This job has been marked completed. Your Job Manager will review the work and send payment after confirming.",
+    "This job has been marked completed. Your Job Manager and Evaluator will review the work and send payment after confirming.",
   "App.jobs.pageSubtitle": "Here you'll find 6-month and 12-month jobs.",
   "App.jobs.search": "Search",
   "App.jobs.filter": "Filter",

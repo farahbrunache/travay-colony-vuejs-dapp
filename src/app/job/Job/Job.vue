@@ -280,13 +280,13 @@
 
                 </vue-panel-body>
                 <vue-panel-footer>
-                  <vue-button accent>
+                  <vue-button v-userRole.worker="{cb: uploadFile, role: job.role}" accent>
                     <a @click.prevent="uploadImages" style="color: white;">
                       {{ $t('App.job.uploadFileButton' /* Submit Proof */) }}
                     </a>
                   </vue-button>
                   <br><br>
-                  <vue-button warn v-userRole.signedIn.worker="{cb: uploadFile, role: job.role}">
+                  <vue-button v-userRole.worker="{cb: uploadFile, role: job.role}" warn>
                     <a @click="markJobCompleteHandler" style="color: white;">
                       {{ $t('App.job.markJobComplete' /* Job is Done */) }}
                     </a>
@@ -362,9 +362,9 @@
 
   const firebaseStorage = firebase.storage();
   import moment from "moment";
-  import {filter} from "compression";
-  import {AssertionError} from "assert";
-  import {any} from "bluebird";
+  // import {filter} from "compression";
+  // import {AssertionError} from "assert";
+  // import {any} from "bluebird";
 
   export default {
     mixins: [sponsorSubmitMixin],
