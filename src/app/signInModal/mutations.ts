@@ -13,10 +13,3 @@ export const SignInModalMutations: ISignInModalMutations = {
     state.userData = userData;
   }
 };
-
-/*
-state - stores the data
-getters - functions which return something from the state
-actions - do all the logic you need like async calls, etc and then commit mutations
-mutations - it should only update the state, no side effetcs, state is received as a first parameter
-*/

@@ -51,9 +51,10 @@ import VueGridItem from '../../shared/components/VueGridItem/VueGridItem.vue';
 import VueButton from '../../shared/components/VueButton/VueButton.vue';
 import VueGridRow from '../../shared/components/VueGridRow/VueGridRow.vue';
 import VueModal from '../../shared/components/VueModal/VueModal.vue';
+import { travaySlackBotMixin } from '../../shared/mixins/mixins';
+
 import firebase from 'firebase';
 import db from '../../firebaseinit';
-import { travaySlackBotMixin } from '../../shared/mixins/mixins';
 import { uuid } from 'vue-uuid';
 
 import { Connect, SimpleSigner } from 'uport-connect';
